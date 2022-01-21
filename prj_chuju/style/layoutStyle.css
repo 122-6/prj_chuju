@@ -1,0 +1,105 @@
+/*通用CSS*/
+* {
+    margin: 0;
+    border-color: #5B5B5B;
+}
+
+.py-50 {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.py-10 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.w-60{
+    width:60%;
+}
+.w-70{
+    width:70%;
+}
+        
+
+/*nav*/
+.top-nav {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: auto;
+}
+
+.top-nav-left {
+    color: #5B5B5B;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.top-nav-right a {
+    margin: 10px;
+    font-size: 25px;
+}
+
+.top-nav-right .iconImg{
+    width:30px;
+    height:30px;
+}
+
+nav a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #706139;
+    font-family: '微軟正黑體'
+}
+
+nav a:hover {
+    color: #5B5B5B;
+    font-family: '微軟正黑體'
+}
+        
+
+/*footer*/
+footer a {
+    color: #706139;
+}
+
+.border-right {
+    margin-right: 50px;
+}
+
+.foot-link .row>.link {
+    width: 30%;
+}
+
+.foot-link {
+    color: #706139;
+}
+
+.emailto {
+    background-color: #706139;
+    padding: 2px 2px 2px 2px;
+    width: fit-content;
+    font-size: 15px;
+}
+
+.end {
+    background-color: #706139;
+    color: white;
+}
+
+footer .title {
+    font-weight: bold;
+}
+
+footer .iconImg{
+    width:20px;
+    height:20px;
+    margin-right:2px;
+}
+.followUs a{
+    margin-right: 1rem;
+}

@@ -1,0 +1,101 @@
+        /*通用CSS*/
+        * {
+            margin: 0;
+        }
+
+        .py-50 {
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+
+        .py-10 {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        /*nav*/
+        .top-nav {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin: auto;
+        }
+
+        .top-nav-left {
+            color: #5B5B5B;           
+        }
+
+        .top-nav-right i {
+            margin: 10px;
+            font-size: 25px;
+        }
+
+        nav a {
+            color: #5B5B5B;
+            font-family: '微軟正黑體'
+        }
+
+        .bottom-nav {
+            background-color: #706139;
+        }
+
+        .bottom-nav a {
+            color: white;
+            margin-right: 20px;
+        }
+        
+        /*main*/
+        .news {
+            border-bottom: 3px solid #706139;
+        }
+
+        .news .row {
+            margin: 30px auto;
+        }
+
+        .news :link {
+            color: #706139;
+        }
+
+        .news figcaption>a {
+            margin-right: 51%;
+        }
+
+        .news-item>span {
+            border: 2px solid #706139;
+            padding: 2px;
+            color: #706139;
+            font-weight: bold;
+        }
+
+        /*footer*/
+        footer :link {
+            color: #706139;
+        }
+
+        .border-right {
+            margin-right: 50px;
+        }
+
+        .foot-link .row>.link {
+            width: 30%;
+        }
+
+        .foot-link {
+            color: #706139;
+        }
+
+        .emailto {
+            background-color: #706139;
+            padding: 2px 2px 2px 2px;
+            width: fit-content;
+            font-size: 15px;
+        }
+
+        .end {
+            background-color: #706139;
+            color: white;
+        }
+
+        footer .title {
+            font-weight: bold;
+        }

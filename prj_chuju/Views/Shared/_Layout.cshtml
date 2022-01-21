@@ -1,0 +1,205 @@
+﻿@*<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>*@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+          integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="javascript/jquery-3.6.0.js"></script>
+    <script src="javascript/hiyes.js"></script>
+    <link rel="stylesheet" href="~/style/layoutStyle.css">
+
+</head>
+
+<body>
+    <div id="test"></div>
+    <nav>
+        <div class="d-flex px-4 top-nav align-items-center justify-content-between" style="height:100px;">
+            <div class="top-nav-left col-1">
+                <a class="d-flex justify-content-center" href="/">
+                    <img class="logo" src="/images/logo/logo_col.png" alt="雛區廣告Logo">
+                </a>
+            </div>
+            <div class="top-nav-center row justify-content-between col-8">
+                @Html.ActionLink("買房第一站", "Index", "BrandArticle")
+                @Html.ActionLink("關於雛居", "Index", "AboutUs")
+                @Html.ActionLink("房市新訊", "Index", "NewsArticle")
+                @Html.ActionLink("建案列表", "Index", "BuildingCase")
+                @Html.ActionLink("活動快報", "Index", "Activity")
+                @Html.ActionLink("建案搜尋", "Index", "BuildingCase")
+                @Html.ActionLink("會員專區", "Index", "Account")
+            </div>
+            <div class="top-nav-right row align-items-center justify-content-center col-2">
+                <a href="#"><img class="iconImg" src="/images/ICON/facebook.png" alt=""></a>|
+                <a href="#"><img class="iconImg" src="/images/ICON/line.png" alt=""></a>
+                <a href="#"><img class="iconImg" src="/images/ICON/search.png" alt=""></a>
+            </div>
+        </div>
+
+    </nav>
+
+    <div>
+        @RenderBody()
+    </div>
+
+    <footer>
+        <div class="container-fluid w-100 py-10">
+            <div class="row justify-content-center foot-link">
+                <div class="col-2 border-right">
+                    <div class="row">
+                        <img class="w-70 mb-4" src="/images/logo/logo_row.png" alt="">
+                    </div>
+                    <div class="row">
+                        台北市松山區敦化北路260號7樓
+                    </div>
+                    <div class="row">
+                        (02)8712-8888
+                    </div>
+                    <div class="row">
+                        91laroslin@gmail.com
+                    </div>
+                    <div class="row">
+                        雛居廣告
+                    </div>
+                </div>
+                <div class="col-3 border-right">
+                    <div class="row">
+                        <h4 class="title">快速連結</h4>
+                    </div>
+                    <div class="row">
+                        <div class="link"><a href="#">首頁</a></div>
+                        <div class="link"><a href="#">買房新訊</a></div>
+                        <div class="link"><a href="#">使用者條款</a></div>
+                    </div>
+                    <div class="row">
+                        <div class="link"><a href="#">關於我們</a></div>
+                        <div class="link"><a href="#">買房第一站</a></div>
+                    </div>
+                    <div class="row">
+                        <div class="link"><a href="#">建案列表</a></div>
+                        <div class="link"><a href="#">加入雛居</a></div>
+                    </div>
+                    <div class="row">
+                        <div class="link"><a href="#">活動快報</a></div>
+                        <div class="link"><a href="#">隱私權政策</a></div>
+                    </div>
+                </div>
+                <div class="col-2 border-right">
+                    <div class="row">
+                        <h4 class="title">建案搜尋</h4>
+                    </div>
+                    <div class="row">
+                        <div class="link"><a href="#">台北市</a></div>
+                        <div class="link"><a href="#">中部地區</a></div>
+                    </div>
+                    <div class="row">
+                        <div class="link"><a href="#">新北市</a></div>
+                        <div class="link"><a href="#">南部地區</a></div>
+                    </div>
+                    <div class="row">
+                        <div class="link"><a href="#">桃竹地區</a></div>
+                        <div class="link"><a href="#">其他地區</a></div>
+                    </div>
+                </div>
+                <div class="col-2 followUs">
+                    <div class="row">
+                        <h4 class="title">追蹤我們</h4>
+                    </div>
+                    <div class="d-flex mb-3">
+                        <div>
+                            <a class="d-flex align-items-center" href="#">
+                                <img class="iconImg" src="/images/ICON/facebook.png" alt="">Facebook
+                            </a>
+                            <a class="d-flex align-items-center" href="#">
+                                <img class="iconImg" src="/images/ICON/youtube.png" alt="">Youtube
+                            </a>
+                        </div>
+                        <div>
+                            <a class="d-flex align-items-center" href="#">
+                                <img class="iconImg" src="/images/ICON/line.png" alt="">Line
+                            </a>
+                            <a class="d-flex align-items-center" href="#">
+                                <img class="iconImg" src="/images/ICON/instagram.png" alt="">Instagram
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <div class="row emailto">
+                        <input type="text" name="email" id="email" placeholder="請輸入電子信箱" class="border-0">
+                        <button class="bg-transparent border-0 text-white">
+                            <i class="fas fa-envelope"></i>
+                            訂閱電子報
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid w-100 py-10 end text-center">
+            雛居廣告股份有限公司 版權所有 ©CHU-GI CORP. | 電話：(02)8712-888 | 地址：台北市松山區敦化北路260號7樓
+        </div>
+    </footer>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>

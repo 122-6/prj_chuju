@@ -107,8 +107,15 @@
       <DependentUpon>dbChuju.edmx</DependentUpon>
       <LastGenOutput>dbChuju.cs</LastGenOutput>
     </Content>
+    <Content Include="images\aboutPictures\dream-team-2021-09-01-07-24-01-utc.jpg" />
+    <Content Include="images\aboutPictures\office-building-2021-08-29-21-04-49-utc.jpg.png" />
+    <Content Include="images\aboutPictures\pexels-north-1275680.jpg" />
+    <Content Include="images\aboutPictures\pexels-pixabay-209274.jpg" />
+    <Content Include="images\aboutPictures\pexels-pixabay-358636.jpg" />
+    <Content Include="images\aboutPictures\quotes.png" />
     <Content Include="images\articleTitlePicture\imgArticle_01.jpg" />
     <Content Include="images\articleTitlePicture\imgArticle_02.jpg" />
+    <Content Include="style\aboutStyle.css" />
     <Content Include="style\designStyle.css" />
     <Content Include="style\indexStyle.css" />
     <Content Include="style\layoutStyle.css" />
@@ -170,6 +177,7 @@
     <Compile Include="articleOutline.cs">
       <DependentUpon>dbChuju.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\BrandArticleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="dbChuju.Context.cs">
@@ -206,6 +214,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\BrandArticle\Index.cshtml" />
+    <Content Include="Views\AboutUs\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

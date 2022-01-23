@@ -1,0 +1,151 @@
+/* ******* */
+/* 通用元素 */
+/* ******* */
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.testingBox{
+    background-color: rgb(230, 188, 255);
+    border: 1px solid black;
+}
+
+.color-white{
+    color:white;
+}
+
+
+/* ******* */
+/* 特定元素 */
+/* ******* */
+
+/* title區 */
+.titlePicture{
+    width:100%;
+    height:80vh;
+    background-image: url("../images/aboutPictures/pexels-pixabay-358636.jpg");
+    background-size: cover;
+    background-position: 50% 50%;
+}
+.titleText{
+    margin-left: 2rem;
+    font-size: 3rem;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+}
+
+/* intro區 */
+.introArea{
+    width: 100%;
+    padding: 100px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+.introMain{
+    width:80%;
+}
+.introText{
+    width:35%;
+
+    font-size: 1.2rem;
+    font-weight: 600;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.introPicture{
+    width:60%;
+    
+    display:flex;
+    align-items: center;
+    overflow: hidden;
+}
+/* introSide類 */
+.introSide{
+    width:110px;
+    margin: 0 20px;
+    position: relative;
+}
+.introSide>.introTitle{
+    display: flex;
+    justify-content: space-between;
+}
+.introSide>.introTitle>.bigword{
+    font-size: 4rem;
+}
+.introSide>.introTitle>.index{
+    padding-top: 0.5rem;
+    font-size: 2rem;
+}
+.introSide>.sideBorder{
+    height:80px;
+    border-right: 2px solid rgb(136, 136, 136);
+    position: absolute;
+    top:3.5rem;
+}
+.introSide>.sideBottom{
+    width:max-content;
+    margin:0px auto;
+    font-family: Song Myung;
+    font-weight: 600;
+    border-bottom: 4px solid #706139;
+}
+
+/* guid區 */
+.guidPicture{
+    position: relative;
+    width:100%;
+    height:80vh;
+    background-image: url("/images/aboutPictures/office-building-2021-08-29-21-04-49-utc.jpg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0% 50%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.guidPicture>.shadowbox{
+    position: absolute;
+    width:100%;
+    height:100%;
+    background-color: black;
+    opacity: 0.3;
+}
+.outerborder{
+    position: absolute;
+    margin: auto;
+    width:100%;
+    height:100%;
+}
+.guidPicture .borderbox{
+    position: absolute;
+    width:90%;
+    height:90%;
+    border:2px solid white;
+    border-bottom: none;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.borderbox>.bottomborder{
+    position: absolute;
+    width: 45%;
+    height:100%;
+    border-bottom: 2px solid white;
+}
+.guidPicture>.quot{
+    position: absolute;
+    width:50px;
+    top:calc(80vh - 55px);
+    transform: rotate(180deg);
+}
+
+
+
+

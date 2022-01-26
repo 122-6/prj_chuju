@@ -1,0 +1,255 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+  /*  * {
+        outline: 1px solid red;
+    }*/
+
+    main {
+        border-bottom: 3px solid #706139;
+    }
+
+    .btn-group {
+        width: 625px;
+    }
+
+    .justify-content-space-between {
+        justify-content: space-between
+    }
+
+    .btn {
+        font-size: 22px;
+        background: transparent;
+        color: #FFFFFF;
+    }
+
+    .sticky {
+        background: #706139;
+        padding-right: 255px;
+        margin-bottom: 35px;
+    }
+
+    .swiper .is-checked {
+        color: #212529;
+    }
+
+    .title {
+        font-size: 50px;
+        color: #383838;
+        font-weight: bold;
+        margin-left: 170px;
+        margin-bottom: 49px;
+    }
+
+    .container {
+        width: 880px;
+        margin: 0 auto;
+        margin-bottom: 44px;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .box {
+        width: 47.5%;
+        margin-bottom: 49px;
+    }
+
+    .picture {
+        width: 100%;
+    }
+
+    .information {
+        background: #E7E7E7;
+        padding: 13px 10px;
+        border: 1px solid #A6A6A6;
+        border-top: 0px;
+    }
+
+    .time {
+        color: #706139;
+        font-weight: 400;
+    }
+
+        .time img {
+            width: 20px;
+            margin-right: 2px;
+        }
+
+    .status-tag-now {
+        font-size: 15px;
+        color: #706139;
+        font-weight: 500;
+        outline: 1px solid #706139;
+        padding: 0 4px;
+    }
+
+    .status-tag {
+        font-size: 15px;
+        color: #949494;
+        font-weight: 500;
+        outline: 1px solid #949494;
+        padding: 0 4px;
+    }
+
+    .page {
+        border-radius: 30px;
+        border: 2px solid #706139;
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+        text-align: center;
+        margin-right: 11px;
+        margin-bottom: 53px;
+    }
+
+    .page-select {
+        border-radius: 30px;
+        border: 2px solid #706139;
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+        text-align: center;
+        margin-right: 11px;
+        background: #706139;
+        color: #FFFFFF;
+    }
+</style>
+<main>
+
+    <div class="d-flex justify-content-end sticky">
+        <div class="d-flex btn-group justify-content-space-between">
+            <div class="swiper"><button class="btn btn1">全部活動</button></div>
+            <div class="swiper"><button class="btn btn2">即將開始</button></div>
+            <div class="swiper"><button class="btn btn3">執行中</button></div>
+            <div class="swiper"><button class="btn btn4">已結束</button></div>
+        </div>
+    </div>
+    <div class="title">活動總覽</div>
+    <div class="container">
+        <div class="row justify-content-space-between">
+            <div class="box">
+                <div class="imgbox">
+                    <img class="picture" src="~/images/ActivityNews/p1.png" />
+                </div>
+                <div class="information d-flex justify-content-space-between">
+                    <div class="time d-flex align-items-center">
+                        <img src="~/images/ActivityNews/clock.png" />2022-01-20 ~ 2022-02-28
+                    </div>
+                    <div class="status-tag-now">活動進行中</div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="imgbox">
+                    <img class="picture" src="~/images/ActivityNews/p2.png" />
+                </div>
+                <div class="information d-flex justify-content-space-between">
+                    <div class="time d-flex align-items-center">
+                        <img src="~/images/ActivityNews/clock.png" />2022-01-01 ~ 2022-03-29
+                    </div>
+                    <div class="status-tag-now">活動進行中</div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="imgbox">
+                    <img class="picture" src="~/images/ActivityNews/p3.png" />
+                </div>
+                <div class="information d-flex justify-content-space-between">
+                    <div class="time d-flex align-items-center">
+                        <img src="~/images/ActivityNews/clock.png" />2022-01-01 ~ 2022-02-28
+                    </div>
+                    <div class="status-tag-now">活動進行中</div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="imgbox">
+                    <img class="picture" src="~/images/ActivityNews/p4.png" />
+                </div>
+                <div class="information d-flex justify-content-space-between">
+                    <div class="time d-flex align-items-center">
+                        <img src="~/images/ActivityNews/clock.png" />2022-01-01 ~ 2022-02-28
+                    </div>
+                    <div class="status-tag-now">活動進行中</div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="imgbox">
+                    <img class="picture" src="~/images/ActivityNews/p5.png" />
+                </div>
+                <div class="information d-flex justify-content-space-between">
+                    <div class="time d-flex align-items-center">
+                        <img src="~/images/ActivityNews/clock.png" />2022-12-11 ~ 2022-02-25
+                    </div>
+                    <div class="status-tag-now">活動進行中</div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="imgbox">
+                    <img class="picture" src="~/images/ActivityNews/p6.png" />
+                </div>
+                <div class="information d-flex justify-content-space-between">
+                    <div class="time d-flex align-items-center">
+                        <img src="~/images/ActivityNews/clock.png" />2022-12-01 ~ 2022-02-20
+                    </div>
+                    <div class="status-tag-now">活動進行中</div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="imgbox">
+                    <img class="picture" src="~/images/ActivityNews/p7.png" />
+                </div>
+                <div class="information d-flex justify-content-space-between">
+                    <div class="time d-flex align-items-center">
+                        <img src="~/images/ActivityNews/clock.png" />2021-11-01 ~ 2022-01-10
+                    </div>
+                    <div class="status-tag">活動已結束</div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="imgbox">
+                    <img class="picture" src="~/images/ActivityNews/p8.png" />
+                </div>
+                <div class="information d-flex justify-content-space-between">
+                    <div class="time d-flex align-items-center">
+                        <img src="~/images/ActivityNews/clock.png" />2021-12-01 ~ 2022-01-09
+                    </div>
+                    <div class="status-tag">活動已結束</div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="imgbox">
+                    <img class="picture" src="~/images/ActivityNews/p9.png" />
+                </div>
+                <div class="information d-flex justify-content-space-between">
+                    <div class="time d-flex align-items-center">
+                        <img src="~/images/ActivityNews/clock.png" />2021-10-20 ~ 2021-11-15
+                    </div>
+                    <div class="status-tag">活動已結束</div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="imgbox">
+                    <img class="picture" src="~/images/ActivityNews/p10.png" />
+                </div>
+                <div class="information d-flex justify-content-space-between">
+                    <div class="time d-flex align-items-center">
+                        <img src="~/images/ActivityNews/clock.png" />2021-10-01 ~ 2021-10-30
+                    </div>
+                    <div class="status-tag">活動已結束</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-list d-flex justify-content-center">
+        <div class="page">1</div>
+        <div class="page-select">2</div>
+        <div class="page">3</div>
+        <div class="page">4</div>
+        <div class="page">5</div>
+    </div>
+</main>
+

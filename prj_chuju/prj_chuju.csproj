@@ -126,6 +126,7 @@
     <Content Include="images\ActivityNews\p9.PNG" />
     <Content Include="images\articleTitlePicture\imgArticle_01.jpg" />
     <Content Include="images\articleTitlePicture\imgArticle_02.jpg" />
+    <Content Include="images\ICON\down-arrow.png" />
     <Content Include="style\aboutStyle.css" />
     <Content Include="style\designStyle.css" />
     <Content Include="style\indexStyle.css" />

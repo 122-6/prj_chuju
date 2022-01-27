@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
 }
 <style>
-  /*  * {
+    /*  * {
         outline: 1px solid red;
     }*/
 
@@ -105,6 +105,7 @@
         text-align: center;
         margin-right: 11px;
         margin-bottom: 53px;
+        cursor: pointer;
     }
 
     .page-select {
@@ -118,6 +119,30 @@
         background: #706139;
         color: #FFFFFF;
     }
+
+        .Top img {
+            width: 30px;
+            transform: rotate(180deg);
+        }
+
+    .btn-top {
+        border-radius: 30px;
+        width: 53px;
+        height: 53px;
+        background: #706139;
+        border: 1px solid #706139;
+        color: #FFFFFF;
+        font-weight: 500;
+        position: fixed;
+        margin-left: 1700px;
+        margin-top: 500px;
+        cursor:pointer;
+        z-index:10;
+    }
+
+    .Top-text {
+        margin-top: -8px;
+    }
 </style>
 <main>
 
@@ -130,6 +155,12 @@
         </div>
     </div>
     <div class="title">活動總覽</div>
+    <div class="Top">
+        <button class="btn-top">
+            <img src="~/images/ICON/down-arrow.png" />
+            <div class="Top-text">TOP</div>
+        </button>
+    </div>
     <div class="container">
         <div class="row justify-content-space-between">
             <div class="box">
@@ -245,11 +276,11 @@
         </div>
     </div>
     <div class="page-list d-flex justify-content-center">
-        <div class="page">1</div>
-        <div class="page-select">2</div>
-        <div class="page">3</div>
-        <div class="page">4</div>
-        <div class="page">5</div>
+        <button class="page">1</button>
+        <button class="page-select">2</button>
+        <button class="page">3</button>
+        <button class="page">4</button>
+        <button class="page">5</button>
     </div>
 </main>
 

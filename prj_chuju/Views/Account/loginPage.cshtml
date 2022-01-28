@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "loginPage";
+}
+
+<link rel="stylesheet" type="text/css" href="~/style/loginStyle.css" />
+
+<div class=MIDDLE>
+    <div class=login>
+        <div class="login2">
+            <div class=loginor>
+                <div class=logintop style="float:left">
+                    <li><a href='#'>註冊會員</a></li>
+                </div>
+                <div class=logintop>
+                    <a href='#'>登入會員</a></li>
+                </div>
+                <div class=loginmain>
+                    <form action="test.php">
+                        <input type="text" id="username" name="username" placeholder="請輸入手機號碼" required>
+                        <div class="tab"></div>
+                        <input type="text" id="password" name="password" placeholder="請輸入電子信箱" required>
+                        <div class="tab"></div>
+                        <input type="text" id="secret" name="password" placeholder="請輸入手機驗證碼" required>
+                        <input type="submit" value="獲取手機驗證碼" id="getSecret"
+                               onclick="location.href='https://google.com.tw'">
+                        <div class="tab"></div>
+                        <input type="submit" value="立即註冊" class="submit"
+                               onclick="location.href='https://google.com.tw'">
+                        <p>
+                            <input type="checkbox" id=check1>
+                            <label for="check1">我已閱讀並同意 服務條款與隱私性說明</label>
+                        </p>
+                        <p>使用現有帳戶快速登入</p>
+                        <div id=otherLog>
+                            <a class=Simage href="https://google.com.tw">
+                                <img src="~/images/AccountPictures/common/facebook.png" width="50"
+                                     height="50">
+                            </a>
+                            <a class=Simage href="https://google.com.tw">
+                                <img src="~/images/AccountPictures/common/line.png" width="50"
+                                     height="50">
+                            </a>
+                            <a class=Simage href="https://google.com.tw">
+                                <img src="~/images/AccountPictures/common/google.png" width="50"
+                                     height="50">
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,130 +1,139 @@
 <html>
-        <head>
-            <meta charset="utf-8"></meta>
-            <title> 雛居廣告</title>
-            <link href="images/eye.ico" rel="Shortcut Icon">
-            <link rel="stylesheet" type="text/css" href="style_U2.css"/><!--匯入CS檔-->
-            
-        </head>
 
-        <body style="background-color:black;margin: 0; padding: 0;">
-                
-            <div class = TOP >
-                <div class =title style ="float:left;">
-                    <img src = "images/ads.png" with="70" heigh="70">
-                </div>
-                <div class =space style ="width= 500px; float:left;">
-                    <a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
-                </div>
+<head>
+    <meta charset="utf-8">
+    </meta>
+    <title> 雛居廣告</title>
+    <link href="images/eye.ico" rel="Shortcut Icon">
+    <link rel="stylesheet" type="text/css" href="style_U2.css" />
+    <!--匯入CS檔-->
 
-                <div class= menu >
-                     <ul style = "list-style-type: none;">
-                        <li ><a href='#'>買房第二站</a></li>
-                        <li><a href='#'>關於雛居</a></li>
-                        <li><a href='#'>房市新訊</a></li>
-                        <li><a href='#'>建案列表</a></li>
-                        <li><a href='#'>活動快報</a></li>
-                        <li><a href='#'>建案搜尋</a></li>
-                        <li><a href='#'>會員專區</a></li>
-                    </ul>
-                </div>
-                <div class =title2 style ="float:left;">
-                    <img src = "images/ads2.png" with="50" heigh="60">
-                </div>
-                     
-            </div>
-            <!--登入系統-->
-            <div class = MIDDLE>
-                <div class = login  >
-                    <div class="login2">  
-                        <div class= loginor >
-                            <div class= logintop style = "float:left">
-                                   <li><a href='#'>註冊會員</a></li>     
+</head>
+
+<body style="background-color:black;margin: 0; padding: 0;">
+
+    <div class=TOP>
+        <div class=title style="float:left;">
+            <img src="images/ads.png" with="70" heigh="70">
+        </div>
+        <div class=space style="width= 500px; float:left;">
+            <a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+        </div>
+
+        <div class=menu>
+            <ul style="list-style-type: none;">
+                <li><a href='#'>買房第二站</a></li>
+                <li><a href='#'>關於雛居</a></li>
+                <li><a href='#'>房市新訊</a></li>
+                <li><a href='#'>建案列表</a></li>
+                <li><a href='#'>活動快報</a></li>
+                <li><a href='#'>建案搜尋</a></li>
+                <li><a href='#'>會員專區</a></li>
+            </ul>
+        </div>
+        <div class=title2 style="float:left;">
+            <img src="images/ads2.png" with="50" heigh="60">
+        </div>
+
+    </div>
+    <!--登入系統-->
+    <div class=MIDDLE>
+        <div class=login>
+            <div class="login2">
+                <div class=loginor>
+                    <div class=logintop style="float:left">
+                        <li><a href='#'>註冊會員</a></li>
+                    </div>
+                    <div class=logintop>
+                        <a href='#'>登入會員</a></li>
+                    </div>
+                    <div class=loginmain>
+                        <form action="test.php">
+                            <input type="text" id="username" name="username" placeholder="請輸入手機號碼" required>
+                            <div class="tab"></div>
+                            <input type="text" id="password" name="password" placeholder="請輸入電子信箱" required>
+                            <div class="tab"></div>
+                            <input type="text" id="secret" name="password" placeholder="請輸入手機驗證碼" required>
+                            <input type="submit" value="獲取手機驗證碼" id="getSecret"
+                                onclick="location.href='https://google.com.tw'">
+                            <div class="tab"></div>
+                            <input type="submit" value="立即註冊" class="submit"
+                                onclick="location.href='https://google.com.tw'">
+                            <p>
+                                <input type="checkbox" id=check1>
+                                <label for="check1">我已閱讀並同意 服務條款與隱私性說明</label>
+                            </p>
+                            <p>使用現有帳戶快速登入</p>
+                            <div id=otherLog>
+                                <a class=Simage href="https://google.com.tw"><img src="images/facebook.png" width="50"
+                                        height="50"></a>
+                                <a class=Simage href="https://google.com.tw"><img src="images/line.png" width="50"
+                                        height="50"></a>
+                                <a class=Simage href="https://google.com.tw"><img src="images/google.png" width="50"
+                                        height="50"></a>
                             </div>
-                            <div class= logintop>
-                                   <a href='#'>登入會員</a></li>     
-                            </div>
-                            <div class=loginmain>
-                                <form action="test.php">
-                                    <input type="text" id="username" name="username" placeholder="請輸入手機號碼" required>
-                                    <div class="tab"></div>
-                                    <input type="text" id="password" name="password" placeholder="請輸入電子信箱" required>
-                                    <div class="tab"></div>
-                                    <input type="text" id="secret" name="password" placeholder="請輸入手機驗證碼" required>
-                                    <input type="submit" value="獲取手機驗證碼" id="getSecret" onclick="location.href='https://google.com.tw'">
-                                    <div class="tab"></div>
-                                <input type="submit" value="立即註冊" class="submit" onclick="location.href='https://google.com.tw'">
-                                <p>
-                                    <input type="checkbox" id=check1 >  
-                                    <label for="check1">我已閱讀並同意 服務條款與隱私性說明</label>
-                                </p>  
-                                <p>使用現有帳戶快速登入</p>
-                                <div id =otherLog>
-                                    <a class = Simage href="https://google.com.tw"><img src="images/facebook.png" width="50" height="50"></a>
-                                    <a class = Simage href="https://google.com.tw"><img src="images/line.png" width="50" height="50"></a>
-                                    <a class = Simage href="https://google.com.tw"><img src="images/google.png" width="50" height="50"></a>
-                                </div>
-                            </form>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class = information>
-                <div id = inforOne>
-                    <a>&nbsp</a>
-                </div>
-                <div id = inforTwo>
-                    <a class =infor_title >快速連結<br><br></a>
-                    <ul style="margin-left: 20px;">
-                        <li ><a href='#'>首頁</a></li>
-                        <li><a href='#'>關於我們</a></li>
-                        <li><a href='#'>建案列表</a></li>
-                        <li><a href='#'>活動快報</a></li>                 
-                    </ul>
-                    <ul >
-                        <li ><a href='#'>房市新訊</a></li>
-                        <li><a href='#'>買房第一站</a></li>
-                        <li><a href='#'>加入雛居</a></li>
-                        <li><a href='#'>隱私權政策</a></li>
-                        
-                    </ul>
-                    <ul >
-                        <li ><a href='#'>使用者條款</a></li>
-                       
-                    </ul>
-                </div>
-                <div id = inforThree>
-                    <a class= infor_title >建案搜尋<br><br></a>
-                    <ul style="margin-left: 1px;">
-                        <li ><a href='#'>台北市</a></li>
-                        <li><a href='#'>新北市</a></li>
-                        <li><a href='#'>桃竹地區</a></li>                 
-                    </ul>
-                    <ul >
-                        <li ><a href='#'>中部地區</a></li>
-                        <li><a href='#'>南部地區</a></li>
-                        <li><a href='#'>其他地區</a></li>
+        </div>
+    </div>
+    <div class=information>
+        <div id=inforOne>
+            <a>&nbsp</a>
+        </div>
+        <div id=inforTwo>
+            <a class=infor_title>快速連結<br><br></a>
+            <ul style="margin-left: 20px;">
+                <li><a href='#'>首頁</a></li>
+                <li><a href='#'>關於我們</a></li>
+                <li><a href='#'>建案列表</a></li>
+                <li><a href='#'>活動快報</a></li>
+            </ul>
+            <ul>
+                <li><a href='#'>房市新訊</a></li>
+                <li><a href='#'>買房第一站</a></li>
+                <li><a href='#'>加入雛居</a></li>
+                <li><a href='#'>隱私權政策</a></li>
 
-                        
-                    </ul>
-                </div>
-                <div id = inforFour>
-                    <a class= infor_title >追蹤我們<br><br></a>
-                    <ul style="margin-left: 1px;">
-                        <li ><a href='#'>Facebook</a></li>
-                        <li><a href='#'>Youtube</a></li>  
-                    </ul>
-                    <ul >
-                        <li ><a href='#'>Line</a></li>
-                        <li><a href='#'>Instagram</a></li>
-                    </ul>
-                    <input type="text"  id=email style="float:left;" name="password" placeholder="請輸入電子信箱" required>
-                    <input type="submit" id=getEmail value="訂閱電子報" onclick="location.href='https://google.com.tw'">
-                </div>
-            </div>
-            <div class = ad>
-                <p>雛居廣告股份有限公司 版權所有@CHU-GI CORP. |  電話: (02)8712-8888  |  地址:台北市松山區敦化路260號7樓</p>
-            </div>
-        </body>
+            </ul>
+            <ul>
+                <li><a href='#'>使用者條款</a></li>
+
+            </ul>
+        </div>
+        <div id=inforThree>
+            <a class=infor_title>建案搜尋<br><br></a>
+            <ul style="margin-left: 1px;">
+                <li><a href='#'>台北市</a></li>
+                <li><a href='#'>新北市</a></li>
+                <li><a href='#'>桃竹地區</a></li>
+            </ul>
+            <ul>
+                <li><a href='#'>中部地區</a></li>
+                <li><a href='#'>南部地區</a></li>
+                <li><a href='#'>其他地區</a></li>
+
+
+            </ul>
+        </div>
+        <div id=inforFour>
+            <a class=infor_title>追蹤我們<br><br></a>
+            <ul style="margin-left: 1px;">
+                <li><a href='#'>Facebook</a></li>
+                <li><a href='#'>Youtube</a></li>
+            </ul>
+            <ul>
+                <li><a href='#'>Line</a></li>
+                <li><a href='#'>Instagram</a></li>
+            </ul>
+            <input type="text" id=email style="float:left;" name="password" placeholder="請輸入電子信箱" required>
+            <input type="submit" id=getEmail value="訂閱電子報" onclick="location.href='https://google.com.tw'">
+        </div>
+    </div>
+    <div class=ad>
+        <p>雛居廣告股份有限公司 版權所有@CHU-GI CORP. | 電話: (02)8712-8888 | 地址:台北市松山區敦化路260號7樓</p>
+    </div>
+</body>
+
 </html>

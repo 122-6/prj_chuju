@@ -113,6 +113,15 @@
     <Content Include="images\aboutPictures\pexels-pixabay-209274.jpg" />
     <Content Include="images\aboutPictures\pexels-pixabay-358636.jpg" />
     <Content Include="images\aboutPictures\quotes.png" />
+    <Content Include="images\AccountPictures\common\ads.png" />
+    <Content Include="images\AccountPictures\common\ads2.png" />
+    <Content Include="images\AccountPictures\common\down.png" />
+    <Content Include="images\AccountPictures\common\facebook.png" />
+    <Content Include="images\AccountPictures\common\google.png" />
+    <Content Include="images\AccountPictures\common\inforOne.png" />
+    <Content Include="images\AccountPictures\common\line.png" />
+    <Content Include="images\AccountPictures\common\pexels-linkedin-sales-navigator-1251844.jpg" />
+    <Content Include="images\AccountPictures\common\pexels-linkedin-sales-navigator-1251844.png" />
     <Content Include="images\ActivityNews\clock.png" />
     <Content Include="images\ActivityNews\p1.PNG" />
     <Content Include="images\ActivityNews\p10.PNG" />
@@ -183,6 +192,7 @@
     <Content Include="javascript\hiyes.js" />
     <Content Include="javascript\jquery-3.6.0.js" />
     <Content Include="javascript\jquery-3.6.0.min.js" />
+    <Content Include="style\loginStyle.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +201,7 @@
       <DependentUpon>dbChuju.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AboutUsController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\BrandArticleController.cs" />
     <Compile Include="Controllers\BuildingListController.cs" />
@@ -232,6 +243,7 @@
     <Content Include="Views\AboutUs\Index.cshtml" />
     <Content Include="Views\Activity\Index.cshtml" />
     <Content Include="Views\BuildingList\Index.cshtml" />
+    <Content Include="Views\Account\loginPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

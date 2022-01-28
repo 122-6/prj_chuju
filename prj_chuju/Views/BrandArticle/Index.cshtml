@@ -1,10 +1,10 @@
-﻿@model IEnumerable<prj_chuju.articleOutline>
+﻿@model List<prj_chuju.Models.class_articleOutline>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<link rel="stylesheet" href="../style/newsStyle.css">
+<link rel="stylesheet" href="~/style/newsStyle.css">
 
 <main>
     <div class="container-fluid py-50 news">
@@ -18,13 +18,13 @@
                     <figure>
 
                         @*這裡需要修正連結*@
-                        <a href="@Url.Action("article","BrandArticle",new {id=item.id })"><img src="@item.pictureURL" alt="" class="w-75"></a>
+                        <a href="@Url.Action("article","BrandArticle",new {id=item.id })"><img src="~/@item.pictureURL" alt="" class="w-75"></a>
                         <figcaption>
 
                             @*這個tag的部分要考慮要不要做*@
                             <a href="#2">
                                 <i class="fas fa-tag"></i>
-                                @item.tag
+                                @*item.tag*@
                             </a>
                             <span>2022/1/18</span>
                         </figcaption>

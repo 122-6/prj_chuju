@@ -1,0 +1,223 @@
+.TOP{ 
+    width: 1500px;
+    height:120px;
+    font-weight:bold; 
+    background-color: white;
+    margin:0px auto;
+    color : rgb(112,97,57);
+   
+   
+}
+.MIDDLE{
+    width: 1500px;
+    height:1000px;
+    background-size:contain;
+    background-image: url( "images/pexels-linkedin-sales-navigator-1251844.png");
+    margin:0px auto;
+    padding-top:1px;
+    
+}
+.login{
+    width: 650px;
+    height:550px;
+    background-color: whitesmoke;
+    margin:0px auto;
+    margin-top: 150px;
+    
+}
+
+.ad{
+    color :white;
+    width: 1500px;
+    height:40px;
+    background-color: rgb(112, 97, 57);
+    margin:0px auto;
+    padding-top:1px;
+    text-align:center;
+    font-family:Microsoft JhengHei;
+ 
+}
+
+.menu li{
+    color : rgb(112,97,57);
+    list-style-type: none;
+    float:left;
+    text-decoration:none;
+    padding:40px 15px;
+    display:table;
+    font-size:25px; 
+}
+.menu a{
+    color : rgb(112,97,57);
+    text-decoration: none;
+    font-family:Microsoft JhengHei;
+}
+.loginor{
+    margin:0px auto;
+
+  background-color: white;
+  border-radius: 5px;
+  border-top: 10px solid #790a6f;
+ 
+  /*定位對齊*/
+  position:relative;   
+  margin: auto;
+   
+}
+.loginmain{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+.loginTop{
+    font-size:25px; 
+    width: 325px;
+    height: 70px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+.loginor li{
+    color : rgb(112,97,57);
+    list-style-type: none;
+    text-decoration:none;
+    padding:40px 15px;
+    display:table;
+    font-size:25px; 
+    position: relative;
+    
+}
+.loginor a{
+    color : black;
+    text-decoration: none;
+    font-family:Microsoft JhengHei;
+    font-weight:bold;
+}
+input{
+    font-size:15px; 
+    padding: 20px;
+    border: none; 
+    border:solid 1px #ccc;
+    border-radius: 5px;
+  }
+#username,#password{ 
+    margin-top: 20px;
+    width: 350px;
+}
+#secret{
+    margin-right: 20px;
+    width:180px;
+    margin-top: 20px;
+}
+#getSecret{
+    background-color: black;
+    color:white;
+}
+.submit{
+    background-color: rgb(112, 97, 57);
+    color:white;
+    margin-top: 20px;
+    width: 350px;
+}
+.otherLog{
+    float:left;
+    
+}
+.Simage{
+    margin-left: 50;
+}
+/*information*/
+.information{
+    width: 1500px;
+    height:220px;
+    background-color: white;
+    margin:0px auto;
+    padding-top:1px;
+    background-size:contain;
+    /*background-image: url( "images/down.png");*/
+    text-decoration: none;
+    font-family:Microsoft JhengHei;
+}
+
+#inforOne{
+    width:400px;
+    height: 220px;
+    float:left;
+    background-image: url( "images/inforOne.png");
+   
+}
+#inforTwo{ 
+    width:500px;
+    height: 210px;
+    float:left;
+    border-color:white rgb(112, 97, 57)white rgb(112, 97, 57);
+    border-width:3px;
+    border-style:solid;
+    text-decoration: none;
+    font-weight:bold;
+}
+
+#inforThree{
+    width:280px;
+    height: 210px;
+    float:left;
+    border-color:white rgb(112, 97, 57) white white ;
+    border-width:3px;
+    border-style:solid;
+    text-decoration: none;
+    font-weight:bold;
+    
+}
+#inforfour{
+    width:300px;
+    
+    float:left;
+    text-decoration: none;
+    font-weight:bold;
+    
+}
+#inforfour a{
+    text-decoration: none;
+}
+.infor_title{
+    color: rgb(112, 97, 57);
+    font-weight:bold;
+    font-size:25px;
+    position:relative;
+    top:20px;
+    left:35%;
+    right:40%;
+
+}
+.infor_content{
+    color: rgb(112, 97, 57);
+
+    font-size:15px;
+}
+#inforTwo ul,#inforThree ul,#inforFour ul{
+    
+    font-size:20px;
+    list-style-type: none;
+    float:left;
+}
+#inforTwo li,#inforThree li,#inforFour li{
+    margin-bottom: 5px;
+}
+#inforTwo a,#inforThree a,#inforFour a{
+    color: rgb(112, 97, 57);
+    text-decoration: none;
+}
+#email{
+    margin-left: 20px;
+    width:150px;
+    height: 40px;
+    color:rgb(112, 97, 57) ;
+}
+#getEmail{
+    width:100px;
+    height: 40px;
+    background-color:rgb(112, 97, 57) ;
+    color:white;
+    padding-top: 10px;
+    padding-left: 10px;
+}

@@ -128,6 +128,7 @@
     <Content Include="images\articleTitlePicture\imgArticle_02.jpg" />
     <Content Include="images\ICON\down-arrow.png" />
     <Content Include="style\aboutStyle.css" />
+    <Content Include="style\Building.css" />
     <Content Include="style\designStyle.css" />
     <Content Include="style\indexStyle.css" />
     <Content Include="style\layoutStyle.css" />
@@ -192,6 +193,7 @@
     <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\BrandArticleController.cs" />
+    <Compile Include="Controllers\BuildingListController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="dbChuju.Context.cs">
       <AutoGen>True</AutoGen>
@@ -229,6 +231,7 @@
     <Content Include="Views\BrandArticle\Index.cshtml" />
     <Content Include="Views\AboutUs\Index.cshtml" />
     <Content Include="Views\Activity\Index.cshtml" />
+    <Content Include="Views\BuildingList\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

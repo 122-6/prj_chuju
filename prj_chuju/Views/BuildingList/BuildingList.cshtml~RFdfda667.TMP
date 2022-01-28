@@ -1,0 +1,515 @@
+﻿
+@{
+    ViewBag.Title = "BuildingList";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+          integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="javascript/jquery-3.6.0.js"></script>
+    <script src="javascript/hiyes.js"></script>
+    <style>
+        /*通用CSS*/
+        * {
+            margin: 0;
+        }
+
+        .py-50 {
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+
+        .py-10 {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .py-25 {
+            padding-top: 25px;
+            padding-bottom: 25px;
+        }
+
+        /*nav*/
+        .top-nav {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin: auto;
+        }
+
+        .top-nav-left {
+            color: #5B5B5B;
+        }
+
+        .top-nav-right i {
+            margin: 10px;
+            font-size: 25px;
+        }
+
+        nav a {
+            color: #5B5B5B;
+            font-family: '微軟正黑體'
+        }
+
+        .bottom-nav {
+            background-color: #706139;
+        }
+
+            .bottom-nav a {
+                color: white;
+                margin-right: 20px;
+            }
+
+
+
+        /*main*/
+
+
+
+        .box {
+            border-bottom: 3px solid #706139;
+            border-top: 3px solid #706139;
+            width: 960px;
+            margin: 0px auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+
+
+
+        .card {
+            width: 200px;
+            height: 300px;
+            background-color: rgb(235, 234, 234);
+            margin: 20px;
+            text-align: center;
+        }
+
+            .card .img-150 {
+                height: 150px;
+            }
+
+
+
+        .card-pic {
+            padding-top: 20px;
+        }
+
+            .card-pic img {
+                height: 150px;
+            }
+
+        .card-name {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        /*footer*/
+        footer :link {
+            color: #706139;
+        }
+
+        .border-right {
+            margin-right: 50px;
+        }
+
+        .foot-link .row > .link {
+            width: 30%;
+        }
+
+        .foot-link {
+            color: #706139;
+        }
+
+        .emailto {
+            background-color: #706139;
+            padding: 2px 2px 2px 2px;
+            width: fit-content;
+            font-size: 15px;
+        }
+
+        .end {
+            background-color: #706139;
+            color: white;
+        }
+
+        footer .title {
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="test"></div>
+    <nav>
+        <div class="row top-nav align-items-center justify-content-between col-8">
+            <div class="top-nav-left col-2">
+                <a href="#">雛區廣告Logo</a>
+            </div>
+            <div class="top-nav-center row justify-content-between col-8">
+                <a href="#">買房第一站</a>
+                <a href="#">關於雛居</a>
+                <a href="#">房市新訊</a>
+                <a href="#">建案列表</a>
+                <a href="#">活動快報</a>
+                <a href="#">建案搜尋</a>
+                <a href="#">會員專區</a>
+            </div>
+            <div class="top-nav-right row align-items-center justify-content-center col-2">
+                <a href="#"><i class="fab fa-facebook-square"></i></a>|
+                <a href="#"><i class="fab fa-line"></i></a>
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+
+        <div class="container-fluid bottom-nav">
+            <div class="row top-nav align-items-center justify-content-between col-8">
+                <div class="top-nav-left col-2">
+                </div>
+                <div class="top-nav-center row col-8">
+                    <a href="#">台北市</a>
+                    <a href="#">新北市</a>
+                    <a href="#">桃竹苗地區</a>
+                    <a href="#">中部地區</a>
+                    <a href="#">南部地區</a>
+                    <a href="#">其他地區</a>
+
+
+                </div>
+                <div class="top-nav-right row align-items-center justify-content-center col-2">
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <div class="container-fliud">
+            <h1>建案列表</h1>
+            <div class="box ">
+                <div class="row">
+                    <div class="card">
+                        <div class="card-pic">
+                            <img src="建案資料庫/照片/13-紘石仰格/111.jpg" alt="">
+                        </div>
+                        <div class="card-name">
+                            紘石仰格
+                        </div>
+                        <div class="card-place">
+                            台北市士林區
+                        </div>
+                        <div class="card-space">
+                            60 - 70 坪
+                        </div>
+                        <div>
+                            <input type="button" value="查看建案" style="width: 150px; align-content: center;">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-pic">
+                            <img src="建案資料庫/照片/13-紘石仰格/111.jpg" alt="">
+                        </div>
+                        <div class="card-name">
+                            紘石仰格
+                        </div>
+                        <div class="card-place">
+                            台北市士林區
+                        </div>
+                        <div class="card-space">
+                            60 - 70 坪
+                        </div>
+                        <div>
+                            <input type="button" value="查看建案" style="width: 150px; align-content: center;">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-pic">
+                            <img src="建案資料庫/照片/13-紘石仰格/111.jpg" alt="">
+                        </div>
+                        <div class="card-name">
+                            紘石仰格
+                        </div>
+                        <div class="card-place">
+                            台北市士林區
+                        </div>
+                        <div class="card-space">
+                            60 - 70 坪
+                        </div>
+                        <div>
+                            <input type="button" value="查看建案" style="width: 150px; align-content: center;">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-pic">
+                            <img src="建案資料庫/照片/13-紘石仰格/111.jpg" alt="">
+                        </div>
+                        <div class="card-name">
+                            紘石仰格
+                        </div>
+                        <div class="card-place">
+                            台北市士林區
+                        </div>
+                        <div class="card-space">
+                            60 - 70 坪
+                        </div>
+                        <div>
+                            <input type="button" value="查看建案" style="width: 150px; align-content: center;">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-pic">
+                            <img src="建案資料庫/照片/13-紘石仰格/111.jpg" alt="">
+                        </div>
+                        <div class="card-name">
+                            紘石仰格
+                        </div>
+                        <div class="card-place">
+                            台北市士林區
+                        </div>
+                        <div class="card-space">
+                            60 - 70 坪
+                        </div>
+                        <div>
+                            <input type="button" value="查看建案" style="width: 150px; align-content: center;">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-pic">
+                            <img src="建案資料庫/照片/13-紘石仰格/111.jpg" alt="">
+                        </div>
+                        <div class="card-name">
+                            紘石仰格
+                        </div>
+                        <div class="card-place">
+                            台北市士林區
+                        </div>
+                        <div class="card-space">
+                            60 - 70 坪
+                        </div>
+                        <div>
+                            <input type="button" value="查看建案" style="width: 150px; align-content: center;">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-pic">
+                            <img src="建案資料庫/照片/13-紘石仰格/111.jpg" alt="">
+                        </div>
+                        <div class="card-name">
+                            紘石仰格
+                        </div>
+                        <div class="card-place">
+                            台北市士林區
+                        </div>
+                        <div class="card-space">
+                            60 - 70 坪
+                        </div>
+                        <div>
+                            <input type="button" value="查看建案" style="width: 150px; align-content: center;">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-pic">
+                            <img src="建案資料庫/照片/13-紘石仰格/111.jpg" alt="">
+                        </div>
+                        <div class="card-name">
+                            紘石仰格
+                        </div>
+                        <div class="card-place">
+                            台北市士林區
+                        </div>
+                        <div class="card-space">
+                            60 - 70 坪
+                        </div>
+                        <div>
+                            <input type="button" value="查看建案" style="width: 150px; align-content: center;">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-pic">
+                            <img src="建案資料庫/照片/13-紘石仰格/111.jpg" alt="">
+                        </div>
+                        <div class="card-name">
+                            紘石仰格
+                        </div>
+                        <div class="card-place">
+                            台北市士林區
+                        </div>
+                        <div class="card-space">
+                            60 - 70 坪
+                        </div>
+                        <div>
+                            <input type="button" value="查看建案" style="width: 150px; align-content: center;">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-pic">
+                            <img src="建案資料庫/照片/13-紘石仰格/111.jpg" alt="">
+                        </div>
+                        <div class="card-name">
+                            紘石仰格
+                        </div>
+                        <div class="card-place">
+                            台北市士林區
+                        </div>
+                        <div class="card-space">
+                            60 - 70 坪
+                        </div>
+                        <div>
+                            <input type="button" value="查看建案" style="width: 150px; align-content: center;">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-pic">
+                            <img src="建案資料庫/照片/13-紘石仰格/111.jpg" alt="">
+                        </div>
+                        <div class="card-name">
+                            紘石仰格
+                        </div>
+                        <div class="card-place">
+                            台北市士林區
+                        </div>
+                        <div class="card-space">
+                            60 - 70 坪
+                        </div>
+                        <div>
+                            <input type="button" value="查看建案" style="width: 150px; align-content: center;">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-pic">
+                            <img src="建案資料庫/照片/13-紘石仰格/111.jpg" alt="">
+                        </div>
+                        <div class="card-name">
+                            紘石仰格
+                        </div>
+                        <div class="card-place">
+                            台北市士林區
+                        </div>
+                        <div class="card-space">
+                            60 - 70 坪
+                        </div>
+                        <div>
+                            <input type="button" value="查看建案" style="width: 150px; align-content: center;">
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </main>
+    <footer>
+        <div class="container-fluid w-100 py-10">
+            <div class="row justify-content-center foot-link">
+                <div class="col-2 border-right">
+                    <div class="row">
+                        <h4 class="title">雛居廣告</h4>
+                    </div>
+                    <div class="row">
+                        台北市松山區敦化北路260號7樓
+                    </div>
+                    <div class="row">
+                        (02)8712-8888
+                    </div>
+                    <div class="row">
+                        91laroslin@gmail.com
+                    </div>
+                    <div class="row">
+                        雛居廣告
+                    </div>
+                </div>
+                <div class="col-3 border-right">
+                    <div class="row">
+                        <h4 class="title">快速連結</h4>
+                    </div>
+                    <div class="row">
+                        <div class="link"><a href="#">首頁</a></div>
+                        <div class="link"><a href="#">買房新訊</a></div>
+                        <div class="link"><a href="#">使用者條款</a></div>
+                    </div>
+                    <div class="row">
+                        <div class="link"><a href="#">關於我們</a></div>
+                        <div class="link"><a href="#">買房第一站</a></div>
+                    </div>
+                    <div class="row">
+                        <div class="link"><a href="#">建案列表</a></div>
+                        <div class="link"><a href="#">加入雛居</a></div>
+                    </div>
+                    <div class="row">
+                        <div class="link"><a href="#">活動快報</a></div>
+                        <div class="link"><a href="#">隱私權政策</a></div>
+                    </div>
+                </div>
+                <div class="col-2 border-right">
+                    <div class="row">
+                        <h4 class="title">建案搜尋</h4>
+                    </div>
+                    <div class="row">
+                        <div class="link"><a href="#">台北市</a></div>
+                        <div class="link"><a href="#">中部地區</a></div>
+                    </div>
+                    <div class="row">
+                        <div class="link"><a href="#">新北市</a></div>
+                        <div class="link"><a href="#">南部地區</a></div>
+                    </div>
+                    <div class="row">
+                        <div class="link"><a href="#">桃竹地區</a></div>
+                        <div class="link"><a href="#">其他地區</a></div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="row">
+                        <h4 class="title">追蹤我們</h4>
+                    </div>
+                    <div class="row">
+                        <div class="link"><a href="#">Facebook</a></div>
+                        <div class="link"><a href="#">Line</a></div>
+                    </div>
+                    <div class="row">
+                        <div class="link"><a href="#">YouTube</a></div>
+                        <div class="link"><a href="#">Instagram</a></div>
+                    </div>
+                    <div class="row emailto">
+                        <input type="text" name="email" id="email" placeholder="請輸入電子信箱" class="border-0">
+                        <button class="bg-transparent border-0 text-white">
+                            <i class="fas fa-envelope"></i>
+                            訂閱電子報
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid w-100 py-10 end text-center">
+            雛居廣告股份有限公司 版權所有 ©CHU-GI CORP. | 電話：(02)8712-888 | 地址：台北市松山區敦化北路260號7樓
+        </div>
+    </footer>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -97,16 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />
-    <Content Include="dbChuju.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>dbChuju.Context.cs</LastGenOutput>
-      <DependentUpon>dbChuju.edmx</DependentUpon>
-    </Content>
-    <Content Include="dbChuju.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>dbChuju.edmx</DependentUpon>
-      <LastGenOutput>dbChuju.cs</LastGenOutput>
-    </Content>
     <Content Include="images\aboutPictures\dream-team-2021-09-01-07-24-01-utc.jpg" />
     <Content Include="images\aboutPictures\office-building-2021-08-29-21-04-49-utc.jpg.png" />
     <Content Include="images\aboutPictures\pexels-north-1275680.jpg" />
@@ -136,6 +126,24 @@
     <Content Include="images\articleTitlePicture\imgArticle_01.jpg" />
     <Content Include="images\articleTitlePicture\imgArticle_02.jpg" />
     <Content Include="images\ICON\down-arrow.png" />
+    <Content Include="images\articleListPictures\1.jpg" />
+    <Content Include="images\articleListPictures\10.jpg" />
+    <Content Include="images\articleListPictures\11.jpg" />
+    <Content Include="images\articleListPictures\12.jpg" />
+    <Content Include="images\articleListPictures\13.png" />
+    <Content Include="images\articleListPictures\14.jpg" />
+    <Content Include="images\articleListPictures\15.jpg" />
+    <Content Include="images\articleListPictures\16.jpg" />
+    <Content Include="images\articleListPictures\17.jpg" />
+    <Content Include="images\articleListPictures\18.jpg" />
+    <Content Include="images\articleListPictures\2.jpg" />
+    <Content Include="images\articleListPictures\3.jpg" />
+    <Content Include="images\articleListPictures\4.jpg" />
+    <Content Include="images\articleListPictures\5.jpg" />
+    <Content Include="images\articleListPictures\6.jpg" />
+    <Content Include="images\articleListPictures\7.jpg" />
+    <Content Include="images\articleListPictures\8.jpg" />
+    <Content Include="images\articleListPictures\9.jpg" />
     <Content Include="style\aboutStyle.css" />
     <Content Include="style\Building.css" />
     <Content Include="style\designStyle.css" />
@@ -197,44 +205,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="articleOutline.cs">
-      <DependentUpon>dbChuju.tt</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\BrandArticleController.cs" />
     <Compile Include="Controllers\BuildingListController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="dbChuju.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dbChuju.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="dbChuju.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dbChuju.tt</DependentUpon>
-    </Compile>
-    <Compile Include="dbChuju.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dbChuju.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\class_articleOutline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <EntityDeploy Include="dbChuju.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>dbChuju.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="dbChuju.edmx.diagram">
-      <DependentUpon>dbChuju.edmx</DependentUpon>
-    </Content>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -253,7 +237,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -61,14 +61,14 @@
 
 <body>
     <div id="test"></div>
-    <nav>
-        <div class="d-flex px-4 top-nav align-items-center justify-content-between" style="height:100px;">
-            <div class="top-nav-left col-1">
-                <a class="d-flex justify-content-center" href="/">
-                    <img class="logo" src="/images/logo/logo_col.png" alt="雛區廣告Logo">
+    <nav class="_LayoutElement">
+        <div class="d-flex px-4 top-nav align-items-center justify-content-between _LayoutElement" style="height:100px;">
+            <div class="top-nav-left col-1 _LayoutElement">
+                <a class="d-flex justify-content-center _LayoutElement" href="/">
+                    <img class="logo _LayoutElement" src="/images/logo/logo_col.png" alt="雛區廣告Logo">
                 </a>
             </div>
-            <div class="top-nav-center row justify-content-between col-8">
+            <div class="top-nav-center row justify-content-between col-8 _LayoutElement">
                 @Html.ActionLink("買房第一站", "Index", "BrandArticle")
                 @Html.ActionLink("關於雛居", "Index", "AboutUs")
                 @Html.ActionLink("房市新訊", "Index", "NewsArticle")
@@ -77,10 +77,10 @@
                 @Html.ActionLink("建案搜尋", "Index", "BuildingCase")
                 @Html.ActionLink("會員專區", "loginPage", "Account")
             </div>
-            <div class="top-nav-right row align-items-center justify-content-center col-2">
-                <a href="#"><img class="iconImg" src="/images/ICON/facebook.png" alt=""></a>|
-                <a href="#"><img class="iconImg" src="/images/ICON/line.png" alt=""></a>
-                <a href="#"><img class="iconImg" src="/images/ICON/search.png" alt=""></a>
+            <div class="top-nav-right row align-items-center justify-content-center col-2 _LayoutElement">
+                <a href="#"><img class="iconImg _LayoutElement" src="/images/ICON/facebook.png" alt=""></a>|
+                <a href="#"><img class="iconImg _LayoutElement" src="/images/ICON/line.png" alt=""></a>
+                <a href="#"><img class="iconImg _LayoutElement" src="/images/ICON/search.png" alt=""></a>
             </div>
         </div>
 
@@ -90,93 +90,93 @@
         @RenderBody()
     </div>
 
-    <footer>
-        <div class="container-fluid w-100 py-10">
-            <div class="row justify-content-center foot-link">
-                <div class="col-2 border-right">
-                    <div class="row">
-                        <img class="w-70 mb-4" src="/images/logo/logo_row.png" alt="">
+    <footer class="_LayoutElement">
+        <div class="container-fluid w-100 py-10 _LayoutElement">
+            <div class="row justify-content-center foot-link _LayoutElement">
+                <div class="col-2 border-right _LayoutElement">
+                    <div class="row _LayoutElement">
+                        <img class="w-70 mb-4 _LayoutElement" src="/images/logo/logo_row.png" alt="">
                     </div>
-                    <div class="row">
+                    <div class="row _LayoutElement">
                         台北市松山區敦化北路260號7樓
                     </div>
-                    <div class="row">
+                    <div class="row _LayoutElement">
                         (02)8712-8888
                     </div>
-                    <div class="row">
+                    <div class="row _LayoutElement">
                         91laroslin@gmail.com
                     </div>
-                    <div class="row">
+                    <div class="row _LayoutElement">
                         雛居廣告
                     </div>
                 </div>
-                <div class="col-3 border-right">
-                    <div class="row">
-                        <h4 class="title">快速連結</h4>
+                <div class="col-3 border-right _LayoutElement">
+                    <div class="row _Layout">
+                        <h4 class="title _LayoutElement">快速連結</h4>
                     </div>
-                    <div class="row">
-                        <div class="link"><a href="#">首頁</a></div>
-                        <div class="link"><a href="#">買房新訊</a></div>
-                        <div class="link"><a href="#">使用者條款</a></div>
+                    <div class="row _LayoutElement">
+                        <div class="link _LayoutElement"><a href="#">首頁</a></div>
+                        <div class="link _LayoutElement"><a href="#">買房新訊</a></div>
+                        <div class="link _LayoutElement"><a href="#">使用者條款</a></div>
                     </div>
-                    <div class="row">
-                        <div class="link"><a href="#">關於我們</a></div>
-                        <div class="link"><a href="#">買房第一站</a></div>
+                    <div class="row _LayoutElement">
+                        <div class="link _LayoutElement"><a href="#">關於我們</a></div>
+                        <div class="link _LayoutElement"><a href="#">買房第一站</a></div>
                     </div>
-                    <div class="row">
-                        <div class="link"><a href="#">建案列表</a></div>
-                        <div class="link"><a href="#">加入雛居</a></div>
+                    <div class="row _LayoutElement">
+                        <div class="link _LayoutElement"><a href="#">建案列表</a></div>
+                        <div class="link _LayoutElement"><a href="#">加入雛居</a></div>
                     </div>
-                    <div class="row">
-                        <div class="link"><a href="#">活動快報</a></div>
-                        <div class="link"><a href="#">隱私權政策</a></div>
+                    <div class="row _LayoutElement">
+                        <div class="link _LayoutElement"><a href="#">活動快報</a></div>
+                        <div class="link _LayoutElement"><a href="#">隱私權政策</a></div>
                     </div>
                 </div>
                 <div class="col-2 border-right">
-                    <div class="row">
-                        <h4 class="title">建案搜尋</h4>
+                    <div class="row _LayoutElement">
+                        <h4 class="title _LayoutElement">建案搜尋</h4>
                     </div>
-                    <div class="row">
-                        <div class="link"><a href="#">台北市</a></div>
-                        <div class="link"><a href="#">中部地區</a></div>
+                    <div class="row _LayoutElement">
+                        <div class="link _LayoutElement"><a href="#">台北市</a></div>
+                        <div class="link _LayoutElement"><a href="#">中部地區</a></div>
                     </div>
-                    <div class="row">
-                        <div class="link"><a href="#">新北市</a></div>
-                        <div class="link"><a href="#">南部地區</a></div>
+                    <div class="row _LayoutElement">
+                        <div class="link _LayoutElement"><a href="#">新北市</a></div>
+                        <div class="link _LayoutElement"><a href="#">南部地區</a></div>
                     </div>
-                    <div class="row">
-                        <div class="link"><a href="#">桃竹地區</a></div>
-                        <div class="link"><a href="#">其他地區</a></div>
+                    <div class="row _LayoutElement">
+                        <div class="link _LayoutElement"><a href="#">桃竹地區</a></div>
+                        <div class="link _LayoutElement"><a href="#">其他地區</a></div>
                     </div>
                 </div>
-                <div class="col-2 followUs">
-                    <div class="row">
-                        <h4 class="title">追蹤我們</h4>
+                <div class="col-2 followUs _LayoutElement">
+                    <div class="row _LayoutElement">
+                        <h4 class="title _LayoutElement">追蹤我們</h4>
                     </div>
-                    <div class="d-flex mb-3">
+                    <div class="d-flex mb-3 _LayoutElement">
                         <div>
-                            <a class="d-flex align-items-center" href="#">
-                                <img class="iconImg" src="/images/ICON/facebook.png" alt="">Facebook
+                            <a class="d-flex align-items-center _LayoutElement" href="#">
+                                <img class="iconImg _LayoutElement" src="/images/ICON/facebook.png" alt="">Facebook
                             </a>
-                            <a class="d-flex align-items-center" href="#">
-                                <img class="iconImg" src="/images/ICON/youtube.png" alt="">Youtube
+                            <a class="d-flex align-items-center _LayoutElement" href="#">
+                                <img class="iconImg _LayoutElement" src="/images/ICON/youtube.png" alt="">Youtube
                             </a>
                         </div>
                         <div>
-                            <a class="d-flex align-items-center" href="#">
-                                <img class="iconImg" src="/images/ICON/line.png" alt="">Line
+                            <a class="d-flex align-items-center _LayoutElement" href="#">
+                                <img class="iconImg _LayoutElement" src="/images/ICON/line.png" alt="">Line
                             </a>
-                            <a class="d-flex align-items-center" href="#">
-                                <img class="iconImg" src="/images/ICON/instagram.png" alt="">Instagram
+                            <a class="d-flex align-items-center _LayoutElement" href="#">
+                                <img class="iconImg _LayoutElement" src="/images/ICON/instagram.png" alt="">Instagram
                             </a>
                         </div>
                     </div>
 
 
-                    <div class="row emailto">
-                        <input type="text" name="email" id="email" placeholder="請輸入電子信箱" class="border-0">
-                        <button class="bg-transparent border-0 text-white">
-                            <i class="fas fa-envelope"></i>
+                    <div class="row emailto _LayoutElement">
+                        <input type="text" name="email" id="email" placeholder="請輸入電子信箱" class="border-0 _LayoutElement">
+                        <button class="bg-transparent border-0 text-white _LayoutElement">
+                            <i class="fas fa-envelope _LayoutElement"></i>
                             訂閱電子報
                         </button>
                     </div>
@@ -184,7 +184,7 @@
             </div>
         </div>
 
-        <div class="container-fluid w-100 py-10 end text-center">
+        <div class="container-fluid w-100 py-10 end text-center _LayoutElement">
             雛居廣告股份有限公司 版權所有 ©CHU-GI CORP. | 電話：(02)8712-888 | 地址：台北市松山區敦化北路260號7樓
         </div>
     </footer>

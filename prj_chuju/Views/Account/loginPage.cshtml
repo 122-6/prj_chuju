@@ -5,50 +5,101 @@
 
 <link rel="stylesheet" type="text/css" href="~/style/loginStyle.css" />
 
-<div class=MIDDLE>
-    <div class=login>
-        <div class="login2">
-            <div class=loginor>
-                <div class=logintop style="float:left">
-                    <li><a href='#'>註冊會員</a></li>
-                </div>
-                <div class=logintop>
-                    <a href='#'>登入會員</a></li>
-                </div>
-                <div class=loginmain>
-                    <form action="test.php">
-                        <input type="text" id="username" name="username" placeholder="請輸入手機號碼" required>
-                        <div class="tab"></div>
-                        <input type="text" id="password" name="password" placeholder="請輸入電子信箱" required>
-                        <div class="tab"></div>
-                        <input type="text" id="secret" name="password" placeholder="請輸入手機驗證碼" required>
-                        <input type="submit" value="獲取手機驗證碼" id="getSecret"
-                               onclick="location.href='https://google.com.tw'">
-                        <div class="tab"></div>
-                        <input type="submit" value="立即註冊" class="submit"
-                               onclick="location.href='https://google.com.tw'">
-                        <p>
-                            <input type="checkbox" id=check1>
-                            <label for="check1">我已閱讀並同意 服務條款與隱私性說明</label>
-                        </p>
-                        <p>使用現有帳戶快速登入</p>
-                        <div id=otherLog>
-                            <a class=Simage href="https://google.com.tw">
-                                <img src="~/images/AccountPictures/common/facebook.png" width="50"
-                                     height="50">
-                            </a>
-                            <a class=Simage href="https://google.com.tw">
-                                <img src="~/images/AccountPictures/common/line.png" width="50"
-                                     height="50">
-                            </a>
-                            <a class=Simage href="https://google.com.tw">
-                                <img src="~/images/AccountPictures/common/google.png" width="50"
-                                     height="50">
-                            </a>
-                        </div>
-                    </form>
-                </div>
+
+<div class="mainArea">
+    <div class="operationArea">
+        
+        <div class="pageSwitcher">
+            <div id="signupPageTag" class="pageTag actived">
+                註冊會員
+            </div>
+
+            <div id="signupPageTag" class="pageTag">
+                會員登入
             </div>
         </div>
+
+        <div class="pageArea">
+
+            <div id="signupPage" class="pageContainer actived">
+                <form class="infoForm">
+                    <div class="inputArea">
+                        <input class="w-100" type="text" id="userCellphone" name="ususerCellphoneername" placeholder="請輸入手機號碼" required>
+                    </div>
+                    <div class="inputArea">
+                        <input class="w-100" type="text" id="userEmail" name="passuserEmailword" placeholder="請輸入電子信箱" required>
+                    </div>
+                    <div class="inputArea d-flex justify-content-between">
+                        <input type="text" id="secret" name="secret" placeholder="請輸入手機驗證碼" required>
+                        <input type="button" value="獲取手機驗證碼" id="getSecret">
+                    </div>
+                    <div class="inputArea">
+                        <input class="w-100" id="submitBtn" type="submit" value="立即註冊">
+                    </div>
+                    <div class="inputArea">
+                        <input type="checkbox" id="cbxAgree">
+                        <label for="cbxAgree">我已閱讀並同意 <a href="#">服務條款</a> 與 <a href="#">隱私性說明</a> </label>
+                    </div>
+                </form>
+            </div>
+
+            <div id="loginPage" class="pageContainer" >
+                <form class="infoForm">
+                    <div class="inputArea">
+                        <input class="w-100" type="text" id="userName" name="userName" placeholder="電子信箱或手機號碼" required>
+                    </div>
+                    <div class="inputArea">
+                        <input class="w-100" type="text" id="password" name="password" placeholder="密碼" required>
+                    </div>
+                    <div class="inputArea d-flex justify-content-between">
+                        <div>
+                            <input type="checkbox" id="rememberMe">
+                            <label for="rememberMe">記住我</label>
+                        </div>
+                        <a id="forgetPassword" href="#">
+                            忘記密碼?
+                        </a>
+                    </div>
+                    <div class="inputArea">
+                        <input class="w-100" id="submitBtn" type="submit" value="登入" onclick="location.href='https://google.com.tw'">
+                    </div>
+
+                </form>
+            </div>
+
+            <p class="w-100">使用現有帳戶快速登入</p>
+            <div class="otherLogin text-left">
+                <a class="linkIcon" href="https://google.com.tw">
+                    <img src="~/images/AccountPictures/common/facebook.png" width="64" height="64">
+                </a>
+                <a class="linkIcon" href="https://google.com.tw">
+                    <img src="~/images/AccountPictures/common/line.png" width="64" height="64">
+                </a>
+                <a class="linkIcon" href="https://google.com.tw">
+                    <img src="~/images/AccountPictures/common/google.png" width="64" height="64">
+                </a>
+            </div>
+        </div>
+
     </div>
 </div>
+
+<script src="~/javascript/jquery-3.6.0.min.js"></script>
+<script>
+    let pageTags = $('.pageSwitcher').children('.pageTag');
+    let pageContainers = $('.pageArea').children('.pageContainer');
+
+    $.each(pageTags, function (ind, val) {
+        $(val).on('click', function (event) {
+            $.each(pageTags, function (i, v) {
+                $(v).removeClass('actived');
+            });
+            $.each(pageContainers, function (i, v) {
+                $(v).removeClass('actived');
+            });
+            $(val).addClass('actived');
+            $(pageContainers[ind]).addClass('actived');
+        });
+    });
+
+</script>

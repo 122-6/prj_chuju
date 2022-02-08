@@ -1,0 +1,58 @@
+﻿@model IEnumerable<project.articleOutline>
+@{
+    ViewBag.Title = "AllArticle";
+}
+
+<link rel="stylesheet" href="~/Content/allarticle.css" />
+<nav>
+    <div class="container-fluid bottom-nav">
+        <div class="row top-nav align-items-center justify-content-between col-8">
+            <div class="top-nav-left col-2">
+            </div>
+            <div class="top-nav-center row col-8">
+                <a href="~/MarketNews/AllArticle">所有文章</a>
+                <a href="~/MarketNews/FeverCase">發燒個案</a>
+                <a href="~/MarketNews/HouseMarket">房市脈動</a>
+                <a href="~/MarketNews/Invest">金融投資</a>
+            </div>
+            <div class="top-nav-right row align-items-center justify-content-center col-2">
+            </div>
+        </div>
+    </div>
+</nav>
+<main>
+    <div class="container-fluid py-50 news">
+        <h1 class="mt-3 mb-5 ml-5 font-weight-bold">所有文章</h1>
+        @foreach (var item in Model)
+        {
+            <div class="d-flex w-75 flex-wrap mx-auto border-b">
+                <div class="col-md-6 news-item my-3">
+                    <a href="~/MarketNews/ArticleContent/@item.id"><img src="~/@item.pictureURL" alt="" class="img-fluid"></a>
+                </div>
+                <div class="col-md-6 news-item my-3">
+                    <div class="title-box h-50">
+                        <div class="d-flex justify-content-between">
+                            <a href="~/MarketNews/ArticleContent/@item.id">
+                                <i class="fas fa-tag"></i>
+                                @item.articleClass1.className
+                            </a>
+                            <span>@Html.DisplayFor(ModelItem => item.publishDate)</span>
+                        </div>
+
+                        <a href="#1"><h3>@item.title</h3></a>
+                    </div>
+                    <div class="tag-box h-50 d-flex align-items-end">
+                        @foreach (var tag in item.articleTagList)
+                        {
+                            <span class="tag">@tag.tagName</span>
+                        }
+                    </div>
+
+                </div>
+            </div>
+
+        }
+
+    </div>
+</main>
+

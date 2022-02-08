@@ -1,0 +1,100 @@
+﻿@model project.ViewModels.ArticleContentViewModel
+@{
+    ViewBag.Title = "ArticleContent";
+}
+<link rel="stylesheet" href="~/Content/articlecontent.css" />
+<nav>
+    <div class="container-fluid bottom-nav">
+        <div class="row top-nav align-items-center justify-content-between col-8">
+            <div class="top-nav-left col-2">
+            </div>
+            <div class="top-nav-center row col-8">
+                <a href="~/BuyHouseFirst/AllArticle">所有文章</a>
+                <a href="~/BuyHouseFirst/FirstStation">買房第一站</a>
+                <a href="~/BuyHouseFirst/MemberBenefits">會員好康</a>
+                <a href="~/BuyHouseFirst/Design">設計裝修</a>
+            </div>
+            <div class="top-nav-right row align-items-center justify-content-center col-2">
+            </div>
+        </div>
+    </div>
+</nav>
+<main>
+    <div class="container-fluid py-50">
+        <div class="d詳細資訊">
+            @foreach (var item in Model.articleDetail)
+            {
+                <p class="text font-weight-bolder">@item.articleClass1.className</p>
+                <p class="text">刊出日期 @Html.DisplayFor(modelitem => item.publishDate)</p>
+                <p class="text">文字 / 林建評</p>
+                <div class="tag d-flex justify-content-start flex-wrap">
+                    @foreach (var tag in item.articleTagList)
+                    {
+                        <div>#@tag.tagName</div>
+                    }
+                </div>
+            }
+        </div>
+        <div class="btn-tool">
+            <a href=""><img src="images/P/text.png" alt=""></a>
+            <a href=""><img src="images/P/printer.png" alt=""></a>
+            <a href=""><img src="images/P/facebook.png" alt=""></a>
+            <a href=""><img src="images/P/twitter.png" alt=""></a>
+            <a href=""><img src="images/P/line.png" alt=""></a>
+        </div>
+        <div class="btn-top">
+            <a href="#top"><i class="fas fa-arrow-circle-up"></i></a>
+        </div>
+        <div class="row article">
+            <div class="col-6 m-auto">
+                <div class="title">
+                    <h1></h1>
+                </div>
+                <div class="title-image">
+                    <img src="" alt="">
+                    <div class="text">
+                        <p></p>
+                    </div>
+                </div>
+                <div class="contents">
+                    @foreach (var item in Model.articleContent)
+                    {
+                        switch (item.contentType)
+                        {
+                            case "title":
+                                <div class="title">
+                                    <h2>@item.textContent</h2>
+                                </div>
+                                break;
+                            case "picture":
+                                <div class="image">
+                                    <img src="~/images/@item.articlePicture.pictureURL" alt="">
+                                </div>
+                                break;
+                            case "text":
+                                <div class="text">
+                                    <p class="">@item.textContent</p>
+                                </div>
+                                break;
+                        }
+                    }
+                </div>
+                <p>相關文章</p>
+                <div class="row other-news">
+                    @foreach (var item in Model.articleOutline)
+                    {
+                        <div class="col-3">
+                            <a href="~/MarketNews/ArticleContent/@item.id">
+                                <img src="~/@item.pictureURL" alt="">
+                                <p class="tag">@item.articleClass1.className</p>
+                                <p>@item.title</p>
+                            </a>
+                            <p class="date">2022/01/19</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

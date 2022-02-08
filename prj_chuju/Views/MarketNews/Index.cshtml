@@ -1,20 +1,19 @@
-﻿@model IEnumerable<project.articleOutline>
-
+﻿@model IEnumerable<prj_chuju.articleOutline>
 @{
-    ViewBag.Title = "AllArticle";
+    ViewBag.Title = "Index";
 }
 
-<link rel="stylesheet" href="~/Content/allarticle.css" />
+<link rel="stylesheet" href="~/style/allarticle.css" />
 <nav>
     <div class="container-fluid bottom-nav">
         <div class="row top-nav align-items-center justify-content-between col-8">
             <div class="top-nav-left col-2">
             </div>
             <div class="top-nav-center row col-8">
-                <a href="~/BuyHouseFirst/AllArticle">所有文章</a>
-                <a href="~/BuyHouseFirst/FirstStation">買房第一站</a>
-                <a href="~/BuyHouseFirst/MemberBenefits">會員好康</a>
-                <a href="~/BuyHouseFirst/Design">設計裝修</a>
+                <a href="~/MarketNews/Index">所有文章</a>
+                <a href="~/MarketNews/FeverCase">發燒個案</a>
+                <a href="~/MarketNews/HouseMarket">房市脈動</a>
+                <a href="~/MarketNews/Invest">金融投資</a>
             </div>
             <div class="top-nav-right row align-items-center justify-content-center col-2">
             </div>
@@ -28,12 +27,12 @@
         {
             <div class="d-flex w-75 flex-wrap mx-auto border-b">
                 <div class="col-md-6 news-item my-3">
-                    <a href="~/BuyHouseFirst/ArticleContent/@item.id"><img src="~/@item.pictureURL" alt="" class="img-fluid"></a>
+                    <a href="~/MarketNews/ArticleContent/@item.id"><img src="~/@item.pictureURL" alt="" class="img-fluid"></a>
                 </div>
                 <div class="col-md-6 news-item my-3">
                     <div class="title-box h-50">
                         <div class="d-flex justify-content-between">
-                            <a href="~/BuyHouseFirst/ArticleContent/@item.id">
+                            <a href="~/MarketNews/ArticleContent/@item.id">
                                 <i class="fas fa-tag"></i>
                                 @item.articleClass1.className
                             </a>
@@ -56,3 +55,4 @@
 
     </div>
 </main>
+

@@ -10,8 +10,8 @@ namespace prj_chuju.Controllers
     public class MarketNewsController : Controller
     {
         // GET: MarketNews
-        dbProjectEntities db = new dbProjectEntities();
-        public ActionResult AllArticle()
+        dbchujuEntities1 db = new dbchujuEntities1();
+        public ActionResult Index()
         {
             
             var article = from p in db.articleOutline join x in db.articleClass on p.articleClass equals x.id where x.mainClass == "房市新訊" select p;

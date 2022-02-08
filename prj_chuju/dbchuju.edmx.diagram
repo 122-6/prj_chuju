@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="003f3e71c5ae4e659254df54940387ec" Name="Diagram1">
+        <EntityTypeShape EntityType="dbchujuModel.accountInfo" Width="1.5" PointX="12.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbchujuModel.accountPicture" Width="1.5" PointX="10" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbchujuModel.articleClass" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbchujuModel.articleContent" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbchujuModel.articleOutline" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbchujuModel.articlePicture" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbchujuModel.articleTagList" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbchujuModel.cityList" Width="1.5" PointX="7.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbchujuModel.regionList" Width="1.5" PointX="10" PointY="2.75" IsExpanded="true" />
+        <AssociationConnector Association="dbchujuModel.FK__accountIn__avata__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="dbchujuModel.FK__accountIn__regio__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="dbchujuModel.FK__articleOu__artic__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="dbchujuModel.FK__articleCo__artic__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="dbchujuModel.FK__articleCo__pictu__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="dbchujuModel.FK__regionLis__cityI__74AE54BC" ManuallyRouted="false" />
+        <AssociationConnector Association="dbchujuModel.articleTag" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -97,6 +97,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />
+    <Content Include="dbchuju.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbchuju.edmx</DependentUpon>
+      <LastGenOutput>dbchuju.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="dbchuju.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbchuju.edmx</DependentUpon>
+      <LastGenOutput>dbchuju.cs</LastGenOutput>
+    </Content>
     <Content Include="images\aboutPictures\dream-team-2021-09-01-07-24-01-utc.jpg" />
     <Content Include="images\aboutPictures\office-building-2021-08-29-21-04-49-utc.jpg.png" />
     <Content Include="images\aboutPictures\pexels-north-1275680.jpg" />
@@ -634,6 +644,8 @@
     <Content Include="images\articleListPictures\8.jpg" />
     <Content Include="images\articleListPictures\9.jpg" />
     <Content Include="style\aboutStyle.css" />
+    <Content Include="style\allarticle.css" />
+    <Content Include="style\articlecontent.css" />
     <Content Include="style\Building.css" />
     <Content Include="style\designStyle.css" />
     <Content Include="style\indexStyle.css" />
@@ -693,7 +705,31 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="accountInfo.cs">
+      <DependentUpon>dbchuju.tt</DependentUpon>
+    </Compile>
+    <Compile Include="accountPicture.cs">
+      <DependentUpon>dbchuju.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="articleClass.cs">
+      <DependentUpon>dbchuju.tt</DependentUpon>
+    </Compile>
+    <Compile Include="articleContent.cs">
+      <DependentUpon>dbchuju.tt</DependentUpon>
+    </Compile>
+    <Compile Include="articleOutline.cs">
+      <DependentUpon>dbchuju.tt</DependentUpon>
+    </Compile>
+    <Compile Include="articlePicture.cs">
+      <DependentUpon>dbchuju.tt</DependentUpon>
+    </Compile>
+    <Compile Include="articleTagList.cs">
+      <DependentUpon>dbchuju.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cityList.cs">
+      <DependentUpon>dbchuju.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivityController.cs" />
@@ -702,15 +738,40 @@
     <Compile Include="Controllers\BuyHouseFirstController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MarketNewsController.cs" />
+    <Compile Include="dbchuju.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbchuju.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dbchuju.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbchuju.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dbchuju.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbchuju.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\class_articleOutline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="regionList.cs">
+      <DependentUpon>dbchuju.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ArticleContentViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
+    <EntityDeploy Include="dbchuju.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dbchuju.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="dbchuju.edmx.diagram">
+      <DependentUpon>dbchuju.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -720,12 +781,12 @@
     <Content Include="Views\Activity\Index.cshtml" />
     <Content Include="Views\BuildingList\Index.cshtml" />
     <Content Include="Views\Account\loginPage.cshtml" />
-    <Content Include="Views\BuyHouseFirst\AllArticle.cshtml" />
+    <Content Include="Views\BuyHouseFirst\Index.cshtml" />
     <Content Include="Views\BuyHouseFirst\ArticleContent.cshtml" />
     <Content Include="Views\BuyHouseFirst\FirstStation.cshtml" />
     <Content Include="Views\BuyHouseFirst\MemberBenefits.cshtml" />
     <Content Include="Views\BuyHouseFirst\Design.cshtml" />
-    <Content Include="Views\MarketNews\AllArticle.cshtml" />
+    <Content Include="Views\MarketNews\Index.cshtml" />
     <Content Include="Views\MarketNews\ArticleContent.cshtml" />
     <Content Include="Views\MarketNews\FeverCase.cshtml" />
     <Content Include="Views\MarketNews\HouseMarket.cshtml" />

@@ -1,0 +1,92 @@
+﻿/*通用*/
+* {
+    margin: 0;
+}
+
+.py-50 {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.py-10 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/*nav*/
+.bottom-nav {
+    background-color: #706139;
+}
+
+.bottom-nav a {
+    color: white;
+    margin-right: 20px;
+}
+
+/*main*/
+.d詳細資訊 {
+    color: #706139;
+    width: 150px;
+    position: fixed;
+    top: 50%;
+}
+
+.d詳細資訊 > .tag > div {
+    border: 1px solid #706139;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.btn-tool {
+    width: 30px;
+    position: fixed;
+    right: 1%;
+    top: 50%;
+}
+
+.btn-tool > a > img {
+    width: 30px;
+    height: auto;
+    margin-top: 20px;
+}
+
+.btn-top > a {
+    position: fixed;
+    right: 5%;
+    bottom: 10%;
+    color: #706139;
+    font-size: 3em;
+}
+
+main img {
+    width: 100%;
+    height: auto;
+}
+
+.article .title > h1, .article .title > h2, .article .text {
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.article .text {
+    font-size: 1.1em;
+    width: 75%;
+    margin: 50px auto;
+}
+
+.text>p {
+    text-align: justify;
+    text-justify: auto;
+}
+
+.other-news :link {
+    font-weight: bold;
+    color: black;
+    font-size: 1.1em;
+}
+
+.tag, .date {
+    color: #706139;
+    font-size: 0.8em;
+}

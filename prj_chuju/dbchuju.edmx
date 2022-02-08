@@ -1,0 +1,582 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbchujuModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="accountInfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="accountName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="userPassword" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="userName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="birthday" Type="date" />
+          <Property Name="gender" Type="nvarchar" MaxLength="1" />
+          <Property Name="cellphone" Type="varchar" MaxLength="20" />
+          <Property Name="region" Type="int" />
+          <Property Name="avatar" Type="int" />
+        </EntityType>
+        <EntityType Name="accountPicture">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pictureURL" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="articleClass">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mainClass" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="className" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="articleContent">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="articleID" Type="int" Nullable="false" />
+          <Property Name="contentOrder" Type="int" Nullable="false" />
+          <Property Name="contentType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="textContent" Type="nvarchar(max)" />
+          <Property Name="pictureID" Type="int" />
+        </EntityType>
+        <EntityType Name="articleOutline">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="articleClass" Type="int" Nullable="false" />
+          <Property Name="publishDate" Type="date" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="intro" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="articleSource" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="pictureURL" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="articlePicture">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pictureURL" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="articleTag">
+          <Key>
+            <PropertyRef Name="articleID" />
+            <PropertyRef Name="tagID" />
+          </Key>
+          <Property Name="articleID" Type="int" Nullable="false" />
+          <Property Name="tagID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="articleTagList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tagName" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cityList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cityName" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="regionList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="regionName" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="cityID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__accountIn__avata__6EF57B66">
+          <End Role="accountPicture" Type="Self.accountPicture" Multiplicity="0..1" />
+          <End Role="accountInfo" Type="Self.accountInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accountPicture">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="accountInfo">
+              <PropertyRef Name="avatar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__accountIn__regio__6E01572D">
+          <End Role="regionList" Type="Self.regionList" Multiplicity="0..1" />
+          <End Role="accountInfo" Type="Self.accountInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="regionList">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="accountInfo">
+              <PropertyRef Name="region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__articleCo__artic__6FE99F9F">
+          <End Role="articleOutline" Type="Self.articleOutline" Multiplicity="1" />
+          <End Role="articleContent" Type="Self.articleContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articleOutline">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="articleContent">
+              <PropertyRef Name="articleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__articleCo__pictu__70DDC3D8">
+          <End Role="articlePicture" Type="Self.articlePicture" Multiplicity="0..1" />
+          <End Role="articleContent" Type="Self.articleContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articlePicture">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="articleContent">
+              <PropertyRef Name="pictureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__articleOu__artic__71D1E811">
+          <End Role="articleClass" Type="Self.articleClass" Multiplicity="1" />
+          <End Role="articleOutline" Type="Self.articleOutline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articleClass">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="articleOutline">
+              <PropertyRef Name="articleClass" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__articleTa__artic__72C60C4A">
+          <End Role="articleOutline" Type="Self.articleOutline" Multiplicity="1" />
+          <End Role="articleTag" Type="Self.articleTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articleOutline">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="articleTag">
+              <PropertyRef Name="articleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__articleTa__tagID__73BA3083">
+          <End Role="articleTagList" Type="Self.articleTagList" Multiplicity="1" />
+          <End Role="articleTag" Type="Self.articleTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articleTagList">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="articleTag">
+              <PropertyRef Name="tagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__regionLis__cityI__74AE54BC">
+          <End Role="cityList" Type="Self.cityList" Multiplicity="1" />
+          <End Role="regionList" Type="Self.regionList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cityList">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="regionList">
+              <PropertyRef Name="cityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbchujuModelStoreContainer">
+          <EntitySet Name="accountInfo" EntityType="Self.accountInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="accountPicture" EntityType="Self.accountPicture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="articleClass" EntityType="Self.articleClass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="articleContent" EntityType="Self.articleContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="articleOutline" EntityType="Self.articleOutline" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="articlePicture" EntityType="Self.articlePicture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="articleTag" EntityType="Self.articleTag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="articleTagList" EntityType="Self.articleTagList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cityList" EntityType="Self.cityList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="regionList" EntityType="Self.regionList" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__accountIn__avata__6EF57B66" Association="Self.FK__accountIn__avata__6EF57B66">
+            <End Role="accountPicture" EntitySet="accountPicture" />
+            <End Role="accountInfo" EntitySet="accountInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__accountIn__regio__6E01572D" Association="Self.FK__accountIn__regio__6E01572D">
+            <End Role="regionList" EntitySet="regionList" />
+            <End Role="accountInfo" EntitySet="accountInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__articleCo__artic__6FE99F9F" Association="Self.FK__articleCo__artic__6FE99F9F">
+            <End Role="articleOutline" EntitySet="articleOutline" />
+            <End Role="articleContent" EntitySet="articleContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__articleCo__pictu__70DDC3D8" Association="Self.FK__articleCo__pictu__70DDC3D8">
+            <End Role="articlePicture" EntitySet="articlePicture" />
+            <End Role="articleContent" EntitySet="articleContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__articleOu__artic__71D1E811" Association="Self.FK__articleOu__artic__71D1E811">
+            <End Role="articleClass" EntitySet="articleClass" />
+            <End Role="articleOutline" EntitySet="articleOutline" />
+          </AssociationSet>
+          <AssociationSet Name="FK__articleTa__artic__72C60C4A" Association="Self.FK__articleTa__artic__72C60C4A">
+            <End Role="articleOutline" EntitySet="articleOutline" />
+            <End Role="articleTag" EntitySet="articleTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK__articleTa__tagID__73BA3083" Association="Self.FK__articleTa__tagID__73BA3083">
+            <End Role="articleTagList" EntitySet="articleTagList" />
+            <End Role="articleTag" EntitySet="articleTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK__regionLis__cityI__74AE54BC" Association="Self.FK__regionLis__cityI__74AE54BC">
+            <End Role="cityList" EntitySet="cityList" />
+            <End Role="regionList" EntitySet="regionList" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbchujuModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="accountInfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="accountName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userPassword" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="birthday" Type="DateTime" Precision="0" />
+          <Property Name="gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="cellphone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="region" Type="Int32" />
+          <Property Name="avatar" Type="Int32" />
+          <NavigationProperty Name="accountPicture" Relationship="Self.FK__accountIn__avata__6EF57B66" FromRole="accountInfo" ToRole="accountPicture" />
+          <NavigationProperty Name="regionList" Relationship="Self.FK__accountIn__regio__6E01572D" FromRole="accountInfo" ToRole="regionList" />
+        </EntityType>
+        <EntityType Name="accountPicture">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pictureURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="accountInfo" Relationship="Self.FK__accountIn__avata__6EF57B66" FromRole="accountPicture" ToRole="accountInfo" />
+        </EntityType>
+        <EntityType Name="articleClass">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mainClass" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="className" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="articleOutline" Relationship="Self.FK__articleOu__artic__71D1E811" FromRole="articleClass" ToRole="articleOutline" />
+        </EntityType>
+        <EntityType Name="articleContent">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="articleID" Type="Int32" Nullable="false" />
+          <Property Name="contentOrder" Type="Int32" Nullable="false" />
+          <Property Name="contentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="textContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="pictureID" Type="Int32" />
+          <NavigationProperty Name="articleOutline" Relationship="Self.FK__articleCo__artic__6FE99F9F" FromRole="articleContent" ToRole="articleOutline" />
+          <NavigationProperty Name="articlePicture" Relationship="Self.FK__articleCo__pictu__70DDC3D8" FromRole="articleContent" ToRole="articlePicture" />
+        </EntityType>
+        <EntityType Name="articleOutline">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="articleClass" Type="Int32" Nullable="false" />
+          <Property Name="publishDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="intro" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="articleSource" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pictureURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="articleClass1" Relationship="Self.FK__articleOu__artic__71D1E811" FromRole="articleOutline" ToRole="articleClass" />
+          <NavigationProperty Name="articleContent" Relationship="Self.FK__articleCo__artic__6FE99F9F" FromRole="articleOutline" ToRole="articleContent" />
+          <NavigationProperty Name="articleTagList" Relationship="Self.articleTag" FromRole="articleOutline" ToRole="articleTagList" />
+        </EntityType>
+        <EntityType Name="articlePicture">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pictureURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="articleContent" Relationship="Self.FK__articleCo__pictu__70DDC3D8" FromRole="articlePicture" ToRole="articleContent" />
+        </EntityType>
+        <EntityType Name="articleTagList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tagName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="articleOutline" Relationship="Self.articleTag" FromRole="articleTagList" ToRole="articleOutline" />
+        </EntityType>
+        <EntityType Name="cityList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cityName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="regionList" Relationship="Self.FK__regionLis__cityI__74AE54BC" FromRole="cityList" ToRole="regionList" />
+        </EntityType>
+        <EntityType Name="regionList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="regionName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cityID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="accountInfo" Relationship="Self.FK__accountIn__regio__6E01572D" FromRole="regionList" ToRole="accountInfo" />
+          <NavigationProperty Name="cityList" Relationship="Self.FK__regionLis__cityI__74AE54BC" FromRole="regionList" ToRole="cityList" />
+        </EntityType>
+        <Association Name="FK__accountIn__avata__6EF57B66">
+          <End Role="accountPicture" Type="Self.accountPicture" Multiplicity="0..1" />
+          <End Role="accountInfo" Type="Self.accountInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accountPicture">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="accountInfo">
+              <PropertyRef Name="avatar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__accountIn__regio__6E01572D">
+          <End Role="regionList" Type="Self.regionList" Multiplicity="0..1" />
+          <End Role="accountInfo" Type="Self.accountInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="regionList">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="accountInfo">
+              <PropertyRef Name="region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__articleOu__artic__71D1E811">
+          <End Role="articleClass" Type="Self.articleClass" Multiplicity="1" />
+          <End Role="articleOutline" Type="Self.articleOutline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articleClass">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="articleOutline">
+              <PropertyRef Name="articleClass" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__articleCo__artic__6FE99F9F">
+          <End Role="articleOutline" Type="Self.articleOutline" Multiplicity="1" />
+          <End Role="articleContent" Type="Self.articleContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articleOutline">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="articleContent">
+              <PropertyRef Name="articleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__articleCo__pictu__70DDC3D8">
+          <End Role="articlePicture" Type="Self.articlePicture" Multiplicity="0..1" />
+          <End Role="articleContent" Type="Self.articleContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articlePicture">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="articleContent">
+              <PropertyRef Name="pictureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__regionLis__cityI__74AE54BC">
+          <End Role="cityList" Type="Self.cityList" Multiplicity="1" />
+          <End Role="regionList" Type="Self.regionList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cityList">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="regionList">
+              <PropertyRef Name="cityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="articleTag">
+          <End Role="articleOutline" Type="Self.articleOutline" Multiplicity="*" />
+          <End Role="articleTagList" Type="Self.articleTagList" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="dbchujuEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="accountInfo" EntityType="Self.accountInfo" />
+          <EntitySet Name="accountPicture" EntityType="Self.accountPicture" />
+          <EntitySet Name="articleClass" EntityType="Self.articleClass" />
+          <EntitySet Name="articleContent" EntityType="Self.articleContent" />
+          <EntitySet Name="articleOutline" EntityType="Self.articleOutline" />
+          <EntitySet Name="articlePicture" EntityType="Self.articlePicture" />
+          <EntitySet Name="articleTagList" EntityType="Self.articleTagList" />
+          <EntitySet Name="cityList" EntityType="Self.cityList" />
+          <EntitySet Name="regionList" EntityType="Self.regionList" />
+          <AssociationSet Name="FK__accountIn__avata__6EF57B66" Association="Self.FK__accountIn__avata__6EF57B66">
+            <End Role="accountPicture" EntitySet="accountPicture" />
+            <End Role="accountInfo" EntitySet="accountInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__accountIn__regio__6E01572D" Association="Self.FK__accountIn__regio__6E01572D">
+            <End Role="regionList" EntitySet="regionList" />
+            <End Role="accountInfo" EntitySet="accountInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__articleOu__artic__71D1E811" Association="Self.FK__articleOu__artic__71D1E811">
+            <End Role="articleClass" EntitySet="articleClass" />
+            <End Role="articleOutline" EntitySet="articleOutline" />
+          </AssociationSet>
+          <AssociationSet Name="FK__articleCo__artic__6FE99F9F" Association="Self.FK__articleCo__artic__6FE99F9F">
+            <End Role="articleOutline" EntitySet="articleOutline" />
+            <End Role="articleContent" EntitySet="articleContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__articleCo__pictu__70DDC3D8" Association="Self.FK__articleCo__pictu__70DDC3D8">
+            <End Role="articlePicture" EntitySet="articlePicture" />
+            <End Role="articleContent" EntitySet="articleContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__regionLis__cityI__74AE54BC" Association="Self.FK__regionLis__cityI__74AE54BC">
+            <End Role="cityList" EntitySet="cityList" />
+            <End Role="regionList" EntitySet="regionList" />
+          </AssociationSet>
+          <AssociationSet Name="articleTag" Association="Self.articleTag">
+            <End Role="articleOutline" EntitySet="articleOutline" />
+            <End Role="articleTagList" EntitySet="articleTagList" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbchujuModelStoreContainer" CdmEntityContainer="dbchujuEntities1">
+          <EntitySetMapping Name="accountInfo">
+            <EntityTypeMapping TypeName="dbchujuModel.accountInfo">
+              <MappingFragment StoreEntitySet="accountInfo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="accountName" ColumnName="accountName" />
+                <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="cellphone" ColumnName="cellphone" />
+                <ScalarProperty Name="region" ColumnName="region" />
+                <ScalarProperty Name="avatar" ColumnName="avatar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="accountPicture">
+            <EntityTypeMapping TypeName="dbchujuModel.accountPicture">
+              <MappingFragment StoreEntitySet="accountPicture">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="pictureURL" ColumnName="pictureURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="articleClass">
+            <EntityTypeMapping TypeName="dbchujuModel.articleClass">
+              <MappingFragment StoreEntitySet="articleClass">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="mainClass" ColumnName="mainClass" />
+                <ScalarProperty Name="className" ColumnName="className" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="articleContent">
+            <EntityTypeMapping TypeName="dbchujuModel.articleContent">
+              <MappingFragment StoreEntitySet="articleContent">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="articleID" ColumnName="articleID" />
+                <ScalarProperty Name="contentOrder" ColumnName="contentOrder" />
+                <ScalarProperty Name="contentType" ColumnName="contentType" />
+                <ScalarProperty Name="textContent" ColumnName="textContent" />
+                <ScalarProperty Name="pictureID" ColumnName="pictureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="articleOutline">
+            <EntityTypeMapping TypeName="dbchujuModel.articleOutline">
+              <MappingFragment StoreEntitySet="articleOutline">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="articleClass" ColumnName="articleClass" />
+                <ScalarProperty Name="publishDate" ColumnName="publishDate" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="intro" ColumnName="intro" />
+                <ScalarProperty Name="articleSource" ColumnName="articleSource" />
+                <ScalarProperty Name="pictureURL" ColumnName="pictureURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="articlePicture">
+            <EntityTypeMapping TypeName="dbchujuModel.articlePicture">
+              <MappingFragment StoreEntitySet="articlePicture">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="pictureURL" ColumnName="pictureURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="articleTagList">
+            <EntityTypeMapping TypeName="dbchujuModel.articleTagList">
+              <MappingFragment StoreEntitySet="articleTagList">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tagName" ColumnName="tagName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cityList">
+            <EntityTypeMapping TypeName="dbchujuModel.cityList">
+              <MappingFragment StoreEntitySet="cityList">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cityName" ColumnName="cityName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="regionList">
+            <EntityTypeMapping TypeName="dbchujuModel.regionList">
+              <MappingFragment StoreEntitySet="regionList">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="regionName" ColumnName="regionName" />
+                <ScalarProperty Name="cityID" ColumnName="cityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="articleTag" TypeName="dbchujuModel.articleTag" StoreEntitySet="articleTag">
+            <EndProperty Name="articleOutline">
+              <ScalarProperty Name="id" ColumnName="articleID" />
+            </EndProperty>
+            <EndProperty Name="articleTagList">
+              <ScalarProperty Name="id" ColumnName="tagID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

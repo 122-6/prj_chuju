@@ -1,0 +1,49 @@
+/*通用CSS*/
+* {
+    margin: 0;
+}
+
+.py-50 {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.py-10 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/*nav*/
+.bottom-nav {
+    background-color: #706139;
+}
+
+.bottom-nav a {
+    color: white;
+    margin-right: 20px;
+}
+
+/*main*/
+.news .row {
+    margin: 30px auto;
+}
+
+.news :link {
+    color: #706139;
+}
+
+.news .border-b {
+    border-bottom: 1px solid #706139    
+}
+
+.news-item figcaption>span {
+    margin-left: 75%;
+}
+
+.news-item .tag {
+    border: 2px solid #706139;
+    padding: 2px;
+    margin: 2px;
+    color: #706139;
+    font-weight: bold;
+}

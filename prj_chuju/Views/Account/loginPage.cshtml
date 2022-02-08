@@ -5,7 +5,6 @@
 
 <link rel="stylesheet" type="text/css" href="~/style/loginStyle.css" />
 
-
 <div class="mainArea">
     <div class="operationArea">
         
@@ -22,19 +21,19 @@
         <div class="pageArea">
 
             <div id="signupPage" class="pageContainer actived">
-                <form class="infoForm">
-                    <div class="inputArea">
-                        <input class="w-100" type="text" id="userCellphone" name="ususerCellphoneername" placeholder="請輸入手機號碼" required>
+                <form method="post" action="~/Account/create" class="infoForm">
+                    <div id="signPhoneBox" class="inputArea">
+                        <input class="w-100" type="text" id="userPhone" name="userPhone" placeholder="請輸入手機號碼" required>
                     </div>
-                    <div class="inputArea">
-                        <input class="w-100" type="text" id="userEmail" name="passuserEmailword" placeholder="請輸入電子信箱" required>
+                    <div id="signEmailBox" class="inputArea">
+                        <input class="w-100" type="text" id="userEmail" name="userEmail" placeholder="請輸入電子信箱" required>
                     </div>
                     <div class="inputArea d-flex justify-content-between">
                         <input type="text" id="secret" name="secret" placeholder="請輸入手機驗證碼" required>
-                        <input type="button" value="獲取手機驗證碼" id="getSecret">
+                        <input type="button" value="獲取信箱驗證碼" id="getSecret">
                     </div>
                     <div class="inputArea">
-                        <input class="w-100" id="submitBtn" type="submit" value="立即註冊">
+                        <input class="w-100" id="signUpSubmitBtn" type="submit" value="立即註冊">
                     </div>
                     <div class="inputArea">
                         <input type="checkbox" id="cbxAgree">
@@ -45,10 +44,10 @@
 
             <div id="loginPage" class="pageContainer" >
                 <form class="infoForm">
-                    <div class="inputArea">
+                    <div id="logNameBox" class="inputArea">
                         <input class="w-100" type="text" id="userName" name="userName" placeholder="電子信箱或手機號碼" required>
                     </div>
-                    <div class="inputArea">
+                    <div id="logPasswordeBox" class="inputArea">
                         <input class="w-100" type="text" id="password" name="password" placeholder="密碼" required>
                     </div>
                     <div class="inputArea d-flex justify-content-between">
@@ -61,7 +60,7 @@
                         </a>
                     </div>
                     <div class="inputArea">
-                        <input class="w-100" id="submitBtn" type="submit" value="登入" onclick="location.href='https://google.com.tw'">
+                        <input class="w-100" id="logInSubmitBtn" type="submit" value="登入" onclick="location.href='https://google.com.tw'">
                     </div>
 
                 </form>
@@ -84,11 +83,11 @@
     </div>
 </div>
 
-<script src="~/javascript/jquery-3.6.0.min.js"></script>
+<script src="~/javascript/jquery-3.6.0.js"></script>
 <script>
+    // 以下: 建立切換分頁功能
     let pageTags = $('.pageSwitcher').children('.pageTag');
     let pageContainers = $('.pageArea').children('.pageContainer');
-
     $.each(pageTags, function (ind, val) {
         $(val).on('click', function (event) {
             $.each(pageTags, function (i, v) {
@@ -101,5 +100,88 @@
             $(pageContainers[ind]).addClass('actived');
         });
     });
+
+    // 以下: 送出驗證碼功能
+    let theSecretCode = "";
+    $('#getSecret').on('click', function () {
+        let theMail = $('#userEmail').val();
+
+        if (ValidateEmail(theMail)) {
+            // 建立驗證碼
+            theSecretCode = ("000" + parseInt(Math.random() * 10000).toString()).slice(-4);
+
+            // 發送中
+            $('#getSecret').val('發送中...')
+
+            // 寄信ajax
+            let params = `theMail=${theMail}&theSecret=${theSecretCode}`;
+            let xhr = new XMLHttpRequest();
+            xhr.open("post", "sendMail", true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    $('#getSecret').val('已發送!')
+                } else {
+                    $('#getSecret').val('發送失敗')
+                }
+            }
+            xhr.send(params);
+        } else {
+            // 未輸入合格式的信箱
+            console.log('信箱格式錯誤');
+        }
+    });
+    
+
+    // 以下: 未通過相關
+    $('#signUpSubmitBtn').on('click', function () {
+
+        // 信箱驗證未通過
+        if ($('#secret').val() != theSecretCode) {
+            secretFail();
+            return false;
+        }
+
+        // 未同意條款
+        if (!$('#cbxAgree').prop('checked')) {
+            agreeFail();
+            return false;
+        }
+        
+        // 不合規手機
+        if (!ValidatePhone($('#userPhone').val())) {
+            phoneFail();
+            return false;
+        }
+            
+    });
+
+    // Validation Function
+    function ValidateEmail(mail) {
+        if (/^\w+([\.-]?\w+)*@@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+            return true;
+        else
+            return false;
+    }
+    function ValidatePhone(phone) {
+        if (/^[0][9][0-9]{8}$/.test(phone))
+            return true;
+        else
+            return false;
+    }
+
+    // Failure Function
+    function emailFail() {
+        console.log('信箱驗證未通過');
+    }
+    function secretFail() {
+        console.log('信箱驗證未通過');
+    }
+    function agreeFail() {
+        console.log('未同意條款');
+    }
+    function phoneFail() {
+        console.log('手機格式不對');
+    }
 
 </script>

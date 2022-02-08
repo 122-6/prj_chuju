@@ -95,18 +95,19 @@
     margin-right: 5%;
 }
 #getSecret {
+    width: 50%;
     background-color: black;
     color: white;
     border: 1px solid #464646;
     padding: 5px 15px;
 }
-#submitBtn {
+#signUpSubmitBtn, #logInSubmitBtn {
     background-color: rgb(112, 97, 57);
     color: white;
     padding: 12px;
     border: none;
-    font-weight:bold;
-    font-size:1.2rem;
+    font-weight: bold;
+    font-size: 1.2rem;
 }
 #forgetPassword{
     text-decoration:underline;
@@ -115,7 +116,7 @@
 #forgetPassword:hover{
     color: red;
 }
-#cbxAgree+label>a{
+#cbxAgree + label > a{
     color: rgb(95,91,251);
 }
 #cbxAgree + label > a:hover {

@@ -10,6 +10,7 @@ using System.Net.Mail;
 
 // sql相關
 using System.Data.SqlClient;
+using prj_chuju.Models;
 
 namespace prj_chuju.Controllers
 {
@@ -58,7 +59,8 @@ namespace prj_chuju.Controllers
         [HttpPost]
         public ActionResult create()
         {
-            
+            factory_accountInfo f = new factory_accountInfo();
+            f.create(Request.Form["userPhone"], Request.Form["userEmail"]);
             return RedirectToAction("Index", "Home");
         }
     }

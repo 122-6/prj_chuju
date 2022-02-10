@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace prj_chuju.Controllers
 {
-    public class BuildingSearchController : Controller
+    public class BuildingCaseController : Controller
     {
         // GET: BuildingSearch
         public ActionResult Index()

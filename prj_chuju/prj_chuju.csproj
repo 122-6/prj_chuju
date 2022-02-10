@@ -776,7 +776,7 @@
     <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\BrandArticleController.cs" />
     <Compile Include="Controllers\BuildingListController.cs" />
-    <Compile Include="Controllers\BuildingSearchController.cs" />
+    <Compile Include="Controllers\BuildingCaseController.cs" />
     <Compile Include="Controllers\BuyHouseFirstController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MarketNewsController.cs" />
@@ -834,7 +834,7 @@
     <Content Include="Views\MarketNews\FeverCase.cshtml" />
     <Content Include="Views\MarketNews\HouseMarket.cshtml" />
     <Content Include="Views\MarketNews\Invest.cshtml" />
-    <Content Include="Views\BuildingSearch\Index.cshtml" />
+    <Content Include="Views\BuildingCase\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

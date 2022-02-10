@@ -96,6 +96,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Activity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Activity.edmx</DependentUpon>
+      <LastGenOutput>Activity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Activity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Activity.edmx</DependentUpon>
+      <LastGenOutput>Activity.cs</LastGenOutput>
+    </Content>
     <Content Include="Content\Site.css" />
     <Content Include="dbchuju.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -133,6 +143,23 @@
     <Content Include="images\ActivityNews\p7.PNG" />
     <Content Include="images\ActivityNews\p8.PNG" />
     <Content Include="images\ActivityNews\p9.PNG" />
+    <Content Include="images\ActivityPictures\ContentPictures\ActivityContPicture_01.jpg" />
+    <Content Include="images\ActivityPictures\ContentPictures\ActivityContPicture_02.jpg" />
+    <Content Include="images\ActivityPictures\ContentPictures\ActivityContPicture_03.jpg" />
+    <Content Include="images\ActivityPictures\ContentPictures\ActivityContPicture_04.jpg" />
+    <Content Include="images\ActivityPictures\ContentPictures\ActivityContPicture_05.jpg" />
+    <Content Include="images\ActivityPictures\ContentPictures\ActivityContPicture_06.jpg" />
+    <Content Include="images\ActivityPictures\ContentPictures\ActivityContPicture_07.jpg" />
+    <Content Include="images\ActivityPictures\ContentPictures\ActivityContPicture_08.jpg" />
+    <Content Include="images\ActivityPictures\OutlinePictures\ActivityOutPicture_01.jpg" />
+    <Content Include="images\ActivityPictures\OutlinePictures\ActivityOutPicture_02.jpg" />
+    <Content Include="images\ActivityPictures\OutlinePictures\ActivityOutPicture_03.jpg" />
+    <Content Include="images\ActivityPictures\OutlinePictures\ActivityOutPicture_04.jpg" />
+    <Content Include="images\ActivityPictures\OutlinePictures\ActivityOutPicture_05.jpg" />
+    <Content Include="images\ActivityPictures\OutlinePictures\ActivityOutPicture_06.jpg" />
+    <Content Include="images\ActivityPictures\OutlinePictures\ActivityOutPicture_07.jpg" />
+    <Content Include="images\ActivityPictures\OutlinePictures\ActivityOutPicture_08.jpg" />
+    <Content Include="images\ActivityPictures\OutlinePictures\ActivityOutPicture_09.jpg" />
     <Content Include="images\articleListPictures\13.jpg" />
     <Content Include="images\articlePictures\p1.jpg" />
     <Content Include="images\articlePictures\p10.jpg" />
@@ -752,6 +779,27 @@
     <Compile Include="accountPicture.cs">
       <DependentUpon>dbchuju.tt</DependentUpon>
     </Compile>
+    <Compile Include="Activity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Activity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Activity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Activity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Activity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Activity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ActivityContent.cs">
+      <DependentUpon>Activity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ActivityOutline.cs">
+      <DependentUpon>Activity.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="articleClass.cs">
       <DependentUpon>dbchuju.tt</DependentUpon>
@@ -799,6 +847,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\class_accountInfo.cs" />
+    <Compile Include="Models\class_ActivityContent.cs" />
+    <Compile Include="Models\class_ActivityOutline.cs" />
     <Compile Include="Models\class_articleOutline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="regionList.cs">
@@ -814,6 +864,13 @@
     </EntityDeploy>
     <Content Include="dbchuju.edmx.diagram">
       <DependentUpon>dbchuju.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Activity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Activity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Activity.edmx.diagram">
+      <DependentUpon>Activity.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />

@@ -1,0 +1,45 @@
+﻿.cards {
+    width: 1200px;
+    margin: 40px auto;
+}
+
+.card {
+    width: 300px;
+}
+
+.card-option {
+    justify-content: space-evenly;
+}
+
+.img-150 {
+    width: 150px;
+    height: 150px;
+}
+
+.card-pic img {
+    height: 150px;
+}
+
+
+.btn-select {
+    color: #706139;
+    border: 2px solid #706139;
+    padding: 20px 20px 20px 30px;
+}
+
+    .btn-select input {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+.region {
+    padding-top: 1.2px;
+    padding-bottom: 1.2px;
+}
+
+.option span {
+    font-size: 0.7em;
+    font-weight: bold;
+    padding-left: 4px;
+}

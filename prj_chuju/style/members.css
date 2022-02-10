@@ -1,0 +1,63 @@
+﻿.page_top{
+    position:absolute;
+    width:1440px;
+    height:128px;
+    left:0px;
+    top: 0px;
+}
+.page_buttom {
+    position: absolute;
+    width: 1440px;
+    height: 240px;
+    left:0px;
+    top:1088px;
+}
+.BACK {
+    position: absolute;
+    width: 1440px;
+    height: 960px;
+    left: 0px;
+    top: 128px;
+}
+
+.btn1 {
+    position: absolute;
+    left: 181px;
+    top: 209px;
+}
+
+.btn2 {
+    position: absolute;
+    left: 362px;
+    top: 209px;
+}
+
+.btn3 {
+    position: absolute;
+    left: 543px;
+    top: 209px;
+}
+
+.btn4 {
+    position: absolute;
+    left: 724px;
+    top: 209px;
+}
+
+.btn5 {
+    position: absolute;
+    left: 905px;
+    top: 209px;
+}
+
+.btn6 {
+    position: absolute;
+    left: 1086px;
+    top: 209px;
+}
+
+.content0 {
+    position: absolute;
+    left: 181px;
+    top: 264px;
+}

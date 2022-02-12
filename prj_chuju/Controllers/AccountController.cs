@@ -27,6 +27,11 @@ namespace prj_chuju.Controllers
             return View();
         }
 
+        public ActionResult infoPage()
+        {
+            return View();
+        }
+
         [HttpPost]
         public void sendMail()
         {

@@ -1,0 +1,437 @@
+﻿
+@{
+    ViewBag.Title = "infoPage";
+}
+
+<!-- 這裡有url要改 -->
+<link rel="stylesheet" href="~/style/accountInfoPage.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<div class="mainArea">
+    <div class="operationArea">
+
+        <div class="pageSwitcher">
+            <div id="infoTag" class="pageTag actived">
+                會員資料
+            </div>
+
+            <div id="bookingTag" class="pageTag">
+                我的預約
+            </div>
+
+            <div id="collectionTag" class="pageTag">
+                我的收藏
+            </div>
+
+            <div id="historyTag" class="pageTag">
+                瀏覽歷史
+            </div>
+
+            <!-- 這裡的注解要另外處理 -->
+            <!-- <div id="cupponTag" class="pageTag">
+                我的優惠券(預留)
+            </div> -->
+            <!-- 這裡的注解要另外處理 -->
+            <!-- <div id="noticeTag" class="pageTag">
+                通知中心(預留)
+            </div> -->
+        </div>
+
+        <div class="pageArea">
+
+            <div id="infoPage" class="pageContainer actived">
+                <div class="d-flex">
+                    <div class="pictureContainer mx-100px d-flex align-items-center">
+                        <div class="d-flex justify-content-center ">
+                            <img class="w-25" src="~/images/AccountPictures/common/gallery.png" alt="">
+                        </div>
+                    </div>
+                    <div class="" style="width:500px">
+                        <div class="font-weight-bold font-120 my-4">編輯會員資料</div>
+                        <form action="">
+                            <table class="w-100 infoFormTable">
+                                <tr>
+                                    <td style="width:100px">姓名</td>
+                                    <td>
+                                        <input class="w-100" type="text">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>性別</td>
+                                    <td>
+                                        <input type="radio" name="gender" id="genderM" value="男" />男
+                                        <input type="radio" name="gender" id="genderF" value="女" />女
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>生日</td>
+                                    <td>
+                                        <input type="text">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>居住地區</td>
+                                    <td>
+                                        <input type="text">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>電子郵件</td>
+                                    <td>
+                                        <input type="text">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>行動電話</td>
+                                    <td>
+                                        <input type="text">
+                                    </td>
+                                </tr>
+                                <!-- 這裡的注解要另外處理 -->
+                                <!-- <tr>
+                                    <td>綁定帳戶</td>
+                                    <td>
+                                        <input type="text">
+                                    </td>
+                                </tr> -->
+                                <tr>
+                                    <td>密碼</td>
+                                    <td>
+                                        <a href="#">設定新的密碼</a>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </form>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <div class="brownBtn" id="btnSaveInfoChange">儲存變更</div>
+                </div>
+            </div>
+
+            <div id="bookingPage" class="pageContainer">
+                <div class="d-flex justify-content-center selectType">
+                    <div class="brownBtn">全部</div>
+                    <div class="brownBtn">預約中</div>
+                    <div class="brownBtn">已看過</div>
+                </div>
+                <div>
+                    <div>預約列表</div>
+                    <div class="w-100 d-flex flex-wrap">
+                        <div class="col-6 p-3">
+                            <div class="buildingCase d-flex">
+                                <div class=" " style="width:160px">
+                                    <img class="w-100" src="/images/test.jpg" alt="">
+                                </div>
+                                <div class="f-1 mx-3 d-flex flex-column">
+                                    <div class="font-weight-bold font-120 my-3">帝璟苑</div>
+                                    <div class="f-1 color-gray">臺北市中正區延平南路150號</div>
+                                    <div>
+                                        <div class="font-weight-bold">預約時間</div>
+                                        <div>101年4月15日</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 以下為複製元素 -->
+                        <div class="col-6 p-3">
+                            <div class="buildingCase d-flex">
+                                <div class=" " style="width:160px">
+                                    <img class="w-100" src="/images/test.jpg" alt="">
+                                </div>
+                                <div class="f-1 mx-3 d-flex flex-column">
+                                    <div class="font-weight-bold font-120 my-3">帝璟苑</div>
+                                    <div class="f-1 color-gray">臺北市中正區延平南路150號</div>
+                                    <div>
+                                        <div class="font-weight-bold">預約時間</div>
+                                        <div>101年4月15日</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 p-3">
+                            <div class="buildingCase d-flex">
+                                <div class=" " style="width:160px">
+                                    <img class="w-100" src="/images/test.jpg" alt="">
+                                </div>
+                                <div class="f-1 mx-3 d-flex flex-column">
+                                    <div class="font-weight-bold font-120 my-3">帝璟苑</div>
+                                    <div class="f-1 color-gray">臺北市中正區延平南路150號</div>
+                                    <div>
+                                        <div class="font-weight-bold">預約時間</div>
+                                        <div>101年4月15日</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 p-3">
+                            <div class="buildingCase d-flex">
+                                <div class=" " style="width:160px">
+                                    <img class="w-100" src="/images/test.jpg" alt="">
+                                </div>
+                                <div class="f-1 mx-3 d-flex flex-column">
+                                    <div class="font-weight-bold font-120 my-3">帝璟苑</div>
+                                    <div class="f-1 color-gray">臺北市中正區延平南路150號</div>
+                                    <div>
+                                        <div class="font-weight-bold">預約時間</div>
+                                        <div>101年4月15日</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="collectionPage" class="pageContainer">
+                <div class="mb-4">
+                    <div class="title my-3">個案收藏</div>
+                    <div class="d-flex">
+                        <div class="col-3 px-2">
+                            <div class="caseItem">
+                                <div>
+                                    <img class="w-100" src="/images/test.jpg" alt="">
+                                </div>
+                                <div class="caseName">紘石仰格</div>
+                                <div class="caseLocation">臺北市士林區</div>
+                                <div class="caseArea">60 - 78 坪</div>
+                                <div class="btnToBuildingCase">查看建案</div>
+                            </div>
+                        </div>
+                        <!-- 以下為複製元素 -->
+                        <div class="col-3 px-2">
+                            <div class="caseItem">
+                                <div>
+                                    <img class="w-100" src="/images/test.jpg" alt="">
+                                </div>
+                                <div class="caseName">紘石仰格</div>
+                                <div class="caseLocation">臺北市士林區</div>
+                                <div class="caseArea">60 - 78 坪</div>
+                                <div class="btnToBuildingCase">查看建案</div>
+                            </div>
+                        </div>
+                        <div class="col-3 px-2">
+                            <div class="caseItem">
+                                <div>
+                                    <img class="w-100" src="/images/test.jpg" alt="">
+                                </div>
+                                <div class="caseName">紘石仰格</div>
+                                <div class="caseLocation">臺北市士林區</div>
+                                <div class="caseArea">60 - 78 坪</div>
+                                <div class="btnToBuildingCase">查看建案</div>
+                            </div>
+                        </div>
+                        <div class="col-3 px-2">
+                            <div class="caseItem">
+                                <div>
+                                    <img class="w-100" src="/images/test.jpg" alt="">
+                                </div>
+                                <div class="caseName">紘石仰格</div>
+                                <div class="caseLocation">臺北市士林區</div>
+                                <div class="caseArea">60 - 78 坪</div>
+                                <div class="btnToBuildingCase">查看建案</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div>
+                    <div class="title my-3">文章收藏</div>
+                    <div class="d-flex">
+                        <div class="col-3 px-2">
+                            <div class="articleItem">
+                                <div>
+                                    <img class="w-100" src="/images/test.jpg" alt="">
+                                </div>
+                                <div class="p-3">
+                                    <div class="articleClass">設計裝修</div>
+                                    <div class="articleTitle">設計新手｜讀懂立面圖的超能力get，從此擺脫圖盲</div>
+                                    <div class="articleTime">2021/08/2</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 以下為複製元素 -->
+                        <div class="col-3 px-2">
+                            <div class="articleItem">
+                                <div>
+                                    <img class="w-100" src="/images/test.jpg" alt="">
+                                </div>
+                                <div class="p-3">
+                                    <div class="articleClass">設計裝修</div>
+                                    <div class="articleTitle">設計新手｜讀懂立面圖的超能力get，從此擺脫圖盲</div>
+                                    <div class="articleTime">2021/08/2</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 px-2">
+                            <div class="articleItem">
+                                <div>
+                                    <img class="w-100" src="/images/test.jpg" alt="">
+                                </div>
+                                <div class="p-3">
+                                    <div class="articleClass">設計裝修</div>
+                                    <div class="articleTitle">設計新手｜讀懂立面圖的超能力get，從此擺脫圖盲</div>
+                                    <div class="articleTime">2021/08/2</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 px-2">
+                            <div class="articleItem">
+                                <div>
+                                    <img class="w-100" src="/images/test.jpg" alt="">
+                                </div>
+                                <div class="p-3">
+                                    <div class="articleClass">設計裝修</div>
+                                    <div class="articleTitle">設計新手｜讀懂立面圖的超能力get，從此擺脫圖盲</div>
+                                    <div class="articleTime">2021/08/2</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="historyPage" class="pageContainer">
+                <div class="mb-4">
+                    <div class="title my-3">個案收藏</div>
+                    <div class="d-flex">
+                        <div class="col-3 px-2">
+                            <div class="caseItem">
+                                <div>
+                                    <img class="w-100" src="/images/test.jpg" alt="">
+                                </div>
+                                <div class="caseName">紘石仰格</div>
+                                <div class="caseLocation">臺北市士林區</div>
+                                <div class="caseArea">60 - 78 坪</div>
+                                <div class="btnToBuildingCase">查看建案</div>
+                            </div>
+                        </div>
+                        <!-- 以下為複製元素 -->
+                        <div class="col-3 px-2">
+                            <div class="caseItem">
+                                <div>
+                                    <img class="w-100" src="/images/test.jpg" alt="">
+                                </div>
+                                <div class="caseName">紘石仰格</div>
+                                <div class="caseLocation">臺北市士林區</div>
+                                <div class="caseArea">60 - 78 坪</div>
+                                <div class="btnToBuildingCase">查看建案</div>
+                            </div>
+                        </div>
+                        <div class="col-3 px-2">
+                            <div class="caseItem">
+                                <div>
+                                    <img class="w-100" src="/images/test.jpg" alt="">
+                                </div>
+                                <div class="caseName">紘石仰格</div>
+                                <div class="caseLocation">臺北市士林區</div>
+                                <div class="caseArea">60 - 78 坪</div>
+                                <div class="btnToBuildingCase">查看建案</div>
+                            </div>
+                        </div>
+                        <div class="col-3 px-2">
+                            <div class="caseItem">
+                                <div>
+                                    <img class="w-100" src="/images/test.jpg" alt="">
+                                </div>
+                                <div class="caseName">紘石仰格</div>
+                                <div class="caseLocation">臺北市士林區</div>
+                                <div class="caseArea">60 - 78 坪</div>
+                                <div class="btnToBuildingCase">查看建案</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div>
+                    <div class="title my-3">文章收藏</div>
+                    <div class="d-flex">
+                        <div class="col-3 px-2">
+                            <div class="articleItem">
+                                <div>
+                                    <img class="w-100" src="/images/test.jpg" alt="">
+                                </div>
+                                <div class="p-3">
+                                    <div class="articleClass">設計裝修</div>
+                                    <div class="articleTitle">設計新手｜讀懂立面圖的超能力get，從此擺脫圖盲</div>
+                                    <div class="articleTime">2021/08/2</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 以下為複製元素 -->
+                        <div class="col-3 px-2">
+                            <div class="articleItem">
+                                <div>
+                                    <img class="w-100" src="/images/test.jpg" alt="">
+                                </div>
+                                <div class="p-3">
+                                    <div class="articleClass">設計裝修</div>
+                                    <div class="articleTitle">設計新手｜讀懂立面圖的超能力get，從此擺脫圖盲</div>
+                                    <div class="articleTime">2021/08/2</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 px-2">
+                            <div class="articleItem">
+                                <div>
+                                    <img class="w-100" src="/images/test.jpg" alt="">
+                                </div>
+                                <div class="p-3">
+                                    <div class="articleClass">設計裝修</div>
+                                    <div class="articleTitle">設計新手｜讀懂立面圖的超能力get，從此擺脫圖盲</div>
+                                    <div class="articleTime">2021/08/2</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 px-2">
+                            <div class="articleItem">
+                                <div>
+                                    <img class="w-100" src="/images/test.jpg" alt="">
+                                </div>
+                                <div class="p-3">
+                                    <div class="articleClass">設計裝修</div>
+                                    <div class="articleTitle">設計新手｜讀懂立面圖的超能力get，從此擺脫圖盲</div>
+                                    <div class="articleTime">2021/08/2</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div id="cupponPage" class="pageContainer">
+                我的優惠券(預留)
+            </div> -->
+            <!-- <div id="noticePage" class="pageContainer">
+                通知中心(預留)
+            </div> -->
+
+
+        </div>
+
+    </div>
+</div>
+<script>
+            // 以下: 建立切換分頁功能
+            let pageTags = $('.pageSwitcher').children('.pageTag');
+            let pageContainers = $('.pageArea').children('.pageContainer');
+            $.each(pageTags, function (ind, val) {
+                $(val).on('click', function (event) {
+                    $.each(pageTags, function (i, v) {
+                        $(v).removeClass('actived');
+                    });
+                    $.each(pageContainers, function (i, v) {
+                        $(v).removeClass('actived');
+                    });
+                    $(val).addClass('actived');
+                    $(pageContainers[ind]).addClass('actived');
+                });
+            });
+</script>

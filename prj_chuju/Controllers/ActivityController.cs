@@ -10,6 +10,7 @@ namespace prj_chuju.Controllers
 {
     public class ActivityController : Controller
     {
+        
         SqlConnection con;
         // GET: Activity
         public ActionResult Index()
@@ -68,5 +69,6 @@ namespace prj_chuju.Controllers
             con.Open();
             return new SqlCommand(strSQL, con);
         }
+        
     }
 }

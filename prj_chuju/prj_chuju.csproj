@@ -127,6 +127,7 @@
     <Content Include="images\AccountPictures\common\ads2.png" />
     <Content Include="images\AccountPictures\common\down.png" />
     <Content Include="images\AccountPictures\common\facebook.png" />
+    <Content Include="images\AccountPictures\common\gallery.png" />
     <Content Include="images\AccountPictures\common\google.png" />
     <Content Include="images\AccountPictures\common\inforOne.png" />
     <Content Include="images\AccountPictures\common\line.png" />
@@ -711,6 +712,7 @@
     <Content Include="images\articleListPictures\8.jpg" />
     <Content Include="images\articleListPictures\9.jpg" />
     <Content Include="style\aboutStyle.css" />
+    <Content Include="style\accountInfoPage.css" />
     <Content Include="style\allarticle.css" />
     <Content Include="style\articlecontent.css" />
     <Content Include="style\Building.css" />
@@ -771,6 +773,7 @@
     <Content Include="javascript\jquery-3.6.0.min.js" />
     <Content Include="style\loginStyle.css" />
     <Content Include="Web.config" />
+    <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="accountInfo.cs">
@@ -855,6 +858,13 @@
       <DependentUpon>dbchuju.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ArticleContentViewModel.cs" />
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -892,6 +902,7 @@
     <Content Include="Views\MarketNews\HouseMarket.cshtml" />
     <Content Include="Views\MarketNews\Invest.cshtml" />
     <Content Include="Views\BuildingCase\Index.cshtml" />
+    <Content Include="Views\Account\infoPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -114,41 +114,91 @@ namespace prj_chuju.Models
             
         }
 
-        public bool occupiedEmail(string enterEmail)
+        public int occupiedEmailID(string enterEmail)
         {
-            string cmdstr = "select email from accountInfo where email = @emailPara";
+            string cmdstr = "select id from accountInfo where email = @emailPara";
 
+            int theid = -1;
             SqlConnection con = new SqlConnection(dbConnectioniStr);
             SqlCommand cmd = new SqlCommand(cmdstr, con);
             SqlDataReader reader;
             cmd.Parameters.AddWithValue("@emailPara", enterEmail);
             con.Open();
             reader = cmd.ExecuteReader();
-            int row = 0;
-            while (reader.Read())
+            if (reader.Read())
             {
-                row++;
+                theid = Convert.ToInt32(reader["id"]);
             }
             con.Close();
-            return row > 0;
+            return theid;
         }
-        public bool occupiedPhone(string enterPhone)
+        public int occupiedPhoneID(string enterPhone)
         {
-            string cmdstr = "select cellphone from accountInfo where cellphone = @cellphonePara";
+            string cmdstr = "select id from accountInfo where cellphone = @cellphonePara";
 
+            int theid = -1;
             SqlConnection con = new SqlConnection(dbConnectioniStr);
             SqlCommand cmd = new SqlCommand(cmdstr, con);
             SqlDataReader reader;
             cmd.Parameters.AddWithValue("@cellphonePara", enterPhone);
             con.Open();
             reader = cmd.ExecuteReader();
-            int row = 0;
-            while (reader.Read())
+            if (reader.Read())
             {
-                row++;
+                theid = Convert.ToInt32(reader["id"]);
             }
             con.Close();
-            return row > 0;
+            return theid;
+        }
+
+        public bool validateByEmail(string email,string passwordEntered)
+        {
+            bool AccountFound = false;
+            string cmdstr = "select userPassword from accountInfo where email = @emailPara";
+            string thePassword = "\0";
+
+            SqlConnection con = new SqlConnection(dbConnectioniStr);
+            SqlCommand cmd = new SqlCommand(cmdstr, con);
+            SqlDataReader reader;
+            cmd.Parameters.AddWithValue("@emailPara", email);
+            con.Open();
+            reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                thePassword = reader["userPassword"].ToString();
+                AccountFound = true;
+            }
+            con.Close();
+
+            if (AccountFound)
+            {
+                return passwordEntered == thePassword;
+            }
+            return false;
+        }
+
+        public int varifyPassByID(int theid,string password)
+        {
+            if (password == "") return -1;
+
+            int passUserID = -1;
+            string cmdstr = "select id from accountInfo where id = @idPara and userPassword = @passwordPara";
+
+            SqlConnection con = new SqlConnection(dbConnectioniStr);
+            SqlCommand cmd = new SqlCommand(cmdstr, con);
+            SqlDataReader reader;
+            cmd.Parameters.AddWithValue("@idPara", theid);
+            cmd.Parameters.AddWithValue("@passwordPara", password);
+
+            con.Open();
+            reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                passUserID = Convert.ToInt32(reader["id"]);
+            }
+            con.Close();
+
+            return passUserID;
         }
     }
 }

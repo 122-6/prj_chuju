@@ -39,6 +39,7 @@
 .operationArea {
     width: 500px;
     background-color: white;
+    box-shadow: 2px 3px 3px rgba(0,0,0,.4);
 }
 .pageSwitcher{
     display: flex;
@@ -87,7 +88,7 @@
     margin-bottom: 20px;
     width: 100%;
 }
-.inputArea [type="text"] {
+.inputArea [type="text"], .inputArea [type="password"] {
     padding: 15px;
     border: 1px solid rgb(179,179,179);
     width: 100%;

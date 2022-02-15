@@ -7,20 +7,51 @@
 
 <div class="mainArea">
     <div class="operationArea">
-        
+
         <div class="pageSwitcher">
+
             <div id="signupPageTag" class="pageTag actived">
-                註冊會員
+                會員登入
             </div>
 
             <div id="signupPageTag" class="pageTag">
-                會員登入
+                註冊會員
             </div>
+
         </div>
 
         <div class="pageArea">
 
-            <div id="signupPage" class="pageContainer actived">
+            <div id="loginPage" class="pageContainer actived">
+                <form method="post" action="passToInfoPage" class="infoForm" id="loginForm">
+                    <div id="logNameBox" class="inputArea">
+                        <input class="w-100" type="text" id="userLogInfo" name="userLogInfo" placeholder="電子信箱或手機號碼" required>
+                        <input type="hidden" name="loginType" value="none" />
+                        <input type="hidden" name="theid" id="theidInput" />
+                        <div class="errorMessage" id="loginInfoEro">NULL</div>
+                    </div>
+                    <div id="logPasswordeBox" class="inputArea">
+                        <input class="w-100" type="password" id="password" name="password" placeholder="密碼" required>
+                        <div class="errorMessage" id="loginPasswordEro">NULL</div>
+                    </div>
+                    <div class="inputArea d-flex justify-content-between">
+                        <div>
+                            <input type="checkbox" id="rememberMe">
+                            <input type="hidden" name="remember" id="rememberInput" />
+                            <label for="rememberMe">記住我</label>
+                        </div>
+                        <a id="forgetPassword" href="#">
+                            忘記密碼?
+                        </a>
+                    </div>
+                    <div class="inputArea">
+                        <input class="w-100" id="logInSubmitBtn" type="submit" value="登入">
+                    </div>
+
+                </form>
+            </div>
+
+            <div id="signupPage" class="pageContainer">
                 <form method="post" action="~/Account/basicInfo" class="infoForm">
                     <div id="signPhoneBox" class="inputArea">
                         <div class="errorMessage" id="signUpPhoneEro">NULL</div>
@@ -48,30 +79,6 @@
                 </form>
             </div>
 
-            <div id="loginPage" class="pageContainer" >
-                <form class="infoForm">
-                    <div id="logNameBox" class="inputArea">
-                        <input class="w-100" type="text" id="userName" name="userName" placeholder="電子信箱或手機號碼" required>
-                    </div>
-                    <div id="logPasswordeBox" class="inputArea">
-                        <input class="w-100" type="text" id="password" name="password" placeholder="密碼" required>
-                    </div>
-                    <div class="inputArea d-flex justify-content-between">
-                        <div>
-                            <input type="checkbox" id="rememberMe">
-                            <label for="rememberMe">記住我</label>
-                        </div>
-                        <a id="forgetPassword" href="#">
-                            忘記密碼?
-                        </a>
-                    </div>
-                    <div class="inputArea">
-                        <input class="w-100" id="logInSubmitBtn" type="submit" value="登入" onclick="location.href='https://google.com.tw'">
-                    </div>
-
-                </form>
-            </div>
-
             <p class="w-100">使用現有帳戶快速登入</p>
             <div class="otherLogin text-left">
                 <a class="linkIcon" href="https://google.com.tw">
@@ -87,10 +94,18 @@
         </div>
 
     </div>
+
+    @*<div id="hehe" style="width:300px;height:300px;background-color:black;cursor:pointer">
+
+    </div>*@
 </div>
 
 <script src="~/javascript/jquery-3.6.0.js"></script>
+
+<!--通用項目-->
 <script>
+    
+
     // 以下: 建立切換分頁功能
     let pageTags = $('.pageSwitcher').children('.pageTag');
     let pageContainers = $('.pageArea').children('.pageContainer');
@@ -107,6 +122,33 @@
         });
     });
 
+    // Validation Function
+    function ValidateEmail(mail) {
+        if (/^\w+([\.-]?\w+)*@@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+            return true;
+        else
+            return false;
+    }
+    function ValidatePhone(phone) {
+        if (/^[0][9][0-9]{8}$/.test(phone))
+            return true;
+        else
+            return false;
+    }
+
+    // Failure Function
+    function elementFail(jq, message) {
+        jq.css('transform', 'scaleY(0)');
+        jq.html(message);
+        setTimeout(() => {
+            jq.css('transform', 'scaleY(1)');
+        }, 200);
+    }
+
+</script>
+
+<!--註冊會員-->
+<script>
     // 以下: 送出驗證碼功能
     let hasSendSecret = false;
     let theSecretCode = "";
@@ -142,7 +184,6 @@
             console.log('信箱格式錯誤');
         }
     });
-    
 
     // 以下: 未通過相關
     $('#signUpSubmitBtn').on('click', function () {
@@ -170,22 +211,8 @@
             secretFail(msg);
             return false;
         }
-            
-    });
 
-    // Validation Function
-    function ValidateEmail(mail) {
-        if (/^\w+([\.-]?\w+)*@@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
-            return true;
-        else
-            return false;
-    }
-    function ValidatePhone(phone) {
-        if (/^[0][9][0-9]{8}$/.test(phone))
-            return true;
-        else
-            return false;
-    }
+    });
 
     // Failure Function
     function emailFail(failMsg) {
@@ -199,18 +226,11 @@
         $('#signUpAgreeEro').css('transform', 'scaleY(1)');
     }
     function phoneFail(failMsg) {
-        elementFail($('#signUpPhoneEro'),failMsg);
-    }
-    function elementFail(jq, message) {
-        jq.css('transform', 'scaleY(0)');
-        jq.html(message);
-        setTimeout(() => {
-            jq.css('transform', 'scaleY(1)');
-        }, 200);
+        elementFail($('#signUpPhoneEro'), failMsg);
     }
 
     // 修正 Fail
-    $('#userPhone').on('keydown',function () {
+    $('#userPhone').on('keydown', function () {
         $('#signUpPhoneEro').css('transform', 'scaleY(0)');
     });
     $('#userEmail').on('keydown', function () {
@@ -268,4 +288,89 @@
         });
     });
 
+    
+
+</script>
+
+<!--登入會員-->
+<script>
+
+    let loginType = 'none';
+    $('#userLogInfo').change(function () {
+        let isEmail = ValidateEmail($('#userLogInfo').val());
+        let isPhone = ValidatePhone($('#userLogInfo').val());
+        if (isEmail || isPhone) {
+            loginType = isEmail ? 'email' : 'phone';
+        } else {
+            loginType = 'none';
+            elementFail($('#loginInfoEro'), '*請輸入電子郵件或手機號碼');
+        }
+        $('#loginType').val(loginType);
+    });
+
+    $('#userLogInfo').on('keydown', function () {
+        $('#loginInfoEro').css('transform', 'scaleY(0)');
+    });
+
+    $('#logInSubmitBtn').on('click', function () {
+        if (loginType == 'none') {
+            elementFail($('#loginInfoEro'), '*請輸入電子郵件或手機號碼');
+            return false;
+        }
+        if ($('#password').val() == "") {
+            elementFail($('#loginPasswordEro'), '*密碼不可空白');
+            return false;
+        }
+
+        userLogInfo = $('#userLogInfo').val();
+        let fetchBody = new FormData();
+        fetchBody.append('loginType', loginType);
+        fetchBody.append('userLogInfo', userLogInfo);
+
+        fetch('varifyAccount', {
+            method: 'POST',
+            body: fetchBody,
+        })
+            .then(receved => receved.text())
+            .then(function (theidText) {
+                let theid = parseInt(theidText);
+                console.log(`theid: ${theid}`);
+                if (theid>0) {
+                    return varifyPassword(theid);
+                } else {
+                    elementFail($('#loginInfoEro'), '*查無此用戶');
+                }
+            })
+            .then(receved => receved.text())
+            .then(function (theUserIDText) {
+                let theUserID = parseInt(theUserIDText);
+                console.log(`theUserID: ${theUserID}`);
+                if (theUserID > 0) {
+                    return successLogin(theUserID);
+                } else {
+                    elementFail($('#loginPasswordEro'), '*密碼錯誤！');
+                }
+            });
+
+        return false;
+    });
+
+    let varifyPassword = function (theid) {
+        let password = $('#password').val();
+        let fetchBody = new FormData();
+        fetchBody.append('theid', theid);
+        fetchBody.append('password', password);
+
+        return fetch('varifyPassword', {
+            method: 'POST',
+            body: fetchBody,
+        });
+    };
+
+    let successLogin = function (theid) {
+        $('#theidInput').val(theid);
+        $('#rememberInput').val($('#rememberMe').prop('checked') ? 'yes' : 'no');
+        $('#loginForm').submit();
+    }
+    
 </script>

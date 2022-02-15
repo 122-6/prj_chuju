@@ -418,19 +418,19 @@
     </div>
 </div>
 <script>
-        // 以下: 建立切換分頁功能
-        let pageTags = $('.pageSwitcher').children('.pageTag');
-        let pageContainers = $('.pageArea').children('.pageContainer');
-        $.each(pageTags, function (ind, val) {
-            $(val).on('click', function (event) {
-                $.each(pageTags, function (i, v) {
-                    $(v).removeClass('actived');
-                });
-                $.each(pageContainers, function (i, v) {
-                    $(v).removeClass('actived');
-                });
-                $(val).addClass('actived');
-                $(pageContainers[ind]).addClass('actived');
+    // 以下: 建立切換分頁功能
+    let pageTags = $('.pageSwitcher').children('.pageTag');
+    let pageContainers = $('.pageArea').children('.pageContainer');
+    $.each(pageTags, function (ind, val) {
+        $(val).on('click', function (event) {
+            $.each(pageTags, function (i, v) {
+                $(v).removeClass('actived');
             });
+            $.each(pageContainers, function (i, v) {
+                $(v).removeClass('actived');
+            });
+            $(val).addClass('actived');
+            $(pageContainers[ind]).addClass('actived');
         });
+    });
 </script>

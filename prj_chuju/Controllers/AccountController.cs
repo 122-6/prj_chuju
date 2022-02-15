@@ -26,6 +26,12 @@ namespace prj_chuju.Controllers
         {
             return View();
         }
+        public ActionResult basicInfo()
+        {
+            ViewBag.userEmail = Request.Form["userEmail"];
+            ViewBag.userPhone = Request.Form["userPhone"];
+            return View();
+        }
 
         public ActionResult infoPage()
         {
@@ -65,8 +71,20 @@ namespace prj_chuju.Controllers
         public ActionResult create()
         {
             factory_accountInfo f = new factory_accountInfo();
-            f.create(Request.Form["userPhone"], Request.Form["userEmail"]);
-            return RedirectToAction("Index", "Home");
+            f.create(Request);
+            return RedirectToAction("infoPage", "Account");
+        }
+        [HttpPost]
+        public bool occupiedEmail()
+        {
+            string enterEmail = Request["enterEmail"];
+            return new factory_accountInfo().occupiedEmail(enterEmail);
+        }
+        [HttpPost]
+        public bool occupiedPhone()
+        {
+            string enterPhone = Request["enterPhone"];
+            return new factory_accountInfo().occupiedPhone(enterPhone);
         }
     }
 }

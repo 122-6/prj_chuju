@@ -3,7 +3,7 @@
     ViewBag.Title = "loginPage";
 }
 
-<link rel="stylesheet" type="text/css" href="~/style/loginStyle.css" />
+<link rel="stylesheet" type="text/css" href="~/style/account/loginStyle.css" />
 
 <div class="mainArea">
     <div class="operationArea">
@@ -21,16 +21,21 @@
         <div class="pageArea">
 
             <div id="signupPage" class="pageContainer actived">
-                <form method="post" action="~/Account/create" class="infoForm">
+                <form method="post" action="~/Account/basicInfo" class="infoForm">
                     <div id="signPhoneBox" class="inputArea">
+                        <div class="errorMessage" id="signUpPhoneEro">NULL</div>
                         <input class="w-100" type="text" id="userPhone" name="userPhone" placeholder="請輸入手機號碼" required>
                     </div>
                     <div id="signEmailBox" class="inputArea">
+                        <div class="errorMessage" id="signUpEmailEro">NULL</div>
                         <input class="w-100" type="text" id="userEmail" name="userEmail" placeholder="請輸入電子信箱" required>
                     </div>
-                    <div class="inputArea d-flex justify-content-between">
-                        <input type="text" id="secret" name="secret" placeholder="請輸入信箱驗證碼" required>
-                        <input type="button" value="獲取信箱驗證碼" id="getSecret">
+                    <div class="inputArea">
+                        <div class="errorMessage" id="signUpSecretEro">NULL</div>
+                        <div class="d-flex justify-content-between">
+                            <input type="text" id="secret" name="secret" placeholder="請輸入信箱驗證碼" required>
+                            <input type="button" value="獲取信箱驗證碼" id="getSecret">
+                        </div>
                     </div>
                     <div class="inputArea">
                         <input class="w-100" id="signUpSubmitBtn" type="submit" value="立即註冊">
@@ -38,6 +43,7 @@
                     <div class="inputArea">
                         <input type="checkbox" id="cbxAgree">
                         <label for="cbxAgree">我已閱讀並同意 <a href="#">服務條款</a> 與 <a href="#">隱私性說明</a> </label>
+                        <div class="errorMessage" id="signUpAgreeEro">NULL</div>
                     </div>
                 </form>
             </div>
@@ -102,6 +108,7 @@
     });
 
     // 以下: 送出驗證碼功能
+    let hasSendSecret = false;
     let theSecretCode = "";
     $('#getSecret').on('click', function () {
         let theMail = $('#userEmail').val();
@@ -112,6 +119,8 @@
 
             // 發送中
             $('#getSecret').val('發送中...')
+            $('#getSecret').off('click');
+            $('#getSecret').css('cursor', 'default');
 
             // 寄信ajax
             let params = `theMail=${theMail}&theSecret=${theSecretCode}`;
@@ -120,6 +129,7 @@
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             xhr.onload = function () {
                 if (xhr.status == 200) {
+                    hasSendSecret = true;
                     $('#getSecret').val('已發送!')
                 } else {
                     $('#getSecret').val('發送失敗')
@@ -128,6 +138,7 @@
             xhr.send(params);
         } else {
             // 未輸入合格式的信箱
+            emailFail('*信箱格式錯誤');
             console.log('信箱格式錯誤');
         }
     });
@@ -136,21 +147,27 @@
     // 以下: 未通過相關
     $('#signUpSubmitBtn').on('click', function () {
 
-        // 信箱驗證未通過
-        if ($('#secret').val() != theSecretCode) {
-            secretFail();
+        if (!ValidatePhone($('#userPhone').val())) {
+            phoneFail('*手機格式錯誤');
             return false;
         }
-
-        // 未同意條款
+        //alert(`occupiedMail:${occupiedMail}`);
+        if (occupiedMail) {
+            emailFail('*此電子郵件已被註冊');
+            return false;
+        }
+        //alert(`occupiedPhone:${occupiedPhone}`);
+        if (occupiedPhone) {
+            phoneFail('*此手機號碼已被註冊');
+            return false;
+        }
         if (!$('#cbxAgree').prop('checked')) {
             agreeFail();
             return false;
         }
-        
-        // 不合規手機
-        if (!ValidatePhone($('#userPhone').val())) {
-            phoneFail();
+        if (!hasSendSecret || $('#secret').val() != theSecretCode) {
+            let msg = hasSendSecret ? '*信箱驗證未通過' : '*尚未發送驗證信';
+            secretFail(msg);
             return false;
         }
             
@@ -171,17 +188,84 @@
     }
 
     // Failure Function
-    function emailFail() {
-        console.log('信箱驗證未通過');
+    function emailFail(failMsg) {
+        elementFail($('#signUpEmailEro'), failMsg);
     }
-    function secretFail() {
-        console.log('信箱驗證未通過');
+    function secretFail(failMsg) {
+        elementFail($('#signUpSecretEro'), failMsg);
     }
     function agreeFail() {
-        console.log('未同意條款');
+        $('#signUpAgreeEro').html('*請詳閱服務條款與隱私性說明');
+        $('#signUpAgreeEro').css('transform', 'scaleY(1)');
     }
-    function phoneFail() {
-        console.log('手機格式不對');
+    function phoneFail(failMsg) {
+        elementFail($('#signUpPhoneEro'),failMsg);
     }
+    function elementFail(jq, message) {
+        jq.css('transform', 'scaleY(0)');
+        jq.html(message);
+        setTimeout(() => {
+            jq.css('transform', 'scaleY(1)');
+        }, 200);
+    }
+
+    // 修正 Fail
+    $('#userPhone').on('keydown',function () {
+        $('#signUpPhoneEro').css('transform', 'scaleY(0)');
+    });
+    $('#userEmail').on('keydown', function () {
+        $('#signUpEmailEro').css('transform', 'scaleY(0)');
+    });
+    $('#cbxAgree').change(function () {
+        $('#signUpAgreeEro').css('transform', 'scaleY(0)');
+    });
+
+    // 驗證已存在之帳號
+    let occupiedMail = true;
+    $('#userEmail').change(function () {
+        let enterEmail = $('#userEmail').val();
+        $.ajax({
+            method: 'post',
+            url: 'occupiedEmail',
+            data: {
+                enterEmail,
+            },
+            success: function (result) {
+                let thereis = (result == 'True');
+                if (thereis) {
+                    occupiedMail = true;
+                    emailFail('*此電子郵件已被註冊');
+                } else {
+                    occupiedMail = false;
+                }
+            },
+            error: function () {
+                console.log('occupiedEmail error');
+            },
+        });
+    });
+    let occupiedPhone = true;
+    $('#userPhone').change(function () {
+        let enterPhone = $('#userPhone').val();
+        $.ajax({
+            method: 'post',
+            url: 'occupiedPhone',
+            data: {
+                enterPhone,
+            },
+            success: function (result) {
+                let thereis = (result == 'True');
+                if (thereis) {
+                    occupiedPhone = true;
+                    phoneFail('*此手機號碼已被註冊');
+                } else {
+                    occupiedPhone = false;
+                }
+            },
+            error: function () {
+                console.log('occupiedPhone error');
+            },
+        });
+    });
 
 </script>

@@ -47,7 +47,11 @@
 .mainArea {
     /* 這裡有url要改 */
     background-image: url( "/images/AccountPictures/common/pexels-linkedin-sales-navigator-1251844.png");
-    background-size: 100% auto;
+    /*background-size: 100% auto;*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: center;
+
     margin: 0px auto;
     padding-top: 1px;
     display: flex;

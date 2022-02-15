@@ -112,3 +112,32 @@ footer._LayoutElement input._LayoutElement{
     padding: 1px 2px;
     border-radius: 0px;
 }
+
+
+/* 獨立物件 */
+#toTopButton {
+    position: fixed;
+    right: 5px;
+    bottom: 50px;
+    border-radius: 50%;
+    background-color: #706139;
+    width: 53px;
+    height: 53px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    opacity:0;
+    transition: opacity 300ms;
+}
+    #toTopButton img {
+        width: 30px;
+        transform: rotate(180deg);
+    }
+    #toTopButton span {
+        position: relative;
+        top: -10px;
+    }
+    #toTopButton.show {
+        opacity: 1;
+    }

@@ -23,8 +23,12 @@
 /* 主外觀 */
 /* ****** */
 .mainArea {
-    background-image: url( "../images/AccountPictures/common/pexels-linkedin-sales-navigator-1251844.png");
-    background-size: 100% auto;
+    background-image: url( "/images/AccountPictures/common/pexels-linkedin-sales-navigator-1251844.png");
+    /*background-size: 100% auto;*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: center;
+
     margin: 0px auto;
     padding-top: 1px;
     display: flex;
@@ -88,10 +92,16 @@
     border: 1px solid rgb(179,179,179);
     width: 100%;
 }
+.errorMessage{
+    font-size: 0.8rem;
+    color: red;
+    transform: scaleY(0);
+    transition: transform 200ms;
+}
 
 
 /* 表單內元素 */
-#secret{
+#secret {
     margin-right: 5%;
 }
 #getSecret {

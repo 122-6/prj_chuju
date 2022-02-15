@@ -712,7 +712,8 @@
     <Content Include="images\articleListPictures\8.jpg" />
     <Content Include="images\articleListPictures\9.jpg" />
     <Content Include="style\aboutStyle.css" />
-    <Content Include="style\accountInfoPage.css" />
+    <Content Include="style\account\accountInfoPage.css" />
+    <Content Include="style\account\basicInfo.css" />
     <Content Include="style\allarticle.css" />
     <Content Include="style\articlecontent.css" />
     <Content Include="style\Building.css" />
@@ -771,7 +772,7 @@
     <Content Include="javascript\hiyes.js" />
     <Content Include="javascript\jquery-3.6.0.js" />
     <Content Include="javascript\jquery-3.6.0.min.js" />
-    <Content Include="style\loginStyle.css" />
+    <Content Include="style\account\loginStyle.css" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
@@ -903,6 +904,7 @@
     <Content Include="Views\MarketNews\Invest.cshtml" />
     <Content Include="Views\BuildingCase\Index.cshtml" />
     <Content Include="Views\Account\infoPage.cshtml" />
+    <Content Include="Views\Account\basicInfo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewBag.Title = "basicInfo";
+}
+
+<link rel="stylesheet" type="text/css" href="~/style/account/basicInfo.css" />
+
+
+<div class="mainArea">
+    <div class="operationArea d-flex">
+        <div class="col-8 py-3">
+            <div class="title">建立您的雛居帳戶</div>
+            <form method="post" action="create" class="d-flex flex-column">
+                <input type="hidden" name="userEmail" id="userEmail" value="@ViewBag.userEmail">
+                <div class="mb-3" style="padding-left:15px;">
+                    <div>親愛的 @ViewBag.userEmail 您好，</div>
+                    <div>請填寫以下基本資料:</div>
+                </div>
+                <table class="formTable">
+                    <tr>
+                        <td>手機</td>
+                        <td><input type="text" name="userPhone" id="userPhone" value="@ViewBag.userPhone"></td>
+                    </tr>
+                    <tr>
+                        <td>姓名</td>
+                        <td><input type="text" name="userName" id="userName"></td>
+                    </tr>
+                    <tr>
+                        <td>生日</td>
+                        <td>
+                            <div class="dateRow">
+                                <input type="hidden" name="birthDay" id="birthDay" />
+                                <input type="number" step="1" min="1900" name="Year" id="BDy" placeholder="年">
+                                <select name="Month" id="BDm" placeholder="月">
+                                    <option value="" disabled selected hidden>月</option>
+                                </select>
+                                <input type="number" step="1" min="1" max="31" name="Date" id="BDd" placeholder="日" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>密碼</td>
+                        <td><input type="password" name="password" id="password"></td>
+                    </tr>
+                    <tr>
+                        <td>確認密碼</td>
+                        <td><input type="password" name="passwordCheck" id="passwordCheck"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div id="errorMessage">NULL</div>
+                        </td>
+                    </tr>
+                </table>
+                <input id="submitBtn" class="m-3 brownBtn toRight" type="submit" value="註冊">
+            </form>
+        </div>
+        <div class="col-4 d-flex align-items-center">
+            <img src="~/images/AccountPictures/common/ads.png" alt="">
+        </div>
+    </div>
+</div>
+
+
+<script src="~/javascript/jquery-3.6.0.js"></script>
+<script>
+    const month = ["none","1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
+    const maxday = [0,31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    for (let i = 1; i <= 12; i++) {
+        $('#BDm').append(`<option value="${i}">${month[i]}</option>`);
+    }
+    $('#BDm').change(function () {
+        $('#BDd').attr('max', maxday[$('#BDm').val()]);
+    });
+
+    $('#submitBtn').on('click', function () {
+
+        if ($('#userPhone').val() == "") {
+            showError("*請輸入您的手機號碼");
+            return false;
+        }
+        if (!/^[0][9][0-9]{8}$/.test($('#userPhone').val())) {
+            showError("*手機號碼格式錯誤");
+            return false;
+        }
+        if ($('#userName').val() == "") {
+            showError("*請輸入您的姓名");
+            return false;
+        }
+        if (!birthdayValidate()) {
+            showError(birthdayError);
+            return false;
+        }
+        if ($('#password').val() == "") {
+            showError("*請輸入密碼");
+            return false;
+        }
+        if ($('#password').val() != $('#passwordCheck').val()) {
+            showError("*確認密碼與密碼不符");
+            return false;
+        }
+
+    });
+
+    let birthdayError = "";
+    function birthdayValidate() {
+        let yystr = $('#BDy').val();
+        let mmstr = $('#BDm').val();
+        let ddstr = $('#BDd').val();
+        let yy = parseInt($('#BDy').val());
+        let mm = parseInt($('#BDm').val());
+        let dd = parseInt($('#BDd').val());
+
+        if (!/^[0-9]+$/.test(yystr) || !/^[0-9]+$/.test(mmstr) || !/^[0-9]+$/.test(ddstr)) {
+            console.log('error 1');
+            birthdayError = "*生日格式錯誤";
+            return false;
+        }
+
+        if (dd <= 0 || dd > maxday[mm]) {
+            console.log('error 2');
+            birthdayError = "*生日格式錯誤";
+            return false;
+        }
+
+        $('#birthDay').val(`${yy}-${mm}-${dd}`);
+        return true;
+    }
+
+    function showError(msg) {
+        $('#errorMessage').removeClass('show');
+        $('#errorMessage').html(msg);
+        setTimeout(function () {
+            $('#errorMessage').addClass('show');
+        }, 200);
+    }
+    
+</script>

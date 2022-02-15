@@ -62,8 +62,93 @@ namespace prj_chuju.Models
             con.Open();
             int row = cmd.ExecuteNonQuery();
             con.Close();
+        }
 
+        public void create(HttpRequestBase req)
+        {
+            string cmdstr = "insert into accountInfo (accountName,userPassword,userName,email,cellphone,birthday) " +
+                "values (@accountNamePara,@userPasswordPara,@userNamePara,@emailPara,@cellphonePara,@birthdyPara)";
 
+            string password = req.Form["password"];
+            string userName = req.Form["userName"];
+            string userEmail = req.Form["userEmail"];
+            string userPhone = req.Form["userPhone"];
+            string birthDay = req.Form["birthDay"];
+
+            SqlConnection con = new SqlConnection(dbConnectioniStr);
+            SqlCommand cmd = new SqlCommand(cmdstr, con);
+            cmd.Parameters.AddWithValue("@accountNamePara", "account");
+            cmd.Parameters.AddWithValue("@userPasswordPara", password);
+            cmd.Parameters.AddWithValue("@userNamePara", userName);
+            cmd.Parameters.AddWithValue("@emailPara", userEmail);
+            cmd.Parameters.AddWithValue("@cellphonePara", userPhone);
+            cmd.Parameters.AddWithValue("@birthdyPara", birthDay);
+
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch(Exception ex)
+            {
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@accountNamePara", "account");
+                cmd.Parameters.AddWithValue("@userPasswordPara", password);
+                cmd.Parameters.AddWithValue("@userNamePara", userName);
+                cmd.Parameters.AddWithValue("@emailPara", userEmail);
+                cmd.Parameters.AddWithValue("@cellphonePara", userPhone);
+                cmd.Parameters.AddWithValue("@birthdyPara", "1900-1-1");
+
+                try
+                {
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+                catch
+                {
+
+                }
+            }
+            
+        }
+
+        public bool occupiedEmail(string enterEmail)
+        {
+            string cmdstr = "select email from accountInfo where email = @emailPara";
+
+            SqlConnection con = new SqlConnection(dbConnectioniStr);
+            SqlCommand cmd = new SqlCommand(cmdstr, con);
+            SqlDataReader reader;
+            cmd.Parameters.AddWithValue("@emailPara", enterEmail);
+            con.Open();
+            reader = cmd.ExecuteReader();
+            int row = 0;
+            while (reader.Read())
+            {
+                row++;
+            }
+            con.Close();
+            return row > 0;
+        }
+        public bool occupiedPhone(string enterPhone)
+        {
+            string cmdstr = "select cellphone from accountInfo where cellphone = @cellphonePara";
+
+            SqlConnection con = new SqlConnection(dbConnectioniStr);
+            SqlCommand cmd = new SqlCommand(cmdstr, con);
+            SqlDataReader reader;
+            cmd.Parameters.AddWithValue("@cellphonePara", enterPhone);
+            con.Open();
+            reader = cmd.ExecuteReader();
+            int row = 0;
+            while (reader.Read())
+            {
+                row++;
+            }
+            con.Close();
+            return row > 0;
         }
     }
 }

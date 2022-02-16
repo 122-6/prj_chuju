@@ -20,12 +20,10 @@ namespace prj_chuju.Controllers
         // GET: Account
         public ActionResult Index()
         {
-            HttpCookie x = Request.Cookies["userInfo"];
-            if (x==null)
-                return RedirectToAction("loginPage");
-            accountCookie xc = new accountCookie(x.Value);
-            int theid = Convert.ToInt32(xc.theid);
-            theid = new factory_accountInfo().varifyPassByID(theid, xc.password);
+            // 點擊上方會員頁面，以AccountInfoHelper確認登入狀態
+            int theid = -1;
+            AccountInfoHelper aih = new AccountInfoHelper(Session, Request);
+            theid = aih.getID();
 
             if (theid > 0)
                 return RedirectToAction("infoPage");
@@ -45,24 +43,34 @@ namespace prj_chuju.Controllers
 
         public ActionResult infoPage()
         {
-            HttpCookie x = Request.Cookies["userInfo"];
-            accountCookie xc = new accountCookie(x.Value);
-            ViewBag.remember = xc.remember;
-            ViewBag.theid = xc.theid;
-            ViewBag.password = xc.password;
+            // 若session登入狀態錯誤或cookie判定非記憶則跳回登入頁面
+            AccountInfoHelper aih = new AccountInfoHelper(Session, Request);
+            AccountInfoMemory loginInfo = aih.Information;
+
+            int theid = new factory_accountInfo().varifyPassByID(loginInfo.theid, loginInfo.password);
+            if (theid <= 0) return RedirectToAction("loginPage");
+
+            // 確認登入與記憶狀況後蒐集資料庫資料以呈現頁面
+            ViewBag.remember = loginInfo.remember;
+            ViewBag.theid = loginInfo.theid;
+            ViewBag.password = loginInfo.password;
             return View();
         }
         public ActionResult passToInfoPage()
         {
+            // 基本傳入資訊
             string theid = Request["theid"];
             string password = Request["password"];
             string remember = Request["remember"];
-            string cookieMessage = $"{remember}|{theid}|{password}";
+            string InfoMessage = $"{remember}|{theid}|{password}";
 
+            // 長期記憶由Cookie實現，短期由Session實現
             HttpCookie x = new HttpCookie("userInfo");
-            x.Value = remember == "yes" ? cookieMessage : "";
+            x.Value = remember == "yes" ? InfoMessage : "";
             x.Expires = DateTime.Now.AddDays(7);
             Response.Cookies.Add(x);
+
+            Session["userInfo"] = remember == "no" ? InfoMessage : "";
 
             return RedirectToAction("infoPage");
         }

@@ -1,0 +1,196 @@
+﻿/* ******** */
+/* 通用項目 */
+/* ******** */
+.brownBtn {
+    padding: 8px 30px;
+    color: white;
+    background-color: rgb(122,97,57);
+    width: max-content;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.testingbox {
+    border: 1px solid black;
+    background-color: rgb(217, 176, 255);
+}
+
+/* 自定義bootstrap */
+.f-1 {
+    flex: 1;
+}
+
+.font-120 {
+    font-size: 1.2rem;
+}
+
+.color-gray {
+    color: #464646;
+}
+
+.w-80 {
+    width: 80%;
+}
+
+.px-100px {
+    padding: 0px 100px;
+}
+
+.mx-100px {
+    margin: 0px 100px;
+}
+
+
+/* ****** */
+/* 主外觀 */
+/* ****** */
+.mainArea {
+    /* 這裡有url要改 */
+    background-image: url( "/images/AccountPictures/common/pexels-linkedin-sales-navigator-1251844.png");
+    /*background-size: 100% auto;*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: center;
+
+    margin: 0px auto;
+    padding-top: 1px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 150px 20px;
+}
+
+.operationArea {
+    width: 1200px;
+    background-color: white;
+    box-shadow: 3px 3px 3px rgba(0,0,0,.3);
+}
+
+.pageSwitcher {
+    display: flex;
+}
+
+.pageTag {
+    flex: 1;
+    background-color: rgb(245,245,245);
+    padding: 10px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+    .pageTag.actived {
+        background-color: white;
+    }
+
+.pageArea {
+    margin: 0px auto;
+    padding: 30px 50px;
+}
+
+.pageContainer {
+    width: 100%;
+    display: none;
+}
+
+    .pageContainer.actived {
+        display: block;
+    }
+
+
+/* ********* */
+/* 各頁面屬性 */
+/* ********* */
+
+/* 會員資料 */
+#infoPage .pictureContainer {
+    width: 180px;
+    height: 180px;
+    background-color: rgb(170, 170, 170);
+    border-radius: 50%;
+}
+
+#infoPage .infoFormTable td:first-child {
+    font-weight: bold;
+    padding: 20px 0;
+}
+
+#infoPage .infoFormTable [type="text"] {
+    width: 100%;
+    border: 1px solid #8A8A8A;
+    font-size: 1.2rem;
+}
+
+/* 我的預約 */
+#bookingPage .selectType > div {
+    margin: 0px 10px;
+}
+
+#bookingPage .buildingCase {
+    padding: 10px;
+    border: 1px solid rgb(212,212,212);
+    box-shadow: 1px 3px 3px rgba(0,0,0,.3);
+    min-height: 200px;
+}
+
+/* 我的收藏 */
+#historyPage .title, #collectionPage .title {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+/* 建案元素 */
+#historyPage .caseItem, #collectionPage .caseItem {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 1px 2px 5px rgba(0,0,0,.3);
+}
+
+    #historyPage .caseItem > *, #collectionPage .caseItem > * {
+        margin: 5px 0;
+    }
+
+.caseItem .btnToBuildingCase {
+    padding: 5px 30px;
+    width: max-content;
+    background-color: rgb(241,241,241);
+    border: 1px solid rgb(168,168,168);
+    color: rgb(131,131,131);
+    cursor: pointer;
+}
+
+.caseItem .caseName {
+    font-size: 2rem;
+}
+
+.caseItem .caseLocation {
+}
+
+.caseItem .caseArea {
+}
+/* 文章元素 */
+#historyPage .articleItem, #collectionPage .articleItem {
+    flex-direction: column;
+    align-items: center;
+    /* box-shadow: 1px 2px 5px rgba(0,0,0,.3); */
+    border-bottom: 1px solid rgb(122,97,57);
+}
+
+.articleItem .articleClass {
+    color: rgb(122,97,57);
+    font-weight: bold;
+}
+
+.articleItem .articleTitle {
+    font-weight: bold;
+    font-size: 1.4rem;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.articleItem .articleTime {
+    margin: 10px 0px;
+    font-size: 10px;
+}

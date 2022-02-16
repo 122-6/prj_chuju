@@ -62,8 +62,143 @@ namespace prj_chuju.Models
             con.Open();
             int row = cmd.ExecuteNonQuery();
             con.Close();
+        }
 
+        public void create(HttpRequestBase req)
+        {
+            string cmdstr = "insert into accountInfo (accountName,userPassword,userName,email,cellphone,birthday) " +
+                "values (@accountNamePara,@userPasswordPara,@userNamePara,@emailPara,@cellphonePara,@birthdyPara)";
 
+            string password = req.Form["password"];
+            string userName = req.Form["userName"];
+            string userEmail = req.Form["userEmail"];
+            string userPhone = req.Form["userPhone"];
+            string birthDay = req.Form["birthDay"];
+
+            SqlConnection con = new SqlConnection(dbConnectioniStr);
+            SqlCommand cmd = new SqlCommand(cmdstr, con);
+            cmd.Parameters.AddWithValue("@accountNamePara", "account");
+            cmd.Parameters.AddWithValue("@userPasswordPara", password);
+            cmd.Parameters.AddWithValue("@userNamePara", userName);
+            cmd.Parameters.AddWithValue("@emailPara", userEmail);
+            cmd.Parameters.AddWithValue("@cellphonePara", userPhone);
+            cmd.Parameters.AddWithValue("@birthdyPara", birthDay);
+
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch(Exception ex)
+            {
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@accountNamePara", "account");
+                cmd.Parameters.AddWithValue("@userPasswordPara", password);
+                cmd.Parameters.AddWithValue("@userNamePara", userName);
+                cmd.Parameters.AddWithValue("@emailPara", userEmail);
+                cmd.Parameters.AddWithValue("@cellphonePara", userPhone);
+                cmd.Parameters.AddWithValue("@birthdyPara", "1900-1-1");
+
+                try
+                {
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+                catch
+                {
+
+                }
+            }
+            
+        }
+
+        public int occupiedEmailID(string enterEmail)
+        {
+            string cmdstr = "select id from accountInfo where email = @emailPara";
+
+            int theid = -1;
+            SqlConnection con = new SqlConnection(dbConnectioniStr);
+            SqlCommand cmd = new SqlCommand(cmdstr, con);
+            SqlDataReader reader;
+            cmd.Parameters.AddWithValue("@emailPara", enterEmail);
+            con.Open();
+            reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                theid = Convert.ToInt32(reader["id"]);
+            }
+            con.Close();
+            return theid;
+        }
+        public int occupiedPhoneID(string enterPhone)
+        {
+            string cmdstr = "select id from accountInfo where cellphone = @cellphonePara";
+
+            int theid = -1;
+            SqlConnection con = new SqlConnection(dbConnectioniStr);
+            SqlCommand cmd = new SqlCommand(cmdstr, con);
+            SqlDataReader reader;
+            cmd.Parameters.AddWithValue("@cellphonePara", enterPhone);
+            con.Open();
+            reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                theid = Convert.ToInt32(reader["id"]);
+            }
+            con.Close();
+            return theid;
+        }
+
+        public bool validateByEmail(string email,string passwordEntered)
+        {
+            bool AccountFound = false;
+            string cmdstr = "select userPassword from accountInfo where email = @emailPara";
+            string thePassword = "\0";
+
+            SqlConnection con = new SqlConnection(dbConnectioniStr);
+            SqlCommand cmd = new SqlCommand(cmdstr, con);
+            SqlDataReader reader;
+            cmd.Parameters.AddWithValue("@emailPara", email);
+            con.Open();
+            reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                thePassword = reader["userPassword"].ToString();
+                AccountFound = true;
+            }
+            con.Close();
+
+            if (AccountFound)
+            {
+                return passwordEntered == thePassword;
+            }
+            return false;
+        }
+
+        public int varifyPassByID(int theid,string password)
+        {
+            if (password == "") return -1;
+
+            int passUserID = -1;
+            string cmdstr = "select id from accountInfo where id = @idPara and userPassword = @passwordPara";
+
+            SqlConnection con = new SqlConnection(dbConnectioniStr);
+            SqlCommand cmd = new SqlCommand(cmdstr, con);
+            SqlDataReader reader;
+            cmd.Parameters.AddWithValue("@idPara", theid);
+            cmd.Parameters.AddWithValue("@passwordPara", password);
+
+            con.Open();
+            reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                passUserID = Convert.ToInt32(reader["id"]);
+            }
+            con.Close();
+
+            return passUserID;
         }
     }
 }

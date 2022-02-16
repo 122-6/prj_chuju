@@ -12,18 +12,59 @@ namespace prj_chuju.Controllers
     {
         SqlConnection con;
         // GET: Activity
-        public ActionResult Index()
+        public ActionResult Index(string tag, int page = 1)
         {
-            List<class_ActivityOutline> list = SqlAll();
-            return View(list);
+            List<class_ActivityOutline> list = default;
+
+            int count = default;
+            string allSql = $"select * from ActivityOutline order by Id offset {(page - 1) * 4} rows fetch next 4 rows only;";
+            string all_countSql = "select count(*) from ActivityOutline";
+            string soonSql = $"select * from ActivityOutline where getdate() between dateadd(day, -7, startDate) and dateadd(day, -1, startDate) order by Id offset {(page - 1) * 4} rows fetch next 4 rows only;";
+            string soon_countSql = "select count(*) from ActivityOutline where getdate() between dateadd(day, -7, startDate) and dateadd(day, -1, startDate)";
+            string nowSql = $"select * from ActivityOutline where getdate() between startDate and endDate order by Id offset {(page - 1) * 4} rows fetch next 4 rows only;";
+            string now_countSql = "select count(*) from ActivityOutline where getdate() between startDate and endDate";
+            string endSql = $"select * from ActivityOutline where getdate() > endDate order by Id offset {(page - 1) * 4} rows fetch next 4 rows only;";
+            string end_countSql = "select count(*) from ActivityOutline where getdate() > endDate";
+
+            switch (tag)
+            {
+                case "全部活動":
+                    list = ListSql(allSql);
+                    count = CountSql(all_countSql);
+                    break;
+                case "即將開始":
+                    list = ListSql(soonSql);
+                    count = CountSql(soon_countSql);
+                    break;
+                case "執行中":
+                    list = ListSql(nowSql);
+                    count = CountSql(now_countSql);
+                    break;
+                case "已結束":
+                    list = ListSql(endSql);
+                    count = CountSql(end_countSql);
+                    break;
+                default:
+                    list = ListSql(allSql);
+                    count = CountSql(all_countSql);
+                    break;
+            }
+            Tuple<List<class_ActivityOutline>, string, int, int> data = new Tuple<List<class_ActivityOutline>, string, int, int>(list, tag, count, page);
+
+            return View(data);
         }
 
-   
-     
-        private List<class_ActivityOutline> SqlAll()
+        public class strSQL
         {
-            string dataSQL = "select * from ActivityOutline";
-            SqlCommand cmd = methodSQL(dataSQL);
+            string tag_now_SQL = $"select count(*) from ActivityOutline where getdate() between startDate and endDate";
+            string tag_end_SQL = $"select count(*) from ActivityOutline where getdate() > endDate";
+        }
+
+
+
+        private List<class_ActivityOutline> ListSql(string strSql)
+        {
+            SqlCommand cmd = methodSQL(strSql);
             SqlDataReader reader = cmd.ExecuteReader();
             List<class_ActivityOutline> list = new List<class_ActivityOutline>();
             while (reader.Read())
@@ -39,7 +80,28 @@ namespace prj_chuju.Controllers
             }
             reader.Close();
             con.Close();
+
             return list;
+        }
+
+        private int CountSql(string strSql)
+        {
+            int count = 1;
+            SqlCommand cmd = methodSQL(strSql);
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.Read() && (int)reader[0] != 0)
+            {
+                count = (int)reader[0] / 4;
+                if ((int)reader[0] % 4 != 0)
+                {
+                    count++;
+                }
+            }
+
+            reader.Close();
+            con.Close();
+
+            return (count);
         }
 
         private class_ActivityContent ActivityContent(string Id)

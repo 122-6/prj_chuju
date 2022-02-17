@@ -10,14 +10,13 @@ namespace prj_chuju.Controllers
 {
     public class ActivityController : Controller
     {
-        
         SqlConnection con;
         // GET: Activity
         public ActionResult Index(string tag, int page = 1)
         {
             List<class_ActivityOutline> list = default;
-
             int count = default;
+
             string allSql = $"select * from ActivityOutline order by Id offset {(page - 1) * 4} rows fetch next 4 rows only;";
             string all_countSql = "select count(*) from ActivityOutline";
             string soonSql = $"select * from ActivityOutline where getdate() between dateadd(day, -7, startDate) and dateadd(day, -1, startDate) order by Id offset {(page - 1) * 4} rows fetch next 4 rows only;";
@@ -29,10 +28,6 @@ namespace prj_chuju.Controllers
 
             switch (tag)
             {
-                case "全部活動":
-                    list = ListSql(allSql);
-                    count = CountSql(all_countSql);
-                    break;
                 case "即將開始":
                     list = ListSql(soonSql);
                     count = CountSql(soon_countSql);
@@ -54,14 +49,6 @@ namespace prj_chuju.Controllers
 
             return View(data);
         }
-
-        public class strSQL
-        {
-            string tag_now_SQL = $"select count(*) from ActivityOutline where getdate() between startDate and endDate";
-            string tag_end_SQL = $"select count(*) from ActivityOutline where getdate() > endDate";
-        }
-
-
 
         private List<class_ActivityOutline> ListSql(string strSql)
         {
@@ -98,7 +85,6 @@ namespace prj_chuju.Controllers
                     count++;
                 }
             }
-
             reader.Close();
             con.Close();
 
@@ -120,6 +106,8 @@ namespace prj_chuju.Controllers
                     content = (string)reader["content"]
                 };
             }
+            reader.Close();
+            con.Close();
 
             return x;
         }

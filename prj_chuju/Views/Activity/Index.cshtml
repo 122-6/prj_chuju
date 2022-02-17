@@ -23,7 +23,6 @@
 
     .tag {
         font-size: 22px;
-        background: transparent;
         color: #FFFFFF;
         line-height: 90px;
     }
@@ -42,7 +41,7 @@
         color: #212529;
     }
 
-    .title {
+    .Activity-title {
         font-size: 50px;
         color: #383838;
         font-weight: bold;
@@ -154,17 +153,15 @@
 <script src="~/javascript/jquery-3.6.0.min.js"></script>
 <body>
     <main>
-        <form method="get">
-            <div class="d-flex justify-content-end sticky">
-                <div class="d-flex tag-group justify-content-space-between">
-                    <div class="swiper"><a href="~/Activity/Index/1" class="tag text-decoration-none">全部活動</a></div>
-                    <div class="swiper"><a href="~/Activity/即將開始/1" class="tag text-decoration-none">即將開始</a></div>
-                    <div class="swiper"><a href="~/Activity/執行中/1" class="tag text-decoration-none">執行中</a></div>
-                    <div class="swiper"><a href="~/Activity/已結束/1" class="tag text-decoration-none">已結束</a></div>
-                </div>
+        <div class="d-flex justify-content-end sticky">
+            <div class="d-flex tag-group justify-content-space-between">
+                <div class="swiper"><a href="~/Activity/全部活動" class="tag text-decoration-none">全部活動</a></div>
+                <div class="swiper"><a href="~/Activity/即將開始" class="tag text-decoration-none">即將開始</a></div>
+                <div class="swiper"><a href="~/Activity/執行中" class="tag text-decoration-none">執行中</a></div>
+                <div class="swiper"><a href="~/Activity/已結束" class="tag text-decoration-none">已結束</a></div>
             </div>
-        </form>
-        <div class="title">活動總覽</div>
+        </div>
+        <div class="Activity-title">活動總覽</div>
         <div class="container">
             <div class="row justify-content-space-between">
                 @{ foreach (var item in Model.Item1)
@@ -176,9 +173,8 @@
                             <script>
                                   $(function () {
                                       $(".status_@item.Id").addClass("status-tag-now");
-                                            });
+                                  });
                             </script>
-
                         }
 
                         else
@@ -203,105 +199,6 @@
                         </div>
                     }
                 }
-                @*<div class="box">
-                        <div class="imgbox">
-                            <img class="picture" src="~/images/ActivityNews/p2.png" />
-                        </div>
-                        <div class="information d-flex justify-content-space-between">
-                            <div class="time d-flex align-items-center">
-                                <img src="~/images/ActivityNews/clock.png" />2022-01-01 ~ 2022-03-29
-                            </div>
-                            <div class="status">活動進行中</div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class="imgbox">
-                            <img class="picture" src="~/images/ActivityNews/p3.png" />
-                        </div>
-                        <div class="information d-flex justify-content-space-between">
-                            <div class="time d-flex align-items-center">
-                                <img src="~/images/ActivityNews/clock.png" />2022-01-01 ~ 2022-02-28
-                            </div>
-                            <div class="status-tag-now">活動進行中</div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class="imgbox">
-                            <img class="picture" src="~/images/ActivityNews/p4.png" />
-                        </div>
-                        <div class="information d-flex justify-content-space-between">
-                            <div class="time d-flex align-items-center">
-                                <img src="~/images/ActivityNews/clock.png" />2022-01-01 ~ 2022-02-28
-                            </div>
-                            <div class="status-tag-now">活動進行中</div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class="imgbox">
-                            <img class="picture" src="~/images/ActivityNews/p5.png" />
-                        </div>
-                        <div class="information d-flex justify-content-space-between">
-                            <div class="time d-flex align-items-center">
-                                <img src="~/images/ActivityNews/clock.png" />2022-12-11 ~ 2022-02-25
-                            </div>
-                            <div class="status-tag-now">活動進行中</div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class="imgbox">
-                            <img class="picture" src="~/images/ActivityNews/p6.png" />
-                        </div>
-                        <div class="information d-flex justify-content-space-between">
-                            <div class="time d-flex align-items-center">
-                                <img src="~/images/ActivityNews/clock.png" />2022-12-01 ~ 2022-02-20
-                            </div>
-                            <div class="status-tag-now">活動進行中</div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class="imgbox">
-                            <img class="picture" src="~/images/ActivityNews/p7.png" />
-                        </div>
-                        <div class="information d-flex justify-content-space-between">
-                            <div class="time d-flex align-items-center">
-                                <img src="~/images/ActivityNews/clock.png" />2021-11-01 ~ 2022-01-10
-                            </div>
-                            <div class="status-tag">活動已結束</div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class="imgbox">
-                            <img class="picture" src="~/images/ActivityNews/p8.png" />
-                        </div>
-                        <div class="information d-flex justify-content-space-between">
-                            <div class="time d-flex align-items-center">
-                                <img src="~/images/ActivityNews/clock.png" />2021-12-01 ~ 2022-01-09
-                            </div>
-                            <div class="status-tag">活動已結束</div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class="imgbox">
-                            <img class="picture" src="~/images/ActivityNews/p9.png" />
-                        </div>
-                        <div class="information d-flex justify-content-space-between">
-                            <div class="time d-flex align-items-center">
-                                <img src="~/images/ActivityNews/clock.png" />2021-10-20 ~ 2021-11-15
-                            </div>
-                            <div class="status-tag">活動已結束</div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class="imgbox">
-                            <img class="picture" src="~/images/ActivityNews/p10.png" />
-                        </div>
-                        <div class="information d-flex justify-content-space-between">
-                            <div class="time d-flex align-items-center">
-                                <img src="~/images/ActivityNews/clock.png" />2021-10-01 ~ 2021-10-30
-                            </div>
-                            <div class="status-tag">活動已結束</div>
-                        </div>
-                    </div>*@
             </div>
         </div>
         <div class="page-list d-flex justify-content-center">
@@ -324,8 +221,6 @@
                 <a href="~/Activity/@Model.Item2/@next" class="page next text-decoration-none">></a>
                 <a href="~/Activity/@Model.Item2/@Model.Item3" class="page last text-decoration-none">@Model.Item3</a>
             }
-            <script>
-            </script>
         </div>
     </main>
 </body>

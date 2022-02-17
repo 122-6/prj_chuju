@@ -858,6 +858,7 @@
     <Compile Include="regionList.cs">
       <DependentUpon>dbchuju.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AccountInfoPageViewModel.cs" />
     <Compile Include="ViewModels\ArticleContentViewModel.cs" />
     <Compile Include="ViewModels\CookieClass.cs" />
     <Compile Include="WebForm1.aspx.cs">
@@ -890,6 +891,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\BrandArticle\Index.cshtml" />
     <Content Include="Views\AboutUs\Index.cshtml" />
+    <Content Include="Views\Activity\Index.cshtml" />
     <Content Include="Views\BuildingList\Index.cshtml" />
     <Content Include="Views\Account\loginPage.cshtml" />
     <Content Include="Views\BuyHouseFirst\Index.cshtml" />
@@ -905,7 +907,6 @@
     <Content Include="Views\BuildingCase\Index.cshtml" />
     <Content Include="Views\Account\infoPage.cshtml" />
     <Content Include="Views\Account\basicInfo.cshtml" />
-    <Content Include="Views\Activity\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

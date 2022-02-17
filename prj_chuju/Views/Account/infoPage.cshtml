@@ -1,4 +1,6 @@
-﻿
+﻿@using prj_chuju.ViewModels;
+@using prj_chuju.Models;
+@model AccountInfoPageViewModel
 @{
     ViewBag.Title = "infoPage";
 }
@@ -44,75 +46,121 @@
         </div>
 
         <div class="pageArea">
-
             <div id="infoPage" class="pageContainer actived">
                 <div class="d-flex">
-                    <div class="pictureContainer mx-100px d-flex align-items-center">
-                        <div class="d-flex justify-content-center ">
-                            <img class="w-25" src="~/images/AccountPictures/common/gallery.png" alt="">
+                    <div>
+                        <div class="pictureContainer my-4 mx-100px d-flex align-items-center">
+                            <div class="d-flex justify-content-center ">
+                                <img class="w-25" src="~/images/AccountPictures/common/gallery.png" alt="">
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column align-items-center" >
+                            <a href="#">
+                                重設密碼
+                            </a>
+                            <a href="logout">
+                                會員登出
+                            </a>
                         </div>
                     </div>
                     <div class="" style="width:500px">
-                        <div class="font-weight-bold font-120 my-4">編輯會員資料</div>
+                        <div class="d-flex justify-content-between my-4">
+                            <span class="font-weight-bold font-120">會員資料</span>
+                            <a id="editUserInfo" href="#">編輯</a>
+                        </div>
                         <form action="">
-                            <table class="w-100 infoFormTable">
+                            <table id="infoFormTable" class="w-100 mb-3 infoFormTable">
                                 <tr>
                                     <td style="width:100px">姓名</td>
                                     <td>
-                                        <input class="w-100" type="text">
+                                        <input disabled class="w-100" type="text" value="@Model.accountInfo.userName">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>性別</td>
                                     <td>
-                                        <input type="radio" name="gender" id="genderM" value="男" />男
-                                        <input type="radio" name="gender" id="genderF" value="女" />女
+                                        <div class="userInfoShower font-120">
+                                            @if (Model.accountInfo.gender != "")
+                                            {
+                                                @: @Model.accountInfo.gender
+                                            }
+                                            else
+                                            {
+                                                @:(未提供)
+                                            }
+                                        </div>
+                                        <div class="userInfoEditor d-none">
+                                            <input type="radio" name="gender" id="genderM" value="男" />男
+                                            <input type="radio" name="gender" id="genderF" value="女" style="margin-left:10px" />女
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>生日</td>
                                     <td>
-                                        <input type="text">
+                                        <div class="userInfoShower font-120">
+                                            @{
+                                                DateTime bd = Model.accountInfo.birthday;
+                                                string birthstr = $"{bd.Year}.{bd.Month}.{bd.Day}";
+                                                @: @birthstr
+                                            }
+                                        </div>
+                                        <div class="userInfoEditor d-none">
+                                            <input type="text">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>居住地區</td>
                                     <td>
-                                        <input type="text">
+                                        <div class="userInfoShower font-120">
+                                            @if (Model.regionInfo.regionID != -1)
+                                            {
+                                                <span>@Model.regionInfo.cityName</span>
+                                                <span>@Model.regionInfo.regionName</span>
+                                            }
+                                            else
+                                            {
+                                                @:(未提供)
+                                            }
+                                        </div>
+                                        <div class="userInfoEditor d-none">
+                                            <input type="text">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>電子郵件</td>
                                     <td>
-                                        <input type="text">
+                                        <input disabled type="text" value="@Model.accountInfo.email">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>行動電話</td>
                                     <td>
-                                        <input type="text">
+                                        <input disabled type="text" value="@Model.accountInfo.cellphone">
                                     </td>
                                 </tr>
                                 <!-- 這裡的注解要另外處理 -->
                                 <!-- <tr>
-                                    <td>綁定帳戶</td>
-                                    <td>
-                                        <input type="text">
-                                    </td>
-                                </tr> -->
-                                <tr>
-                                    <td>密碼</td>
-                                    <td>
-                                        <a href="#">設定新的密碼</a>
-                                    </td>
-                                </tr>
+            <td>綁定帳戶</td>
+            <td>
+                <input type="text">
+            </td>
+        </tr> -->
+                                @*<tr>
+                <td>密碼</td>
+                <td>
+                    <a href="#">設定新的密碼</a>
+                </td>
+            </tr>*@
 
                             </table>
+                            <div class="d-flex justify-content-end">
+                                <input type="submit" class="brownBtn" id="btnSaveInfoChange" value="儲存變更">
+                            </div>
                         </form>
                     </div>
-                </div>
-                <div class="d-flex justify-content-end">
-                    <div class="brownBtn" id="btnSaveInfoChange">儲存變更</div>
                 </div>
             </div>
 
@@ -423,6 +471,8 @@
 
     </div>
 </div>
+
+<!--通用項目-->
 <script>
     // 以下: 建立切換分頁功能
     let pageTags = $('.pageSwitcher').children('.pageTag');
@@ -438,5 +488,31 @@
             $(val).addClass('actived');
             $(pageContainers[ind]).addClass('actived');
         });
+    });
+</script>
+
+<!--會員資料-->
+<script>
+    $('#editUserInfo').on('click', function (event) {
+        event.preventDefault();
+        let textInputs = $('#infoFormTable').find('input[type="text"]');
+        let infoShowers = $('#infoFormTable').find('.userInfoShower');
+        let infoEdditors = $('#infoFormTable').find('.userInfoEditor');
+
+        let trs = $('#infoFormTable').find('tr');
+
+        $.each(textInputs, function (ind, elm) {
+            $(elm).removeAttr('disabled');
+        });
+        $.each(infoShowers, function (ind, elm) {
+            $(elm).addClass('d-none');
+        });
+        $.each(infoEdditors, function (ind, elm) {
+            $(elm).removeClass('d-none');
+        });
+
+        
+
+        return false;
     });
 </script>

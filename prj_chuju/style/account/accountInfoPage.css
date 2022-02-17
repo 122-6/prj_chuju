@@ -104,6 +104,10 @@
 /* ********* */
 
 /* 會員資料 */
+#infoPage{
+    padding: 0px 20px;
+}
+
 #infoPage .pictureContainer {
     width: 180px;
     height: 180px;
@@ -120,6 +124,12 @@
     width: 100%;
     border: 1px solid #8A8A8A;
     font-size: 1.2rem;
+}
+
+#infoPage .infoFormTable input:disabled{
+    border:none;
+    background-color: transparent;
+    color: black;
 }
 
 /* 我的預約 */

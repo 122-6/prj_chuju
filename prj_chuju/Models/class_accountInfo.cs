@@ -21,18 +21,32 @@ namespace prj_chuju.Models
         public int region;
         public int avatar;
 
-        class_accountInfo(SqlDataReader reader)
+        public class_accountInfo()
         {
-            id = Convert.ToInt32(reader["id"]);
+            id = -1;
+            accountName = "account";
+            userPassword = "initPassword";
+            email = "initEmail";
+            userName = "initUserName";
+            birthday = new DateTime(1900, 1, 1);
+            gender = "initGender";
+            cellphone = "initPhone";
+            region = -1;
+            avatar = -1;
+        }
+        public class_accountInfo(SqlDataReader reader)
+        {
+            id = reader["id"].Equals(DBNull.Value) ? -1 : Convert.ToInt32(reader["id"]);
+            birthday = reader["birthday"].Equals(DBNull.Value) ? new DateTime(1900, 1, 1) : Convert.ToDateTime(reader["birthday"]);
+            region = reader["region"].Equals(DBNull.Value) ? -1 : Convert.ToInt32(reader["region"]);
+            avatar = reader["avatar"].Equals(DBNull.Value) ? -1 : Convert.ToInt32(reader["avatar"]);
+
             accountName = reader["accountName"].ToString();
             userPassword = reader["userPassword"].ToString();
             email = reader["email"].ToString();
             userName = reader["userName"].ToString();
-            birthday = Convert.ToDateTime(reader["birthday"]);
             gender = reader["gender"].ToString();
             cellphone = reader["cellphone"].ToString();
-            region = Convert.ToInt32(reader["region"]);
-            avatar = Convert.ToInt32(reader["avatar"]);
         }
     }
     public class factory_accountInfo
@@ -46,6 +60,7 @@ namespace prj_chuju.Models
             @"Asynchronous Processing=True;" +
             @"";
 
+        // 新增會員
         public void create(string cellphone, string email)
         {
             string cmdstr = "insert into accountInfo (accountName,userPassword,userName,email,cellphone) " +
@@ -63,7 +78,6 @@ namespace prj_chuju.Models
             int row = cmd.ExecuteNonQuery();
             con.Close();
         }
-
         public void create(HttpRequestBase req)
         {
             string cmdstr = "insert into accountInfo (accountName,userPassword,userName,email,cellphone,birthday) " +
@@ -114,6 +128,29 @@ namespace prj_chuju.Models
             
         }
 
+        // 調閱會員資料
+        public class_accountInfo selectAccountByID(int theid)
+        {
+            string sqlstr = "select * from accountInfo where id = @idPara";
+            class_accountInfo res=new class_accountInfo();
+
+            SqlConnection con = new SqlConnection(dbConnectioniStr);
+            SqlCommand cmd;
+            SqlDataReader reader;
+
+            con.Open();
+            cmd = new SqlCommand(sqlstr, con);
+            cmd.Parameters.AddWithValue("@idPara", theid);
+            reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                res = new class_accountInfo(reader);
+            }
+            con.Close();
+            return res;
+        }
+
+        // 驗證系統
         public int occupiedEmailID(string enterEmail)
         {
             string cmdstr = "select id from accountInfo where email = @emailPara";
@@ -150,7 +187,6 @@ namespace prj_chuju.Models
             con.Close();
             return theid;
         }
-
         public bool validateByEmail(string email,string passwordEntered)
         {
             bool AccountFound = false;
@@ -176,7 +212,6 @@ namespace prj_chuju.Models
             }
             return false;
         }
-
         public int varifyPassByID(int theid,string password)
         {
             if (password == "") return -1;

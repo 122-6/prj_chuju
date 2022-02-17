@@ -17,9 +17,17 @@ namespace prj_chuju.Controllers
 {
     public class AccountController : Controller
     {
-        // GET: Account
+        // 各頁面
         public ActionResult Index()
         {
+            // 刷新Cookie
+            HttpCookie x = new HttpCookie("userInfo");
+            if (x != null)
+            {
+                x.Expires = DateTime.Now.AddDays(14);
+                Response.Cookies.Add(x);
+            }
+
             // 點擊上方會員頁面，以AccountInfoHelper確認登入狀態
             int theid = -1;
             AccountInfoHelper aih = new AccountInfoHelper(Session, Request);
@@ -29,7 +37,6 @@ namespace prj_chuju.Controllers
                 return RedirectToAction("infoPage");
             return RedirectToAction("loginPage");
         }
-
         public ActionResult loginPage()
         {
             return View();
@@ -40,7 +47,6 @@ namespace prj_chuju.Controllers
             ViewBag.userPhone = Request.Form["userPhone"];
             return View();
         }
-
         public ActionResult infoPage()
         {
             // 若session登入狀態錯誤或cookie判定非記憶則跳回登入頁面
@@ -51,10 +57,19 @@ namespace prj_chuju.Controllers
             if (theid <= 0) return RedirectToAction("loginPage");
 
             // 確認登入與記憶狀況後蒐集資料庫資料以呈現頁面
+            class_accountInfo x = new factory_accountInfo().selectAccountByID(theid);
             ViewBag.remember = loginInfo.remember;
             ViewBag.theid = loginInfo.theid;
             ViewBag.password = loginInfo.password;
-            return View();
+
+            AccountInfoPageViewModel aipvm = new AccountInfoPageViewModel(theid);
+
+
+            //ViewBag.userName = x.userName;
+            //ViewBag.gender = x.gender;
+            //ViewBag.email = x.email;
+            //ViewBag.cellphone = x.cellphone;
+            return View(aipvm);
         }
         public ActionResult passToInfoPage()
         {
@@ -67,7 +82,7 @@ namespace prj_chuju.Controllers
             // 長期記憶由Cookie實現，短期由Session實現
             HttpCookie x = new HttpCookie("userInfo");
             x.Value = remember == "yes" ? InfoMessage : "";
-            x.Expires = DateTime.Now.AddDays(7);
+            x.Expires = DateTime.Now.AddDays(14);
             Response.Cookies.Add(x);
 
             Session["userInfo"] = remember == "no" ? InfoMessage : "";
@@ -75,6 +90,7 @@ namespace prj_chuju.Controllers
             return RedirectToAction("infoPage");
         }
 
+        // 註冊系統
         [HttpPost]
         public void sendMail()
         {
@@ -103,14 +119,19 @@ namespace prj_chuju.Controllers
                 }
             }
         }
-
         [HttpPost]
         public ActionResult create()
         {
             factory_accountInfo f = new factory_accountInfo();
             f.create(Request);
+
+            int theid = f.occupiedEmailID(Request["userEmail"]);
+            Session["userInfo"] = $"no|{theid}|{Request["password"]}";
+
             return RedirectToAction("infoPage", "Account");
         }
+
+        // 登入系統
         [HttpPost]
         public bool occupiedEmail()
         {
@@ -123,7 +144,6 @@ namespace prj_chuju.Controllers
             string enterPhone = Request["enterPhone"];
             return new factory_accountInfo().occupiedPhoneID(enterPhone)>0;
         }
-
         [HttpPost]
         public string varifyAccount()
         {
@@ -153,5 +173,21 @@ namespace prj_chuju.Controllers
             int thdUserID = new factory_accountInfo().varifyPassByID(theid, password);
             return thdUserID.ToString();
         }
+
+        // 登出系統
+        public ActionResult logout()
+        {
+            // 清除Cookie
+            HttpCookie x = new HttpCookie("userInfo");
+            x.Value = "";
+            x.Expires = DateTime.Now.AddSeconds(-1);
+            Response.Cookies.Add(x);
+
+            // 清除Session
+            Session["userInfo"] = "";
+
+            return RedirectToAction("Index","Home");
+        }
+
     }
 }

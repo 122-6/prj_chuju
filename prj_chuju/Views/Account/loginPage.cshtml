@@ -22,6 +22,7 @@
 
         <div class="pageArea">
 
+            @*登入畫面*@
             <div id="loginPage" class="pageContainer actived">
                 <form method="post" action="passToInfoPage" class="infoForm" id="loginForm">
                     <div id="logNameBox" class="inputArea">
@@ -51,6 +52,7 @@
                 </form>
             </div>
 
+            @*註冊畫面*@
             <div id="signupPage" class="pageContainer">
                 <form method="post" action="~/Account/basicInfo" class="infoForm">
                     <div id="signPhoneBox" class="inputArea">
@@ -79,7 +81,8 @@
                 </form>
             </div>
 
-            <p class="w-100">使用現有帳戶快速登入</p>
+            @*快速登入*@
+            @*<p class="w-100">使用現有帳戶快速登入</p>
             <div class="otherLogin text-left">
                 <a class="linkIcon" href="https://google.com.tw">
                     <img src="~/images/AccountPictures/common/facebook.png" width="64" height="64">
@@ -90,7 +93,7 @@
                 <a class="linkIcon" href="https://google.com.tw">
                     <img src="~/images/AccountPictures/common/google.png" width="64" height="64">
                 </a>
-            </div>
+            </div>*@
         </div>
 
     </div>
@@ -193,22 +196,22 @@
             return false;
         }
         //alert(`occupiedMail:${occupiedMail}`);
-        if (occupiedMail) {
-            emailFail('*此電子郵件已被註冊');
-            return false;
-        }
+        //if ($('#userEmail').val()=="") {
+        //    emailFail('*請輸入電子信箱');
+        //    return false;
+        //}
         //alert(`occupiedPhone:${occupiedPhone}`);
-        if (occupiedPhone) {
-            phoneFail('*此手機號碼已被註冊');
-            return false;
-        }
-        if (!$('#cbxAgree').prop('checked')) {
-            agreeFail();
+        if ($('#userPhone').val()=="") {
+            phoneFail('*請輸入手機號碼');
             return false;
         }
         if (!hasSendSecret || $('#secret').val() != theSecretCode) {
             let msg = hasSendSecret ? '*信箱驗證未通過' : '*尚未發送驗證信';
             secretFail(msg);
+            return false;
+        }
+        if (!$('#cbxAgree').prop('checked')) {
+            agreeFail();
             return false;
         }
 

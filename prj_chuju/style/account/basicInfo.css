@@ -1,0 +1,102 @@
+﻿/* ******** */
+/* 通用項目 */
+/* ******** */
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.brownBtn {
+    padding: 3px 15px;
+    color: white;
+    background-color: rgb(122,97,57);
+    width: max-content;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.toRight {
+    align-self: end;
+}
+
+
+/* ****** */
+/* 主外觀 */
+/* ****** */
+.mainArea {
+    background-image: url( "/images/AccountPictures/common/pexels-linkedin-sales-navigator-1251844.png");
+    /*background-size: 100% auto;*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    margin: 0px auto;
+    padding-top: 1px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 150px 0px;
+}
+
+.operationArea {
+    width: 640px;
+    background-color: white;
+    box-shadow: 2px 3px 3px rgba(0,0,0,.4);
+}
+
+
+.pageArea {
+    margin: 0px auto;
+    padding: 30px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+}
+
+.pageContainer {
+    width: 100%;
+}
+
+/*表單內容*/
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 20px 10px;
+}
+
+.formTable {
+    width: 80%;
+    margin: 0 auto;
+}
+
+    .formTable td:first-child {
+        padding: 10px 0px;
+        width: 100px;
+    }
+
+    .formTable input {
+        width: 100%;
+        border: 1px solid gray;
+    }
+
+.dateRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .dateRow > input, .dateRow > select {
+        width: 30%;
+        text-align: center;
+    }
+
+#errorMessage{
+    transform: scaleY(0);
+    color: red;
+    font-size: 0.8rem;
+    transition: transform 200ms;
+    text-align: right;
+}
+    #errorMessage.show {
+        transform: scaleY(1);
+    }

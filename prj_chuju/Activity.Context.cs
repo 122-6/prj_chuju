@@ -13,10 +13,10 @@ namespace prj_chuju
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities : DbContext
+    public partial class testActitvityEntities : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public testActitvityEntities()
+            : base("name=testActitvityEntities")
         {
         }
     

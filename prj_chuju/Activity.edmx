@@ -48,7 +48,7 @@
           <Property Name="endDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="testActitvityEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ActivityContent" EntityType="Self.ActivityContent" />
           <EntitySet Name="ActivityOutline" EntityType="Self.ActivityOutline" />
         </EntityContainer>
@@ -57,7 +57,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="testActitvityModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="testActitvityModelStoreContainer" CdmEntityContainer="testActitvityEntities">
           <EntitySetMapping Name="ActivityContent">
             <EntityTypeMapping TypeName="testActitvityModel.ActivityContent">
               <MappingFragment StoreEntitySet="ActivityContent">

@@ -14,12 +14,6 @@ namespace prj_chuju
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-              name: "Activity_tag",
-              url: "Activity/{tag}",
-              defaults: new { controller = "Activity", action = "Index", tag = UrlParameter.Optional }
-             );
-
-            routes.MapRoute(
                name: "Activity_page",
                url: "Activity/{tag}/{page}",
                defaults: new { controller = "Activity", action = "Index", tag = UrlParameter.Optional, page = UrlParameter.Optional }
@@ -30,7 +24,6 @@ namespace prj_chuju
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
-
         }
     }
 }

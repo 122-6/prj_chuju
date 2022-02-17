@@ -16,11 +16,12 @@
 /*nav*/
 .bottom-nav {
     background-color: #706139;
+    padding-left: 15%;
 }
 
 .bottom-nav a {
     color: white;
-    margin-right: 20px;
+    margin-right: 3%;
 }
 
 /*main*/
@@ -28,7 +29,7 @@
     margin: 30px auto;
 }
 
-.news :link {
+.news :link, .news :visited {
     color: #706139;
 }
 

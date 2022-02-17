@@ -16,13 +16,13 @@
 /*nav*/
 .bottom-nav {
     background-color: #706139;
+    padding-left: 15%;
 }
 
 .bottom-nav a {
     color: white;
-    margin-right: 20px;
+    margin-right: 3%;
 }
-
 /*main*/
 .d詳細資訊 {
     color: #706139;

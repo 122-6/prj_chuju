@@ -19,7 +19,7 @@ namespace prj_chuju.ViewModels
                @"Asynchronous Processing=True;" +
                @"";
         public class_accountInfo accountInfo;
-        public class_regionInfo regionInfo;
+        public class_userRegionInfo regionInfo;
 
         public AccountInfoPageViewModel(int theid)
         {
@@ -41,32 +41,32 @@ namespace prj_chuju.ViewModels
             if (reader.Read())
             {
                 accountInfo = new class_accountInfo(reader);
-                regionInfo = new class_regionInfo(reader);
+                regionInfo = new class_userRegionInfo(reader);
             }
             else
             {
                 accountInfo = new class_accountInfo();
-                regionInfo = new class_regionInfo();
+                regionInfo = new class_userRegionInfo();
             }
             con.Close();
         }
 
     }
-    public class class_regionInfo
+    public class class_userRegionInfo
     {
         public int regionID;
         public int cityID;
         public string regionName;
         public string cityName;
 
-        public class_regionInfo()
+        public class_userRegionInfo()
         {
             regionID = 1;
             cityID = 1;
             regionName = "中山區";
             cityName = "臺北市";
         }
-        public class_regionInfo(SqlDataReader reader)
+        public class_userRegionInfo(SqlDataReader reader)
         {
             regionID = reader["region"].Equals(DBNull.Value) ? -1 : Convert.ToInt32(reader["region"]);
             cityID = reader["cityID"].Equals(DBNull.Value) ? -1 : Convert.ToInt32(reader["cityID"]);

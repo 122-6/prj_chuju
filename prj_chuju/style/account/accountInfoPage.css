@@ -5,10 +5,32 @@
     padding: 8px 30px;
     color: white;
     background-color: rgb(122,97,57);
+    border:none;
     width: max-content;
     cursor: pointer;
     font-weight: bold;
 }
+
+.lightBrownBtn {
+    padding: 8px 30px;
+    color: rgb(122,97,57);
+    background-color: white;
+    border: 2px solid rgb(122,97,57);
+    width: max-content;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.hidableBtn{
+    opacity:1;
+    transform: translateY(0px);
+    transition: opacity, transform;
+    transition-duration: 300ms;
+}
+    .hidableBtn.hide {
+        opacity: 0;
+        transform: translateY(10px);
+    }
 
 .testingbox {
     border: 1px solid black;
@@ -132,6 +154,35 @@
     color: black;
 }
 
+#infoPage #editUserInfo{
+    color: rgb(0,123,255);
+    transition: color 300ms;
+}
+    #infoPage #editUserInfo:hover {
+        color: rgb(0,86,179);
+    }
+
+.dateRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .dateRow > input, .dateRow > select {
+        width: 30%;
+        text-align: center;
+    }
+
+.regionRow {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+    .regionRow > input, .regionRow > select {
+        width: 35%;
+        text-align: center;
+    }
 /* 我的預約 */
 #bookingPage .selectType > div {
     margin: 0px 10px;

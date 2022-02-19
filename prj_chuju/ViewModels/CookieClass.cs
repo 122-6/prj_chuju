@@ -62,5 +62,13 @@ namespace prj_chuju.ViewModels
         {
             return Information.theid;
         }
+        public void updateCookie(HttpResponseBase response, HttpRequestBase request)
+        {
+            HttpCookie oldx = request.Cookies["userInfo"];
+            HttpCookie newx = new HttpCookie("userInfo");
+            newx.Value = oldx != null ? oldx.Value : "";
+            newx.Expires = DateTime.Now.AddDays(14);
+            response.Cookies.Add(newx);
+        }
     }
 }

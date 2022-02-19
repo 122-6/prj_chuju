@@ -54,7 +54,7 @@
                                 <img class="w-25" src="~/images/AccountPictures/common/gallery.png" alt="">
                             </div>
                         </div>
-                        <div class="d-flex flex-column align-items-center" >
+                        <div class="d-flex flex-column align-items-center">
                             <a href="#">
                                 重設密碼
                             </a>
@@ -73,13 +73,13 @@
                                 <tr>
                                     <td style="width:100px">姓名</td>
                                     <td>
-                                        <input disabled class="w-100" type="text" value="@Model.accountInfo.userName">
+                                        <input disabled class="w-100" type="text" id="userName" name="userName" value="@Model.accountInfo.userName">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>性別</td>
                                     <td>
-                                        <div class="userInfoShower font-120">
+                                        <div class="userInfoShower font-120" id="genderShower">
                                             @if (Model.accountInfo.gender != "")
                                             {
                                                 @: @Model.accountInfo.gender
@@ -90,15 +90,15 @@
                                             }
                                         </div>
                                         <div class="userInfoEditor d-none">
-                                            <input type="radio" name="gender" id="genderM" value="男" />男
-                                            <input type="radio" name="gender" id="genderF" value="女" style="margin-left:10px" />女
+                                            <input type="radio" name="gender" id="genderM" value="男" /><label for="genderM">男</label>
+                                            <input type="radio" name="gender" id="genderF" value="女" style="margin-left:10px" /><label for="genderF">女</label>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>生日</td>
                                     <td>
-                                        <div class="userInfoShower font-120">
+                                        <div class="userInfoShower font-120" id="birthdayShower">
                                             @{
                                                 DateTime bd = Model.accountInfo.birthday;
                                                 string birthstr = $"{bd.Year}.{bd.Month}.{bd.Day}";
@@ -106,14 +106,21 @@
                                             }
                                         </div>
                                         <div class="userInfoEditor d-none">
-                                            <input type="text">
+                                            <div class="dateRow">
+                                                <input type="hidden" name="birthDay" id="birthDay" />
+                                                <input type="number" step="1" min="1900" name="Year" id="BDy" placeholder="年">
+                                                <select name="Month" id="BDm" placeholder="月">
+                                                    <option value="" disabled selected hidden>月</option>
+                                                </select>
+                                                <input type="number" step="1" min="1" max="31" name="Date" id="BDd" placeholder="日" />
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>居住地區</td>
                                     <td>
-                                        <div class="userInfoShower font-120">
+                                        <div class="userInfoShower font-120" id="regionShower">
                                             @if (Model.regionInfo.regionID != -1)
                                             {
                                                 <span>@Model.regionInfo.cityName</span>
@@ -125,39 +132,48 @@
                                             }
                                         </div>
                                         <div class="userInfoEditor d-none">
-                                            <input type="text">
+                                            <div class="regionRow">
+                                                <input type="hidden" name="regionID" id="regionID" />
+                                                <select name="city" id="city" placeholder="縣市">
+                                                    <option value="" disabled selected hidden>請選擇縣市</option>
+                                                </select>
+                                                <select name="region" id="region" placeholder="地區" style="margin-left:10px;">
+                                                    <option value="" disabled selected hidden>請撰擇地區</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>電子郵件</td>
                                     <td>
-                                        <input disabled type="text" value="@Model.accountInfo.email">
+                                        <input disabled type="text" id="email" name="email" value="@Model.accountInfo.email">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>行動電話</td>
                                     <td>
-                                        <input disabled type="text" value="@Model.accountInfo.cellphone">
+                                        <input disabled type="text" id="cellphone" name="cellphone" value="@Model.accountInfo.cellphone">
                                     </td>
                                 </tr>
                                 <!-- 這裡的注解要另外處理 -->
                                 <!-- <tr>
-            <td>綁定帳戶</td>
-            <td>
-                <input type="text">
-            </td>
-        </tr> -->
+                                    <td>綁定帳戶</td>
+                                    <td>
+                                        <input type="text">
+                                    </td>
+                                </tr> -->
                                 @*<tr>
-                <td>密碼</td>
-                <td>
-                    <a href="#">設定新的密碼</a>
-                </td>
-            </tr>*@
+                                        <td>密碼</td>
+                                        <td>
+                                            <a href="#">設定新的密碼</a>
+                                        </td>
+                                    </tr>*@
 
                             </table>
-                            <div class="d-flex justify-content-end">
-                                <input type="submit" class="brownBtn" id="btnSaveInfoChange" value="儲存變更">
+                            <div id="infoConfirmArea" class="d-flex justify-content-end" style="visibility:hidden">
+                                <div id="btnCancelInfoChange" class="lightBrownBtn mr-3 hidableBtn hide">取消</div>
+                                <input type="submit" class="brownBtn hidableBtn hide" id="btnSaveInfoChange" value="儲存變更">
                             </div>
                         </form>
                     </div>
@@ -472,6 +488,66 @@
     </div>
 </div>
 
+<!--載入資料庫資料-->
+<script>
+    // 使用者資訊
+    let userInfo = {
+        id: @Model.accountInfo.id,
+        userName: '@Model.accountInfo.userName',
+        gender: '@Model.accountInfo.gender',
+        birthday: {
+            year: '@Model.accountInfo.birthday.Year',
+            month: '@Model.accountInfo.birthday.Month',
+            day: '@Model.accountInfo.birthday.Day',
+            toString: function () {
+                return `${this.year}.${this.month}.${this.day}`;
+            },
+        },
+        region: {
+            city: '@Model.regionInfo.cityName',
+            region: '@Model.regionInfo.regionName',
+            cityID: @Model.regionInfo.cityID,
+            regionID: @Model.regionInfo.regionID,
+            toString: function () {
+                return `${this.city} ${this.region}`;
+            },
+        },
+        email:'@Model.accountInfo.email',
+        cellphone: '@Model.accountInfo.cellphone',
+    };
+
+    // 地區資訊
+    let cityList = [];
+    let regionList = [];
+    $.ajax({
+        method: 'post',
+        url: 'regionObject',
+        dataType: 'json',
+        success: function (result) {
+            cityList = result["cityList"];
+            regionList = result["regionList"];
+            updateCityOptions();
+        },
+    });
+    function updateCityOptions() {
+        $('#city').html(`<option value="" disabled selected hidden>請選擇縣市</option>`);
+        for (let i = 0; i < cityList.length; i++) {
+            $('#city').append(`<option value=${cityList[i]["id"]}>${cityList[i]["cityName"]}</option>`)
+        }
+    }
+    function updateRegionOptions(cityID) {
+        $('#region').html(`<option value="" disabled selected hidden>請選擇地區</option>`);
+        for (let i = 0; i < regionList.length; i++) {
+            let cid = regionList[i]["cityID"];
+            if (regionList[i]["cityID"] == cityID) {
+                $('#region').append(`<option value=${regionList[i]["id"]}>${regionList[i]["regionName"]}</option>`)
+            }
+            if (cid > cityID) break;
+        }
+    }
+
+</script>
+
 <!--通用項目-->
 <script>
     // 以下: 建立切換分頁功能
@@ -493,11 +569,43 @@
 
 <!--會員資料-->
 <script>
+    // 生日系統
+    const month = ["none", "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
+    const maxday = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    for (let i = 1; i <= 12; i++) {
+        $('#BDm').append(`<option value="${i}">${month[i]}</option>`);
+    }
+    $('#BDm').change(function () {
+        $('#BDd').attr('max', maxday[$('#BDm').val()]);
+    });
+
     $('#editUserInfo').on('click', function (event) {
         event.preventDefault();
+        turnOnEditInfo();
+        return false;
+    });
+    $('#btnCancelInfoChange').on('click', function (event) {
+        turnOffEditInfo();
+    });
+
+    // 地區系統
+    $('#city').change(function () {
+        let cityID = $(this).val();
+        if (cityID > 0) {
+            updateRegionOptions(cityID);
+        } else {
+            $('#region').html(`<option value="" disabled selected hidden>請選擇地區</option>`);
+        }
+    });
+
+    // 編輯系統
+    function turnOnEditInfo() {
+        setInfoByUserInfo();
+
         let textInputs = $('#infoFormTable').find('input[type="text"]');
         let infoShowers = $('#infoFormTable').find('.userInfoShower');
         let infoEdditors = $('#infoFormTable').find('.userInfoEditor');
+        let confirmBtns = $('#infoConfirmArea').find('.hidableBtn');
 
         let trs = $('#infoFormTable').find('tr');
 
@@ -511,8 +619,130 @@
             $(elm).removeClass('d-none');
         });
 
-        
+        $('#infoConfirmArea').css('visibility', 'visible');
+        $.each(confirmBtns, function (ind, elm) {
+            $(elm).removeClass('hide');
+        });
+    }
+    function turnOffEditInfo() {
+        setInfoByUserInfo();
+        let textInputs = $('#infoFormTable').find('input[type="text"]');
+        let infoShowers = $('#infoFormTable').find('.userInfoShower');
+        let infoEdditors = $('#infoFormTable').find('.userInfoEditor');
+        let confirmBtns = $('#infoConfirmArea').find('.hidableBtn');
 
+        let trs = $('#infoFormTable').find('tr');
+
+        $.each(textInputs, function (ind, elm) {
+            $(elm).attr('disabled', 'disabled');
+        });
+        $.each(infoShowers, function (ind, elm) {
+            $(elm).removeClass('d-none');
+        });
+        $.each(infoEdditors, function (ind, elm) {
+            $(elm).addClass('d-none');
+        });
+
+        $.each(confirmBtns, function (ind, elm) {
+            $(elm).addClass('hide');
+        });
+        $('#infoConfirmArea').css('visibility', 'visible');
+    }
+    function setInfoByUserInfo() {
+        // userName
+        $('#userName').val(userInfo.userName);
+
+        // gender
+        if (userInfo.gender != "") {
+            $('#genderShower').html(userInfo.gender);
+            if (userInfo.gender == "男") {
+                $('#genderM')[0].checked = true;
+            } else {
+                $('#genderF')[0].checked = true;
+            }
+        } else {
+            $('#genderShower').html('(未提供)');
+            $('#genderM')[0].checked = false;
+            $('#genderF')[0].checked = false;
+        }
+
+        // birthday
+        $('#birthdayShower').html(userInfo.birthday.toString());
+        $('#BDy').val(userInfo.birthday.year);
+        $('#BDm').val(userInfo.birthday.month);
+        $('#BDd').val(userInfo.birthday.day);
+
+        // region
+        $('#regionShower').html(userInfo.region.regionID > 0 ? userInfo.region.toString() : '(未提供)');
+        let cityID = userInfo.region.cityID;
+        let regionID = userInfo.region.regionID;
+        updateCityOptions();
+        updateRegionOptions(cityID);
+        if (regionID > 0) {
+            $('#city').val(cityID);
+            $('#region').val(regionID);
+        }
+
+
+        // email
+        $('#email').val(userInfo.email);
+
+        // cellphone
+        $('#cellphone').val(userInfo.cellphone);
+    }
+
+    // 確認變更
+    $('#btnSaveInfoChange').on('click', function (event) {
+        event.preventDefault();
+        let bdy = $('#BDy').val(), bdm = $('#BDm').val(), bdd = $('#BDd').val();
+        let infoObj = {
+            userName: $('#userName').val(),
+            gender: $('#genderM')[0].checked ? '男' : $('#genderF')[0].checked ? '女' : '',
+            bdy: bdy,
+            bdm: bdm,
+            bdd: bdd,
+            birthday: `${bdy}-${bdm}-${bdd}`,
+            email: $('#email').val(),
+            region: $('#region').val(),
+            cellphone: $('#cellphone').val(),
+            id: userInfo.id,
+        };
+        $.ajax({
+            method: 'post',
+            url: 'editAccountInfo',
+            data: infoObj,
+            success: function () {
+                updateUserInfo(infoObj);
+                setInfoByUserInfo();
+                turnOffEditInfo();
+            },
+        });
         return false;
     });
+    function updateUserInfo(infoObj) {
+        userInfo.userName = infoObj["userName"];
+        userInfo.gender = infoObj["gender"];
+        userInfo.email = infoObj["email"];
+        userInfo.cellphone = infoObj["cellphone"];
+        userInfo.birthday.year = infoObj["bdy"];
+        userInfo.birthday.month = infoObj["bdm"];
+        userInfo.birthday.day = infoObj["bdd"];
+
+        if (infoObj["region"] != null) {
+            let regionID = infoObj["region"];
+            let regionObj = regionList.find(elm => elm["id"] == regionID);
+            let region = regionObj["regionName"];
+            let cityID = parseInt(regionObj["cityID"]);
+            let city = cityList.find(elm => elm["id"] == cityID)["cityName"];
+            userInfo.region.city = city;
+            userInfo.region.region = region;
+            userInfo.region.cityID = cityID;
+            userInfo.region.regionID = regionID;
+        }
+        
+    }
+
+
 </script>
+
+

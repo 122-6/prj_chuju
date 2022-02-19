@@ -235,5 +235,40 @@ namespace prj_chuju.Models
 
             return passUserID;
         }
+
+        // 修改會員系統
+        public void editAccountInfo(HttpRequestBase request)
+        {
+            string sqlstr = "update accountInfo set " +
+                "userName=@userNamePara," +
+                "gender=@genderPara," +
+                "birthday=@birthdayPara," +
+                "email=@emailPara," +
+                "region=@regionPara," +
+                "cellphone=@cellphonePara " +
+                "where id = @idPara;";
+            SqlConnection con = new SqlConnection(dbConnectioniStr);
+            SqlCommand cmd;
+            cmd = new SqlCommand(sqlstr, con);
+            cmd.Parameters.AddWithValue("@userNamePara", request["userName"]);
+            cmd.Parameters.AddWithValue("@genderPara", request["gender"]);
+            cmd.Parameters.AddWithValue("@birthdayPara", request["birthday"]);
+            cmd.Parameters.AddWithValue("@emailPara", request["email"]);
+            cmd.Parameters.AddWithValue("@regionPara", request["region"]);
+            cmd.Parameters.AddWithValue("@cellphonePara", request["cellphone"]);
+            cmd.Parameters.AddWithValue("@idPara", request["id"]);
+
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch
+            {
+
+            }
+            
+        }
     }
 }

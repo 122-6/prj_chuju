@@ -20,18 +20,13 @@ namespace prj_chuju.Controllers
         // 各頁面
         public ActionResult Index()
         {
-            // 刷新Cookie
-            HttpCookie x = new HttpCookie("userInfo");
-            if (x != null)
-            {
-                x.Expires = DateTime.Now.AddDays(14);
-                Response.Cookies.Add(x);
-            }
-
             // 點擊上方會員頁面，以AccountInfoHelper確認登入狀態
             int theid = -1;
             AccountInfoHelper aih = new AccountInfoHelper(Session, Request);
             theid = aih.getID();
+
+            // 刷新Cookie
+            aih.updateCookie(Response, Request);
 
             if (theid > 0)
                 return RedirectToAction("infoPage");
@@ -58,17 +53,14 @@ namespace prj_chuju.Controllers
 
             // 確認登入與記憶狀況後蒐集資料庫資料以呈現頁面
             class_accountInfo x = new factory_accountInfo().selectAccountByID(theid);
+
+            // todo: 待刪 測試用程式碼
             ViewBag.remember = loginInfo.remember;
             ViewBag.theid = loginInfo.theid;
             ViewBag.password = loginInfo.password;
 
             AccountInfoPageViewModel aipvm = new AccountInfoPageViewModel(theid);
 
-
-            //ViewBag.userName = x.userName;
-            //ViewBag.gender = x.gender;
-            //ViewBag.email = x.email;
-            //ViewBag.cellphone = x.cellphone;
             return View(aipvm);
         }
         public ActionResult passToInfoPage()
@@ -79,12 +71,12 @@ namespace prj_chuju.Controllers
             string remember = Request["remember"];
             string InfoMessage = $"{remember}|{theid}|{password}";
 
-            // 長期記憶由Cookie實現，短期由Session實現
+            // 長期記憶由Cookie實現:
             HttpCookie x = new HttpCookie("userInfo");
             x.Value = remember == "yes" ? InfoMessage : "";
             x.Expires = DateTime.Now.AddDays(14);
             Response.Cookies.Add(x);
-
+            // 短期記憶由Session實現:
             Session["userInfo"] = remember == "no" ? InfoMessage : "";
 
             return RedirectToAction("infoPage");
@@ -107,7 +99,7 @@ namespace prj_chuju.Controllers
                 Credentials = new NetworkCredential("chujumail306@gmail.com", "P@ssw0rd-chuju"),
             })
             {
-                string subject = $"雛居帳號驗證碼";
+                string subject = $"雛居會員電子郵件驗證通知信";
                 string body = $"感謝您註冊雛居廣告帳戶！\n\n您的驗證碼為: {theSecret}\n\n於 {DateTime.Now} 發送";
                 try
                 {
@@ -189,5 +181,17 @@ namespace prj_chuju.Controllers
             return RedirectToAction("Index","Home");
         }
 
+        // Ajax資料輸出
+        public JsonResult regionObject()
+        {
+            class_allRegionInfo x = new class_allRegionInfo();
+            return Json(x);
+        }
+
+        // 會員頁面相關功能
+        public void editAccountInfo()
+        {
+            new factory_accountInfo().editAccountInfo(Request);
+        }
     }
 }

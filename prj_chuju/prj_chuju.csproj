@@ -854,6 +854,7 @@
     <Compile Include="Models\class_ActivityContent.cs" />
     <Compile Include="Models\class_ActivityOutline.cs" />
     <Compile Include="Models\class_articleOutline.cs" />
+    <Compile Include="Models\class_buildingList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="regionList.cs">
       <DependentUpon>dbchuju.tt</DependentUpon>

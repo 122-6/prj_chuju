@@ -1,4 +1,4 @@
-﻿
+﻿@model List<prj_chuju.Models.class_buildingCase>
 @{
     ViewBag.Title = "Index";
 }
@@ -166,16 +166,17 @@
     </div>
 
     <div class="cards row justify-content-center py-25 btn-select">
+        @foreach (var item in Model) {
         <div class="card">
             <div class="card-pic">
-                <img src="~/images/建案資料庫/13-紘石仰格/111.jpg" alt="">
+                <img src="~/@item.pictrueurl" alt="">
             </div>
             <div class="">
 
-                <div class="card-info"> 紘石仰格</div>
-                <div class="card-region">台北市士林區</div>
-                <div class="card-detail">60 - 70坪 | 3-4房</div>
-                <div class="card-tag"> 景觀宅,制震宅,學區宅,交通宅</div>
+                <div class="card-info">@item.buildname</div>
+                <div class="card-region">@item.country@item.district</div>
+                <div class="card-detail">@item.insidespace</div>
+                <div class="card-tag"><img src="~/images/P/price-tag.png" alt=""> @item.features</div>
                 <div class="card-price">總價 <span>洽詢案場</span> </div>
             </div>
 
@@ -186,24 +187,8 @@
                 <div class="link"><a href="#">預約鑑賞</a></div>
             </div>
         </div>
-
-        <div class="card">
-            <div class="card-pic">
-                <img src="~/images/建案資料庫/13-紘石仰格/111.jpg" alt="">
-            </div>
-            <div class="card-info"> 紘石仰格</div>
-            <div class="card-region">台北市士林區</div>
-            <div class="card-detail">60 - 70坪 | 3-4房</div>
-            <div class="card-tag"> 景觀宅,制震宅,學區宅,交通宅</div>
-            <div class="card-price">總價 <span>洽詢案場</span> </div>
-
-            <div class="card-option form-row ">
-                <div class="link"><a href="#">加入收藏</a></div>
-                <div class="link"><a href="#">查看詳情</a></div>
-                <div class="link"><a href="#">預約鑑賞</a></div>
-            </div>
-        </div>
-        <div class="card">
+        }        
+        @*<div class="card">
             <div class="card-pic">
                 <img src="~/images/建案資料庫/13-紘石仰格/111.jpg" alt="">
             </div>
@@ -219,109 +204,7 @@
                 <div class="link"><a href="#">查看詳情</a></div>
                 <div class="link"><a href="#">預約鑑賞</a></div>
             </div>
-        </div>
-        <div class="card">
-            <div class="card-pic">
-                <img src="~/images/建案資料庫/13-紘石仰格/111.jpg" alt="">
-            </div>
-            <div class="card-info"> 紘石仰格</div>
-            <div class="card-region">台北市士林區</div>
-            <div class="card-detail">60 - 70坪 | 3-4房</div>
-            <div class="card-tag"> 景觀宅,制震宅,學區宅,交通宅</div>
-            <div class="card-price">總價 <span>洽詢案場</span> </div>
-            <div class="card-function row border-right">
-            </div>
-            <div class="card-option form-row ">
-                <div class="link"><a href="#">加入收藏</a></div>
-                <div class="link"><a href="#">查看詳情</a></div>
-                <div class="link"><a href="#">預約鑑賞</a></div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-pic">
-                <img src="~/images/建案資料庫/13-紘石仰格/111.jpg" alt="">
-            </div>
-            <div class="card-info"> 紘石仰格</div>
-            <div class="card-region">台北市士林區</div>
-            <div class="card-detail">60 - 70坪 | 3-4房</div>
-            <div class="card-tag"> 景觀宅,制震宅,學區宅,交通宅</div>
-            <div class="card-price">總價 <span>洽詢案場</span> </div>
-            <div class="card-function row border-right">
-            </div>
-            <div class="card-option form-row ">
-                <div class="link"><a href="#">加入收藏</a></div>
-                <div class="link"><a href="#">查看詳情</a></div>
-                <div class="link"><a href="#">預約鑑賞</a></div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-pic">
-                <img src="~/images/建案資料庫/13-紘石仰格/111.jpg" alt="">
-            </div>
-            <div class="card-info"> 紘石仰格</div>
-            <div class="card-region">台北市士林區</div>
-            <div class="card-detail">60 - 70坪 | 3-4房</div>
-            <div class="card-tag"> 景觀宅,制震宅,學區宅,交通宅</div>
-            <div class="card-price">總價 <span>洽詢案場</span> </div>
-            <div class="card-function row border-right">
-            </div>
-            <div class="card-option form-row ">
-                <div class="link"><a href="#">加入收藏</a></div>
-                <div class="link"><a href="#">查看詳情</a></div>
-                <div class="link"><a href="#">預約鑑賞</a></div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-pic">
-                <img src="~/images/建案資料庫/13-紘石仰格/111.jpg" alt="">
-            </div>
-            <div class="card-info"> 紘石仰格</div>
-            <div class="card-region">台北市士林區</div>
-            <div class="card-detail">60 - 70坪 | 3-4房</div>
-            <div class="card-tag"> 景觀宅,制震宅,學區宅,交通宅</div>
-            <div class="card-price">總價 <span>洽詢案場</span> </div>
-            <div class="card-function row border-right">
-            </div>
-            <div class="card-option form-row ">
-                <div class="link"><a href="#">加入收藏</a></div>
-                <div class="link"><a href="#">查看詳情</a></div>
-                <div class="link"><a href="#">預約鑑賞</a></div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-pic">
-                <img src="~/images/建案資料庫/13-紘石仰格/111.jpg" alt="">
-            </div>
-            <div class="card-info"> 紘石仰格</div>
-            <div class="card-region">台北市士林區</div>
-            <div class="card-detail">60 - 70坪 | 3-4房</div>
-            <div class="card-tag"> 景觀宅,制震宅,學區宅,交通宅</div>
-            <div class="card-price">總價 <span>洽詢案場</span> </div>
-            <div class="card-function row border-right">
-            </div>
-            <div class="card-option form-row ">
-                <div class="link"><a href="#">加入收藏</a></div>
-                <div class="link"><a href="#">查看詳情</a></div>
-                <div class="link"><a href="#">預約鑑賞</a></div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-pic">
-                <img src="~/images/建案資料庫/13-紘石仰格/111.jpg" alt="">
-            </div>
-            <div class="card-info"> 紘石仰格</div>
-            <div class="card-region">台北市士林區</div>
-            <div class="card-detail">60 - 70坪 | 3-4房</div>
-            <div class="card-tag"> 景觀宅,制震宅,學區宅,交通宅</div>
-            <div class="card-price">總價 <span>洽詢案場</span> </div>
-            <div class="card-function row border-right">
-            </div>
-            <div class="card-option form-row ">
-                <div class="link"><a href="#">加入收藏</a></div>
-                <div class="link"><a href="#">查看詳情</a></div>
-                <div class="link"><a href="#">預約鑑賞</a></div>
-            </div>
-        </div>
+        </div>*@
 
 
 

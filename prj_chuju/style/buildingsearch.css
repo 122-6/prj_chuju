@@ -19,12 +19,15 @@
 .card-pic img {
     height: 150px;
 }
+.card-tag img{
+    height:14px;
+}
 
 
 .btn-select {
     color: #706139;
     border: 2px solid #706139;
-    padding: 20px 20px 20px 30px;
+    padding: 40px 40px 20px 30px;
 }
 
     .btn-select input {

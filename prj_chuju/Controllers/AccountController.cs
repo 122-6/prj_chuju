@@ -193,5 +193,37 @@ namespace prj_chuju.Controllers
         {
             new factory_accountInfo().editAccountInfo(Request);
         }
+        public JsonResult getCollectBuilding()
+        {
+            int theid = Convert.ToInt32(Request["userID"]);
+            factory_userCollectViewed f = new factory_userCollectViewed();
+            List<class_userBuildingInfo> x = f.getCollectBuilding(theid);
+            return Json(x);
+        }
+        public JsonResult getViewedBuilding()
+        {
+            int theid = Convert.ToInt32(Request["userID"]);
+            factory_userCollectViewed f = new factory_userCollectViewed();
+            List<class_userBuildingInfo> x = f.getViewedBuilding(theid);
+            return Json(x);
+        }
+        public JsonResult getCollectArticle()
+        {
+            int theid = Convert.ToInt32(Request["userID"]);
+            factory_userCollectViewed f = new factory_userCollectViewed();
+            List<class_userArticleInfo> x = f.getCollectArticle(theid);
+            return Json(x);
+        }
+        public JsonResult getViewedArticle()
+        {
+            int theid = Convert.ToInt32(Request["userID"]);
+            factory_userCollectViewed f = new factory_userCollectViewed();
+            List<class_userArticleInfo> x = f.getViewedArticle(theid);
+            return Json(x);
+        }
+
+
+        
+
     }
 }

@@ -9,12 +9,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-<h1>
-    @ViewBag.remember
-    , @ViewBag.theid
-    , @ViewBag.password
-</h1>
-
 <div class="mainArea">
     <div class="operationArea">
 
@@ -55,12 +49,9 @@
                             </div>
                         </div>
                         <div class="d-flex flex-column align-items-center">
-                            <a href="#">
-                                重設密碼
-                            </a>
-                            <a href="logout">
-                                會員登出
-                            </a>
+                            <a class="optionItem" href="#">重設密碼</a>
+                            <a class="optionItem" href="logout">會員登出</a>
+                            
                         </div>
                     </div>
                     <div class="" style="width:500px">
@@ -156,20 +147,6 @@
                                         <input disabled type="text" id="cellphone" name="cellphone" value="@Model.accountInfo.cellphone">
                                     </td>
                                 </tr>
-                                <!-- 這裡的注解要另外處理 -->
-                                <!-- <tr>
-                                    <td>綁定帳戶</td>
-                                    <td>
-                                        <input type="text">
-                                    </td>
-                                </tr> -->
-                                @*<tr>
-                                        <td>密碼</td>
-                                        <td>
-                                            <a href="#">設定新的密碼</a>
-                                        </td>
-                                    </tr>*@
-
                             </table>
                             <div id="infoConfirmArea" class="d-flex justify-content-end" style="visibility:hidden">
                                 <div id="btnCancelInfoChange" class="lightBrownBtn mr-3 hidableBtn hide">取消</div>
@@ -257,230 +234,78 @@
 
             <div id="collectionPage" class="pageContainer">
                 <div class="mb-4">
-                    <div class="title my-3">個案收藏</div>
-                    <div class="d-flex">
-                        <div class="col-3 px-2">
-                            <div class="caseItem">
-                                <div>
-                                    <img class="w-100" src="/images/test.jpg" alt="">
-                                </div>
-                                <div class="caseName">紘石仰格</div>
-                                <div class="caseLocation">臺北市士林區</div>
-                                <div class="caseArea">60 - 78 坪</div>
-                                <div class="btnToBuildingCase">查看建案</div>
-                            </div>
+                    <div class="title my-3">建案收藏</div>
+                    <div style="position:relative">
+                        <div id="collectBuildingContainer" class="d-flex">
+                            <div class="itemPos col-3 px-2" id="collectBuildingPos-0"></div>
+                            <div class="itemPos col-3 px-2" id="collectBuildingPos-1"></div>
+                            <div class="itemPos col-3 px-2" id="collectBuildingPos-2"></div>
+                            <div class="itemPos col-3 px-2" id="collectBuildingPos-3"></div>
                         </div>
-                        <!-- 以下為複製元素 -->
-                        <div class="col-3 px-2">
-                            <div class="caseItem">
-                                <div>
-                                    <img class="w-100" src="/images/test.jpg" alt="">
-                                </div>
-                                <div class="caseName">紘石仰格</div>
-                                <div class="caseLocation">臺北市士林區</div>
-                                <div class="caseArea">60 - 78 坪</div>
-                                <div class="btnToBuildingCase">查看建案</div>
-                            </div>
+                        <div class="arrowBtn prev d-none" id="CB-prevBtn">
+                            <img class="w-100" src="~/images/AccountPictures/common/next.png" />
                         </div>
-                        <div class="col-3 px-2">
-                            <div class="caseItem">
-                                <div>
-                                    <img class="w-100" src="/images/test.jpg" alt="">
-                                </div>
-                                <div class="caseName">紘石仰格</div>
-                                <div class="caseLocation">臺北市士林區</div>
-                                <div class="caseArea">60 - 78 坪</div>
-                                <div class="btnToBuildingCase">查看建案</div>
-                            </div>
+                        <div class="arrowBtn next d-none" id="CB-nextBtn">
+                            <img class="w-100" src="~/images/AccountPictures/common/next.png" />
                         </div>
-                        <div class="col-3 px-2">
-                            <div class="caseItem">
-                                <div>
-                                    <img class="w-100" src="/images/test.jpg" alt="">
-                                </div>
-                                <div class="caseName">紘石仰格</div>
-                                <div class="caseLocation">臺北市士林區</div>
-                                <div class="caseArea">60 - 78 坪</div>
-                                <div class="btnToBuildingCase">查看建案</div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
-
                 <div>
                     <div class="title my-3">文章收藏</div>
-                    <div class="d-flex">
-                        <div class="col-3 px-2">
-                            <div class="articleItem">
-                                <div>
-                                    <img class="w-100" src="/images/test.jpg" alt="">
-                                </div>
-                                <div class="p-3">
-                                    <div class="articleClass">設計裝修</div>
-                                    <div class="articleTitle">設計新手｜讀懂立面圖的超能力get，從此擺脫圖盲</div>
-                                    <div class="articleTime">2021/08/2</div>
-                                </div>
-                            </div>
+                    <div style="position:relative">
+                        <div id="collectArticleContainer" class="d-flex">
+                            <div class="itemPos col-3 px-2" id="collectArticlePos-0"></div>
+                            <div class="itemPos col-3 px-2" id="collectArticlePos-1"></div>
+                            <div class="itemPos col-3 px-2" id="collectArticlePos-2"></div>
+                            <div class="itemPos col-3 px-2" id="collectArticlePos-3"></div>
                         </div>
-                        <!-- 以下為複製元素 -->
-                        <div class="col-3 px-2">
-                            <div class="articleItem">
-                                <div>
-                                    <img class="w-100" src="/images/test.jpg" alt="">
-                                </div>
-                                <div class="p-3">
-                                    <div class="articleClass">設計裝修</div>
-                                    <div class="articleTitle">設計新手｜讀懂立面圖的超能力get，從此擺脫圖盲</div>
-                                    <div class="articleTime">2021/08/2</div>
-                                </div>
-                            </div>
+                        <div class="arrowBtn prev d-none" id="CA-prevBtn">
+                            <img class="w-100" src="~/images/AccountPictures/common/next.png" />
                         </div>
-                        <div class="col-3 px-2">
-                            <div class="articleItem">
-                                <div>
-                                    <img class="w-100" src="/images/test.jpg" alt="">
-                                </div>
-                                <div class="p-3">
-                                    <div class="articleClass">設計裝修</div>
-                                    <div class="articleTitle">設計新手｜讀懂立面圖的超能力get，從此擺脫圖盲</div>
-                                    <div class="articleTime">2021/08/2</div>
-                                </div>
-                            </div>
+                        <div class="arrowBtn next d-none" id="CA-nextBtn">
+                            <img class="w-100" src="~/images/AccountPictures/common/next.png" />
                         </div>
-                        <div class="col-3 px-2">
-                            <div class="articleItem">
-                                <div>
-                                    <img class="w-100" src="/images/test.jpg" alt="">
-                                </div>
-                                <div class="p-3">
-                                    <div class="articleClass">設計裝修</div>
-                                    <div class="articleTitle">設計新手｜讀懂立面圖的超能力get，從此擺脫圖盲</div>
-                                    <div class="articleTime">2021/08/2</div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
 
             <div id="historyPage" class="pageContainer">
                 <div class="mb-4">
-                    <div class="title my-3">個案收藏</div>
-                    <div class="d-flex">
-                        <div class="col-3 px-2">
-                            <div class="caseItem">
-                                <div>
-                                    <img class="w-100" src="/images/test.jpg" alt="">
-                                </div>
-                                <div class="caseName">紘石仰格</div>
-                                <div class="caseLocation">臺北市士林區</div>
-                                <div class="caseArea">60 - 78 坪</div>
-                                <div class="btnToBuildingCase">查看建案</div>
-                            </div>
+                    <div class="title my-3">建案瀏覽記錄</div>
+                    <div style="position:relative">
+                        <div id="viewBuildingContainer" class="d-flex">
+                            <div class="itemPos col-3 px-2" id="viewBuildingPos-0"></div>
+                            <div class="itemPos col-3 px-2" id="viewBuildingPos-1"></div>
+                            <div class="itemPos col-3 px-2" id="viewBuildingPos-2"></div>
+                            <div class="itemPos col-3 px-2" id="viewBuildingPos-3"></div>
                         </div>
-                        <!-- 以下為複製元素 -->
-                        <div class="col-3 px-2">
-                            <div class="caseItem">
-                                <div>
-                                    <img class="w-100" src="/images/test.jpg" alt="">
-                                </div>
-                                <div class="caseName">紘石仰格</div>
-                                <div class="caseLocation">臺北市士林區</div>
-                                <div class="caseArea">60 - 78 坪</div>
-                                <div class="btnToBuildingCase">查看建案</div>
-                            </div>
+                        <div class="arrowBtn prev d-none" id="VB-prevBtn">
+                            <img class="w-100" src="~/images/AccountPictures/common/next.png" />
                         </div>
-                        <div class="col-3 px-2">
-                            <div class="caseItem">
-                                <div>
-                                    <img class="w-100" src="/images/test.jpg" alt="">
-                                </div>
-                                <div class="caseName">紘石仰格</div>
-                                <div class="caseLocation">臺北市士林區</div>
-                                <div class="caseArea">60 - 78 坪</div>
-                                <div class="btnToBuildingCase">查看建案</div>
-                            </div>
+                        <div class="arrowBtn next d-none" id="VB-nextBtn">
+                            <img class="w-100" src="~/images/AccountPictures/common/next.png" />
                         </div>
-                        <div class="col-3 px-2">
-                            <div class="caseItem">
-                                <div>
-                                    <img class="w-100" src="/images/test.jpg" alt="">
-                                </div>
-                                <div class="caseName">紘石仰格</div>
-                                <div class="caseLocation">臺北市士林區</div>
-                                <div class="caseArea">60 - 78 坪</div>
-                                <div class="btnToBuildingCase">查看建案</div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
 
                 <div>
-                    <div class="title my-3">文章收藏</div>
-                    <div class="d-flex">
-                        <div class="col-3 px-2">
-                            <div class="articleItem">
-                                <div>
-                                    <img class="w-100" src="/images/test.jpg" alt="">
-                                </div>
-                                <div class="p-3">
-                                    <div class="articleClass">設計裝修</div>
-                                    <div class="articleTitle">設計新手｜讀懂立面圖的超能力get，從此擺脫圖盲</div>
-                                    <div class="articleTime">2021/08/2</div>
-                                </div>
-                            </div>
+                    <div class="title my-3">文章瀏覽記錄</div>
+                    <div style="position:relative">
+                        <div id="viewArticleContainer" class="d-flex">
+                            <div class="itemPos col-3 px-2" id="viewArticlePos-0"></div>
+                            <div class="itemPos col-3 px-2" id="viewArticlePos-1"></div>
+                            <div class="itemPos col-3 px-2" id="viewArticlePos-2"></div>
+                            <div class="itemPos col-3 px-2" id="viewArticlePos-3"></div>
                         </div>
-                        <!-- 以下為複製元素 -->
-                        <div class="col-3 px-2">
-                            <div class="articleItem">
-                                <div>
-                                    <img class="w-100" src="/images/test.jpg" alt="">
-                                </div>
-                                <div class="p-3">
-                                    <div class="articleClass">設計裝修</div>
-                                    <div class="articleTitle">設計新手｜讀懂立面圖的超能力get，從此擺脫圖盲</div>
-                                    <div class="articleTime">2021/08/2</div>
-                                </div>
-                            </div>
+                        <div class="arrowBtn prev d-none" id="VA-prevBtn">
+                            <img class="w-100" src="~/images/AccountPictures/common/next.png" />
                         </div>
-                        <div class="col-3 px-2">
-                            <div class="articleItem">
-                                <div>
-                                    <img class="w-100" src="/images/test.jpg" alt="">
-                                </div>
-                                <div class="p-3">
-                                    <div class="articleClass">設計裝修</div>
-                                    <div class="articleTitle">設計新手｜讀懂立面圖的超能力get，從此擺脫圖盲</div>
-                                    <div class="articleTime">2021/08/2</div>
-                                </div>
-                            </div>
+                        <div class="arrowBtn next d-none" id="VA-nextBtn">
+                            <img class="w-100" src="~/images/AccountPictures/common/next.png" />
                         </div>
-                        <div class="col-3 px-2">
-                            <div class="articleItem">
-                                <div>
-                                    <img class="w-100" src="/images/test.jpg" alt="">
-                                </div>
-                                <div class="p-3">
-                                    <div class="articleClass">設計裝修</div>
-                                    <div class="articleTitle">設計新手｜讀懂立面圖的超能力get，從此擺脫圖盲</div>
-                                    <div class="articleTime">2021/08/2</div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
-
-            <!-- <div id="cupponPage" class="pageContainer">
-                我的優惠券(預留)
-            </div> -->
-            <!-- <div id="noticePage" class="pageContainer">
-                通知中心(預留)
-            </div> -->
 
 
         </div>
@@ -745,4 +570,195 @@
 
 </script>
 
+<!--收藏系統-->
+<script>
+    let initCB = {
+        theURL: 'getCollectBuilding',
+        toStringFunction: toCaseItemStr,
+        arrowIDs: {
+            prev: '#CB-prevBtn',
+            next: '#CB-nextBtn',
+        },
+        posID: 'collectBuildingPos',
+        itemID: 'CB',
+    };
+    let CBObj = new collectionObj(initCB);
+    CBObj.getData();
 
+    let initCA = {
+        theURL: 'getCollectArticle',
+        toStringFunction: toArticleItemStr,
+        arrowIDs: {
+            prev: '#CA-prevBtn',
+            next: '#CA-nextBtn',
+        },
+        posID: 'collectArticlePos',
+        itemID: 'CA',
+    }
+    let CAObj = new collectionObj(initCA);
+    CAObj.getData();
+
+    let initVB = {
+        theURL: 'getViewedBuilding',
+        toStringFunction: toCaseItemStr,
+        arrowIDs: {
+            prev: '#VB-prevBtn',
+            next: '#VB-nextBtn',
+        },
+        posID: 'viewBuildingPos',
+        itemID: 'VB',
+    };
+    let VBObj = new collectionObj(initVB);
+    VBObj.getData();
+
+    let initVA = {
+        theURL: 'getViewedArticle',
+        toStringFunction: toArticleItemStr,
+        arrowIDs: {
+            prev: '#VA-prevBtn',
+            next: '#VA-nextBtn',
+        },
+        posID: 'viewArticlePos',
+        itemID: 'VA',
+    };
+    let VAObj = new collectionObj(initVA);
+    VAObj.getData();
+
+    // toStringFunctions
+    function toCaseItemStr(ind, caseElm ,IDName) {
+        return `
+                <div class="caseItem switchItem rightHide" id="${IDName}-${ind}">
+                    <div class="imgdiv">
+                        <img class="w-100" src="/${caseElm.picURL}" alt="">
+                    </div>
+                    <div class="caseName">${caseElm.建案名稱}</div>
+                    <div class="caseLocation">${caseElm.地區}</div>
+                    <div class="caseArea">${caseElm.坪數規劃}</div>
+                    <div class="btnToBuildingCase" id="btn${IDName}-${caseElm.建案序號}">查看建案</div>
+                </div>
+                `;
+    }
+    function toArticleItemStr(ind, elm, IDName) {
+        return `
+                <div class="articleItem switchItem rightHide" id="${IDName}-${ind}">
+                    <div class="imgdiv">
+                        <img class="w-100" src="/${elm.picURL}" alt="">
+                    </div>
+                    <div class="p-3">
+                        <div class="articleClass">${elm.className}</div>
+                        <div class="articleTitle" id="btn${IDName}-${elm.id}">${elm.title}</div>
+                        <div class="articleTime">${elm.publishDate}</div>
+                    </div>
+                </div>
+                `;
+    }
+
+    // 物件定義
+    function collectionObj(initObj) {
+        let self = this;
+        this.url = initObj.theURL; //需自己新增
+        this.toString = initObj.toStringFunction; // 需自己新增
+        this.prevArrow = initObj.arrowIDs.prev; // 需自己新增
+        this.nextArrow = initObj.arrowIDs.next; // 需自己新增
+        this.posID = initObj.posID; // 需自己新增
+        this.itemID = initObj.itemID; // 需自己新增
+        this.collection = [];
+        this.page = 0;
+        this.PID = [];
+        this.getData = function () {
+            $.ajax({
+                method: 'post',
+                url: self.url,
+                data: {
+                    userID: userInfo.id,
+                },
+                dataType: 'json',
+                success: function (result) {
+                    if (result.length > 0) {
+                        self.collection = result;
+                        self.update();
+                        self.generatePID();
+                        self.initPage();
+                        self.initArrows();
+                    } else {
+                        $(`#${self.posID}-0`).html("目前沒有資料喔！");
+                        $(`#${self.posID}-0`).css('height', '30px');
+                        $(`#${self.posID}-1`).css('height', '30px');
+                        $(`#${self.posID}-2`).css('height', '30px');
+                        $(`#${self.posID}-3`).css('height', '30px');
+                    }
+                }
+            });
+        };
+        this.update = function () {
+            $.each(self.collection, function (ind, elm) {
+                let pos = ind % 4;
+                elm.picURL.replace("\\", "/");
+                $(`#${self.posID}-${pos}`).append(self.toString(ind, elm, self.itemID));
+            });
+        };
+        this.generatePID = function () {
+            let n = self.collection.length;
+            for (let page = 0; page * 4 < n; page++) {
+                let pageID = [];
+                for (let i = 0; i < 4; i++) {
+                    if (page + i < n) pageID.push(`#${self.itemID}-${page * 4 + i}`);
+                }
+                self.PID.push(pageID);
+            }
+        };
+        this.nextPage = function () {
+            if (self.page + 1 >= self.PID.length) return;
+            $.each(self.PID[self.page], function (ind, elm) {
+                $(elm).addClass('leftHide');
+            });
+            self.page++;
+            setTimeout(function () {
+                $.each(self.PID[self.page], function (ind, elm) {
+                    $(elm).removeClass('rightHide');
+                });
+            }, 200);
+            self.arrowShowNone();
+        };
+        this.prevPage = function () {
+            if (self.page - 1 < 0) return;
+            $.each(self.PID[self.page], function (ind, elm) {
+                $(elm).addClass('rightHide');
+            });
+            self.page--;
+            setTimeout(function () {
+                $.each(self.PID[self.page], function (ind, elm) {
+                    $(elm).removeClass('leftHide');
+                });
+            }, 200);
+            self.arrowShowNone();
+        };
+        this.initPage = function () {
+            $.each(self.PID[0], function (ind, elm) {
+                $(elm).removeClass('rightHide');
+            });
+            self.arrowShowNone();
+        };
+        this.arrowShowNone = function () {
+            if (self.page <= 0) {
+                $(self.prevArrow).addClass('d-none');
+            } else {
+                $(self.prevArrow).removeClass('d-none');
+            }
+            if (self.page + 1 >= self.PID.length) {
+                $(self.nextArrow).addClass('d-none');
+            } else {
+                $(self.nextArrow).removeClass('d-none');
+            }
+        }
+        this.initArrows = function () {
+            $(self.nextArrow).on('click', function () {
+                self.nextPage();
+            });
+            $(self.prevArrow).on('click', function () {
+                self.prevPage();
+            });
+        }
+    }
+
+</script>

@@ -183,6 +183,19 @@
         width: 35%;
         text-align: center;
     }
+
+.optionItem {
+    margin: 10px 0px;
+    width: 120px;
+    color: rgb(122,97,57);
+    border: 2px solid rgb(122,97,57);
+    text-align: center;
+}
+    .optionItem:hover {
+        color: rgb(122,97,57);
+        text-decoration: none;
+    }
+
 /* 我的預約 */
 #bookingPage .selectType > div {
     margin: 0px 10px;
@@ -200,6 +213,87 @@
     font-size: 1.6rem;
     font-weight: bold;
 }
+
+/*排列呈現元素*/
+.itemPos {
+    height: 440px;
+}
+
+    .itemPos > * {
+        position: absolute;
+    }
+
+.arrowBtn {
+    position: absolute;
+    top: 0;
+    width: 30px;
+    height: 440px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.arrowBtn.next {
+    right: -10px;
+}
+    .arrowBtn.next:hover {
+        animation: goRight 1500ms infinite;
+    }
+.arrowBtn.prev {
+    left: -10px;
+    transform: translate(0px) rotate(180deg);
+}
+    .arrowBtn.prev:hover {
+        animation: goRightRotate 1500ms infinite;
+    }
+@keyframes goRight{
+    0%{
+        transform: translateX(0);
+        opacity: 1;
+    }
+    60%{
+        transform: translateX(10px);
+        opacity: 0.5;
+    }
+    90% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+@keyframes goRightRotate {
+    0% {
+        transform: translateX(0) rotate(180deg);
+        opacity: 1;
+    }
+
+    60% {
+        transform: translateX(-10px) rotate(180deg);
+        opacity: 0.5;
+    }
+
+    90% {
+        transform: translateX(0) rotate(180deg);
+        opacity: 1;
+    }
+}
+
+.switchItem {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity, transform;
+    transition-duration: 300ms;
+}
+
+    .switchItem.leftHide {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    .switchItem.rightHide {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
 /* 建案元素 */
 #historyPage .caseItem, #collectionPage .caseItem {
     padding: 20px;
@@ -207,12 +301,25 @@
     flex-direction: column;
     align-items: center;
     box-shadow: 1px 2px 5px rgba(0,0,0,.3);
+    height: 440px;
 }
 
     #historyPage .caseItem > *, #collectionPage .caseItem > * {
         margin: 5px 0;
     }
 
+.caseItem .caseName {
+    font-size: 1.8rem;
+}
+.caseItem img{
+    width: 219px;
+    height: 219px;
+    object-fit: cover;
+}
+.caseItem .caseLocation {
+}
+.caseItem .caseArea {
+}
 .caseItem .btnToBuildingCase {
     padding: 5px 30px;
     width: max-content;
@@ -222,21 +329,23 @@
     cursor: pointer;
 }
 
-.caseItem .caseName {
-    font-size: 2rem;
-}
-
-.caseItem .caseLocation {
-}
-
-.caseItem .caseArea {
-}
 /* 文章元素 */
 #historyPage .articleItem, #collectionPage .articleItem {
     flex-direction: column;
     align-items: center;
     /* box-shadow: 1px 2px 5px rgba(0,0,0,.3); */
     border-bottom: 1px solid rgb(122,97,57);
+    /*height: 440px;*/
+}
+
+.articleItem .imgdiv{
+    background-color: rgb(245, 245, 245);
+}
+
+.articleItem img{
+    width: 267px;
+    height: 183px;
+    object-fit:contain;
 }
 
 .articleItem .articleClass {

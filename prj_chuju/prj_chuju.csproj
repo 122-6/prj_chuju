@@ -131,6 +131,7 @@
     <Content Include="images\AccountPictures\common\google.png" />
     <Content Include="images\AccountPictures\common\inforOne.png" />
     <Content Include="images\AccountPictures\common\line.png" />
+    <Content Include="images\AccountPictures\common\next.png" />
     <Content Include="images\AccountPictures\common\pexels-linkedin-sales-navigator-1251844.jpg" />
     <Content Include="images\AccountPictures\common\pexels-linkedin-sales-navigator-1251844.png" />
     <Content Include="images\ActivityNews\clock.png" />

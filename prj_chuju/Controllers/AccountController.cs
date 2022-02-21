@@ -181,17 +181,19 @@ namespace prj_chuju.Controllers
             return RedirectToAction("Index","Home");
         }
 
-        // Ajax資料輸出
-        public JsonResult regionObject()
-        {
-            class_allRegionInfo x = new class_allRegionInfo();
-            return Json(x);
-        }
-
         // 會員頁面相關功能
         public void editAccountInfo()
         {
             new factory_accountInfo().editAccountInfo(Request);
+        }
+        public void editAccountPassword()
+        {
+            new factory_accountInfo().editAccountPassword(Request);
+        }
+        public JsonResult regionObject()
+        {
+            class_allRegionInfo x = new class_allRegionInfo();
+            return Json(x);
         }
         public JsonResult getCollectBuilding()
         {

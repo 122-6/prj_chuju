@@ -94,6 +94,7 @@ namespace prj_chuju.ViewModels
     public class class_userArticleInfo
     {
         public int id;
+        public string mainClass;
         public string className;
         public string title;
         public string publishDate;
@@ -101,6 +102,7 @@ namespace prj_chuju.ViewModels
         public class_userArticleInfo(SqlDataReader reader)
         {
             id = Convert.ToInt32(reader["id"]);
+            mainClass = reader["mainClass"].ToString() == "買房第一站" ? "BuyHouseFirst" : "MarketNews";
             className = reader["className"].ToString();
             title = reader["title"].ToString();
             publishDate = reader["publishDate"].ToString();
@@ -168,7 +170,7 @@ namespace prj_chuju.ViewModels
         public List<class_userArticleInfo> getCollectArticle(int theid)
         {
             List<class_userArticleInfo> output = new List<class_userArticleInfo>();
-            string sqlstr = "select ca.articleID as id, className, title, publishDate, pictureURL as picURL from collectArticle as ca " +
+            string sqlstr = "select ca.articleID as id, className, title, publishDate, pictureURL as picURL, mainClass from collectArticle as ca " +
                 "join articleOutline as ao on ao.id = ca.articleID " +
                 "join articleClass as ac on ac.id = ao.articleClass " +
                 "where accountID = @theid order by collectDate desc";
@@ -190,7 +192,7 @@ namespace prj_chuju.ViewModels
         public List<class_userArticleInfo> getViewedArticle(int theid)
         {
             List<class_userArticleInfo> output = new List<class_userArticleInfo>();
-            string sqlstr = "select va.articleID as id, className, title, publishDate, pictureURL as picURL from viewedArticle as va " +
+            string sqlstr = "select va.articleID as id, className, title, publishDate, pictureURL as picURL, mainClass from viewedArticle as va " +
                 "join articleOutline as ao on ao.id = va.articleID " +
                 "join articleClass as ac on ac.id = ao.articleClass " +
                 "where accountID = @theid order by viewDate desc";

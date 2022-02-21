@@ -268,7 +268,19 @@ namespace prj_chuju.Models
             {
 
             }
-            
+        }
+        public void editAccountPassword(HttpRequestBase request)
+        {
+            string sqlstr = "update accountInfo set userPassword=@newPassword where id = @theid";
+            SqlConnection con = new SqlConnection(dbConnectioniStr);
+            SqlCommand cmd;
+            cmd = new SqlCommand(sqlstr, con);
+            cmd.Parameters.AddWithValue("@newPassword", request["password"]);
+            cmd.Parameters.AddWithValue("@theid", request["theid"]);
+
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
     }
 

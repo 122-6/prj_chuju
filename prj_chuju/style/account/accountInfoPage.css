@@ -14,12 +14,15 @@
 .lightBrownBtn {
     padding: 8px 30px;
     color: rgb(122,97,57);
-    background-color: white;
+    background-color: rgb(255,255,255,1);
     border: 2px solid rgb(122,97,57);
     width: max-content;
     cursor: pointer;
     font-weight: bold;
 }
+    .lightBrownBtn:hover {
+        background-color: rgba(122,97,57,.2)
+    }
 
 .hidableBtn{
     opacity:1;
@@ -190,10 +193,29 @@
     color: rgb(122,97,57);
     border: 2px solid rgb(122,97,57);
     text-align: center;
+    background-color: rgba(255,255,255,1);
 }
     .optionItem:hover {
         color: rgb(122,97,57);
         text-decoration: none;
+        background-color: rgba(122,97,57,.2)
+    }
+
+#passwordEdittor {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+    #passwordEdittor.show {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+    #passwordEdittor input {
+        width: 150px;
+        border: 1px solid #8A8A8A;
+    }
+    #passwordEdittor td:first-child{
+        padding: 2px 5px;
     }
 
 /* 我的預約 */
@@ -279,19 +301,21 @@
 
 .switchItem {
     opacity: 1;
-    transform: translateX(0);
-    transition: opacity, transform;
-    transition-duration: 300ms;
+    transform: translateX(0px);
+    transition: opacity, 500ms, transform, 500ms;
+    z-index:0;
 }
 
     .switchItem.leftHide {
         opacity: 0;
-        transform: translateX(-20px);
+        transform: translateX(-50px);
+        z-index: -1;
     }
 
     .switchItem.rightHide {
         opacity: 0;
-        transform: translateX(20px);
+        transform: translateX(50px);
+        z-index: -1;
     }
 
 /* 建案元素 */
@@ -356,9 +380,12 @@
 .articleItem .articleTitle {
     font-weight: bold;
     font-size: 1.4rem;
-    cursor: pointer;
     margin-bottom: 10px;
+    color: black;
 }
+    .articleItem .articleTitle:hover {
+        text-decoration: none;
+    }
 
 .articleItem .articleTime {
     margin: 10px 0px;

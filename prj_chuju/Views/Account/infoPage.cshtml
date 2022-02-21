@@ -49,8 +49,22 @@
                             </div>
                         </div>
                         <div class="d-flex flex-column align-items-center">
-                            <a class="optionItem" href="#">重設密碼</a>
-                            <a class="optionItem" href="logout">會員登出</a>
+                            <a class="optionItem" id="editPwdBtn" href="#">重設密碼</a>
+                            <div id="passwordEdittor" class="">
+                                <table style="margin: 10px auto;">
+                                    <tbody>
+                                        <tr><td>目前密碼</td><td><input type="password" id="pwdEold" /></td></tr>
+                                        <tr><td>新密碼</td><td><input type="password" id="pwdEnew" /></td></tr>
+                                        <tr><td>確認新密碼</td><td><input type="password" id="pwdEnew-check" /></td></tr>
+                                        <tr><td></td><td><span id="pwdnewEro" style="color:red;font-size:0.8rem"></span></td></tr>
+                                    </tbody>
+                                </table>
+                                <div style="display:flex;justify-content:flex-end;">
+                                    <div id="cancelpwdeBtn" class="lightBrownBtn" style="margin-right: 10px; padding: 5px 15px; ">取消</div>
+                                    <div id="submitpwdeBtn" class="brownBtn" style="margin-right: 30px; padding: 5px 15px; ">儲存</div>
+                                </div>
+                            </div>
+                            <a id="logoutBtn" class="optionItem" href="logout">會員登出</a>
                             
                         </div>
                     </div>
@@ -567,6 +581,86 @@
         
     }
 
+    // 修改密碼
+    $('#passwordEdittor').hide();
+    $('#pwdnewEro').hide();
+    $('#editPwdBtn').on('click', function (event) {
+        event.preventDefault();
+        if ($(this).html() == '重設密碼') {
+            editPwdOn();
+        } else {
+            editPwdOff();
+        }
+        return false;
+    });
+    $.each($('#passwordEdittor').find('input'), function (ind, elm) {
+        $(elm).on('keydown', function () {
+            $('#pwdnewEro').hide();
+        });
+    });
+    $('#cancelpwdeBtn').on('click', function () {
+        editPwdOff();
+    });
+    $('#submitpwdeBtn').on('click', function () {
+        let password = $('#pwdEold').val();
+        let pwdnew = $('#pwdEnew').val();
+        let pwdnewcheck = $('#pwdEnew-check').val();
+
+        if (password == "") {
+            $('#pwdnewEro').html('*請輸入密碼').fadeIn()
+            return;
+        }
+        if (pwdnew == "") {
+            $('#pwdnewEro').html('*請輸入新密碼').fadeIn()
+            return;
+        }
+        if (pwdnew != pwdnewcheck) {
+            $('#pwdnewEro').html('*請輸入相同的新密碼').fadeIn()
+            return;
+        }
+
+        let ajaxData = {
+            theid: userInfo.id,
+            password: password,
+        };
+        $.ajax({
+            method: 'post',
+            url: 'varifyPassword',
+            data: ajaxData,
+            success: function (result) {
+                if (result < 0) {
+                    $('#pwdnewEro').html('*舊密碼輸入錯誤').fadeIn()
+                } else {
+                    $.ajax({
+                        method: 'post',
+                        url: 'editAccountPassword',
+                        data: ajaxData,
+                        success: function () {
+                            editPwdOff();
+                            alert('密碼修改成功！');
+                        }
+                    });
+                }
+            }
+        });
+    });
+    function editPwdOn() {
+        $('#editPwdBtn').html('取消修改')
+        $('#logoutBtn').addClass('d-none'); // 所有的optionItem都應該在此
+
+        $('#passwordEdittor').slideDown(300);
+    }
+    function editPwdOff() {
+        $('#editPwdBtn').html('重設密碼')
+        $('#passwordEdittor').slideUp(300, function () {
+            $('#pwdnewEro').hide();
+            $('#logoutBtn').removeClass('d-none'); // 所有的optionItem都應該在此
+
+            $.each($('#passwordEdittor').find('input'), function (ind, elm) {
+                $(elm).val('');
+            });
+        });
+    }
 
 </script>
 
@@ -646,7 +740,7 @@
                     </div>
                     <div class="p-3">
                         <div class="articleClass">${elm.className}</div>
-                        <div class="articleTitle" id="btn${IDName}-${elm.id}">${elm.title}</div>
+                        <a class="articleTitle d-block" id="btn${IDName}-${elm.id}" href="/${elm.mainClass}/ArticleContent/${elm.id}">${elm.title}</a>
                         <div class="articleTime">${elm.publishDate}</div>
                     </div>
                 </div>
@@ -717,7 +811,7 @@
                 $.each(self.PID[self.page], function (ind, elm) {
                     $(elm).removeClass('rightHide');
                 });
-            }, 200);
+            }, 300);
             self.arrowShowNone();
         };
         this.prevPage = function () {
@@ -730,7 +824,7 @@
                 $.each(self.PID[self.page], function (ind, elm) {
                     $(elm).removeClass('leftHide');
                 });
-            }, 200);
+            }, 300);
             self.arrowShowNone();
         };
         this.initPage = function () {

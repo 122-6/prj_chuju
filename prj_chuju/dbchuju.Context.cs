@@ -34,5 +34,7 @@ namespace prj_chuju
         public virtual DbSet<articleTagList> articleTagList { get; set; }
         public virtual DbSet<cityList> cityList { get; set; }
         public virtual DbSet<regionList> regionList { get; set; }
+        public virtual DbSet<ActivityContent> ActivityContent { get; set; }
+        public virtual DbSet<ActivityOutline> ActivityOutline { get; set; }
     }
 }

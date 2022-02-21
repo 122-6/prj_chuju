@@ -14,9 +14,15 @@ namespace prj_chuju
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-               name: "Activity_page",
-               url: "Activity/{tag}/{page}",
-               defaults: new { controller = "Activity", action = "Index", tag = UrlParameter.Optional, page = UrlParameter.Optional }
+                name: "Activity_page",
+                url: "Activity/{tag}/{page}",
+                defaults: new { controller = "Activity", action = "Index", tag = UrlParameter.Optional, page = UrlParameter.Optional }
+                );
+
+            routes.MapRoute(
+                name: "ActivityContent",
+                url: "ActivityContent/{Id}",
+                defaults: new { controller = "Activity", action = "ActivityContent", Id = UrlParameter.Optional }
                 );
 
             routes.MapRoute(

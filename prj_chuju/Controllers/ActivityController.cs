@@ -91,7 +91,12 @@ namespace prj_chuju.Controllers
             return (count);
         }
 
-        private class_ActivityContent ActivityContent(string Id)
+        public ActionResult ActivityContent(int Id)
+        {
+            var content = QueryContentById(Id);
+            return View(content);
+        }
+        private class_ActivityContent QueryContentById(int Id)
         {
             class_ActivityContent x = default;
             string IdSql = $"select * from ActivityContent where ActivityId = {Id}";
@@ -115,10 +120,10 @@ namespace prj_chuju.Controllers
         private SqlCommand methodSQL(string strSQL)
         {
             con = new SqlConnection();
-            con.ConnectionString = @"Data Source=.;Initial Catalog=testActitvity;Integrated Security=True";
+            con.ConnectionString = @"Data Source=chujudbserver.database.windows.net;Initial Catalog=dbchuju;Persist Security Info=True;User ID=chujuas;Password=P@ssw0rd-chuju;MultipleActiveResultSets=True;Application Name=EntityFramework";
             con.Open();
             return new SqlCommand(strSQL, con);
         }
-        
+
     }
 }

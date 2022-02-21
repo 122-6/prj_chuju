@@ -161,9 +161,11 @@
                             </script>
                         }
                         <div class="box">
-                            <div class="imgbox">
-                                <img class="picture" src="~/@item.picture" />
-                            </div>
+                            <a href="~/ActivityContent/@item.Id">
+                                <div class="imgbox">
+                                    <img class="picture" src="~/@item.picture" />
+                                </div>
+                            </a>
                             <div id="abc" class="information d-flex justify-content-space-between">
                                 <div class="time d-flex align-items-center">
                                     <img src="~/images/ActivityNews/clock.png" />@item.startDate.ToString("yyyy-MM-dd") ~ @item.endDate.ToString("yyyy-MM-dd")

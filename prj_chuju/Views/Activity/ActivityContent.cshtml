@@ -1,0 +1,44 @@
+﻿@model prj_chuju.Models.class_ActivityContent
+@{
+    ViewBag.Title = "ActivityContent";
+}
+<style>
+    .ActivityContent_title {
+        text-align: center;
+        margin-top: 85px;
+        margin-bottom: 100px;
+        font-size: 50px;
+        font-weight: bold;
+        color: #383838;
+    }
+
+    .content {
+        max-width: 990px;
+        margin: 0px auto;
+        margin-bottom: 150px;
+    }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .content p {
+            font-size: 21px;
+        }
+
+    .box {
+
+    }
+</style>
+<div class="ActivityContent_title">
+    @Model.title
+</div>
+<main>
+    <div class="content">
+        @Html.Raw(@Model.content)
+    </div>
+</main>
+<extra>
+    <div class="box"></div>
+</extra>

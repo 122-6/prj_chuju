@@ -96,16 +96,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Activity.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Activity.edmx</DependentUpon>
-      <LastGenOutput>Activity.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Activity.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Activity.edmx</DependentUpon>
-      <LastGenOutput>Activity.cs</LastGenOutput>
-    </Content>
     <Content Include="Content\Site.css" />
     <Content Include="dbchuju.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -783,26 +773,11 @@
     <Compile Include="accountPicture.cs">
       <DependentUpon>dbchuju.tt</DependentUpon>
     </Compile>
-    <Compile Include="Activity.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Activity.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Activity.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Activity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Activity.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Activity.edmx</DependentUpon>
-    </Compile>
     <Compile Include="ActivityContent.cs">
-      <DependentUpon>Activity.tt</DependentUpon>
+      <DependentUpon>dbchuju.tt</DependentUpon>
     </Compile>
     <Compile Include="ActivityOutline.cs">
-      <DependentUpon>Activity.tt</DependentUpon>
+      <DependentUpon>dbchuju.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="articleClass.cs">
@@ -881,13 +856,6 @@
     <Content Include="dbchuju.edmx.diagram">
       <DependentUpon>dbchuju.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Activity.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Activity.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Activity.edmx.diagram">
-      <DependentUpon>Activity.edmx</DependentUpon>
-    </Content>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -910,6 +878,7 @@
     <Content Include="Views\BuildingCase\Index.cshtml" />
     <Content Include="Views\Account\infoPage.cshtml" />
     <Content Include="Views\Account\basicInfo.cshtml" />
+    <Content Include="Views\Activity\ActivityContent.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

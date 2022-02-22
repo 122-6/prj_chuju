@@ -91,6 +91,35 @@ namespace prj_chuju.ViewModels
             picURL = reader["picURL"].ToString();
         }
     }
+    public class class_bookedCaseInfo : class_userBuildingInfo
+    {
+        public bool hasBooked;
+        public DateTime bookedDate;
+        public int bookedYear;
+        public int bookedMonth;
+        public int bookedDay;
+        public string clickDate;
+        public string 接待中心;
+        public class_bookedCaseInfo(SqlDataReader reader) : base(reader)
+        {
+            if (!reader["bookedDate"].Equals(DBNull.Value))
+            {
+                hasBooked = true;
+                bookedDate= Convert.ToDateTime(reader["bookedDate"]);
+            }
+            else
+            {
+                hasBooked = false;
+                bookedDate = new DateTime();
+            }
+            bookedYear = bookedDate.Year;
+            bookedMonth = bookedDate.Month;
+            bookedDay = bookedDate.Day;
+            clickDate = reader["clickDate"].ToString();
+            接待中心 = reader["接待中心"].ToString();
+
+        }
+    }
     public class class_userArticleInfo
     {
         public int id;
@@ -119,6 +148,31 @@ namespace prj_chuju.ViewModels
             @"MultipleActiveResultSets=True;" +
             @"Asynchronous Processing=True;" +
             @"";
+
+        public List<class_bookedCaseInfo> getBookedCase(int theid)
+        {
+            List<class_bookedCaseInfo> output = new List<class_bookedCaseInfo>();
+            string sqlstr = "select 建案序號, 建案名稱, 地區, 坪數規劃, picURL, " +
+                "bookedDate, clickDate, 接待中心 " +
+                "from bookedCase as bc " +
+                "join buildingdb as bdb on bc.buildingID=bdb.建案序號 " +
+                "where accountID = @theid order by bookedDate desc";
+
+            SqlConnection con = new SqlConnection(dbConnectioniStr);
+            SqlCommand cmd;
+            SqlDataReader reader;
+
+            con.Open();
+            cmd = new SqlCommand(sqlstr, con);
+            cmd.Parameters.AddWithValue("@theid", theid);
+            reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                output.Add(new class_bookedCaseInfo(reader));
+            }
+            con.Close();
+            return output;
+        }
 
         public List<class_userBuildingInfo> getCollectBuilding(int theid)
         {

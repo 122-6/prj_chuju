@@ -235,9 +235,16 @@ namespace prj_chuju.Controllers
             List<class_userArticleInfo> x = f.getViewedArticle(theid);
             return Json(x);
         }
+        public JsonResult getBookedCase()
+        {
+            int theid = Convert.ToInt32(Request["userID"]);
+            factory_userCollectViewed f = new factory_userCollectViewed();
+            List<class_bookedCaseInfo> x = f.getBookedCase(theid);
+            return Json(x);
+        }
 
 
-        
+
 
     }
 }

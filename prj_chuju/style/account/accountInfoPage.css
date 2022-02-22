@@ -218,19 +218,40 @@
         padding: 2px 5px;
     }
 
+
 /* 我的預約 */
 #bookingPage .selectType > div {
     margin: 0px 10px;
 }
+.selectType .brownBtn {
+    border: 3px solid rgba(102,77,37);
+    border-radius: 3px;
+    background-color: rgb(162,137,97);
+}
+    .selectType .brownBtn.actived {
+        background-color: rgb(122,97,57);
+    }
 
-#bookingPage .buildingCase {
+#bookingPage .bookedCase {
     padding: 10px;
     border: 1px solid rgb(212,212,212);
     box-shadow: 1px 3px 3px rgba(0,0,0,.3);
-    min-height: 200px;
+    cursor: pointer;
 }
+.bookedCase .bookedImg{
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+}
+.bookPos{
+    min-height: 240px;
+}
+    .bookPos > div > *{
+        position: absolute;
+    }
 
-/* 我的收藏 */
+
+/* 收藏瀏覽標題 */
 #historyPage .title, #collectionPage .title {
     font-size: 1.6rem;
     font-weight: bold;

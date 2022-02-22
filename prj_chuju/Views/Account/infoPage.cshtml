@@ -173,75 +173,23 @@
 
             <div id="bookingPage" class="pageContainer">
                 <div class="d-flex justify-content-center selectType">
-                    <div class="brownBtn">全部</div>
-                    <div class="brownBtn">預約中</div>
-                    <div class="brownBtn">已看過</div>
+                    <div id="bookSelector-all" class="brownBtn actived">全部</div>
+                    <div id="bookSelector-yet" class="brownBtn">預約中</div>
+                    <div id="bookSelector-fin" class="brownBtn">已看過</div>
                 </div>
                 <div>
                     <div>預約列表</div>
-                    <div class="w-100 d-flex flex-wrap">
-                        <div class="col-6 p-3">
-                            <div class="buildingCase d-flex">
-                                <div class=" " style="width:160px">
-                                    <img class="w-100" src="/images/test.jpg" alt="">
-                                </div>
-                                <div class="f-1 mx-3 d-flex flex-column">
-                                    <div class="font-weight-bold font-120 my-3">帝璟苑</div>
-                                    <div class="f-1 color-gray">臺北市中正區延平南路150號</div>
-                                    <div>
-                                        <div class="font-weight-bold">預約時間</div>
-                                        <div>101年4月15日</div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="w-100 d-flex flex-wrap" style="position: relative;">
+                        <div class="bookPos col-6 p-3" id="bookBuildingPos-0"></div>
+                        <div class="bookPos col-6 p-3" id="bookBuildingPos-1"></div>
+                        <div class="bookPos col-6 p-3" id="bookBuildingPos-2"></div>
+                        <div class="bookPos col-6 p-3" id="bookBuildingPos-3"></div>
+                        <div class="arrowBtn prev d-none" id="BC-prevBtn">
+                            <img class="w-100" src="~/images/AccountPictures/common/next.png" />
                         </div>
-                        <!-- 以下為複製元素 -->
-                        <div class="col-6 p-3">
-                            <div class="buildingCase d-flex">
-                                <div class=" " style="width:160px">
-                                    <img class="w-100" src="/images/test.jpg" alt="">
-                                </div>
-                                <div class="f-1 mx-3 d-flex flex-column">
-                                    <div class="font-weight-bold font-120 my-3">帝璟苑</div>
-                                    <div class="f-1 color-gray">臺北市中正區延平南路150號</div>
-                                    <div>
-                                        <div class="font-weight-bold">預約時間</div>
-                                        <div>101年4月15日</div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="arrowBtn next d-none" id="BC-nextBtn">
+                            <img class="w-100" src="~/images/AccountPictures/common/next.png" />
                         </div>
-                        <div class="col-6 p-3">
-                            <div class="buildingCase d-flex">
-                                <div class=" " style="width:160px">
-                                    <img class="w-100" src="/images/test.jpg" alt="">
-                                </div>
-                                <div class="f-1 mx-3 d-flex flex-column">
-                                    <div class="font-weight-bold font-120 my-3">帝璟苑</div>
-                                    <div class="f-1 color-gray">臺北市中正區延平南路150號</div>
-                                    <div>
-                                        <div class="font-weight-bold">預約時間</div>
-                                        <div>101年4月15日</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 p-3">
-                            <div class="buildingCase d-flex">
-                                <div class=" " style="width:160px">
-                                    <img class="w-100" src="/images/test.jpg" alt="">
-                                </div>
-                                <div class="f-1 mx-3 d-flex flex-column">
-                                    <div class="font-weight-bold font-120 my-3">帝璟苑</div>
-                                    <div class="f-1 color-gray">臺北市中正區延平南路150號</div>
-                                    <div>
-                                        <div class="font-weight-bold">預約時間</div>
-                                        <div>101年4月15日</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -744,6 +692,19 @@
     let VAObj = new collectionObj(initVA);
     VAObj.getData();
 
+    let initBC = {
+        theURL: 'getBookedCase',
+        toStringFunction: toBookedCaseStr,
+        arrowIDs: {
+            prev: '#BC-prevBtn',
+            next: '#BC-nextBtn',
+        },
+        posID: 'bookBuildingPos',
+        itemID: 'BC',
+    };
+    let BCObj = new collectionObj(initBC);
+    BCObj.getData();
+
     // toStringFunctions
     function toCaseItemStr(ind, caseElm ,IDName) {
         return `
@@ -772,6 +733,27 @@
                 </div>
                 `;
     }
+    function toBookedCaseStr(ind, elm, IDName) {
+        return `
+                <div style="position: relative;">
+                    <div class="bookedCase switchItem d-flex rightHide w-100" id="${IDName}-${ind}">
+                        <div class=" " style="width:160px">
+                            <img class="bookedImg" src="/${elm.picURL}" alt="">
+                        </div>
+                        <div class="f-1 mx-3 d-flex flex-column">
+                            <div class="font-weight-bold font-120 my-3">${elm.建案名稱}</div>
+                            <div class="f-1 color-gray">${elm.接待中心}</div>
+                            <div>
+                                <div class="font-weight-bold">預約日期</div>
+                                <div>
+                                    ${elm.hasBooked?elm.bookedYear+"年"+elm.bookedMonth+"月"+elm.bookedDay+"日":"尚未排定"}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `;
+    }
 
     // 物件定義
     function collectionObj(initObj) {
@@ -795,13 +777,8 @@
                 dataType: 'json',
                 success: function (result) {
                     if (result.length > 0) {
-                        console.log(result);
                         self.collection = result;
-                        console.log(self.collection);
-
                         self.update();
-                        console.log(self.collection);
-
                         self.generatePID();
                         self.initPage();
                         self.initArrows();
@@ -816,6 +793,9 @@
             });
         };
         this.update = function () {
+            for (let i = 0; i < 4; i++) {
+                $(`#${self.posID}-${i}`).html('');
+            }
             $.each(self.collection, function (ind, elm) {
                 let pos = ind % 4;
                 elm.picURL = elm.picURL.replaceAll("\\", "/");
@@ -824,6 +804,7 @@
         };
         this.generatePID = function () {
             let n = self.collection.length;
+            self.PID = [];
             for (let page = 0; page * 4 < n; page++) {
                 let pageID = [];
                 for (let i = 0; i < 4; i++) {
@@ -882,6 +863,53 @@
             });
             $(self.prevArrow).on('click', function () {
                 self.prevPage();
+            });
+        }
+    }
+
+    // 預選選擇器
+    let BCSelector = new BCSelectorObj();
+    BCSelector.initBtn();
+    function BCSelectorObj() {
+        let self = this;
+        this.btnID = 'bookSelector';
+        this.types = ['all', 'yet', 'fin'];
+        this.collection = null;
+        this.getCollection = function () {
+            if (!self.collection) {
+                self.collection = {
+                    all: BCObj.collection,
+                    yet: [],
+                    fin: [],
+                };
+                let todayInt = Date.now();
+                $.each(BCObj.collection, function (inc, elm) {
+                    let t = parseInt(elm.bookedDate.substr(6));
+                    if (!elm.hasBooked || t > todayInt) {
+                        self.collection.yet.push(elm);
+                    } else {
+                        self.collection.fin.push(elm);
+                    }
+                });
+            }
+        };
+        this.initBtn = function () {
+            $.each(self.types, function (ind, val) {
+                $(`#${self.btnID}-${val}`).on('click', function () {
+
+                    $.each(self.types, function (ind, val) {
+                        $(`#${self.btnID}-${val}`).removeClass('actived');
+                    });
+                    $(this).addClass('actived');
+
+                    self.getCollection();
+                    BCObj.collection = self.collection[val];
+                    BCObj.update();
+                    BCObj.initPage();
+                    BCObj.generatePID();
+                    BCObj.page = 0;
+                    BCObj.arrowShowNone();
+                });
             });
         }
     }

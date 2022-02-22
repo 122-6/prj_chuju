@@ -896,19 +896,29 @@
         this.initBtn = function () {
             $.each(self.types, function (ind, val) {
                 $(`#${self.btnID}-${val}`).on('click', function () {
+                    // 蒐集已有的數據
+                    self.getCollection();
 
+                    // 改變按鈕顏色
                     $.each(self.types, function (ind, val) {
                         $(`#${self.btnID}-${val}`).removeClass('actived');
                     });
                     $(this).addClass('actived');
 
-                    self.getCollection();
+                    // 更新畫面
                     BCObj.collection = self.collection[val];
-                    BCObj.update();
-                    BCObj.initPage();
-                    BCObj.generatePID();
-                    BCObj.page = 0;
-                    BCObj.arrowShowNone();
+                    if (BCObj.collection.length > 0) {
+                        BCObj.update();
+                        BCObj.generatePID();
+                        BCObj.page = 0;
+                        BCObj.initPage();
+                    } else {
+                        $(`#${BCObj.posID}-0`).html("目前沒有資料喔！");
+                        $(`#${BCObj.posID}-1`).html("");
+                        $(`#${BCObj.posID}-2`).html("");
+                        $(`#${BCObj.posID}-3`).html("");
+                    }
+                    
                 });
             });
         }

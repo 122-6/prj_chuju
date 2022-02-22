@@ -21,8 +21,9 @@
         <AssociationConnector Association="dbchujuModel.FK__articleCo__pictu__70DDC3D8" ManuallyRouted="false" />
         <AssociationConnector Association="dbchujuModel.FK__regionLis__cityI__74AE54BC" ManuallyRouted="false" />
         <AssociationConnector Association="dbchujuModel.articleTag" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="dbchujuModel.ActivityContent" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="dbchujuModel.ActivityOutline" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="dbchujuModel.ActivityContent" Width="1.5" PointX="0.75" PointY="10" />
+        <EntityTypeShape EntityType="dbchujuModel.ActivityOutline" Width="1.5" PointX="3" PointY="9.875" />
+        <AssociationConnector Association="dbchujuModel.FK_ActivityOutline_ActivityContent" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

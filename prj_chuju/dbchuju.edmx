@@ -208,6 +208,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ActivityOutline_ActivityContent">
+          <End Role="ActivityContent" Type="Self.ActivityContent" Multiplicity="1" />
+          <End Role="ActivityOutline" Type="Self.ActivityOutline" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ActivityContent">
+              <PropertyRef Name="ActivityId" />
+            </Principal>
+            <Dependent Role="ActivityOutline">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="dbchujuModelStoreContainer">
           <EntitySet Name="accountInfo" EntityType="Self.accountInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="accountPicture" EntityType="Self.accountPicture" Schema="dbo" store:Type="Tables" />
@@ -252,6 +264,10 @@
           <AssociationSet Name="FK__regionLis__cityI__74AE54BC" Association="Self.FK__regionLis__cityI__74AE54BC">
             <End Role="cityList" EntitySet="cityList" />
             <End Role="regionList" EntitySet="regionList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityOutline_ActivityContent" Association="Self.FK_ActivityOutline_ActivityContent">
+            <End Role="ActivityContent" EntitySet="ActivityContent" />
+            <End Role="ActivityOutline" EntitySet="ActivityOutline" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -470,6 +486,10 @@
           </AssociationSet>
           <EntitySet Name="ActivityContent" EntityType="dbchujuModel.ActivityContent" />
           <EntitySet Name="ActivityOutline" EntityType="dbchujuModel.ActivityOutline" />
+          <AssociationSet Name="FK_ActivityOutline_ActivityContent" Association="dbchujuModel.FK_ActivityOutline_ActivityContent">
+            <End Role="ActivityContent" EntitySet="ActivityContent" />
+            <End Role="ActivityOutline" EntitySet="ActivityOutline" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ActivityContent">
           <Key>
@@ -478,6 +498,7 @@
           <Property Name="ActivityId" Type="Int32" Nullable="false" />
           <Property Name="title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ActivityOutline" Relationship="dbchujuModel.FK_ActivityOutline_ActivityContent" FromRole="ActivityContent" ToRole="ActivityOutline" />
         </EntityType>
         <EntityType Name="ActivityOutline">
           <Key>
@@ -487,7 +508,20 @@
           <Property Name="startDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="endDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="picture" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ActivityContent" Relationship="dbchujuModel.FK_ActivityOutline_ActivityContent" FromRole="ActivityOutline" ToRole="ActivityContent" />
         </EntityType>
+        <Association Name="FK_ActivityOutline_ActivityContent">
+          <End Type="dbchujuModel.ActivityContent" Role="ActivityContent" Multiplicity="1" />
+          <End Type="dbchujuModel.ActivityOutline" Role="ActivityOutline" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ActivityContent">
+              <PropertyRef Name="ActivityId" />
+            </Principal>
+            <Dependent Role="ActivityOutline">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

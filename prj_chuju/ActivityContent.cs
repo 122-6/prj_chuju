@@ -17,5 +17,7 @@ namespace prj_chuju
         public int ActivityId { get; set; }
         public string title { get; set; }
         public string content { get; set; }
+    
+        public virtual ActivityOutline ActivityOutline { get; set; }
     }
 }

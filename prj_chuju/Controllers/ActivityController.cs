@@ -17,13 +17,13 @@ namespace prj_chuju.Controllers
             List<class_ActivityOutline> list = default;
             int count = default;
 
-            string allSql = $"select * from ActivityOutline order by Id offset {(page - 1) * 4} rows fetch next 4 rows only;";
+            string allSql = $"select * from ActivityOutline order by endDate desc offset {(page - 1) * 4} rows fetch next 4 rows only;";
             string all_countSql = "select count(*) from ActivityOutline";
-            string soonSql = $"select * from ActivityOutline where getdate() between dateadd(day, -7, startDate) and dateadd(day, -1, startDate) order by Id offset {(page - 1) * 4} rows fetch next 4 rows only;";
+            string soonSql = $"select * from ActivityOutline where getdate() between dateadd(day, -7, startDate) and dateadd(day, -1, startDate) order by endDate desc offset {(page - 1) * 4} rows fetch next 4 rows only;";
             string soon_countSql = "select count(*) from ActivityOutline where getdate() between dateadd(day, -7, startDate) and dateadd(day, -1, startDate)";
-            string nowSql = $"select * from ActivityOutline where getdate() between startDate and endDate order by Id offset {(page - 1) * 4} rows fetch next 4 rows only;";
+            string nowSql = $"select * from ActivityOutline where getdate() between startDate and endDate order by endDate desc offset {(page - 1) * 4} rows fetch next 4 rows only;";
             string now_countSql = "select count(*) from ActivityOutline where getdate() between startDate and endDate";
-            string endSql = $"select * from ActivityOutline where getdate() > endDate order by Id offset {(page - 1) * 4} rows fetch next 4 rows only;";
+            string endSql = $"select * from ActivityOutline where getdate() > endDate order by endDate desc offset {(page - 1) * 4} rows fetch next 4 rows only;";
             string end_countSql = "select count(*) from ActivityOutline where getdate() > endDate";
 
             switch (tag)

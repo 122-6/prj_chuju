@@ -18,5 +18,7 @@ namespace prj_chuju
         public System.DateTime startDate { get; set; }
         public System.DateTime endDate { get; set; }
         public string picture { get; set; }
+    
+        public virtual ActivityContent ActivityContent { get; set; }
     }
 }

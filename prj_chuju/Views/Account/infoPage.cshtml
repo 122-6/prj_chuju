@@ -533,6 +533,15 @@
     // 確認變更
     $('#btnSaveInfoChange').on('click', function (event) {
         event.preventDefault();
+        if (!ValidateEmail($('#email').val())) {
+            alert('錯誤: 電子郵件格式有誤');
+            return;
+        }
+        if (!ValidatePhone($('#cellphone').val())) {
+            alert('錯誤: 手機格式有誤');
+            return;
+        }
+
         let bdy = $('#BDy').val(), bdm = $('#BDm').val(), bdd = $('#BDd').val();
         let infoObj = {
             userName: $('#userName').val(),
@@ -580,6 +589,19 @@
         }
         
     }
+    // Validation Function
+    function ValidateEmail(mail) {
+        if (/^\w+([\.-]?\w+)*@@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+            return true;
+        else
+            return false;
+    }
+    function ValidatePhone(phone) {
+        if (/^[0][9][0-9]{8}$/.test(phone))
+            return true;
+        else
+            return false;
+    }
 
     // 修改密碼
     $('#passwordEdittor').hide();
@@ -619,22 +641,26 @@
             return;
         }
 
-        let ajaxData = {
-            theid: userInfo.id,
-            password: password,
-        };
         $.ajax({
             method: 'post',
             url: 'varifyPassword',
-            data: ajaxData,
+            data: {
+                theid: userInfo.id,
+                password: password,
+            },
             success: function (result) {
+                console.log(`password${password}`);
+                console.log(result);
                 if (result < 0) {
                     $('#pwdnewEro').html('*舊密碼輸入錯誤').fadeIn()
                 } else {
                     $.ajax({
                         method: 'post',
                         url: 'editAccountPassword',
-                        data: ajaxData,
+                        data: {
+                            theid: userInfo.id,
+                            password: $('#pwdEnew').val(),
+                        },
                         success: function () {
                             editPwdOff();
                             alert('密碼修改成功！');
@@ -769,8 +795,13 @@
                 dataType: 'json',
                 success: function (result) {
                     if (result.length > 0) {
+                        console.log(result);
                         self.collection = result;
+                        console.log(self.collection);
+
                         self.update();
+                        console.log(self.collection);
+
                         self.generatePID();
                         self.initPage();
                         self.initArrows();
@@ -787,7 +818,7 @@
         this.update = function () {
             $.each(self.collection, function (ind, elm) {
                 let pos = ind % 4;
-                elm.picURL.replace("\\", "/");
+                elm.picURL = elm.picURL.replaceAll("\\", "/");
                 $(`#${self.posID}-${pos}`).append(self.toString(ind, elm, self.itemID));
             });
         };

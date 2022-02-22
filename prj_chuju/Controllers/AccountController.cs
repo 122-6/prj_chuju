@@ -188,6 +188,18 @@ namespace prj_chuju.Controllers
         }
         public void editAccountPassword()
         {
+            AccountInfoMemory aim = new AccountInfoHelper(Session, Request).Information;
+            string theid = Request["theid"];
+            string password = Request["password"];
+            string remember = aim.remember;
+            string InfoMessage = $"{remember}|{theid}|{password}";
+
+            HttpCookie x = new HttpCookie("userInfo");
+            x.Value = remember == "yes" ? InfoMessage : "";
+            x.Expires = DateTime.Now.AddDays(14);
+            Response.Cookies.Add(x);
+            Session["userInfo"] = remember == "no" ? InfoMessage : "";
+
             new factory_accountInfo().editAccountPassword(Request);
         }
         public JsonResult regionObject()

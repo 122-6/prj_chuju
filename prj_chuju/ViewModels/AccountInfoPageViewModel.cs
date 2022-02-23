@@ -23,9 +23,10 @@ namespace prj_chuju.ViewModels
 
         public AccountInfoPageViewModel(int theid)
         {
-            string sqlstr = "select * from accountInfo as ai " +
+            string sqlstr = "select *, ap.pictureURL as avatarURL from accountInfo as ai " +
                 "left join regionList as rl on ai.region = rl.id " +
                 "left join cityList as cl on cl.id = rl.cityID " +
+                "left join accountPicture as ap on ap.id = ai.avatar " +
                 "where ai.id = @idPara";
 
             SqlConnection con = new SqlConnection(dbConnectioniStr);

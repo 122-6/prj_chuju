@@ -20,6 +20,7 @@ namespace prj_chuju.Models
         public string cellphone;
         public int region;
         public int avatar;
+        public string avatarURL;
 
         public class_accountInfo()
         {
@@ -33,6 +34,7 @@ namespace prj_chuju.Models
             cellphone = "initPhone";
             region = -1;
             avatar = -1;
+            avatarURL = "";
         }
         public class_accountInfo(SqlDataReader reader)
         {
@@ -47,6 +49,7 @@ namespace prj_chuju.Models
             userName = reader["userName"].ToString();
             gender = reader["gender"].ToString();
             cellphone = reader["cellphone"].ToString();
+            avatarURL = reader["avatarURL"].ToString();
         }
     }
     public class factory_accountInfo
@@ -131,7 +134,9 @@ namespace prj_chuju.Models
         // 調閱會員資料
         public class_accountInfo selectAccountByID(int theid)
         {
-            string sqlstr = "select * from accountInfo where id = @idPara";
+            string sqlstr = "select ai.*, ap.pictureURL as avatarURL from accountInfo as ai " +
+                "left join accountPicture as ap on ap.id = ai.avatar " +
+                "where ai.id = @idPara";
             class_accountInfo res=new class_accountInfo();
 
             SqlConnection con = new SqlConnection(dbConnectioniStr);
@@ -148,6 +153,23 @@ namespace prj_chuju.Models
             }
             con.Close();
             return res;
+        }
+        public int getNewestAvatar(int userID)
+        {
+            int result = -1;
+            string sqlstr = "select top(1) id from accountPicture where uploader=@userIDPara order by uploadDate desc";
+            SqlConnection con = new SqlConnection(dbConnectioniStr);
+            SqlCommand cmd = new SqlCommand(sqlstr, con);
+            SqlDataReader reader;
+            cmd.Parameters.AddWithValue("@userIDPara", userID);
+            con.Open();
+            reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                result = Convert.ToInt32(reader["id"]);
+            }
+            con.Close();
+            return result;
         }
 
         // 驗證系統
@@ -282,6 +304,31 @@ namespace prj_chuju.Models
             cmd.ExecuteNonQuery();
             con.Close();
         }
+        public void createAvatar(string fileName, int userID)
+        {
+            string sqlstr = "insert into accountPicture (pictureURL,uploader) values (@theURL,@userIDPara)";
+            SqlConnection con = new SqlConnection(dbConnectioniStr);
+            SqlCommand cmd;
+
+            cmd = new SqlCommand(sqlstr, con);
+            cmd.Parameters.AddWithValue("@theURL", fileName);
+            cmd.Parameters.AddWithValue("@userIDPara", userID);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+        public void updateUserAvatar(int userID,int avatarID)
+        {
+            string sqlstr = "update accountInfo set avatar = @avatarIDPara where id = @userIDPara";
+            SqlConnection con = new SqlConnection(dbConnectioniStr);
+            SqlCommand cmd = new SqlCommand(sqlstr, con);
+            cmd.Parameters.AddWithValue("@avatarIDPara", avatarID);
+            cmd.Parameters.AddWithValue("@userIDPara", userID);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+
     }
 
     

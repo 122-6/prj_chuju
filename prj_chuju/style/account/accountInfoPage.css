@@ -65,6 +65,12 @@
     margin: 0px 100px;
 }
 
+.centerlize{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 /* ****** */
 /* 主外觀 */
@@ -104,7 +110,6 @@
     font-size: 24px;
     cursor: pointer;
 }
-
     .pageTag.actived {
         background-color: white;
     }
@@ -118,28 +123,80 @@
     width: 100%;
     display: none;
 }
-
     .pageContainer.actived {
         display: block;
     }
 
 
-/* ********* */
-/* 各頁面屬性 */
-/* ********* */
-
+/************/
 /* 會員資料 */
+/************/
 #infoPage{
     padding: 0px 20px;
 }
 
-#infoPage .pictureContainer {
+/* 功能列 */
+.pictureContainer {
+    position: relative;
     width: 180px;
     height: 180px;
-    background-color: rgb(170, 170, 170);
-    border-radius: 50%;
 }
+    .pictureContainer > .pictureInner {
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        overflow:hidden;
+    }
+    .pictureContainer [type="file"]{
+        width:180px;
+        height:180px;
+        background-color: blue;
+        opacity: 0;
+    }
+    .pictureContainer #dragHint {
+        color: white;
+        font-weight: bold;
+        background-color: rgba(0,0,0,.8);
+        opacity: 0;
+        transition: opacity,300ms;
+    }
+    .pictureContainer #dragHint.hovered {
+        opacity: 1;
+    }
 
+.optionItem {
+    margin: 10px 0px;
+    width: 120px;
+    color: rgb(122,97,57);
+    border: 2px solid rgb(122,97,57);
+    text-align: center;
+    background-color: rgba(255,255,255,1);
+}
+    .optionItem:hover {
+        color: rgb(122,97,57);
+        text-decoration: none;
+        background-color: rgba(122,97,57,.2)
+    }
+
+#passwordEdittor {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+    #passwordEdittor.show {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+    #passwordEdittor input {
+        width: 150px;
+        border: 1px solid #8A8A8A;
+    }
+    #passwordEdittor td:first-child {
+        padding: 2px 5px;
+    }
+
+/* 資料列 */
 #infoPage .infoFormTable td:first-child {
     font-weight: bold;
     padding: 20px 0;
@@ -170,7 +227,6 @@
     justify-content: space-between;
     align-items: center;
 }
-
     .dateRow > input, .dateRow > select {
         width: 30%;
         text-align: center;
@@ -181,77 +237,15 @@
     justify-content: flex-start;
     align-items: center;
 }
-
     .regionRow > input, .regionRow > select {
         width: 35%;
         text-align: center;
     }
 
-.optionItem {
-    margin: 10px 0px;
-    width: 120px;
-    color: rgb(122,97,57);
-    border: 2px solid rgb(122,97,57);
-    text-align: center;
-    background-color: rgba(255,255,255,1);
-}
-    .optionItem:hover {
-        color: rgb(122,97,57);
-        text-decoration: none;
-        background-color: rgba(122,97,57,.2)
-    }
 
-#passwordEdittor {
-    width: 80%;
-    margin: 0 auto;
-    padding: 0 10px;
-}
-    #passwordEdittor.show {
-        opacity: 1;
-        transform: scaleY(1);
-    }
-    #passwordEdittor input {
-        width: 150px;
-        border: 1px solid #8A8A8A;
-    }
-    #passwordEdittor td:first-child{
-        padding: 2px 5px;
-    }
-
-
-/* 我的預約 */
-#bookingPage .selectType > div {
-    margin: 0px 10px;
-}
-.selectType .brownBtn {
-    border: 3px solid rgba(102,77,37);
-    border-radius: 3px;
-    background-color: rgb(162,137,97);
-}
-    .selectType .brownBtn.actived {
-        background-color: rgb(122,97,57);
-    }
-
-#bookingPage .bookedCase {
-    padding: 10px;
-    border: 1px solid rgb(212,212,212);
-    box-shadow: 1px 3px 3px rgba(0,0,0,.3);
-    cursor: pointer;
-}
-.bookedCase .bookedImg{
-    width: 160px;
-    height: 160px;
-    object-fit: cover;
-}
-.bookPos{
-    min-height: 240px;
-}
-    .bookPos > div > *{
-        position: absolute;
-    }
-
-
-/* 收藏瀏覽標題 */
+/******************/
+/* 收藏與瀏覽歷史 */
+/******************/
 #historyPage .title, #collectionPage .title {
     font-size: 1.6rem;
     font-weight: bold;
@@ -261,7 +255,6 @@
 .itemPos {
     height: 440px;
 }
-
     .itemPos > * {
         position: absolute;
     }
@@ -326,17 +319,49 @@
     transition: opacity, 500ms, transform, 500ms;
     z-index:0;
 }
-
     .switchItem.leftHide {
         opacity: 0;
         transform: translateX(-50px);
         z-index: -1;
     }
-
     .switchItem.rightHide {
         opacity: 0;
         transform: translateX(50px);
         z-index: -1;
+    }
+
+/* 預約元素 */
+#bookingPage .selectType > div {
+    margin: 0px 10px;
+}
+
+.selectType .brownBtn {
+    border: 3px solid rgba(102,77,37);
+    border-radius: 3px;
+    background-color: rgb(162,137,97);
+}
+    .selectType .brownBtn.actived {
+        background-color: rgb(122,97,57);
+    }
+
+#bookingPage .bookedCase {
+    padding: 10px;
+    border: 1px solid rgb(212,212,212);
+    box-shadow: 1px 3px 3px rgba(0,0,0,.3);
+    cursor: pointer;
+}
+
+.bookedCase .bookedImg {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+}
+
+.bookPos {
+    min-height: 240px;
+}
+    .bookPos > div > * {
+        position: absolute;
     }
 
 /* 建案元素 */
@@ -348,7 +373,6 @@
     box-shadow: 1px 2px 5px rgba(0,0,0,.3);
     height: 440px;
 }
-
     #historyPage .caseItem > *, #collectionPage .caseItem > * {
         margin: 5px 0;
     }

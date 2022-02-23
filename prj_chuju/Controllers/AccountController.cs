@@ -13,6 +13,9 @@ using System.Data.SqlClient;
 using prj_chuju.Models;
 using prj_chuju.ViewModels;
 
+// 頭貼相關
+using System.IO;
+
 namespace prj_chuju.Controllers
 {
     public class AccountController : Controller
@@ -182,6 +185,30 @@ namespace prj_chuju.Controllers
         }
 
         // 會員頁面相關功能
+        public ActionResult updateAccountAvatar(HttpPostedFileBase avatarRound)
+        {
+            if (avatarRound != null)
+            {
+                if (avatarRound.ContentLength > 0)
+                {
+                    // 存檔相關
+                    Guid myuuid = Guid.NewGuid();
+                    string uuidName = myuuid.ToString();
+                    string fileName = uuidName + Path.GetExtension(avatarRound.FileName);
+                    var path = Path.Combine(Server.MapPath("~/images/AccountPictures/userAvatar"), fileName);
+                    avatarRound.SaveAs(path);
+
+                    // 資料庫相關
+                    string avatarStr = "images/AccountPictures/userAvatar/" + fileName;
+                    int userID = new AccountInfoHelper(Session,Request).Information.theid;
+                    factory_accountInfo f = new factory_accountInfo();
+                    f.createAvatar(avatarStr, userID);
+                    int avatarID = f.getNewestAvatar(userID);
+                    f.updateUserAvatar(userID, avatarID);
+                }
+            }
+            return RedirectToAction("infoPage");
+        }
         public void editAccountInfo()
         {
             new factory_accountInfo().editAccountInfo(Request);

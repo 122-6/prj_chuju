@@ -1,46 +1,4 @@
-﻿@*<!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>@ViewBag.Title - My ASP.NET Application</title>
-        <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-        <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <script src="~/Scripts/modernizr-2.8.3.js"></script>
-    </head>
-    <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>
-        </div>
-
-        <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-        <script src="~/Scripts/bootstrap.min.js"></script>
-    </body>
-    </html>*@
-
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -74,7 +32,7 @@
     <div id="test"></div>
 
 
-    <nav class="_LayoutElement">
+    <nav class="_LayoutElement" style="box-shadow: 3px 0px 5px rgba(0,0,0,.4);">
         <div class="d-flex px-4 top-nav align-items-center justify-content-between _LayoutElement" style="height:100px;">
             <div class="top-nav-left col-1 _LayoutElement">
                 <a class="d-flex justify-content-center _LayoutElement" href="/">
@@ -128,21 +86,21 @@
                         <h4 class="title _LayoutElement">快速連結</h4>
                     </div>
                     <div class="row _LayoutElement">
-                        <div class="link _LayoutElement"><a href="#">首頁</a></div>
-                        <div class="link _LayoutElement"><a href="#">買房新訊</a></div>
-                        <div class="link _LayoutElement"><a href="#">使用者條款</a></div>
+                        <div class="link _LayoutElement">@Html.ActionLink("首頁","Index","Home")</div>
+                        <div class="link _LayoutElement">@Html.ActionLink("買房新訊", "Index", "MarketNews")</div>
+                        <div class="link _LayoutElement">@Html.ActionLink("使用者條款", "Index", "Home")</div>
                     </div>
                     <div class="row _LayoutElement">
-                        <div class="link _LayoutElement"><a href="#">關於我們</a></div>
-                        <div class="link _LayoutElement"><a href="#">買房第一站</a></div>
+                        <div class="link _LayoutElement">@Html.ActionLink("關於我們", "Index", "AboutUs")</div>
+                        <div class="link _LayoutElement">@Html.ActionLink("買房第一站", "Index", "BuyHouseFirst")</div>
                     </div>
                     <div class="row _LayoutElement">
-                        <div class="link _LayoutElement"><a href="#">建案列表</a></div>
-                        <div class="link _LayoutElement"><a href="#">加入雛居</a></div>
+                        <div class="link _LayoutElement">@Html.ActionLink("建案列表", "Index", "BuildingList")</div>
+                        <div class="link _LayoutElement">@Html.ActionLink("加入雛居", "Index", "Account")</div>
                     </div>
                     <div class="row _LayoutElement">
-                        <div class="link _LayoutElement"><a href="#">活動快報</a></div>
-                        <div class="link _LayoutElement"><a href="#">隱私權政策</a></div>
+                        <div class="link _LayoutElement"><a href="~/Activity/全部活動">活動快報</a></div>
+                        <div class="link _LayoutElement">@Html.ActionLink("隱私權政策", "Index", "Home")</div>
                     </div>
                 </div>
                 <div class="col-2 border-right _LayoutElement">
@@ -187,7 +145,7 @@
 
 
                     <div class="row emailto _LayoutElement">
-                        <input type="text" name="email" id="email" placeholder="請輸入電子信箱" class="border-0 _LayoutElement">
+                        <input type="text" name="_Layoutemail" id="_Layoutemail" placeholder="請輸入電子信箱" class="border-0 _LayoutElement">
                         <button class="bg-transparent border-0 text-white _LayoutElement">
                             <i class="fas fa-envelope _LayoutElement"></i>
                             訂閱電子報

@@ -214,6 +214,31 @@
     <Content Include="images\articleListPictures\7.jpg" />
     <Content Include="images\articleListPictures\8.jpg" />
     <Content Include="images\articleListPictures\9.jpg" />
+    <Content Include="images\建案內容\audit.png" />
+    <Content Include="images\建案內容\facebook.png" />
+    <Content Include="images\建案內容\like.png" />
+    <Content Include="images\建案內容\line.png" />
+    <Content Include="images\建案內容\news.png" />
+    <Content Include="images\建案內容\pexels-vecislavas-popa-1643383.png" />
+    <Content Include="images\建案內容\phone-call.png" />
+    <Content Include="images\建案內容\place.png" />
+    <Content Include="images\建案內容\printer.png" />
+    <Content Include="images\建案內容\text.png" />
+    <Content Include="images\建案內容\twitter.png" />
+    <Content Include="images\建案內容\地圖.PNG" />
+    <Content Include="images\建案內容\屋子1.PNG" />
+    <Content Include="images\建案內容\屋子2.PNG" />
+    <Content Include="images\建案內容\屋子3.PNG" />
+    <Content Include="images\建案內容\屋子4.PNG" />
+    <Content Include="images\建案內容\建案內容-1.PNG" />
+    <Content Include="images\建案內容\建案內容-2.PNG" />
+    <Content Include="images\建案內容\建案內容-3.png" />
+    <Content Include="images\建案內容\建案內容-4.PNG" />
+    <Content Include="images\建案內容\建案內容-5.PNG" />
+    <Content Include="images\建案內容\建案內容-6.PNG" />
+    <Content Include="images\建案內容\新屋-1.PNG" />
+    <Content Include="images\建案內容\新屋-2.PNG" />
+    <Content Include="images\建案內容\新屋3.PNG" />
     <Content Include="images\建案資料庫\10-敦南御所\0.jpg" />
     <Content Include="images\建案資料庫\10-敦南御所\1.jpg" />
     <Content Include="images\建案資料庫\10-敦南御所\2.jpg" />
@@ -888,6 +913,7 @@
     <Compile Include="Controllers\BuyHouseFirstController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MarketNewsController.cs" />
+    <Compile Include="Controllers\testBuildContentController.cs" />
     <Compile Include="dbchuju.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -960,6 +986,7 @@
     <Content Include="Views\Account\infoPage.cshtml" />
     <Content Include="Views\Account\basicInfo.cshtml" />
     <Content Include="Views\Activity\ActivityContent.cshtml" />
+    <Content Include="Views\testBuildContent\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

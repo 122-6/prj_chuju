@@ -1,0 +1,648 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .justify-content-space-between {
+        justify-content: space-between
+    }
+
+    .picture {
+        width: 100%;
+    }
+
+    .sticky {
+        background: #706139;
+        margin-bottom: 142px;
+    }
+
+    .swiper:not(:last-child):after {
+        content: "";
+        width: 1px;
+        height: 46px;
+        background: #FFFFFF;
+        position: absolute;
+        margin-left: 22px;
+        margin-top: 12px;
+    }
+
+    .tag-group {
+        width: 579px;
+    }
+
+    .swiper .tag {
+        font-size: 20px;
+        color: #FFFFFF;
+        line-height: 70px;
+    }
+
+    .wrapper {
+        margin: 0px auto;
+        width: 1350px;
+    }
+
+    .wrapper_content {
+        margin-bottom: 130px;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+        .wrapper_content .imgbox {
+            width: 656px;
+        }
+
+    .build_title, .table_title, .map_title, .build_news_title {
+        color: #706139;
+    }
+
+    .build_title, .table_title, .map_title {
+        font-size: 35px;
+    }
+
+    .build_news_title {
+        font-size: 28px;
+    }
+
+    .table_title, .map_title, .build_news_title {
+        text-align: center;
+    }
+
+    .content {
+        width: 637px;
+        font-size: 19px;
+        line-height: 40px;
+        color: #000000;
+        margin-bottom: 30px;
+    }
+
+    .iconbox {
+        border: 0.5px solid #C7C7C7;
+        width: 388px;
+        margin: 0px auto;
+    }
+
+        .iconbox .box {
+            width: 96px;
+            text-align: center;
+            padding: 17px 13px;
+            border-right: 0.5px solid #C7C7C7;
+            background-color: #F1F1F1;
+        }
+
+            .iconbox .box .tag {
+                color: #706139;
+                font-size: 17px;
+                line-height: 25px;
+                text-decoration: none;
+            }
+
+        .iconbox img {
+            width: 28.5px;
+            margin-bottom: 5px;
+        }
+
+    .reverse {
+        flex-direction: row-reverse;
+    }
+
+    .wrapper_table {
+        padding: 0px 119px;
+    }
+
+        .wrapper_table .table {
+            margin-top: 43px;
+            margin-bottom: 93px;
+            flex-wrap: wrap;
+            color: #706139;
+        }
+
+        .wrapper_table .box {
+            width: 50%;
+            height: 67px;
+            display: flex;
+            align-items: center;
+            font-size: 19px;
+        }
+
+            .wrapper_table .box:nth-child(4n-3), .wrapper_table .box:nth-child(4n-2) {
+                background-color: #E7E5E5;
+            }
+
+            .wrapper_table .box:nth-child(4n-1), .wrapper_table .box:nth-child(4n) {
+                background-color: #F8F8F8;
+            }
+
+        .wrapper_table item {
+            margin-left: 82px;
+            margin-right: 58px;
+        }
+
+        .wrapper_table span {
+            color: #414141;
+        }
+
+    .wrapper_map .imgbox {
+        margin-top: 43px;
+        margin-bottom: 217px;
+    }
+
+    .wrapper_news .line {
+        width: 188px;
+        text-align: end;
+        font-size: 25px;
+        color: #706139;
+        border-top: 1px solid #706139;
+        margin-right: 49px;
+        padding-top: 14px;
+    }
+
+    .wrapper .news {
+        width: 1013px;
+        margin-bottom: 69px;
+    }
+
+    .wrapper_news .box {
+        width: 233px;
+    }
+
+    .wrapper_news .textbox {
+        border-right: 0.5px solid #706139;
+        border-bottom: 0.5px solid #706139;
+    }
+
+    .wrapper_news .type {
+        font-weight: bold;
+        color: #706139;
+    }
+
+    .wrapper_news .title {
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 29px;
+    }
+
+    .wrapper_news .time {
+        color: #797070;
+        font-size: 11px;
+        line-height: 16px;
+        margin-top: 17px;
+        margin-bottom: 27px;
+    }
+
+    .wrapper_function {
+        width: 311px;
+        align-items: center;
+        margin-bottom: 70px;
+    }
+
+        .wrapper_function .func {
+            width: 32px;
+        }
+
+        .wrapper_function .social {
+            width: 45px;
+            height: 45px;
+            background-color: #DADADA;
+            border-radius: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .wrapper_function .social .facebook {
+                width: 22px;
+            }
+
+            .wrapper_function .social .twitter, .wrapper_function .social .line {
+                width: 25px;
+            }
+
+    .wrapper_news a {
+        text-decoration: none;
+        color: #383838;
+    }
+
+    .wrapper_build_news .box {
+        width: 431px;
+        margin-top: 79px;
+        margin-bottom:88px;
+    }
+
+    .wrapper_build_news .textbox .title {
+        color: #1E3240;
+        font-weight: bold;
+    }
+
+    .wrapper_build_news .imgbox {
+        margin-bottom: 14px;
+    }
+
+    .wrapper_build_news .address .room {
+        width: 12px;
+        margin-right: 7px;
+    }
+
+    .wrapper_build_news .address {
+        margin-top: 4px;
+        font-size: 13px;
+        align-items: center;
+    }
+
+    .wrapper_build_news .heart {
+        width: 15px;
+        margin-right: 5px;
+        padding-bottom: 2px;
+    }
+
+    .wrapper_build_news .cart_1 {
+        text-decoration: none;
+        color: #1E3240;
+    }
+
+    .wrapper_build_news .cart_2 {
+        color: #706139;
+        text-align: end;
+    }
+
+    .section_1 {
+        background-image: url(~/images/建案內容/pexels-vecislavas-popa-1643383.png)
+    }
+</style>
+<main>
+    <div>
+        <img class="picture" src="~/images/建案內容/建案內容-1.png" />
+    </div>
+    <div class="d-flex justify-content-center sticky">
+        <div class="d-flex tag-group justify-content-space-between">
+            <div class="swiper"><a href="#" class="tag text-decoration-none">個案特色</a></div>
+            <div class="swiper"><a href="#" class="tag text-decoration-none">個案詳情</a></div>
+            <div class="swiper"><a href="#" class="tag text-decoration-none">生活地圖</a></div>
+            <div class="swiper"><a href="#" class="tag text-decoration-none">相關新聞</a></div>
+            <div class="swiper"><a href="#" class="tag text-decoration-none">線上預約</a></div>
+        </div>
+    </div>
+    <section>
+        <div class="wrapper_content wrapper d-flex">
+            <div class="imgbox">
+                <img class="picture" src="~/images/建案內容/建案內容-2.png" />
+            </div>
+            <div class="textbox">
+                <div class="build_title">聯上天母</div>
+                <div class="content">
+                    陽明浮岫，磺溪濯月，天母北路56號，24層鋼骨雲峰
+                    換個高度收藏天母，攬天地凝鍊富裕之深境。天母北路56號，磺溪樹濤第一排，24層鋼骨雲峰，55-77坪雍容落款。德國iF建築名家李文勝X聯上集團，繼「聯上聽瀑」、「聯上涵玥」後，續寫磺溪泰然地標之姿，以當代人文建築語境，臨摹疊嶂山系，烘托天母超然世外的優渥品味。枕群山，掬清流，國際情調相偎自然，世界風景您已看得過癮，穿行使館特區，循溪徑優雅返邸，慢慢活，才是天母人鍾情的細水長流。
+                </div>
+                <div class="iconbox d-flex justify-content-space-between">
+                    <div class="box">
+                        <a href="#" class="tag">
+                            <img src="~/images/建案內容/phone-call.png" />
+                            <div>立即來電</div>
+                        </a>
+                    </div>
+                    <div class="box">
+                        <a href="#" class="tag">
+                            <img src="~/images/建案內容/line.png" />
+                            <div>LINE詢問</div>
+                        </a>
+                    </div>
+                    <div class="box">
+                        <a href="#" class="tag">
+                            <img src="~/images/建案內容/place.png" />
+                            <div>地圖導航</div>
+                        </a>
+                    </div>
+                    <div class="box">
+                        <a href="#" class="tag">
+                            <img src="~/images/建案內容/audit.png" />
+                            <div>立即預約</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="wrapper_content wrapper d-flex reverse">
+            <div class="imgbox">
+                <img class="picture" src="~/images/建案內容/建案內容-3.png" />
+            </div>
+            <div class="textbox">
+                <div class="content">
+                    中山大道溪有水岸，層峰靠岸 雙首排珍稀地段，榮耀門牌身價
+
+                    何曾見過中山北路的寧靜面孔？只因與一彎雙溪的相逢，歡騰的中山北路，換上沉靜面容。【紘石仰格】雄踞中山大道和雙溪水岸雙首排地段，將鬧中取靜的優渥、玉帶環腰的富裕風水、億級國際建設輕擁入懷，無可複製的地段價值，氣勢出演士林傳世居址。
+                </div>
+            </div>
+        </div>
+        <div class="wrapper_content wrapper d-flex">
+            <div class="imgbox">
+                <img class="picture" src="~/images/建案內容/建案內容-4.png" />
+            </div>
+            <div class="textbox">
+                <div class="content">
+                    縱情水岸河濱，舉目江山如畫 枕雙溪、臥陽明，歲月裡談慢活
+
+                    擁雙溪過日子有多歡快，得親自感受才懂。樹海鳥兒敲窗，澄波澗音交響，晨起歡快慢跑，向晚對坐垂釣，出門帶上風景，賦歸靜擁陽明，台北市中心難得一見的開闊視野、心遊山水的自在日常，映照層峰寬闊胸膛。
+                </div>
+            </div>
+        </div>
+        <div class="wrapper_content wrapper d-flex reverse">
+            <div class="imgbox">
+                <img class="picture" src="~/images/建案內容/建案內容-5.png" />
+            </div>
+            <div class="textbox">
+                <div class="content">
+                    6分鐘士林雙捷，百億建設聚首 士林風華革新，揭幕國際城市面貌
+
+                    散步6分鐘即抵捷運士林站，權掌TOD、環狀線Y26站共構開發，雙線縱橫貫穿台北車站國門、101、大直劍南站等站點，士林站TOD、北士科、萬寶、新光紡織、士林紙廠等重大利多蓄勢待發，再創璀璨士林前景。
+                </div>
+            </div>
+        </div>
+        <div class="wrapper_content wrapper d-flex">
+            <div class="imgbox">
+                <img class="picture" src="~/images/建案內容/建案內容-6.png" />
+            </div>
+            <div class="textbox">
+                <div class="content">
+                    士林紙廠四大開發案磅礴登場 鉅資傾注12000坪 國際飯店藝文特區
+
+                    上看士林數百億商機核心，士林紙廠四大開發案相繼啟動！12000坪複合式文創園區、高層住辦大樓、大型國際飯店全面匯聚，引進紙業博物館、辦公空間、文化會展、餐飲購物等機能，【紘石仰格】就近豐收下一座美學經濟重鎮。
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="wrapper_table wrapper">
+            <div class="table_title">個案詳情</div>
+            <div class="table d-flex">
+                <div class="box">
+                    <item>建案地區</item>
+                    <span>臺北市 士林區</span>
+                </div>
+                <div class="box">
+                    <item>建案名稱</item>
+                    <span>紘石仰格</span>
+                </div>
+                <div class="box">
+                    <item>建案類型</item>
+                    <span>預售屋</span>
+                </div>
+                <div class="box">
+                    <item>投資建設</item>
+                    <span>紘石建設股份有限公司</span>
+                </div>
+                <div class="box">
+                    <item>營造公司 </item>
+                    <span>上承營造股份有限公司</span>
+                </div>
+                <div class="box">
+                    <item>建築設計</item>
+                    <span>金以容建築師事務所</span>
+                </div>
+                <div class="box">
+                    <item>交屋狀況</item>
+                    <span>標準配備</span>
+                </div>
+                <div class="box">
+                    <item>坪數規劃</item>
+                    <span>60 - 78 坪</span>
+                </div>
+                <div class="box">
+                    <item>樓層規劃</item>
+                    <span>地上17層、地下4層</span>
+                </div>
+                <div class="box">
+                    <item>棟戶規劃</item>
+                    <span>1棟、62戶</span>
+                </div>
+                <div class="box">
+                    <item>車位規劃</item>
+                    <span>共86個</span>
+                </div>
+                <div class="box">
+                    <item>車位配比</item>
+                    <span>1:1.38</span>
+                </div>
+                <div class="box">
+                    <item>基地面積</item>
+                    <span>460坪</span>
+                </div>
+                <div class="box">
+                    <item>基地位置</item>
+                    <span>臺北市士林區中山北路五段.中山北路五段751巷口</span>
+                </div>
+                <div class="box">
+                    <item>接待中心</item>
+                    <span>臺北市士林區中山北路五段716號</span>
+                </div>
+                <div class="box">
+                    <item>諮詢專線</item>
+                    <span>02-28328588</span>
+                </div>
+                <div class="box">
+                    <item>建築代銷</item>
+                    <span>海悅廣告股份有限公司</span>
+                </div>
+                <div class="box">
+                    <item></item>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="wrapper_map wrapper">
+            <div class="map_title">生活地圖</div>
+            <div class="imgbox">
+                <img class="picture" src="~/images/建案內容/地圖.png" />
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="wrapper_news wrapper d-flex">
+            <div class="line">
+                <span>相關新聞</span>
+            </div>
+            <div class="news d-flex justify-content-space-between">
+                <div class="box">
+                    <a href="#">
+                        <div class="imgbox">
+                            <img class="picture" src="~/images/建案內容/news.png" />
+                        </div>
+                        <div class="textbox">
+                            <div class="type">設計裝修</div>
+                            <div class="title">設計新手｜讀懂立面圖的超能力GET，從此擺脫圖盲</div>
+                            <div class="time">2021/08/21</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="box">
+                    <a href="#">
+                        <div class="imgbox">
+                            <img class="picture" src="~/images/建案內容/news.png" />
+                        </div>
+                        <div class="textbox">
+                            <div class="type">設計裝修</div>
+                            <div class="title">設計新手｜讀懂立面圖的超能力GET，從此擺脫圖盲</div>
+                            <div class="time">2021/08/21</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="box">
+                    <a href="#">
+                        <div class="imgbox">
+                            <img class="picture" src="~/images/建案內容/news.png" />
+                        </div>
+                        <div class="textbox">
+                            <div class="type">設計裝修</div>
+                            <div class="title">設計新手｜讀懂立面圖的超能力GET，從此擺脫圖盲</div>
+                            <div class="time">2021/08/21</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="box">
+                    <a href="#">
+                        <div class="imgbox">
+                            <img class="picture" src="~/images/建案內容/news.png" />
+                        </div>
+                        <div class="textbox">
+                            <div class="type">設計裝修</div>
+                            <div class="title">設計新手｜讀懂立面圖的超能力GET，從此擺脫圖盲</div>
+                            <div class="time">2021/08/21</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="wrapper_function wrapper d-flex justify-content-space-between">
+        <a href="#">
+            <div class="func">
+                <img class="picture" src="~/images/建案內容/text.png" />
+            </div>
+        </a>
+        <a href="#">
+            <div class="func">
+                <img class="picture" src="~/images/建案內容/printer.png" />
+            </div>
+        </a>
+        <a href="#">
+            <div class="social">
+                <div class="facebook">
+                    <img class="picture" src="~/images/建案內容/facebook.png" />
+                </div>
+            </div>
+        </a>
+        <a href="#">
+            <div class="social">
+                <div class="twitter">
+                    <img class="picture" src="~/images/建案內容/twitter.png" />
+                </div>
+            </div>
+        </a>
+        <a href="#">
+            <div class="social">
+                <div class="line">
+                    <img class="picture" src="~/images/建案內容/line.png" />
+                </div>
+            </div>
+        </a>
+    </section>
+    <section>
+        <div class="wrapper_build_news wrapper">
+            <div class="build_news_title">推薦你可能喜歡的新家</div>
+            <div class="build d-flex justify-content-space-between">
+                <div class="box">
+                    <div class="imgbox">
+                        <img class="picture" src="~/images/建案內容/新屋-1.png" />
+                    </div>
+                    <div class="textbox d-flex justify-content-space-between">
+                        <div>
+                            <div class="title">
+                                力麒天沐
+                            </div>
+                            <div class="address d-flex">
+                                <div class="room">
+                                    <img class="picture" src="~/images/建案內容/room.png" />
+                                </div>
+                                <span>臺中市北屯區崇德十九路</span>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="#" class="cart_1 d-flex">
+                                <div class="heart">
+                                    <img class="picture" src="~/images/建案內容/like.png" />
+                                </div>
+                                <span>加入收藏</span>
+                            </a>
+                            <a href="#">
+                                <div class="cart_2">預約鑑賞</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="imgbox">
+                        <img class="picture" src="~/images/建案內容/新屋-2.png" />
+                    </div>
+                    <div class="textbox d-flex justify-content-space-between">
+                        <div>
+                            <div class="title">
+                                聯上天母
+                            </div>
+                            <div class="address d-flex">
+                                <div class="room">
+                                    <img class="picture" src="~/images/建案內容/room.png" />
+                                </div>
+                                <span>臺中市士林區天母北路56號</span>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="#" class="cart_1 d-flex">
+                                <div class="heart">
+                                    <img class="picture" src="~/images/建案內容/like.png" />
+                                </div>
+                                <span>加入收藏</span>
+                            </a>
+                            <a href="#">
+                                <div class="cart_2">預約鑑賞</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>   <div class="box">
+                    <div class="imgbox">
+                        <img class="picture" src="~/images/建案內容/新屋-3.png" />
+                    </div>
+                    <div class="textbox d-flex justify-content-space-between">
+                        <div>
+                            <div class="title">
+                               南京御邸
+                            </div>
+                            <div class="address d-flex">
+                                <div class="room">
+                                    <img class="picture" src="~/images/建案內容/room.png" />
+                                </div>
+                                <span>臺北市中山區南京東路三段106號</span>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="#" class="cart_1 d-flex">
+                                <div class="heart">
+                                    <img class="picture" src="~/images/建案內容/like.png" />
+                                </div>
+                                <span>加入收藏</span>
+                            </a>
+                            <a href="#">
+                                <div class="cart_2">預約鑑賞</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section_1">
+        <div>
+        </div>
+    </section>
+</main>
+

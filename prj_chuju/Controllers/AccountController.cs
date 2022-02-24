@@ -84,6 +84,28 @@ namespace prj_chuju.Controllers
 
             return RedirectToAction("infoPage");
         }
+        public ActionResult forgetPassword()
+        {
+            return View();
+        }
+        public ActionResult resetPassword(string code)
+        {
+            if (string.IsNullOrEmpty(code))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                factory_accountInfo f = new factory_accountInfo();
+                int theid = f.getIDByCode(code);
+                f.removeCodeByID(theid);
+                ViewBag.theid = theid;
+                if(theid<0)
+                    return RedirectToAction("Index", "Home");
+                else
+                    return View();
+            }
+        }
 
         // 註冊系統
         [HttpPost]
@@ -182,6 +204,63 @@ namespace prj_chuju.Controllers
             Session["userInfo"] = "";
 
             return RedirectToAction("Index","Home");
+        }
+
+        // 忘記密碼系統
+        public void sendForgetEmail()
+        {
+            // 變數宣告與資料庫動作
+            factory_accountInfo f = new factory_accountInfo();
+            string host = Request.Url.Host;
+            string userEmail = Request["email"];
+            string code = Guid.NewGuid().ToString();
+            int theid = f.occupiedEmailID(userEmail);
+            f.addForgetCode(theid, code);
+
+            // 寄送連結
+            using (SmtpClient theEmail = new SmtpClient
+            {
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                EnableSsl = true,
+                Host = "smtp.gmail.com",
+                Port = 587,
+                Credentials = new NetworkCredential("chujumail306@gmail.com", "P@ssw0rd-chuju"),
+            })
+            {
+                string subject = $"雛居會員密碼重設通知信";
+                string body = $"親愛的用戶，您好！\n\n" +
+                    $"您於 {DateTime.Now} 要求重設密碼，以下為修改密碼的連結:\n\n" +
+                    $"http://{host}/Account/resetPassword?code={code}\n\n" +
+                    $"為維護您的隱私及保障您的權益，如果您沒有要求變更密碼，請您盡速與我們連繫！\n" +
+                    $"謝謝！\n\n";
+                try
+                {
+                    theEmail.Send("chujumail306@gmail.com", userEmail, subject, body);
+                }
+                catch (SmtpException ex)
+                {
+                    string msg = ex.StackTrace.ToString();
+                }
+            }
+        }
+        public ActionResult resetPasswordWork()
+        {
+            AccountInfoMemory aim = new AccountInfoHelper(Session, Request).Information;
+            string theid = Request["theid"];
+            string password = Request["password"];
+            string remember = "no";
+            string InfoMessage = $"{remember}|{theid}|{password}";
+
+            HttpCookie x = new HttpCookie("userInfo");
+            x.Value = remember == "yes" ? InfoMessage : "";
+            x.Expires = DateTime.Now.AddDays(14);
+            Response.Cookies.Add(x);
+            Session["userInfo"] = remember == "no" ? InfoMessage : "";
+
+            new factory_accountInfo().editAccountPassword(Request);
+
+            return RedirectToAction("Index", "Account");
         }
 
         // 會員頁面相關功能

@@ -1,0 +1,56 @@
+﻿/* 自定義bootstrap */
+.mb-10px{
+    margin-bottom:10px;
+}
+.mb-50px{
+    margin-bottom: 50px;
+}
+.font-120{
+    font-size: 1.2rem;
+}
+
+/* 主外觀 */
+.mainArea {
+    background-image: url( "/images/AccountPictures/common/pexels-linkedin-sales-navigator-1251844.png");
+    /*background-size: 100% auto;*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    margin: 0px auto;
+    padding-top: 1px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 150px 0px;
+
+    min-height:70vh;
+}
+
+.operationArea {
+    width: 400px;
+    background-color: white;
+    box-shadow: 2px 3px 3px rgba(0,0,0,.4);
+    padding: 20px;
+}
+
+.errorMsg {
+    color: red;
+    font-size: 0.8rem;
+}
+
+[type="text"] {
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 5px 15px;
+    border: 1px solid rgb(179,179,179);
+}
+
+.blackBtn {
+    background-color: black;
+    color: white;
+    border-radius: 3px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    text-align: center;
+}

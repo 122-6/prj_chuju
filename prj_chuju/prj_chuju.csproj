@@ -260,7 +260,6 @@
     <Content Include="images\建案內容\建案內容-6.PNG" />
     <Content Include="images\建案內容\新屋-1.PNG" />
     <Content Include="images\建案內容\新屋-2.PNG" />
-    <Content Include="images\建案內容\新屋3.PNG" />
     <Content Include="images\建案資料庫\10-敦南御所\0.jpg" />
     <Content Include="images\建案資料庫\10-敦南御所\1.jpg" />
     <Content Include="images\建案資料庫\10-敦南御所\2.jpg" />
@@ -834,6 +833,8 @@
     <Content Include="style\aboutStyle.css" />
     <Content Include="style\account\accountInfoPage.css" />
     <Content Include="style\account\basicInfo.css" />
+    <Content Include="style\account\forgetPwd.css" />
+    <Content Include="style\account\resetPwd.css" />
     <Content Include="style\allarticle.css" />
     <Content Include="style\articlecontent.css" />
     <Content Include="style\Building.css" />
@@ -1017,6 +1018,8 @@
     <Content Include="Views\Activity\ActivityContent.cshtml" />
     <Content Include="Views\testBuildContent\Index.cshtml" />
     <Content Include="Views\OnlineService\Service.cshtml" />
+    <Content Include="Views\Account\forgetPassword.cshtml" />
+    <Content Include="Views\Account\resetPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -10,7 +10,7 @@ namespace prj_chuju.SignalR
     {
         private static string serviceID;
         private static string clientID;
-        private static int count = 0;
+        
         public void ServiceConnection()
         {
             serviceID = Context.ConnectionId;
@@ -19,9 +19,11 @@ namespace prj_chuju.SignalR
         public void ClientConnection()
         {
             clientID = Context.ConnectionId;
-            Clients.Client(serviceID).newClient(clientID, count);
             Clients.Client(clientID).newClient(clientID);
-
+            if (serviceID != null)
+            {
+                Clients.Client(serviceID).newClient(clientID);
+            }
         }
 
         public void ServiceSend(string message, string Id)
@@ -31,7 +33,10 @@ namespace prj_chuju.SignalR
 
         public void ClientSend(string message, string Id)
         {
-            Clients.Client(serviceID).sendMessage(message, Id);
+            if (serviceID != null)
+            {
+                Clients.Client(serviceID).sendMessage(message, Id);
+            }
         }
     }
 }

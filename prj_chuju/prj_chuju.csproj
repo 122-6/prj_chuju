@@ -124,6 +124,7 @@
     <Content Include="images\AccountPictures\common\next.png" />
     <Content Include="images\AccountPictures\common\pexels-linkedin-sales-navigator-1251844.jpg" />
     <Content Include="images\AccountPictures\common\pexels-linkedin-sales-navigator-1251844.png" />
+    <Content Include="images\AccountPictures\userAvatar\_.css" />
     <Content Include="images\ActivityNews\clock.png" />
     <Content Include="images\ActivityNews\p1.PNG" />
     <Content Include="images\ActivityNews\p10.PNG" />
@@ -247,7 +248,6 @@
     <Content Include="images\建案資料庫\10-敦南御所\5.jpg" />
     <Content Include="images\建案資料庫\11-和平大苑\0.jpg" />
     <Content Include="images\建案資料庫\11-和平大苑\1.jpg" />
-    <Content Include="images\建案資料庫\11-和平大苑\111.jpg" />
     <Content Include="images\建案資料庫\11-和平大苑\2.jpg" />
     <Content Include="images\建案資料庫\11-和平大苑\3.jpg" />
     <Content Include="images\建案資料庫\11-和平大苑\4.jpg" />
@@ -996,7 +996,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="images\AccountPictures\userAvatar\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

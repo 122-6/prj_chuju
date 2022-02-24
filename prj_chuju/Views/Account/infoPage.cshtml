@@ -13,7 +13,7 @@
     <div class="operationArea">
 
         <div class="pageSwitcher">
-            <div id="infoTag" class="pageTag actived">
+            <div id="infoTag" class="pageTag">
                 會員資料
             </div>
 
@@ -28,19 +28,10 @@
             <div id="historyTag" class="pageTag">
                 瀏覽歷史
             </div>
-
-            <!-- 這裡的注解要另外處理 -->
-            <!-- <div id="cupponTag" class="pageTag">
-                我的優惠券(預留)
-            </div> -->
-            <!-- 這裡的注解要另外處理 -->
-            <!-- <div id="noticeTag" class="pageTag">
-                通知中心(預留)
-            </div> -->
         </div>
 
         <div class="pageArea">
-            <div id="infoPage" class="pageContainer actived">
+            <div id="infoPage" class="pageContainer">
                 <div class="d-flex">
                     <div>
                         <div class="pictureContainer my-4 mx-100px">
@@ -291,6 +282,12 @@
 <script>
     // initialize
     $(function () {
+        let activeTab = localStorage.getItem('activeTab');
+        if (activeTab) {
+            $(`#${activeTab}`).click();
+        } else {
+            $('#infoTag').click();
+        }
         resize();
     });
 
@@ -359,6 +356,9 @@
     let pageContainers = $('.pageArea').children('.pageContainer');
     $.each(pageTags, function (ind, val) {
         $(val).on('click', function (event) {
+
+            localStorage.setItem('activeTab', $(val).attr('id'));
+
             $.each(pageTags, function (i, v) {
                 $(v).removeClass('actived');
             });
@@ -679,7 +679,8 @@
         let fileName = $('#avatarRound').val();
         let idxDot = fileName.lastIndexOf(".") + 1;
         let extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
-        let allow = imgTypes.find(elm => elm == extFile);
+        let allow = $.inArray(extFile, imgTypes);
+
         if (allow >= 0) {
             newAvatar = true;
             $('#avatarBtn').html('確認並上傳');

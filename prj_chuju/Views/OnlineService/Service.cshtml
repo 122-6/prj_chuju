@@ -1,0 +1,215 @@
+﻿
+@{
+    ViewBag.Title = "Service";
+}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+<script src="~/javascript/jquery-3.6.0.js"></script>
+<link rel="stylesheet" href="~/style/layoutStyle.css">
+<link href="~/style/Service.css" rel="stylesheet" />
+
+<nav class="_LayoutElement" style="box-shadow: 3px 0px 5px rgba(0,0,0,.4);">
+    <div class="d-flex px-4 top-nav align-items-center justify-content-between _LayoutElement" style="height:100px;">
+        <div class="top-nav-left col-1 _LayoutElement">
+            <a class="d-flex justify-content-center _LayoutElement" href="/">
+                <img class="logo _LayoutElement" src="/images/logo/logo_col.png" alt="雛區廣告Logo">
+            </a>
+        </div>
+        <div class="top-nav-center row justify-content-between col-8 _LayoutElement">
+            @Html.ActionLink("買房第一站", "Index", "BuyHouseFirst")
+            @Html.ActionLink("關於雛居", "Index", "AboutUs")
+            @Html.ActionLink("房市新訊", "Index", "MarketNews")
+            @Html.ActionLink("建案列表", "Index", "BuildingList")
+            <a href="~/Activity/全部活動">活動快報</a>
+            @Html.ActionLink("建案搜尋", "Index", "BuildingCase")
+            @Html.ActionLink("會員專區", "Index", "Account")
+        </div>
+        <div class="top-nav-right row align-items-center justify-content-center col-2 _LayoutElement">
+            <a href="https://www.facebook.com/%E9%9B%9B%E5%B1%85%E5%BB%A3%E5%91%8A-107555398504019"><img class="iconImg _LayoutElement" src="/images/ICON/facebook.png" alt=""></a>|
+            <a href="https://lin.ee/H4RrV2z "><img class="iconImg _LayoutElement" src="/images/ICON/line.png" alt=""></a>
+            <a href="#"><img class="iconImg _LayoutElement" src="/images/ICON/search.png" alt=""></a>
+        </div>
+    </div>
+
+</nav>
+
+<div>
+    <div class="mainService">
+        <div class="view my-50">
+            <div class="client-nav"></div>
+            <div class="message-view">
+                <div class="message-box"></div>
+                <div class="text-input">
+                    <input type="text" name="message" id="message">
+                    <button id="sendmessage">傳送</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+        $(document).ready(function () {
+            var chat = $.connection.chatHub;
+            var currentId;
+
+            chat.client.newClient = function (clientId, count) {
+                $(".client-nav").append(`<div class="online"><button data-tablink="${clientId}">Client</button><i class="${clientId}">新訊息</i></div>`);
+
+                $(".message-box").append(`<div class="message" id="${clientId}"><div class="client"></div><div class="service"></div></div>`);
+                $("#" + clientId).hide();
+            };
+
+            chat.client.sendMessage = function (message, clientId) {
+                if (!($(`.${clientId}`).parent().hasClass("active"))) {
+                    $(`.${clientId}`).show();
+                }
+                $(`#${clientId} .client`).append('<div class="content" >' + htmlEncode(message) + '</div>');
+
+            };
+
+            $(".client-nav").on('click', '.online', function () {
+                $(this).addClass("active").siblings(".active").removeClass("active");
+                $(`#${$(this).find("button").data("tablink")}`).show().siblings(".message").hide();
+                currentId = $(this).find("button").data("tablink");
+                $($(this).find("i")).hide();
+            });
+
+            $.connection.hub.start().done(function () {
+                chat.server.serviceConnection();
+
+                $('#sendmessage').click(function () {
+                    chat.server.serviceSend($('#message').val(), currentId);
+                    $(`#${currentId}>.service`).append('<div class="content" >' + htmlEncode($('#message').val()) + '</div>')
+                    $('#message').val('').focus();
+                });
+                $('#message').keydown(function (event) {
+                    if (event.keyCode == 13) {
+                        chat.server.serviceSend($('#message').val(), currentId);
+                        $(`#${currentId}>.service`).append('<div class="content" >' + htmlEncode($('#message').val()) + '</div>')
+                        $('#message').val('').focus();
+                    }
+                });
+            });
+
+            function htmlEncode(value) {
+                var encodedValue = $('<sapn>').text(value).html();
+                return encodedValue;
+            }
+
+            function findTabLink() {
+                $(".active").find("button").data("tablink");
+            }
+        });
+    </script>
+</div>
+
+<footer class="_LayoutElement">
+    <div class="container-fluid w-100 py-10 _LayoutElement">
+        <div class="row justify-content-center foot-link _LayoutElement">
+            <div class="col-2 border-right _LayoutElement">
+                <div class="row _LayoutElement">
+                    <img class="w-70 mb-4 _LayoutElement" src="/images/logo/logo_row.png" alt="">
+                </div>
+                <div class="row _LayoutElement">
+                    台北市松山區敦化北路260號7樓
+                </div>
+                <div class="row _LayoutElement">
+                    (02)8712-8888
+                </div>
+                <div class="row _LayoutElement">
+                    91laroslin@gmail.com
+                </div>
+                <div class="row _LayoutElement">
+                    雛居廣告
+                </div>
+            </div>
+            <div class="col-3 border-right _LayoutElement">
+                <div class="row _Layout">
+                    <h4 class="title _LayoutElement">快速連結</h4>
+                </div>
+                <div class="row _LayoutElement">
+                    <div class="link _LayoutElement">@Html.ActionLink("首頁", "Index", "Home")</div>
+                    <div class="link _LayoutElement">@Html.ActionLink("買房新訊", "Index", "MarketNews")</div>
+                    <div class="link _LayoutElement">@Html.ActionLink("使用者條款", "Index", "Home")</div>
+                </div>
+                <div class="row _LayoutElement">
+                    <div class="link _LayoutElement">@Html.ActionLink("關於我們", "Index", "AboutUs")</div>
+                    <div class="link _LayoutElement">@Html.ActionLink("買房第一站", "Index", "BuyHouseFirst")</div>
+                </div>
+                <div class="row _LayoutElement">
+                    <div class="link _LayoutElement">@Html.ActionLink("建案列表", "Index", "BuildingList")</div>
+                    <div class="link _LayoutElement">@Html.ActionLink("加入雛居", "Index", "Account")</div>
+                </div>
+                <div class="row _LayoutElement">
+                    <div class="link _LayoutElement"><a href="~/Activity/全部活動">活動快報</a></div>
+                    <div class="link _LayoutElement">@Html.ActionLink("隱私權政策", "Index", "Home")</div>
+                </div>
+            </div>
+            <div class="col-2 border-right _LayoutElement">
+                <div class="row _LayoutElement">
+                    <h4 class="title _LayoutElement">建案搜尋</h4>
+                </div>
+                <div class="row _LayoutElement">
+                    <div class="link _LayoutElement"><a href="#">台北市</a></div>
+                    <div class="link _LayoutElement"><a href="#">中部地區</a></div>
+                </div>
+                <div class="row _LayoutElement">
+                    <div class="link _LayoutElement"><a href="#">新北市</a></div>
+                    <div class="link _LayoutElement"><a href="#">南部地區</a></div>
+                </div>
+                <div class="row _LayoutElement">
+                    <div class="link _LayoutElement"><a href="#">桃竹地區</a></div>
+                    <div class="link _LayoutElement"><a href="#">其他地區</a></div>
+                </div>
+            </div>
+            <div class="col-2 followUs _LayoutElement">
+                <div class="row _LayoutElement">
+                    <h4 class="title _LayoutElement">追蹤我們</h4>
+                </div>
+                <div class="d-flex mb-3 _LayoutElement">
+                    <div>
+                        <a class="d-flex align-items-center _LayoutElement" href="https://www.facebook.com/%E9%9B%9B%E5%B1%85%E5%BB%A3%E5%91%8A-107555398504019">
+                            <img class="iconImg _LayoutElement" src="/images/ICON/facebook.png" alt="">Facebook
+                        </a>
+                        <a class="d-flex align-items-center _LayoutElement" href="https://www.youtube.com/channel/UCo0Hgt38kaGUoUdSGWkNkhQ/videos">
+                            <img class="iconImg _LayoutElement" src="/images/ICON/youtube.png" alt="">Youtube
+                        </a>
+                    </div>
+                    <div>
+                        <a class="d-flex align-items-center _LayoutElement" href="https://lin.ee/H4RrV2z ">
+                            <img class="iconImg _LayoutElement" src="/images/ICON/line.png" alt="">Line
+                        </a>
+                        <a class="d-flex align-items-center _LayoutElement" href="https://www.instagram.com/chuju.house/">
+                            <img class="iconImg _LayoutElement" src="/images/ICON/instagram.png" alt="">Instagram
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="row emailto _LayoutElement">
+                    <input type="text" name="_Layoutemail" id="_Layoutemail" placeholder="請輸入電子信箱" class="border-0 _LayoutElement">
+                    <button class="bg-transparent border-0 text-white _LayoutElement">
+                        <i class="fas fa-envelope _LayoutElement"></i>
+                        訂閱電子報
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid w-100 py-10 end text-center _LayoutElement">
+        雛居廣告股份有限公司 版權所有 ©CHU-GI CORP. | 電話：(02)8712-888 | 地址：台北市松山區敦化北路260號7樓
+    </div>
+</footer>

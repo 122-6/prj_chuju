@@ -47,6 +47,7 @@
                 <a href="~/Activity/全部活動">活動快報</a>
                 @Html.ActionLink("建案搜尋", "Index", "BuildingCase")
                 @Html.ActionLink("會員專區", "Index", "Account")
+                @Html.ActionLink("客服後台", "Service", "OnlineService")
             </div>
             <div class="top-nav-right row align-items-center justify-content-center col-2 _LayoutElement">
                 <a href="https://www.facebook.com/%E9%9B%9B%E5%B1%85%E5%BB%A3%E5%91%8A-107555398504019"><img class="iconImg _LayoutElement" src="/images/ICON/facebook.png" alt=""></a>|
@@ -86,7 +87,7 @@
                         <h4 class="title _LayoutElement">快速連結</h4>
                     </div>
                     <div class="row _LayoutElement">
-                        <div class="link _LayoutElement">@Html.ActionLink("首頁","Index","Home")</div>
+                        <div class="link _LayoutElement">@Html.ActionLink("首頁", "Index", "Home")</div>
                         <div class="link _LayoutElement">@Html.ActionLink("買房新訊", "Index", "MarketNews")</div>
                         <div class="link _LayoutElement">@Html.ActionLink("使用者條款", "Index", "Home")</div>
                     </div>
@@ -178,8 +179,74 @@
         });
 
     </script>
+
+    @*線上客服*@
+
+    <link href="~/style/Client.css" rel="stylesheet" />
+    <div class="mainClient">
+        <button class="btnTalk">
+            客服
+        </button>
+        <div class="talk-view disppear" id="talk-view">
+            <div class="title">雛居線上客服</div>
+            <div class="message-box">
+                <div class="service"></div>
+                <div class="client"></div>
+            </div>
+            <div class="input-box">
+                <input type="hidden" id="clientID" value="" />
+                <input type="text" id="message" placeholder="想問什麼呢？" />
+                <button id="sendmessage">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+        $(function () {
+            var chat = $.connection.chatHub;
+            chat.client.sendMessage = function (message) {
+                $(".service").append('<div class="content" >' + htmlEncode(message) + '</div>');
+            };
+
+            chat.client.newClient = function (clientID) {
+                $("#clientID").val(clientID);
+            }
+
+            $.connection.hub.start().done(function () {
+                chat.server.clientConnection();
+                $('#sendmessage').click(function () {
+                    chat.server.clientSend($('#message').val(), $("#clientID").val());
+                    $(".client").append('<div class="content" >' + htmlEncode($('#message').val()) + '</div>');
+                    $('#message').val('').focus();
+                });
+
+                $('#message').keydown(function (event) {
+                    if (event.keyCode == 13) {
+                        chat.server.clientSend($('#message').val(), $("#clientID").val());
+                        $(".client").append('<div class="content" >' + htmlEncode($('#message').val()) + '</div>');
+                        $('#message').val('').focus();
+                    }
+                });
+            });
+            function htmlEncode(value) {
+                var encodedValue = $('<span>').text(value).html();
+                return encodedValue;
+            };
+
+            $(".btnTalk").click(function () {
+                if ($("#talk-view").hasClass("disppear")) {
+                    $("#talk-view").removeClass("disppear");
+                }
+                else {
+                    $("#talk-view").addClass("disppear")
+                }
+
+            });
+        });
+    </script>
 </body>
-
-
-
 </html>

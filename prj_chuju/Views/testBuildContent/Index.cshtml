@@ -66,7 +66,7 @@
         text-align: center;
     }
 
-    .content {
+    .wrapper_content .content {
         width: 637px;
         font-size: 19px;
         line-height: 40px;
@@ -224,7 +224,7 @@
     .wrapper_build_news .box {
         width: 431px;
         margin-top: 79px;
-        margin-bottom:88px;
+        margin-bottom: 88px;
     }
 
     .wrapper_build_news .textbox .title {
@@ -250,7 +250,6 @@
     .wrapper_build_news .heart {
         width: 15px;
         margin-right: 5px;
-        padding-bottom: 2px;
     }
 
     .wrapper_build_news .cart_1 {
@@ -259,12 +258,108 @@
     }
 
     .wrapper_build_news .cart_2 {
+        text-decoration: none;
         color: #706139;
         text-align: end;
     }
 
-    .section_1 {
-        background-image: url(~/images/建案內容/pexels-vecislavas-popa-1643383.png)
+    .signup {
+        background-image: url('../../images/建案內容/pexels-vecislavas-popa-1643383.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 50%;
+        padding: 100px 0px 150px;
+        text-align: center;
+    }
+
+        .signup .title {
+            color: #FFFFFF;
+            font-size: 40px;
+            font-weight: 500;
+            margin-bottom: 35px;
+        }
+
+    .wrapper_signup {
+        margin: 0px auto;
+        width: 865px;
+        text-align: start;
+    }
+
+    .signup .info {
+        color: #FF0000;
+        font-weight: 300;
+        width: 100%;
+    }
+
+    .signup .box {
+        width: 411px;
+    }
+
+    #name, #tel, #email, #signup_county, #signup_city {
+        color: #FFFFFF;
+        font-size: 20px;
+        background: transparent;
+        border: 2px solid #FFFFFF;
+        width: 100%;
+        padding: 6px 10px;
+        margin-bottom: 29px;
+    }
+
+    #code {
+        color: #FFFFFF;
+        font-size: 20px;
+        background: transparent;
+        border: 2px solid #FFFFFF;
+        width: 239px;
+        padding: 6px 10px;
+    }
+
+    #getCode {
+        width: 144px;
+        height: 46px;
+        color: #FFFFFF;
+        background: #706139;
+        font-size: 20px;
+    }
+
+    #signup_county option, #signup_city option {
+        color: #383838;
+    }
+
+    .check_signup_box {
+        margin-top: -9px;
+        margin-bottom: 71px;
+    }
+
+    #check {
+        width: 18px;
+    }
+
+    .checkbox_label {
+        color: #FFFFFF;
+    }
+
+    .signup .member {
+        color: #FFFFFF;
+        text-align: end;
+    }
+
+    .signup .click_signup {
+        color: red;
+        text-decoration: underline;
+    }
+
+    .signup .signup_btn_box {
+       text-align:center;
+    }
+
+    .signup .signup_btn {
+        width: 179px;
+        height: 49px;
+        color: #FFFFFF;
+        background: transparent;
+        border: 2px solid #FFFFFF;
+        font-size: 20px;
     }
 </style>
 <main>
@@ -608,14 +703,15 @@
                             </a>
                         </div>
                     </div>
-                </div>   <div class="box">
+                </div>
+                <div class="box">
                     <div class="imgbox">
                         <img class="picture" src="~/images/建案內容/新屋-3.png" />
                     </div>
                     <div class="textbox d-flex justify-content-space-between">
                         <div>
                             <div class="title">
-                               南京御邸
+                                南京御邸
                             </div>
                             <div class="address d-flex">
                                 <div class="room">
@@ -631,8 +727,8 @@
                                 </div>
                                 <span>加入收藏</span>
                             </a>
-                            <a href="#">
-                                <div class="cart_2">預約鑑賞</div>
+                            <a href="#" class="cart_2">
+                                <div>預約鑑賞</div>
                             </a>
                         </div>
                     </div>
@@ -640,8 +736,45 @@
             </div>
         </div>
     </section>
-    <section class="section_1">
-        <div>
+    <section class="signup">
+        <div class="wrapper title">線上預約</div>
+        <div class="wrapper_signup">
+            <form>
+                <label class="info">每個欄位都是必填欄位</label>
+                <div class="content d-flex justify-content-space-between">
+                    <div class="box">
+                        <input id="name" type="text" placeholder="姓名" />
+                        <input id="tel" type="tel" placeholder="行動電話" />
+                        <div class="codebox d-flex justify-content-space-between">
+                            <input id="code" type="text" placeholder="輸入驗證碼" />
+                            <a class="d-flex justify-content-center align-items-center" id="getCode">獲取驗證碼</a>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <input id="email" type="email" placeholder="E-mail" />
+                        <select id="signup_county">
+                            <option>居住縣市</option>
+                            <option value="臺北市" data-index="0">臺北市</option>
+                        </select>
+                        <select id="signup_city">
+                            <option>鄉鎮縣市</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="check_signup_box d-flex justify-content-space-between">
+                    <div>
+                        <input id="check" type="checkbox" />
+                        <label class="checkbox_label">我已閱讀並同意服務條款與隱私權聲明</label>
+                    </div>
+                    <div>
+                        <span class="member">我已經是會員：</span>
+                        <a href="#" class="click_signup">點我登入</a>
+                    </div>
+                </div>
+                <div class="signup_btn_box">
+                    <button class="signup_btn" type="submit">立即預約</button>
+                </div>
+            </form>
         </div>
     </section>
 </main>

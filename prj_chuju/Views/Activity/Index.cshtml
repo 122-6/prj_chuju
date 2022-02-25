@@ -65,9 +65,9 @@
         width: 100%;
     }
 
-    .picture:hover{
-        opacity:0.8;
-    }
+        .picture:hover {
+            opacity: 0.8;
+        }
 
     .information {
         background: #E7E7E7;
@@ -125,79 +125,76 @@
     }
 </style>
 <script src="~/javascript/jquery-3.6.0.min.js"></script>
-<body>
-    <main>
-        <div class="d-flex justify-content-end sticky">
-            <div class="d-flex tag-group justify-content-space-between">
-                <div class="swiper"><a href="~/Activity/全部活動" class="tag text-decoration-none">全部活動</a></div>
-                <div class="swiper"><a href="~/Activity/即將開始" class="tag text-decoration-none">即將開始</a></div>
-                <div class="swiper"><a href="~/Activity/執行中" class="tag text-decoration-none">執行中</a></div>
-                <div class="swiper"><a href="~/Activity/已結束" class="tag text-decoration-none">已結束</a></div>
-            </div>
+<main>
+    <div class="d-flex justify-content-end sticky">
+        <div class="d-flex tag-group justify-content-space-between">
+            <div class="swiper"><a href="~/Activity/全部活動" class="tag text-decoration-none">全部活動</a></div>
+            <div class="swiper"><a href="~/Activity/即將開始" class="tag text-decoration-none">即將開始</a></div>
+            <div class="swiper"><a href="~/Activity/執行中" class="tag text-decoration-none">執行中</a></div>
+            <div class="swiper"><a href="~/Activity/已結束" class="tag text-decoration-none">已結束</a></div>
         </div>
-        <div class="Activity-title">活動總覽</div>
-        <div class="container">
-            <div class="row justify-content-space-between">
-                @{ foreach (var item in Model.Item1)
+    </div>
+    <div class="Activity-title">活動總覽</div>
+    <div class="container">
+        <div class="row justify-content-space-between">
+            @{ foreach (var item in Model.Item1)
+                {
+                    string tag;
+                    if (DateTime.Now.Date >= item.startDate && DateTime.Now.Date <= item.endDate)
                     {
-                        string tag;
-                        if (DateTime.Now.Date >= item.startDate && DateTime.Now.Date <= item.endDate)
-                        {
-                            tag = "活動進行中";
-                            <script>
+                        tag = "活動進行中";
+                        <script>
                                   $(function () {
                                       $(".status_@item.Id").addClass("status-tag-now");
                                   });
-                            </script>
-                        }
+                        </script>
+                    }
 
-                        else
-                        {
-                            tag = "活動已結束";
-                            <script>
+                    else
+                    {
+                        tag = "活動已結束";
+                        <script>
                                 $(function () {
                                     $(".status_@item.Id").addClass("status-tag-end");
                                 });
-                            </script>
-                        }
-                        <div class="box">
-                            <a href="~/ActivityContent/@item.Id">
-                                <div class="imgbox">
-                                    <img class="picture" src="~/@item.picture" />
-                                </div>
-                            </a>
-                            <div id="abc" class="information d-flex justify-content-space-between">
-                                <div class="time d-flex align-items-center">
-                                    <img src="~/images/ActivityNews/clock.png" />@item.startDate.ToString("yyyy-MM-dd") ~ @item.endDate.ToString("yyyy-MM-dd")
-                                </div>
-                                <div class="status_@item.Id">@tag</div>
-                            </div>
-                        </div>
+                        </script>
                     }
+                    <div class="box">
+                        <a href="~/ActivityContent/@item.Id">
+                            <div class="imgbox">
+                                <img class="picture" src="~/@item.picture" />
+                            </div>
+                        </a>
+                        <div id="abc" class="information d-flex justify-content-space-between">
+                            <div class="time d-flex align-items-center">
+                                <img src="~/images/ActivityNews/clock.png" />@item.startDate.ToString("yyyy-MM-dd") ~ @item.endDate.ToString("yyyy-MM-dd")
+                            </div>
+                            <div class="status_@item.Id">@tag</div>
+                        </div>
+                    </div>
                 }
-            </div>
-        </div>
-        <div class="page-list d-flex justify-content-center">
-            @{
-                int previous = Model.Item4 - 1;
-                int next = Model.Item4 + 1;
-                if (previous < 1)
-                {
-                    previous = 1;
-                }
-
-                if (next > Model.Item3)
-                {
-                    next = Model.Item3;
-                }
-
-                <a href="~/Activity/@Model.Item2/1" class="page one text-decoration-none">1</a>
-                <a href="~/Activity/@Model.Item2/@previous" class="page previous text-decoration-none"><</a>
-                <a href="~/Activity/@Model.Item2/@Model.Item4" class="page page-select text-decoration-none">@Model.Item4</a>
-                <a href="~/Activity/@Model.Item2/@next" class="page next text-decoration-none">></a>
-                <a href="~/Activity/@Model.Item2/@Model.Item3" class="page last text-decoration-none">@Model.Item3</a>
             }
         </div>
-    </main>
-</body>
+    </div>
+    <div class="page-list d-flex justify-content-center">
+        @{
+            int previous = Model.Item4 - 1;
+            int next = Model.Item4 + 1;
+            if (previous < 1)
+            {
+                previous = 1;
+            }
 
+            if (next > Model.Item3)
+            {
+                next = Model.Item3;
+            }
+
+            <a href="~/Activity/@Model.Item2/1" class="page one text-decoration-none">1</a>
+            <a href="~/Activity/@Model.Item2/@previous" class="page previous text-decoration-none"><</a>
+            <a href="~/Activity/@Model.Item2/@Model.Item4" class="page page-select text-decoration-none">@Model.Item4</a>
+            <a href="~/Activity/@Model.Item2/@next" class="page next text-decoration-none">></a>
+            <a href="~/Activity/@Model.Item2/@Model.Item3" class="page last text-decoration-none">@Model.Item3</a>
+        }
+    </div>
+</main>

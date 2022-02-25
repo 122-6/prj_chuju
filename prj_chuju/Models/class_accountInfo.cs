@@ -11,7 +11,7 @@ namespace prj_chuju.Models
     public class class_accountInfo
     {
         public int id;
-        public string accountName;
+        public string permission;
         public string userPassword;
         public string email;
         public string userName;
@@ -25,7 +25,7 @@ namespace prj_chuju.Models
         public class_accountInfo()
         {
             id = -1;
-            accountName = "account";
+            permission = "client";
             userPassword = "initPassword";
             email = "initEmail";
             userName = "initUserName";
@@ -43,7 +43,7 @@ namespace prj_chuju.Models
             region = reader["region"].Equals(DBNull.Value) ? -1 : Convert.ToInt32(reader["region"]);
             avatar = reader["avatar"].Equals(DBNull.Value) ? -1 : Convert.ToInt32(reader["avatar"]);
 
-            accountName = reader["accountName"].ToString();
+            permission = reader["permission"].ToString();
             userPassword = reader["userPassword"].ToString();
             email = reader["email"].ToString();
             userName = reader["userName"].ToString();
@@ -83,8 +83,8 @@ namespace prj_chuju.Models
         }
         public void create(HttpRequestBase req)
         {
-            string cmdstr = "insert into accountInfo (accountName,userPassword,userName,email,cellphone,birthday) " +
-                "values (@accountNamePara,@userPasswordPara,@userNamePara,@emailPara,@cellphonePara,@birthdyPara)";
+            string cmdstr = "insert into accountInfo (permission,userPassword,userName,email,cellphone,birthday) " +
+                "values (@permissionPara,@userPasswordPara,@userNamePara,@emailPara,@cellphonePara,@birthdyPara)";
 
             string password = req.Form["password"];
             string userName = req.Form["userName"];
@@ -94,7 +94,7 @@ namespace prj_chuju.Models
 
             SqlConnection con = new SqlConnection(dbConnectioniStr);
             SqlCommand cmd = new SqlCommand(cmdstr, con);
-            cmd.Parameters.AddWithValue("@accountNamePara", "account");
+            cmd.Parameters.AddWithValue("@permissionPara", "client");
             cmd.Parameters.AddWithValue("@userPasswordPara", password);
             cmd.Parameters.AddWithValue("@userNamePara", userName);
             cmd.Parameters.AddWithValue("@emailPara", userEmail);
@@ -110,7 +110,7 @@ namespace prj_chuju.Models
             catch(Exception ex)
             {
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@accountNamePara", "account");
+                cmd.Parameters.AddWithValue("@permissionPara", "client");
                 cmd.Parameters.AddWithValue("@userPasswordPara", password);
                 cmd.Parameters.AddWithValue("@userNamePara", userName);
                 cmd.Parameters.AddWithValue("@emailPara", userEmail);
@@ -324,6 +324,48 @@ namespace prj_chuju.Models
             SqlCommand cmd = new SqlCommand(sqlstr, con);
             cmd.Parameters.AddWithValue("@avatarIDPara", avatarID);
             cmd.Parameters.AddWithValue("@userIDPara", userID);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+
+        // 忘記密碼系統
+        public void addForgetCode(int theid,string code)
+        {
+            string sqlstr = "insert into forgetCode (accountID,theCode) values (@idPara,@codePara)";
+            SqlConnection con = new SqlConnection(dbConnectioniStr);
+            SqlCommand cmd = new SqlCommand(sqlstr, con);
+            cmd.Parameters.AddWithValue("@idPara", theid);
+            cmd.Parameters.AddWithValue("@codePara", code);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+        public int getIDByCode(string code)
+        {
+            int output = -1;
+            string sqlstr = "select accountID from forgetCode where theCode = @codePara";
+            SqlConnection con = new SqlConnection(dbConnectioniStr);
+            SqlCommand cmd = new SqlCommand(sqlstr, con);
+            SqlDataReader reader;
+
+            con.Open();
+            cmd.Parameters.AddWithValue("@codePara", code);
+            reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                output = Convert.ToInt32(reader["accountID"]);
+            }
+            con.Close();
+            return output;
+        }
+
+        public void removeCodeByID(int theid)
+        {
+            string sqlstr = "delete from forgetCode where accountID = @idPara";
+            SqlConnection con = new SqlConnection(dbConnectioniStr);
+            SqlCommand cmd = new SqlCommand(sqlstr, con);
+            cmd.Parameters.AddWithValue("@idPara", theid);
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();

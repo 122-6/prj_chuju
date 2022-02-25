@@ -15,7 +15,7 @@ namespace prj_chuju.Controllers
         public ActionResult Index(string tag, int page = 1)
         {
             List<class_ActivityOutline> list = default;
-            int count = default;
+            int max_page = default;
 
             string allSql = $"select * from ActivityOutline order by endDate desc offset {(page - 1) * 4} rows fetch next 4 rows only;";
             string all_countSql = "select count(*) from ActivityOutline";
@@ -30,22 +30,22 @@ namespace prj_chuju.Controllers
             {
                 case "即將開始":
                     list = ListSql(soonSql);
-                    count = CountSql(soon_countSql);
+                    max_page = CountSql(soon_countSql);
                     break;
                 case "執行中":
                     list = ListSql(nowSql);
-                    count = CountSql(now_countSql);
+                    max_page = CountSql(now_countSql);
                     break;
                 case "已結束":
                     list = ListSql(endSql);
-                    count = CountSql(end_countSql);
+                    max_page = CountSql(end_countSql);
                     break;
                 default:
                     list = ListSql(allSql);
-                    count = CountSql(all_countSql);
+                    max_page = CountSql(all_countSql);
                     break;
             }
-            Tuple<List<class_ActivityOutline>, string, int, int> data = new Tuple<List<class_ActivityOutline>, string, int, int>(list, tag, count, page);
+            Tuple<List<class_ActivityOutline>, string, int, int> data = new Tuple<List<class_ActivityOutline>, string, int, int>(list, tag, max_page, page);
 
             return View(data);
         }

@@ -43,6 +43,13 @@ namespace prj_chuju.Controllers
             }
             con.Close();
 
+            ViewBag.region = Request["region"];
+            ViewBag.area = Request["area"];
+            ViewBag.rooms = Request["rooms"];
+            ViewBag.status = Request["status"];
+            ViewBag.tags = Request["tags"];
+
+
             return View(list);
         }
 

@@ -216,6 +216,14 @@ function removeXinArray(x, array) {
         }
     }
 }
+function selectStrToArray(str) {
+    if (str.length == 1) return [0];
+    let res = [];
+    for (let i = 1; i < str.length; i++) {
+        res.push(parseInt(str[i]));
+    }
+    return res;
+}
 
 const nullSelectorObj = {
     region: -1,

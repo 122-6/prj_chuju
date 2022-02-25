@@ -4,6 +4,7 @@
 }
 <link rel="stylesheet" href="~/style/buildingsearch.css" />
 <script src="~/Scripts/buildingSearch.js"></script>
+
 <main>
     <div class="btn-select">
 
@@ -50,7 +51,7 @@
     </div>
 
     <div id="casesContainer" class="cards py-25 btn-select d-flex justify-content-center flex-wrap">
-        @foreach (var item in Model)
+        @*@foreach (var item in Model)
         {
             <div class="my-card">
                 <div class="d-flex p-3">
@@ -73,7 +74,7 @@
                 </div>
             </div>
 
-        }
+        }*@
 
     </div>
 
@@ -81,9 +82,20 @@
 </main>
 
 <script>
-    let selector = new selectorObj(nullSelectorObj);
+    let ViewBagExists = '@ViewBag.region'.length > 0;
+    let bagInfo = {
+        region: parseInt('@ViewBag.region'),
+        area: parseInt('@ViewBag.area'),
+        rooms: selectStrToArray('@ViewBag.rooms'),
+        status: selectStrToArray('@ViewBag.status'),
+        tags: selectStrToArray('@ViewBag.tags'),
+    }
+    let selectorInitializer = ViewBagExists ? bagInfo : nullSelectorObj;
+
+    let selector = new selectorObj(selectorInitializer);
     $(function () {
         initSelector(selector);
+        selector.update();
     })
     function selectorObj(initObj) {
         let self = this;

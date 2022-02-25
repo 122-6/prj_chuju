@@ -48,99 +48,59 @@
                     <h2>買新房 找雛居 台灣首家上市建築代銷 雛居團隊</h2>
                 </div>
             </div>
-            <div class="search-selected align-items-center">
-                <div>請選擇搜尋條件：</div>
-                <div id="search-selected"></div>
+        <form id="buildingSearchForm" action="@Url.Action("Index","BuildingCase")" method="post">
+            <div class="btn-select">
+                <!--地區-->
+                <div class="option mb-3">
+                    <h5>請選擇地區 </h5>
+                    <div id="regionRegion" class="selectRegion">
+                    </div>
+                </div>
+                <!--坪數-->
+                <div class="option mb-3">
+                    <h5>坪數</h5>
+                    <div id="areaRegion" class="selectRegion">
+                    </div>
+                </div>
+                <!--房型-->
+                <div class="option mb-3">
+                    <h5>
+                        房型<span>(可複選)</span>
+                    </h5>
+                    <div id="roomsRegion" class="selectRegion">
+                    </div>
+                </div>
+                <!--屋況-->
+                <div class="option mb-3">
+                    <h5>
+                        屋況<span>(可複選)</span>
+                    </h5>
+                    <div id="statusRegion" class="selectRegion">
+                    </div>
+                </div>
+                <!--特性-->
+                <div class="option mb-3">
+                    <h5>
+                        特性<span>(可複選)</span>
+                    </h5>
+                    <div id="tagsRegion" class="selectRegion">
+                    </div>
+                </div>
             </div>
-            <form method="post" action="Home/Index">
-                <div class="btn-select">
-                    <div class="city" id="city">
-                        <fieldset>
-                            <span>縣市</span>
-                            <input type="hidden" id="cityResult" name="縣市" />
-                            <input type="button" value="臺北市">
-                            <input type="button" value="新北市">
-                            <input type="button" value="桃園市">
-                            <input type="button" value="新竹市">
-                            <input type="button" value="新竹縣">
-                            <input type="button" value="臺中市">
-                            <input type="button" value="臺南市">
-                            <input type="button" value="高雄市">
-                            <input type="button" value="基隆市">
-                            <input type="button" value="嘉義縣">
-                            <input type="button" value="彰化縣">
-                        </fieldset>
-                    </div>
-                    <div class="area">
-                        <fieldset id="area-fieldset">
-                            <span>地區</span>
-                            <input type="hidden" id="areaResult" name="地區" />
-                            <input type="button" value="不限">
-                            <!--依縣市動態新增按鈕-->
-                        </fieldset>
-                    </div>
-                    <div class="size">
-                        <fieldset>
-                            <span>坪數</span>
-                            <input type="hidden" id="sizeResult" name="坪數規劃" />
-                            <input type="button" value="不限">
-                            <input type="button" value="15坪以下">
-                            <input type="button" value="15坪-20坪">
-                            <input type="button" value="20坪-30坪">
-                            <input type="button" value="30坪-40坪">
-                            <input type="button" value="40坪以上">
-                            <input type="button" value="自訂">
-                        </fieldset>
-                    </div>
-                    <div class="room-type">
-                        <fieldset>
-                            <span>房型</span>
-                            <input type="hidden" id="roomResult" name="房型規劃" />
-                            <input type="button" value="不限">
-                            <input type="button" value="套房">
-                            <input type="button" value="2房">
-                            <input type="button" value="3房">
-                            <input type="button" value="4房以上">
-                            <input type="button" value="透天">
-                        </fieldset>
-                    </div>
-                    <div class="house-type">
-                        <fieldset>
-                            <span>屋況</span>
-                            <input type="hidden" id="houseResult" name="現況" />
-                            <input type="button" value="不限">
-                            <input type="button" value="預售屋">
-                            <input type="button" value="新成屋">
-                        </fieldset>
-                    </div>
-                    <div class="region">
-                        <fieldset>
-                            <span>特性</span>
-                            <input type="hidden" id="regionResult" name="特點" />
-                            <input type="button" value="不限">
-                            <input type="button" value="學區宅">
-                            <input type="button" value="交通宅">
-                            <input type="button" value="景觀宅">
-                            <input type="button" value="制震宅">
-                            <input type="button" value="防疫宅">
-                            <input type="button" value="低總價">
-                            <input type="button" value="低公設">
-                            <input type="button" value="低首付">
-                            <input type="button" value="防疫宅">
-                            <input type="button" value="重劃區">
-                        </fieldset>
-                    </div>
-                </div>
-                <div class="search row justify-content-center">
-                    <button>
-                        <i class="fas fa-search"></i>
-                        尋找建案
-                    </button>
-                </div>
-            </form>
+            <div class="search row justify-content-center">
+                <button id="submitSearchBtn" style="padding:2px 15px;">
+                    <i class="fas fa-search"></i>
+                    尋找建案
+                </button>
+            </div>
+            <input type="hidden" id="toSearchRegion" name="region" />
+            <input type="hidden" id="toSearchArea" name="area" />
+            <input type="hidden" id="toSearchRooms" name="rooms" />
+            <input type="hidden" id="toSearchStatus" name="status" />
+            <input type="hidden" id="toSearchTags" name="tags" />
+        </form>
         </div>
     </div>
-    
 
 
     @*這裡是房市新訊的部分*@

@@ -1,184 +1,211 @@
-        /*通用CSS*/
-        * {
-            margin: 0;
-        }
+/*通用CSS*/
+* {
+    margin: 0;
+}
 
-        .py-50 {
-            padding-top: 50px;
-            padding-bottom: 50px;
-        }
+.py-50 {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
 
-        .py-10 {
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
+.py-10 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 
-        /*nav*/
-        .top-nav {           
-            height: 70px;           
-            margin: auto;
-        }
+/*nav*/
+.top-nav {           
+    height: 70px;           
+    margin: auto;
+}
 
-        .top-nav-left {
-            color: #5B5B5B;           
-        }
+.top-nav-left {
+    color: #5B5B5B;           
+}
 
-        .top-nav-right i {
-            margin: 10px;
-            font-size: 25px;
-        }
+.top-nav-right i {
+    margin: 10px;
+    font-size: 25px;
+}
 
-        nav a {
-            color: #5B5B5B;
-            font-family: '微軟正黑體'
-        } 
+nav a {
+    color: #5B5B5B;
+    font-family: '微軟正黑體'
+} 
         
-        /*main*/
-        main h1, main h2 {
-            font-weight: bold;
-            color: white;
-            text-shadow: 1px 1px 5px #272727;
-        }
+/*main*/
+main h1, main h2 {
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 5px #272727;
+}
 
-        .row-title {
-            width:fit-content;
-        }
+.row-title {
+    width:fit-content;
+}
 
-        .search-selected{
-            display: flex;
-            border: 2px solid #706139;
-            height: 40px;
-            color: #706139;
-            padding-left: 10px;
-            margin-bottom: 5px;
-        }
+.search-selected{
+    display: flex;
+    border: 2px solid #706139;
+    height: 40px;
+    color: #706139;
+    padding-left: 10px;
+    margin-bottom: 5px;
+}
 
-        .title-top, .title-bottom {
-            display: flex;
-            justify-content: center;
-            color: white;
-        }
+.title-top, .title-bottom {
+    display: flex;
+    justify-content: center;
+    color: white;
+}
 
-        .btn-select {
-            color: #706139;
-            border: 2px solid #706139;
-            padding: 20px 20px 20px 30px;
-        }
+.btn-select {
+    color: #706139;
+    border: 2px solid #706139;
+    padding: 20px 20px 20px 30px;
+}
 
-        .btn-select span {
-            font-weight: bold;
-            font-size: 1.2em;
-        }
+.btn-select span {
+    font-weight: bold;
+    font-size: 1.2em;
+}
 
-        .btn-select input {
-            background-color: transparent;
-            border: none;
-            color: #706139;
-            cursor: pointer;
-        }
+.btn-select input {
+    background-color: transparent;
+    border: none;
+    color: #706139;
+    cursor: pointer;
+}
 
-        .btn-select input:focus {
-            background-color: white;
-            color: #706139;
-            border-radius: 5px;
-        }
+.btn-select input:focus {
+    background-color: white;
+    color: #706139;
+    border-radius: 5px;
+}
 
-        .search>button {
-            margin: 20px;
-            border: none;
-            font-size: 2em;
-            color: white;
-            background-color: #706139;
-            cursor: pointer;
-        }
+.search>button {
+    margin: 20px;
+    border: none;
+    font-size: 2em;
+    color: white;
+    background-color: #706139;
+    cursor: pointer;
+}
 
-        .search>button {
-            border-radius: 5px;
-            box-shadow: 0px 2px 2px #272727;
-        }
+.search>button {
+    border-radius: 5px;
+    box-shadow: 0px 2px 2px #272727;
+}
 
-        .news h5 {
-            font-weight: bold;
-        }
+.news h5 {
+    font-weight: bold;
+}
 
-        .news {
-            background-color:aquamarine;
-            padding: 30px 30px 30px 60px;
-            background-image: url(../images/P/pexels-gdtography-911758.png);
-        }
+.news {
+    background-color:aquamarine;
+    padding: 30px 30px 30px 60px;
+    background-image: url(../images/P/pexels-gdtography-911758.png);
+}
 
-        .news-img {
-            position: relative;
-            margin-top: 30px;
-        }
+.news-img {
+    position: relative;
+    margin-top: 30px;
+}
         
-        .news img {
-            margin-bottom: 30px;
-            width: 90%; 
-            height: auto;
-        }
+.news img {
+    margin-bottom: 30px;
+    width: 90%; 
+    height: auto;
+}
 
-        .news-content {
-            bottom: 0px;
-            left: 70px;
-            width: 60%;
-            position: absolute;
-            background-color: white;
-            border-radius: 10px;
-            font-size: 0.5em;
-            padding: 10px 5px 0 10px;
-        }
+.news-content {
+    bottom: 0px;
+    left: 70px;
+    width: 60%;
+    position: absolute;
+    background-color: white;
+    border-radius: 10px;
+    font-size: 0.5em;
+    padding: 10px 5px 0 10px;
+}
 
-        .learn-more {
-            background-color: #706139;
-            width: 100px;
-            height: 40px;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
+.learn-more {
+    background-color: #706139;
+    width: 100px;
+    height: 40px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
 
-        .act {
-            background-color:cadetblue;
-            padding: 30px 30px 30px 60px;
-            background-image: url(../images/P/pexels-burst-373912.png);
-        }
+.act {
+    background-color:cadetblue;
+    padding: 30px 30px 30px 60px;
+    background-image: url(../images/P/pexels-burst-373912.png);
+}
 
-        .about-us {
-            background-image: url(../images/P/pexels-umar-mukhtar-1538177.png);
-            padding-top: 30px;
-            color: white;
-        }
+.about-us {
+    background-image: url(../images/P/pexels-umar-mukhtar-1538177.png);
+    padding-top: 30px;
+    color: white;
+}
 
-        /*footer*/
-        footer :link {
-            color: #706139;
-        }
+/*footer*/
+footer :link {
+    color: #706139;
+}
 
-        .border-right {
-            margin-right: 50px;
-        }
+.border-right {
+    margin-right: 50px;
+}
 
-        .foot-link .row>.link {
-            width: 30%;
-        }
+.foot-link .row>.link {
+    width: 30%;
+}
 
-        .foot-link {
-            color: #706139;
-        }
+.foot-link {
+    color: #706139;
+}
 
-        .emailto {
-            background-color: #706139;
-            padding: 2px 2px 2px 2px;
-            width: fit-content;
-            font-size: 15px;
-        }
+.emailto {
+    background-color: #706139;
+    padding: 2px 2px 2px 2px;
+    width: fit-content;
+    font-size: 15px;
+}
 
-        .end {
-            background-color: #706139;
-            color: white;
-        }
+.end {
+    background-color: #706139;
+    color: white;
+}
 
-        footer .title {
-            font-weight: bold;
-        }
+footer .title {
+    font-weight: bold;
+}
+
+
+/* 建案搜詢功能 */
+.option > h5{
+    font-size:1.2rem;
+    font-weight: bold;
+}
+.option > h5 > span {
+    font-size: 0.8rem;
+}
+
+.selectRegion {
+    padding-top: 1.2px;
+    padding-bottom: 1.2px;
+}
+
+    .selectRegion > fieldset > [type="button"] {
+        padding: 2px 7px;
+        margin-right: 10px;
+        border: 2px solid rgba(0,0,0,0);
+        border-radius: 3px;
+        background-color: transparent;
+    }
+    .selectRegion > fieldset > [type="button"].actived {
+        border-color: #908159;
+        background-color: rgba(200,185,147,.8);
+    }

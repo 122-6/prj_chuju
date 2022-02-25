@@ -21,11 +21,5 @@ namespace prj_chuju.Controllers
 
             return View();
         }
-        [HttpPost]
-        public ActionResult Index(buildingdb p)
-        {
-            dbchujuEntities1 db = new dbchujuEntities1();
-            return RedirectToAction("");
-        }
     }
 }

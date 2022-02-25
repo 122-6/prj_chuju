@@ -24,8 +24,14 @@ namespace prj_chuju.SignalR
             db.SaveChanges();
         }
 
-        public void ClientConnection()
+        public void ClientConnection(string userName)
         {
+            if (userName == null)
+            {
+                Random rnd = new Random();
+                userName = "訪客" + rnd.Next(1000, 9999);
+            }
+
             //client端連線資料傳入db
             ClientConnection tclient = new ClientConnection()
             {
@@ -42,7 +48,7 @@ namespace prj_chuju.SignalR
 
                 serviceID = Min.connectionId;
 
-                Clients.Client(serviceID).newClient(clientID);
+                Clients.Client(serviceID).newClient(clientID, userName);
                 Clients.Client(clientID).newClient(clientID, serviceID);
                 //service端有client加入連線後，連線人數+1
                 ServiceConnection tservice = db.ServiceConnection.FirstOrDefault(p => p.connectionId == serviceID);

@@ -60,11 +60,24 @@
     line-height: 80px;
     font-size: 2em;
     cursor: pointer;
+    position: relative;
+}
+
+.mainService .client-nav #cancel {
+    width: 10px;
+    height: 10px;
+    font-size: 8px;
+    color: darkred;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .mainService .online>i {
     width: 25px;
-    height: 10px;
+    height: 15px;
     border-radius: 10px;
     background-color: #FF2D2D;
     display: none;

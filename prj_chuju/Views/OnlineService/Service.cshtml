@@ -64,8 +64,8 @@
             var chat = $.connection.chatHub;
             var currentId = "";
 
-            chat.client.newClient = function (clientId) {
-                $(".client-nav").append(`<div class="online"><button data-tablink="${clientId}">Client</button><i class="${clientId}">新訊息</i></div>`);
+            chat.client.newClient = function (clientId, userName) {
+                $(".client-nav").prepend(`<div class="online"><button data-tablink="${clientId}">${userName}</button><i class="${clientId}">新訊息</i></div>`);
 
                 $(".message-box").append(`<div class="message" id="${clientId}"><div class="client"></div><div class="service"></div></div>`);
                 $("#" + clientId).hide();
@@ -84,7 +84,6 @@
                 $(`#${$(this).find("button").data("tablink")}`).show().siblings(".message").hide();
                 currentId = $(this).find("button").data("tablink");
                 $($(this).find("i")).hide();
-                console.log(currentId);
             });
 
             $.connection.hub.start().done(function () {
@@ -107,10 +106,6 @@
             function htmlEncode(value) {
                 var encodedValue = $('<sapn>').text(value).html();
                 return encodedValue;
-            }
-
-            function findTabLink() {
-                $(".active").find("button").data("tablink");
             }
         });
     </script>

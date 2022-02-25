@@ -246,7 +246,7 @@
                     $("#talk-view").addClass("disppear")
                 }
                 if ($("#clientID").val() == "") {
-                    chat.server.clientConnection();
+                    chat.server.clientConnection($("#userName").val());
                 }
 
             });

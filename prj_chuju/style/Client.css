@@ -17,6 +17,7 @@
     position: fixed;
     bottom: 110px;
     right: 5px;
+    border: 5px solid #c7ae6a;
 }
 
 .mainClient .disppear {

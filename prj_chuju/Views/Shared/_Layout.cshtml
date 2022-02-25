@@ -241,9 +241,11 @@
             $(".btnTalk").click(function () {
                 if ($("#talk-view").hasClass("disppear")) {
                     $("#talk-view").removeClass("disppear");
+                    $(".btnTalk").text("X");
                 }
                 else {
                     $("#talk-view").addClass("disppear")
+                    $(".btnTalk").text("客服");
                 }
                 if ($("#clientID").val() == "") {
                     chat.server.clientConnection($("#userName").val());

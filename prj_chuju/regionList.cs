@@ -24,8 +24,8 @@ namespace prj_chuju
         public string regionName { get; set; }
         public int cityID { get; set; }
     
+        public virtual cityList cityList { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<accountInfo> accountInfo { get; set; }
-        public virtual cityList cityList { get; set; }
     }
 }

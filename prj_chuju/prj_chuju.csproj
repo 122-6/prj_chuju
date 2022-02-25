@@ -927,7 +927,16 @@
     <Compile Include="articleTagList.cs">
       <DependentUpon>dbchuju.tt</DependentUpon>
     </Compile>
+    <Compile Include="buildingdb.cs">
+      <DependentUpon>dbchuju.tt</DependentUpon>
+    </Compile>
+    <Compile Include="buildingdetail.cs">
+      <DependentUpon>dbchuju.tt</DependentUpon>
+    </Compile>
     <Compile Include="cityList.cs">
+      <DependentUpon>dbchuju.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientConnection.cs">
       <DependentUpon>dbchuju.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AboutUsController.cs" />
@@ -959,6 +968,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Message.cs">
+      <DependentUpon>dbchuju.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\class_accountInfo.cs" />
     <Compile Include="Models\class_ActivityContent.cs" />
     <Compile Include="Models\class_ActivityOutline.cs" />
@@ -968,6 +980,9 @@
     <Compile Include="Models\class_regionList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="regionList.cs">
+      <DependentUpon>dbchuju.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceConnection.cs">
       <DependentUpon>dbchuju.tt</DependentUpon>
     </Compile>
     <Compile Include="SignalR\chatHub.cs" />

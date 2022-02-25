@@ -10,7 +10,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="accountName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="permission" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="userPassword" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="userName" Type="nvarchar" MaxLength="30" Nullable="false" />
@@ -26,6 +26,8 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="pictureURL" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="uploader" Type="int" />
+          <Property Name="uploadDate" Type="datetime" />
         </EntityType>
         <EntityType Name="ActivityContent">
           <Key>
@@ -97,12 +99,73 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tagName" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
+        <EntityType Name="buildingdb">
+          <Key>
+            <PropertyRef Name="建案序號" />
+          </Key>
+          <Property Name="建案序號" Type="int" Nullable="false" />
+          <Property Name="縣市" Type="nvarchar" MaxLength="255" />
+          <Property Name="地區" Type="nvarchar" MaxLength="255" />
+          <Property Name="建案名稱" Type="nvarchar" MaxLength="255" />
+          <Property Name="營造公司" Type="nvarchar" MaxLength="255" />
+          <Property Name="坪數規劃" Type="nvarchar" MaxLength="255" />
+          <Property Name="樓層規劃" Type="nvarchar" MaxLength="255" />
+          <Property Name="基地面積" Type="nvarchar" MaxLength="255" />
+          <Property Name="基地位置" Type="nvarchar" MaxLength="255" />
+          <Property Name="接待中心" Type="nvarchar" MaxLength="255" />
+          <Property Name="諮詢專線" Type="nvarchar" MaxLength="255" />
+          <Property Name="特點" Type="nvarchar" MaxLength="255" />
+          <Property Name="現況" Type="nvarchar" MaxLength="255" />
+          <Property Name="picURL" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="buildingdetail">
+          <Key>
+            <PropertyRef Name="建案序號" />
+          </Key>
+          <Property Name="建案序號" Type="int" Nullable="false" />
+          <Property Name="縣市" Type="nvarchar" MaxLength="255" />
+          <Property Name="地區" Type="nvarchar" MaxLength="255" />
+          <Property Name="建案名稱" Type="nvarchar" MaxLength="255" />
+          <Property Name="文宣1" Type="nvarchar" MaxLength="255" />
+          <Property Name="文宣2" Type="nvarchar" MaxLength="255" />
+          <Property Name="文宣3" Type="nvarchar" MaxLength="255" />
+          <Property Name="文宣4" Type="nvarchar" MaxLength="255" />
+          <Property Name="文宣5" Type="nvarchar" MaxLength="255" />
+          <Property Name="文宣6" Type="nvarchar" MaxLength="255" />
+          <Property Name="文宣7" Type="nvarchar" MaxLength="255" />
+          <Property Name="文宣8" Type="nvarchar" MaxLength="255" />
+          <Property Name="文宣9" Type="nvarchar" MaxLength="255" />
+          <Property Name="pic1" Type="nvarchar" MaxLength="255" />
+          <Property Name="pic2" Type="nvarchar" MaxLength="255" />
+          <Property Name="pic3" Type="nvarchar" MaxLength="255" />
+          <Property Name="pic4" Type="nvarchar" MaxLength="255" />
+          <Property Name="pic5" Type="nvarchar" MaxLength="255" />
+          <Property Name="pic6" Type="nvarchar" MaxLength="255" />
+          <Property Name="pic7" Type="nvarchar" MaxLength="255" />
+          <Property Name="pic8" Type="nvarchar" MaxLength="255" />
+          <Property Name="pic9" Type="nvarchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="cityList">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cityName" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientConnection">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="connectionId" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="content" Type="nvarchar" MaxLength="200" />
+          <Property Name="client_Id" Type="int" />
         </EntityType>
         <EntityType Name="regionList">
           <Key>
@@ -111,6 +174,14 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="regionName" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="cityID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceConnection">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="connectionId" Type="nvarchar" MaxLength="50" />
+          <Property Name="online_count" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__accountIn__avata__6EF57B66">
           <End Role="accountPicture" Type="Self.accountPicture" Multiplicity="0..1" />
@@ -196,6 +267,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Message__client___3864608B">
+          <End Role="ClientConnection" Type="Self.ClientConnection" Multiplicity="0..1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientConnection">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="client_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__regionLis__cityI__74AE54BC">
           <End Role="cityList" Type="Self.cityList" Multiplicity="1" />
           <End Role="regionList" Type="Self.regionList" Multiplicity="*" />
@@ -231,8 +314,13 @@
           <EntitySet Name="articlePicture" EntityType="Self.articlePicture" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="articleTag" EntityType="Self.articleTag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="articleTagList" EntityType="Self.articleTagList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="buildingdb" EntityType="Self.buildingdb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="buildingdetail" EntityType="Self.buildingdetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cityList" EntityType="Self.cityList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientConnection" EntityType="Self.ClientConnection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="regionList" EntityType="Self.regionList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceConnection" EntityType="Self.ServiceConnection" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__accountIn__avata__6EF57B66" Association="Self.FK__accountIn__avata__6EF57B66">
             <End Role="accountPicture" EntitySet="accountPicture" />
             <End Role="accountInfo" EntitySet="accountInfo" />
@@ -261,6 +349,10 @@
             <End Role="articleTagList" EntitySet="articleTagList" />
             <End Role="articleTag" EntitySet="articleTag" />
           </AssociationSet>
+          <AssociationSet Name="FK__Message__client___3864608B" Association="Self.FK__Message__client___3864608B">
+            <End Role="ClientConnection" EntitySet="ClientConnection" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
           <AssociationSet Name="FK__regionLis__cityI__74AE54BC" Association="Self.FK__regionLis__cityI__74AE54BC">
             <End Role="cityList" EntitySet="cityList" />
             <End Role="regionList" EntitySet="regionList" />
@@ -274,30 +366,15 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbchujuModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="accountInfo">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="accountName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="userPassword" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="userName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="birthday" Type="DateTime" Precision="0" />
-          <Property Name="gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="cellphone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="region" Type="Int32" />
-          <Property Name="avatar" Type="Int32" />
-          <NavigationProperty Name="accountPicture" Relationship="Self.FK__accountIn__avata__6EF57B66" FromRole="accountInfo" ToRole="accountPicture" />
-          <NavigationProperty Name="regionList" Relationship="Self.FK__accountIn__regio__6E01572D" FromRole="accountInfo" ToRole="regionList" />
-        </EntityType>
         <EntityType Name="accountPicture">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="pictureURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="accountInfo" Relationship="Self.FK__accountIn__avata__6EF57B66" FromRole="accountPicture" ToRole="accountInfo" />
+          <Property Name="uploader" Type="Int32" />
+          <Property Name="uploadDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="accountInfo" Relationship="dbchujuModel.FK__accountIn__avata__6EF57B66" FromRole="accountPicture" ToRole="accountInfo" />
         </EntityType>
         <EntityType Name="articleClass">
           <Key>
@@ -367,33 +444,9 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="regionName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="cityID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="accountInfo" Relationship="Self.FK__accountIn__regio__6E01572D" FromRole="regionList" ToRole="accountInfo" />
           <NavigationProperty Name="cityList" Relationship="Self.FK__regionLis__cityI__74AE54BC" FromRole="regionList" ToRole="cityList" />
+          <NavigationProperty Name="accountInfo" Relationship="dbchujuModel.FK__accountIn__regio__6E01572D" FromRole="regionList" ToRole="accountInfo" />
         </EntityType>
-        <Association Name="FK__accountIn__avata__6EF57B66">
-          <End Role="accountPicture" Type="Self.accountPicture" Multiplicity="0..1" />
-          <End Role="accountInfo" Type="Self.accountInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="accountPicture">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="accountInfo">
-              <PropertyRef Name="avatar" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__accountIn__regio__6E01572D">
-          <End Role="regionList" Type="Self.regionList" Multiplicity="0..1" />
-          <End Role="accountInfo" Type="Self.accountInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="regionList">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="accountInfo">
-              <PropertyRef Name="region" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__articleOu__artic__71D1E811">
           <End Role="articleClass" Type="Self.articleClass" Multiplicity="1" />
           <End Role="articleOutline" Type="Self.articleOutline" Multiplicity="*" />
@@ -447,7 +500,6 @@
           <End Role="articleTagList" Type="Self.articleTagList" Multiplicity="*" />
         </Association>
         <EntityContainer Name="dbchujuEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="accountInfo" EntityType="Self.accountInfo" />
           <EntitySet Name="accountPicture" EntityType="Self.accountPicture" />
           <EntitySet Name="articleClass" EntityType="Self.articleClass" />
           <EntitySet Name="articleContent" EntityType="Self.articleContent" />
@@ -456,14 +508,6 @@
           <EntitySet Name="articleTagList" EntityType="Self.articleTagList" />
           <EntitySet Name="cityList" EntityType="Self.cityList" />
           <EntitySet Name="regionList" EntityType="Self.regionList" />
-          <AssociationSet Name="FK__accountIn__avata__6EF57B66" Association="Self.FK__accountIn__avata__6EF57B66">
-            <End Role="accountPicture" EntitySet="accountPicture" />
-            <End Role="accountInfo" EntitySet="accountInfo" />
-          </AssociationSet>
-          <AssociationSet Name="FK__accountIn__regio__6E01572D" Association="Self.FK__accountIn__regio__6E01572D">
-            <End Role="regionList" EntitySet="regionList" />
-            <End Role="accountInfo" EntitySet="accountInfo" />
-          </AssociationSet>
           <AssociationSet Name="FK__articleOu__artic__71D1E811" Association="Self.FK__articleOu__artic__71D1E811">
             <End Role="articleClass" EntitySet="articleClass" />
             <End Role="articleOutline" EntitySet="articleOutline" />
@@ -489,6 +533,24 @@
           <AssociationSet Name="FK_ActivityOutline_ActivityContent" Association="dbchujuModel.FK_ActivityOutline_ActivityContent">
             <End Role="ActivityContent" EntitySet="ActivityContent" />
             <End Role="ActivityOutline" EntitySet="ActivityOutline" />
+          </AssociationSet>
+          <EntitySet Name="buildingdb" EntityType="dbchujuModel.buildingdb" />
+          <EntitySet Name="buildingdetail" EntityType="dbchujuModel.buildingdetail" />
+          <EntitySet Name="Message" EntityType="dbchujuModel.Message" />
+          <EntitySet Name="accountInfo" EntityType="dbchujuModel.accountInfo" />
+          <AssociationSet Name="FK__accountIn__avata__6EF57B66" Association="dbchujuModel.FK__accountIn__avata__6EF57B66">
+            <End Role="accountPicture" EntitySet="accountPicture" />
+            <End Role="accountInfo" EntitySet="accountInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__accountIn__regio__6E01572D" Association="dbchujuModel.FK__accountIn__regio__6E01572D">
+            <End Role="regionList" EntitySet="regionList" />
+            <End Role="accountInfo" EntitySet="accountInfo" />
+          </AssociationSet>
+          <EntitySet Name="ClientConnection" EntityType="dbchujuModel.ClientConnection" />
+          <EntitySet Name="ServiceConnection" EntityType="dbchujuModel.ServiceConnection" />
+          <AssociationSet Name="FK__Message__client___3864608B" Association="dbchujuModel.FK__Message__client___3864608B">
+            <End Role="ClientConnection" EntitySet="ClientConnection" />
+            <End Role="Message" EntitySet="Message" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="ActivityContent">
@@ -522,31 +584,141 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="buildingdb">
+          <Key>
+            <PropertyRef Name="建案序號" />
+          </Key>
+          <Property Name="建案序號" Type="Int32" Nullable="false" />
+          <Property Name="縣市" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="地區" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="建案名稱" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="營造公司" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="坪數規劃" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="樓層規劃" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="基地面積" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="基地位置" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="接待中心" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="諮詢專線" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="特點" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="現況" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="picURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="buildingdetail">
+          <Key>
+            <PropertyRef Name="建案序號" />
+          </Key>
+          <Property Name="建案序號" Type="Int32" Nullable="false" />
+          <Property Name="縣市" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="地區" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="建案名稱" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="文宣1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="文宣2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="文宣3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="文宣4" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="文宣5" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="文宣6" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="文宣7" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="文宣8" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="文宣9" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="pic1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="pic2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="pic3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="pic4" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="pic5" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="pic6" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="pic7" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="pic8" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="pic9" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="content" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="client_Id" Type="Int32" />
+          <NavigationProperty Name="ClientConnection" Relationship="dbchujuModel.FK__Message__client___3864608B" FromRole="Message" ToRole="ClientConnection" />
+        </EntityType>
+        <EntityType Name="accountInfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="permission" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="userPassword" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="userName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="birthday" Type="DateTime" Precision="0" />
+          <Property Name="gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="cellphone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="region" Type="Int32" />
+          <Property Name="avatar" Type="Int32" />
+          <NavigationProperty Name="accountPicture" Relationship="dbchujuModel.FK__accountIn__avata__6EF57B66" FromRole="accountInfo" ToRole="accountPicture" />
+          <NavigationProperty Name="regionList" Relationship="dbchujuModel.FK__accountIn__regio__6E01572D" FromRole="accountInfo" ToRole="regionList" />
+        </EntityType>
+        <Association Name="FK__accountIn__avata__6EF57B66">
+          <End Type="dbchujuModel.accountPicture" Role="accountPicture" Multiplicity="0..1" />
+          <End Type="dbchujuModel.accountInfo" Role="accountInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accountPicture">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="accountInfo">
+              <PropertyRef Name="avatar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__accountIn__regio__6E01572D">
+          <End Type="dbchujuModel.regionList" Role="regionList" Multiplicity="0..1" />
+          <End Type="dbchujuModel.accountInfo" Role="accountInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="regionList">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="accountInfo">
+              <PropertyRef Name="region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClientConnection">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="connectionId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Message" Relationship="dbchujuModel.FK__Message__client___3864608B" FromRole="ClientConnection" ToRole="Message" />
+        </EntityType>
+        <EntityType Name="ServiceConnection">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="connectionId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="online_count" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Message__client___3864608B">
+          <End Type="dbchujuModel.ClientConnection" Role="ClientConnection" Multiplicity="0..1" />
+          <End Type="dbchujuModel.Message" Role="Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientConnection">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="client_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="dbchujuModelStoreContainer" CdmEntityContainer="dbchujuEntities1">
-          <EntitySetMapping Name="accountInfo">
-            <EntityTypeMapping TypeName="dbchujuModel.accountInfo">
-              <MappingFragment StoreEntitySet="accountInfo">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="accountName" ColumnName="accountName" />
-                <ScalarProperty Name="userPassword" ColumnName="userPassword" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="userName" ColumnName="userName" />
-                <ScalarProperty Name="birthday" ColumnName="birthday" />
-                <ScalarProperty Name="gender" ColumnName="gender" />
-                <ScalarProperty Name="cellphone" ColumnName="cellphone" />
-                <ScalarProperty Name="region" ColumnName="region" />
-                <ScalarProperty Name="avatar" ColumnName="avatar" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="accountPicture">
             <EntityTypeMapping TypeName="dbchujuModel.accountPicture">
               <MappingFragment StoreEntitySet="accountPicture">
+                <ScalarProperty Name="uploadDate" ColumnName="uploadDate" />
+                <ScalarProperty Name="uploader" ColumnName="uploader" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="pictureURL" ColumnName="pictureURL" />
               </MappingFragment>
@@ -643,6 +815,96 @@
                 <ScalarProperty Name="endDate" ColumnName="endDate" />
                 <ScalarProperty Name="startDate" ColumnName="startDate" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="buildingdb">
+            <EntityTypeMapping TypeName="dbchujuModel.buildingdb">
+              <MappingFragment StoreEntitySet="buildingdb">
+                <ScalarProperty Name="picURL" ColumnName="picURL" />
+                <ScalarProperty Name="現況" ColumnName="現況" />
+                <ScalarProperty Name="特點" ColumnName="特點" />
+                <ScalarProperty Name="諮詢專線" ColumnName="諮詢專線" />
+                <ScalarProperty Name="接待中心" ColumnName="接待中心" />
+                <ScalarProperty Name="基地位置" ColumnName="基地位置" />
+                <ScalarProperty Name="基地面積" ColumnName="基地面積" />
+                <ScalarProperty Name="樓層規劃" ColumnName="樓層規劃" />
+                <ScalarProperty Name="坪數規劃" ColumnName="坪數規劃" />
+                <ScalarProperty Name="營造公司" ColumnName="營造公司" />
+                <ScalarProperty Name="建案名稱" ColumnName="建案名稱" />
+                <ScalarProperty Name="地區" ColumnName="地區" />
+                <ScalarProperty Name="縣市" ColumnName="縣市" />
+                <ScalarProperty Name="建案序號" ColumnName="建案序號" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="buildingdetail">
+            <EntityTypeMapping TypeName="dbchujuModel.buildingdetail">
+              <MappingFragment StoreEntitySet="buildingdetail">
+                <ScalarProperty Name="pic9" ColumnName="pic9" />
+                <ScalarProperty Name="pic8" ColumnName="pic8" />
+                <ScalarProperty Name="pic7" ColumnName="pic7" />
+                <ScalarProperty Name="pic6" ColumnName="pic6" />
+                <ScalarProperty Name="pic5" ColumnName="pic5" />
+                <ScalarProperty Name="pic4" ColumnName="pic4" />
+                <ScalarProperty Name="pic3" ColumnName="pic3" />
+                <ScalarProperty Name="pic2" ColumnName="pic2" />
+                <ScalarProperty Name="pic1" ColumnName="pic1" />
+                <ScalarProperty Name="文宣9" ColumnName="文宣9" />
+                <ScalarProperty Name="文宣8" ColumnName="文宣8" />
+                <ScalarProperty Name="文宣7" ColumnName="文宣7" />
+                <ScalarProperty Name="文宣6" ColumnName="文宣6" />
+                <ScalarProperty Name="文宣5" ColumnName="文宣5" />
+                <ScalarProperty Name="文宣4" ColumnName="文宣4" />
+                <ScalarProperty Name="文宣3" ColumnName="文宣3" />
+                <ScalarProperty Name="文宣2" ColumnName="文宣2" />
+                <ScalarProperty Name="文宣1" ColumnName="文宣1" />
+                <ScalarProperty Name="建案名稱" ColumnName="建案名稱" />
+                <ScalarProperty Name="地區" ColumnName="地區" />
+                <ScalarProperty Name="縣市" ColumnName="縣市" />
+                <ScalarProperty Name="建案序號" ColumnName="建案序號" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Message">
+            <EntityTypeMapping TypeName="dbchujuModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="client_Id" ColumnName="client_Id" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="accountInfo">
+            <EntityTypeMapping TypeName="dbchujuModel.accountInfo">
+              <MappingFragment StoreEntitySet="accountInfo">
+                <ScalarProperty Name="avatar" ColumnName="avatar" />
+                <ScalarProperty Name="region" ColumnName="region" />
+                <ScalarProperty Name="cellphone" ColumnName="cellphone" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+                <ScalarProperty Name="permission" ColumnName="permission" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientConnection">
+            <EntityTypeMapping TypeName="dbchujuModel.ClientConnection">
+              <MappingFragment StoreEntitySet="ClientConnection">
+                <ScalarProperty Name="connectionId" ColumnName="connectionId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceConnection">
+            <EntityTypeMapping TypeName="dbchujuModel.ServiceConnection">
+              <MappingFragment StoreEntitySet="ServiceConnection">
+                <ScalarProperty Name="online_count" ColumnName="online_count" />
+                <ScalarProperty Name="connectionId" ColumnName="connectionId" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

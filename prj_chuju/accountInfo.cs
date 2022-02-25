@@ -15,7 +15,7 @@ namespace prj_chuju
     public partial class accountInfo
     {
         public int id { get; set; }
-        public string accountName { get; set; }
+        public string permission { get; set; }
         public string userPassword { get; set; }
         public string email { get; set; }
         public string userName { get; set; }

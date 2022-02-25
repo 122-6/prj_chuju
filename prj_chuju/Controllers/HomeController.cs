@@ -16,7 +16,16 @@ namespace prj_chuju.Controllers
             // 刷新Cookie
             new AccountInfoHelper(Session, Request).updateCookie(Response, Request);
 
+            dbchujuEntities1 db = new dbchujuEntities1();
+
+
             return View();
+        }
+        [HttpPost]
+        public ActionResult Index(buildingdb p)
+        {
+            dbchujuEntities1 db = new dbchujuEntities1();
+            return RedirectToAction("");
         }
     }
 }

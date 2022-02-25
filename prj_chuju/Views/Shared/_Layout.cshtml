@@ -195,6 +195,7 @@
             </div>
             <div class="input-box">
                 <input type="hidden" id="clientID" value="" />
+                <input type="hidden" id="serviceID" value="" />
                 <input type="text" id="message" placeholder="想問什麼呢？" />
                 <button id="sendmessage">
                     <i class="fa-solid fa-paper-plane"></i>
@@ -212,14 +213,14 @@
                 $(".service").append('<div class="content" >' + htmlEncode(message) + '</div>');
             };
 
-            chat.client.newClient = function (clientID) {
+            chat.client.newClient = function (clientID, serviceID) {
                 $("#clientID").val(clientID);
+                $("#serviceID").val(serviceID);
             }
 
             $.connection.hub.start().done(function () {
-                chat.server.clientConnection();
                 $('#sendmessage').click(function () {
-                    chat.server.clientSend($('#message').val(), $("#clientID").val());
+                    chat.server.clientSend($('#message').val(), $("#clientID").val(), $("#serviceID").val());
                     $(".client").append('<div class="content" >' + htmlEncode($('#message').val()) + '</div>');
                     $('#message').val('').focus();
                 });
@@ -243,6 +244,9 @@
                 }
                 else {
                     $("#talk-view").addClass("disppear")
+                }
+                if ($("#clientID").val() == "") {
+                    chat.server.clientConnection();
                 }
 
             });

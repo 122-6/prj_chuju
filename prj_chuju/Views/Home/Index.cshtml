@@ -52,60 +52,66 @@
                 <div>請選擇搜尋條件：</div>
                 <div id="search-selected"></div>
             </div>
-            <div class="btn-select">
-                <div class="city" id="city">
-                    <fieldset>
-                        <span>縣市</span>
-                        <input type="button" value="臺北市">
-                        <input type="button" value="新北市">
-                        <input type="button" value="桃園市">
-                        <input type="button" value="新竹市">
-                        <input type="button" value="新竹縣">
-                        <input type="button" value="臺中市">
-                        <input type="button" value="臺南市">
-                        <input type="button" value="高雄市">
-                        <input type="button" value="基隆市">
-                        <input type="button" value="嘉義縣">
-                        <input type="button" value="彰化縣">
-                    </fieldset>
+            <form method="post" action="Home/Index">
+                <div class="btn-select">
+                    <div class="city" id="city">
+                        <fieldset>
+                            <span>縣市</span>
+                            <input type="hidden" id="cityResult" name="縣市" />
+                            <input type="button" value="臺北市">
+                            <input type="button" value="新北市">
+                            <input type="button" value="桃園市">
+                            <input type="button" value="新竹市">
+                            <input type="button" value="新竹縣">
+                            <input type="button" value="臺中市">
+                            <input type="button" value="臺南市">
+                            <input type="button" value="高雄市">
+                            <input type="button" value="基隆市">
+                            <input type="button" value="嘉義縣">
+                            <input type="button" value="彰化縣">
+                        </fieldset>
+                    </div>
+                    <div class="area">
+                        <fieldset id="area-fieldset">
+                            <span>地區</span>
+                            <input type="hidden" id="areaResult" name="地區" />
+                            <input type="button" value="不限">
+                            <!--依縣市動態新增按鈕-->
+                        </fieldset>
+                    </div>
+                    <div class="size">
+                        <fieldset>
+                            <span>坪數</span>
+                            <input type="hidden" id="sizeResult" name="坪數規劃" />
+                            <input type="button" value="不限">
+                            <input type="button" value="15坪以下">
+                            <input type="button" value="15坪-20坪">
+                            <input type="button" value="20坪-30坪">
+                            <input type="button" value="30坪-40坪">
+                            <input type="button" value="40坪以上">
+                            <input type="button" value="自訂">
+                        </fieldset>
+                    </div>
+                    <div class="house-type">
+                        <fieldset>
+                            <span>屋況</span>
+                            <input type="hidden" id="houseResult" name="現況" />
+                            <input type="button" value="不限">
+                            <input type="button" value="套房">
+                            <input type="button" value="2房">
+                            <input type="button" value="3房">
+                            <input type="button" value="4房以上">
+                            <input type="button" value="透天">
+                        </fieldset>
+                    </div>
                 </div>
-                <div class="area">
-                    <fieldset id="area-fieldset">
-                        <span>地區</span>
-                        <input type="button" value="不限">
-                        <!--依縣市動態新增按鈕-->
-                    </fieldset>
+                <div class="search row justify-content-center">
+                    <button>
+                        <i class="fas fa-search"></i>
+                        尋找建案
+                    </button>
                 </div>
-                <div class="price">
-                    <fieldset>
-                        <span>總價</span>
-                        <input type="button" value="不限">
-                        <input type="button" value="1000萬以下">
-                        <input type="button" value="1000萬-1500萬">
-                        <input type="button" value="1500萬-2500萬">
-                        <input type="button" value="2500萬-3500萬">
-                        <input type="button" value="3500萬以上">
-                        <input type="button" value="自訂">
-                    </fieldset>
-                </div>
-                <div class="room-type">
-                    <fieldset>
-                        <span>房型</span>
-                        <input type="button" value="不限">
-                        <input type="button" value="套房">
-                        <input type="button" value="2房">
-                        <input type="button" value="3房">
-                        <input type="button" value="4房以上">
-                        <input type="button" value="透天">
-                    </fieldset>
-                </div>
-            </div>
-            <div class="search row justify-content-center">
-                <button>
-                    <i class="fas fa-search"></i>
-                    尋找建案
-                </button>
-            </div>
+            </form>
         </div>
     </div>
 

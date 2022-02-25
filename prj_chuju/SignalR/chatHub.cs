@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace prj_chuju.SignalR
@@ -10,33 +11,90 @@ namespace prj_chuju.SignalR
     {
         private static string serviceID;
         private static string clientID;
-        
+        dbchujuEntities1 db = new dbchujuEntities1();
         public void ServiceConnection()
         {
-            serviceID = Context.ConnectionId;
+            //serviceID = Context.ConnectionId;
+
+            ServiceConnection tservice = new ServiceConnection()
+            {
+                connectionId = Context.ConnectionId
+            };
+            db.ServiceConnection.Add(tservice);
+            db.SaveChanges();
         }
 
         public void ClientConnection()
         {
-            clientID = Context.ConnectionId;
-            Clients.Client(clientID).newClient(clientID);
-            if (serviceID != null)
+            //client端連線資料傳入db
+            ClientConnection tclient = new ClientConnection()
             {
+                connectionId = Context.ConnectionId
+            };
+            db.ClientConnection.Add(tclient);
+
+            clientID = Context.ConnectionId;
+            
+            if (db.ServiceConnection.Count() != 0)
+            {
+                //client端尋找連線人數最少的service端連線
+                ServiceConnection Min = db.ServiceConnection.Where(t => t.online_count == db.ServiceConnection.Min(m => m.online_count)).FirstOrDefault();
+
+                serviceID = Min.connectionId;
+
                 Clients.Client(serviceID).newClient(clientID);
+                Clients.Client(clientID).newClient(clientID, serviceID);
+                //service端有client加入連線後，連線人數+1
+                ServiceConnection tservice = db.ServiceConnection.FirstOrDefault(p => p.connectionId == serviceID);
+                if (tservice != null)
+                {
+                    tservice.online_count++;
+                }
             }
+
+            db.SaveChanges();
         }
 
         public void ServiceSend(string message, string Id)
         {
-            Clients.Client(Id).sendMessage(message);
+            if (Id != "" && message != "")
+            {
+                Clients.Client(Id).sendMessage(message);
+            }
         }
 
-        public void ClientSend(string message, string Id)
+        public void ClientSend(string message, string cId, string sId)
         {
-            if (serviceID != null)
+            if (sId != null && message != "")
             {
-                Clients.Client(serviceID).sendMessage(message, Id);
+                Clients.Client(sId).sendMessage(message, cId);
             }
+            else
+            {
+                
+            }
+        }
+
+        public override Task OnDisconnected(bool stopCalled)
+        {
+            
+            return deleteId();
+        }
+
+        public Task deleteId()
+        {
+            ClientConnection tclient = db.ClientConnection.FirstOrDefault(p => p.connectionId == Context.ConnectionId);
+            ServiceConnection tservice = db.ServiceConnection.FirstOrDefault(p => p.connectionId == Context.ConnectionId);
+            if (tclient != null)
+            {
+                db.ClientConnection.Remove(tclient);
+            }
+            else if (tservice != null)
+            {
+                db.ServiceConnection.Remove(tservice);
+            }
+            db.SaveChanges();
+            return null;
         }
     }
 }

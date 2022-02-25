@@ -12,20 +12,18 @@ namespace prj_chuju
     using System;
     using System.Collections.Generic;
     
-    public partial class accountPicture
+    public partial class ClientConnection
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public accountPicture()
+        public ClientConnection()
         {
-            this.accountInfo = new HashSet<accountInfo>();
+            this.Message = new HashSet<Message>();
         }
     
         public int id { get; set; }
-        public string pictureURL { get; set; }
-        public Nullable<int> uploader { get; set; }
-        public Nullable<System.DateTime> uploadDate { get; set; }
+        public string connectionId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<accountInfo> accountInfo { get; set; }
+        public virtual ICollection<Message> Message { get; set; }
     }
 }

@@ -25,7 +25,6 @@ namespace prj_chuju
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<accountInfo> accountInfo { get; set; }
         public virtual DbSet<accountPicture> accountPicture { get; set; }
         public virtual DbSet<articleClass> articleClass { get; set; }
         public virtual DbSet<articleContent> articleContent { get; set; }
@@ -36,5 +35,11 @@ namespace prj_chuju
         public virtual DbSet<regionList> regionList { get; set; }
         public virtual DbSet<ActivityContent> ActivityContent { get; set; }
         public virtual DbSet<ActivityOutline> ActivityOutline { get; set; }
+        public virtual DbSet<buildingdb> buildingdb { get; set; }
+        public virtual DbSet<buildingdetail> buildingdetail { get; set; }
+        public virtual DbSet<Message> Message { get; set; }
+        public virtual DbSet<accountInfo> accountInfo { get; set; }
+        public virtual DbSet<ClientConnection> ClientConnection { get; set; }
+        public virtual DbSet<ServiceConnection> ServiceConnection { get; set; }
     }
 }

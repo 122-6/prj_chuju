@@ -62,9 +62,9 @@
     <script>
         $(document).ready(function () {
             var chat = $.connection.chatHub;
-            var currentId;
+            var currentId = "";
 
-            chat.client.newClient = function (clientId, count) {
+            chat.client.newClient = function (clientId) {
                 $(".client-nav").append(`<div class="online"><button data-tablink="${clientId}">Client</button><i class="${clientId}">新訊息</i></div>`);
 
                 $(".message-box").append(`<div class="message" id="${clientId}"><div class="client"></div><div class="service"></div></div>`);
@@ -84,6 +84,7 @@
                 $(`#${$(this).find("button").data("tablink")}`).show().siblings(".message").hide();
                 currentId = $(this).find("button").data("tablink");
                 $($(this).find("i")).hide();
+                console.log(currentId);
             });
 
             $.connection.hub.start().done(function () {

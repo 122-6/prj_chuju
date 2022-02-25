@@ -17,31 +17,31 @@ namespace prj_chuju.Controllers
             List<class_ActivityOutline> list = default;
             int max_page = default;
 
-            string allSql = $"select * from ActivityOutline order by endDate desc offset {(page - 1) * 4} rows fetch next 4 rows only;";
+            string allSql = $"select * from ActivityOutline order by endDate desc offset @Page_row rows fetch next 4 rows only;";
             string all_countSql = "select count(*) from ActivityOutline";
-            string soonSql = $"select * from ActivityOutline where getdate() between dateadd(day, -7, startDate) and dateadd(day, -1, startDate) order by endDate desc offset {(page - 1) * 4} rows fetch next 4 rows only;";
+            string soonSql = $"select * from ActivityOutline where getdate() between dateadd(day, -7, startDate) and dateadd(day, -1, startDate) order by endDate desc offset @Page_row rows fetch next 4 rows only;";
             string soon_countSql = "select count(*) from ActivityOutline where getdate() between dateadd(day, -7, startDate) and dateadd(day, -1, startDate)";
-            string nowSql = $"select * from ActivityOutline where getdate() between startDate and endDate order by endDate desc offset {(page - 1) * 4} rows fetch next 4 rows only;";
+            string nowSql = $"select * from ActivityOutline where getdate() between startDate and endDate order by endDate desc offset @Page_row rows fetch next 4 rows only;";
             string now_countSql = "select count(*) from ActivityOutline where getdate() between startDate and endDate";
-            string endSql = $"select * from ActivityOutline where getdate() > endDate order by endDate desc offset {(page - 1) * 4} rows fetch next 4 rows only;";
+            string endSql = $"select * from ActivityOutline where getdate() > endDate order by endDate desc offset @Page_row rows fetch next 4 rows only;";
             string end_countSql = "select count(*) from ActivityOutline where getdate() > endDate";
 
             switch (tag)
             {
                 case "即將開始":
-                    list = ListSql(soonSql);
+                    list = ListSql(soonSql, page);
                     max_page = CountSql(soon_countSql);
                     break;
                 case "執行中":
-                    list = ListSql(nowSql);
+                    list = ListSql(nowSql, page);
                     max_page = CountSql(now_countSql);
                     break;
                 case "已結束":
-                    list = ListSql(endSql);
+                    list = ListSql(endSql, page);
                     max_page = CountSql(end_countSql);
                     break;
                 default:
-                    list = ListSql(allSql);
+                    list = ListSql(allSql, page);
                     max_page = CountSql(all_countSql);
                     break;
             }
@@ -50,9 +50,10 @@ namespace prj_chuju.Controllers
             return View(data);
         }
 
-        private List<class_ActivityOutline> ListSql(string strSql)
+        private List<class_ActivityOutline> ListSql(string strSql, int page)
         {
             SqlCommand cmd = methodSQL(strSql);
+            cmd.Parameters.AddWithValue("@Page_row", (page - 1) * 4);
             SqlDataReader reader = cmd.ExecuteReader();
             List<class_ActivityOutline> list = new List<class_ActivityOutline>();
             while (reader.Read())
@@ -99,9 +100,10 @@ namespace prj_chuju.Controllers
         private class_ActivityContent QueryContentById(int Id)
         {
             class_ActivityContent x = default;
-            string IdSql = $"select * from ActivityContent where ActivityId = {Id}";
+            string IdSql = $"select title, content from ActivityContent where ActivityId = @Id";
 
             SqlCommand cmd = methodSQL(IdSql);
+            cmd.Parameters.AddWithValue("@Id", Id);
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.Read())
             {

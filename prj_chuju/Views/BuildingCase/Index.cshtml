@@ -3,214 +3,146 @@
     ViewBag.Title = "Index";
 }
 <link rel="stylesheet" href="~/style/buildingsearch.css" />
+<script src="~/Scripts/buildingSearch.js"></script>
 <main>
     <div class="btn-select">
 
-        <div class="option">
+        <!--地區-->
+        <div class="option mb-3">
             <h5>請選擇地區 </h5>
-            <div class="region">
-                <fieldset>
-                    <input type="button" value="臺北市">
-                    <input type="button" value="新北市">
-                    <input type="button" value="桃園市">
-                    <input type="button" value="新竹市">
-                    <input type="button" value="新竹縣">
-                    <input type="button" value="臺中市">
-                    <input type="button" value="臺南市">
-                    <input type="button" value="高雄市">
-                    <input type="button" value="基隆市">
-                    <input type="button" value="嘉義縣">
-                    <input type="button" value="彰化縣">
-                </fieldset>
+            <div id="regionRegion" class="region">
             </div>
         </div>
-        <div class="option">
+
+        <!--坪數-->
+        <div class="option mb-3">
             <h5>坪數</h5>
-            <div class="region">
-                <fieldset>
-                    <input type="button" value="不限">
-                    <input type="button" value="15坪以下">
-                    <input type="button" value="15-20坪">
-                    <input type="button" value="20-30坪">
-                    <input type="button" value="30-40坪">
-                    <input type="button" value="40坪以上">
-                    <input type="button" value="自訂">
-                </fieldset>
+            <div id="areaRegion" class="region">
             </div>
         </div>
-        <div class="option">
+
+        <!--房型-->
+        <div class="option mb-3">
             <h5>
                 房型<span>(可複選)</span>
             </h5>
-            <div class="region">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1">
-                    <label class="form-check-label" for="inlineCheckbox1">不限</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2">
-                    <label class="form-check-label" for="inlineCheckbox2">套房</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3">
-                    <label class="form-check-label" for="inlineCheckbox3">2房</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4">
-                    <label class="form-check-label" for="inlineCheckbox4">3房</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox5">
-                    <label class="form-check-label" for="inlineCheckbox5">4房以上</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6">
-                    <label class="form-check-label" for="inlineCheckbox6">透天</label>
-                </div>
+            <div id="roomsRegion" class="region">
             </div>
         </div>
-        <div class="option">
+
+        <!--屋況-->
+        <div class="option mb-3">
             <h5>
                 屋況<span>(可複選)</span>
             </h5>
-            <div class="region">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox7">
-                    <label class="form-check-label" for="inlineCheckbox7">不限</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox8">
-                    <label class="form-check-label" for="inlineCheckbox8">預售屋</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox9">
-                    <label class="form-check-label" for="inlineCheckbox9">新成屋</label>
-                </div>
+            <div id="statusRegion" class="region">
             </div>
         </div>
-        <div class="option">
-            <h5>
-                類型<span>(可複選)</span>
-            </h5>
-            <div class="region">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox10">
-                    <label class="form-check-label" for="inlineCheckbox10">不限</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox11">
-                    <label class="form-check-label" for="inlineCheckbox11">住家</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox12">
-                    <label class="form-check-label" for="inlineCheckbox12">店面</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox13">
-                    <label class="form-check-label" for="inlineCheckbox13">一般事務所</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox14">
-                    <label class="form-check-label" for="inlineCheckbox14">廠辦</label>
-                </div>
-            </div>
-        </div>
-        <div class="option">
+
+        <!--特性-->
+        <div class="option mb-3">
             <h5>
                 特性<span>(可複選)</span>
             </h5>
-            <div class="region">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox15">
-                    <label class="form-check-label" for="inlineCheckbox15">不限</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox16">
-                    <label class="form-check-label" for="inlineCheckbox16">學區宅</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox17">
-                    <label class="form-check-label" for="inlineCheckbox17">交通宅</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox18">
-                    <label class="form-check-label" for="inlineCheckbox18">景觀宅</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox19">
-                    <label class="form-check-label" for="inlineCheckbox19">制震宅</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox20">
-                    <label class="form-check-label" for="inlineCheckbox20">防疫宅</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox21">
-                    <label class="form-check-label" for="inlineCheckbox21">低總價</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox22">
-                    <label class="form-check-label" for="inlineCheckbox22">低公設</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox23">
-                    <label class="form-check-label" for="inlineCheckbox23">低首付</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox24">
-                    <label class="form-check-label" for="inlineCheckbox24">重劃區</label>
-                </div>
-
+            <div id="tagsRegion" class="region">
             </div>
         </div>
     </div>
 
-    <div class="cards row justify-content-center py-25 btn-select">
-        @foreach (var item in Model) {
-        <div class="card">
-            <div class="card-pic">
-                <img src="~/@item.pictrueurl" alt="">
-            </div>
-            <div class="">
+    <div id="casesContainer" class="cards py-25 btn-select d-flex justify-content-center flex-wrap">
+        @foreach (var item in Model)
+        {
+            <div class="my-card">
+                <div class="d-flex p-3">
+                    <div class="card-pic mr-2">
+                        <img src="~/@item.pictrueurl" alt="">
+                    </div>
+                    <div class="flex-auto">
+                        <div class="card-info font-120 font-bold">@item.buildname</div>
+                        <div class="card-region">@item.country@item.district</div>
+                        <div class="card-detail my-3">@item.insidespace</div>
+                        <div class="card-tag font-80 mb-2"><img src="~/images/P/price-tag.png" alt=""> @item.features</div>
+                        <div class="card-price">總價 <span>洽詢案場</span> </div>
+                    </div>
+                </div>
 
-                <div class="card-info">@item.buildname</div>
-                <div class="card-region">@item.country@item.district</div>
-                <div class="card-detail">@item.insidespace</div>
-                <div class="card-tag"><img src="~/images/P/price-tag.png" alt=""> @item.features</div>
-                <div class="card-price">總價 <span>洽詢案場</span> </div>
+                <div class="d-flex justify-content-between">
+                    <a class="BClink" href="#">加入收藏</a>
+                    <a class="BClink" href="#">查看詳情</a>
+                    <a class="BClink" href="#">預約鑑賞</a>
+                </div>
             </div>
 
-
-            <div class="card-option form-row ">
-                <div class="link"><a href="#">加入收藏</a></div>
-                <div class="link"><a href="#">查看詳情</a></div>
-                <div class="link"><a href="#">預約鑑賞</a></div>
-            </div>
-        </div>
-        }        
-        @*<div class="card">
-            <div class="card-pic">
-                <img src="~/images/建案資料庫/13-紘石仰格/111.jpg" alt="">
-            </div>
-            <div class="card-info"> 紘石仰格</div>
-            <div class="card-region">台北市士林區</div>
-            <div class="card-detail">60 - 70坪 | 3-4房</div>
-            <div class="card-tag"> 景觀宅,制震宅,學區宅,交通宅</div>
-            <div class="card-price">總價 <span>洽詢案場</span> </div>
-            <div class="card-function row border-right">
-            </div>
-            <div class="card-option form-row ">
-                <div class="link"><a href="#">加入收藏</a></div>
-                <div class="link"><a href="#">查看詳情</a></div>
-                <div class="link"><a href="#">預約鑑賞</a></div>
-            </div>
-        </div>*@
-
-
+        }
 
     </div>
-
-
 
 
 </main>
+
+<script>
+    let selector = new selectorObj(nullSelectorObj);
+    $(function () {
+        initSelector(selector);
+    })
+    function selectorObj(initObj) {
+        let self = this;
+        this.region = initObj.region;
+        this.area = initObj.area;
+        this.rooms = initObj.rooms;
+        this.status = initObj.status;
+        this.tags = initObj.tags;
+        this.ajaxData = {};
+        this.update = function () {
+            self.generateAjaxData();
+            console.log(self.ajaxData);
+            $.ajax({
+                method: 'post',
+                url: '@Url.Action("getBuildingBySelector","BuildingCase")',
+                data: self.ajaxData,
+                success: function (result) {
+                    theCases = result;
+                    generateCaseCards(result);
+                }
+            })
+
+        };
+        this.generateAjaxData = function () {
+            let roomsStr = "0";
+            let statusStr = "0";
+            let tagsStr = "0";
+            for (let i = 0; i < self.rooms.length; i++) {
+                let n = self.rooms[i];
+                if (n == 0) {
+                    roomsStr = "0";
+                    break;
+                }
+                roomsStr += n;
+            }
+            for (let i = 0; i < self.status.length; i++) {
+                let n = self.status[i];
+                if (n == 0) {
+                    statusStr = "0";
+                    break;
+                }
+                statusStr += n;
+            }
+            for (let i = 0; i < self.tags.length; i++) {
+                let n = self.tags[i];
+                if (n == 0) {
+                    tagsStr = "0";
+                    break;
+                }
+                tagsStr += n;
+            }
+            self.ajaxData = {
+                region: self.region,
+                area: self.area,
+                rooms: roomsStr,
+                status: statusStr,
+                tags: tagsStr,
+            };
+        };
+
+    }
+</script>

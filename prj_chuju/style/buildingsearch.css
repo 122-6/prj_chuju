@@ -3,8 +3,15 @@
     margin: 40px auto;
 }
 
-.card {
-    width: 300px;
+.my-card {
+    width: 350px;
+    margin: 0px 10px 20px 10px;
+    box-shadow: 2px 2px 4px rgba(0,0,0,.4);
+    border-radius: 3px;
+    border: 1px solid #BBB;
+    display: flex;
+    flex-direction:column;
+    justify-content:space-between;
 }
 
 .card-option {
@@ -16,11 +23,21 @@
     height: 150px;
 }
 
+
 .card-pic img {
-    height: 150px;
+    width: 125px;
+    height: 125px;
+    object-fit: cover;
 }
 .card-tag img{
     height:14px;
+}
+.card-price{
+    text-align:right;
+}
+.card-price span{
+    font-size:1.2rem;
+    font-weight:bold;
 }
 
 
@@ -46,3 +63,57 @@
     font-weight: bold;
     padding-left: 4px;
 }
+
+/* ******** */
+/* 淳嘉更新 */
+/* ******** */
+/* 通用項目 */
+.font-120{
+    font-size:1.2rem;
+}
+.font-80{
+    font-size:0.8rem;
+}
+.font-bold{
+    font-weight:bold;
+}
+.centerlize{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+}
+.flex-auto{
+    flex:auto;
+}
+/* 單選按鈕 */
+fieldset > [type="button"] {
+    padding: 2px 7px;
+    margin-right: 10px;
+    border: 2px solid rgba(0,0,0,0);
+    border-radius: 3px;
+}
+    fieldset > [type="button"].actived {
+        border-color: #908159;
+    }
+/* 建案連結 */
+.BClink {
+    flex: 1;
+    padding: 5px 15px;
+    text-align: center;
+    border-top: 1px solid #AAA;
+    border-left: 1px solid #AAA;
+    color: #706139;
+}
+    .BClink:first-child{
+        border-left:none;
+    }
+    .BClink:hover {
+        text-decoration: none;
+        color: #706139;
+        background-color: #C0B189;
+    }
+    .BClink:visited {
+        color: #706139;
+    }
+
+

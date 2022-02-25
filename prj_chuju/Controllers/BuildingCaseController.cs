@@ -45,5 +45,11 @@ namespace prj_chuju.Controllers
 
             return View(list);
         }
+
+        public JsonResult getBuildingBySelector()
+        {
+            List<class_buildingCase> List = new factory_buildingCase().getBuildingBySelector(Request);
+            return Json(List);
+        }
     }
 }

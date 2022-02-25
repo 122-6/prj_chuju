@@ -829,6 +829,7 @@
     <Content Include="images\建案資料庫\9-One park Taipei\2.jpg" />
     <Content Include="images\建案資料庫\9-One park Taipei\3.jpg" />
     <Content Include="javascript\jquery-3.6.0.min.js" />
+    <Content Include="Scripts\buildingSearch.js" />
     <Content Include="Scripts\jquery.signalR-2.4.3.js" />
     <Content Include="Scripts\jquery.signalR-2.4.3.min.js" />
     <Content Include="style\aboutStyle.css" />

@@ -1,4 +1,4 @@
-﻿
+﻿@model prj_chuju.ViewModels.HomePageViewModel
 @{
     ViewBag.Title = "Index";
 }
@@ -110,45 +110,23 @@
             <p class="text-white">優質新房個案介紹，全台社區時價登錄，提供您購物、賞屋最新報導資訊</p>
         </div>
         <div class="row justify-content-center">
-            <div class="col-3 news-img">
-                <a href="#">
-                    <img src="../images/P/屋子1.PNG" class=".img-fluid">
-                    <div class="news-content">
-                        <h5>紘石仰格</h5>
-                        <p>臺北市大安區敦化南路一段187巷20號</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-3 news-img">
-                <a href="#">
-                    <img src="../images/P/屋子2.PNG" class=".img-fluid">
-                    <div class="news-content">
-                        <h5>紘石仰格</h5>
-                        <p>臺北市大安區敦化南路一段187巷20號</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-3 news-img">
-                <a href="#">
-                    <img src="../images/P/屋子3.PNG" class=".img-fluid">
-                    <div class="news-content">
-                        <h5>紘石仰格</h5>
-                        <p>臺北市大安區敦化南路一段187巷20號</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-3 news-img">
-                <a href="#">
-                    <img src="../images/P/屋子4.PNG" class=".img-fluid">
-                    <div class="news-content">
-                        <h5>紘石仰格</h5>
-                        <p>臺北市大安區敦化南路一段187巷20號</p>
-                    </div>
-                </a>
-            </div>
+            @foreach (var item in Model.building)
+            {
+                <div class="col-3 news-img">
+                    <a href="#">
+                        <img src="~/@item.picURL" class=".img-fluid">
+                        <div class="news-content">
+                            <h5>@item.建案名稱</h5>
+                            <p>@item.基地位置</p>
+                        </div>
+                    </a>
+                </div>
+            }
         </div>
         <div class="row justify-content-center mt-5">
-            <input type="button" class="learn-more" value="查看更多">
+            <a href="~/BuildingList">
+                <input type="button" class="learn-more" value="查看更多">
+            </a>
         </div>
 
     </div>
@@ -160,24 +138,15 @@
             <h1 class="font-weight-bold">活動快報</h1>
             <p class="text-white">最新活動報你知，各項專屬會員的優惠請不要錯過</p>
         </div>
-        <div class="row mb-5">
-            <div class="col-4">
-                <a href="#"><img src="../images/P/活動1.jpg" alt=""></a>
-            </div>
-            <div class="col-4">
-                <a href="#"><img src="../images/P/活動2.jpg" alt=""></a>
-            </div>
-            <div class="col-4">
-                <a href="#"><img src="../images/P/活動2.jpg" alt=""></a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-4">
-                <a href="#"><img src="../images/P/活動3.jpg" alt=""></a>
-            </div>
-            <div class="col-4">
-                <a href="#"><img src="../images/P/活動4.jpg" alt=""></a>
-            </div>
+        <div class="row justify-content-center flex-wrap">
+            @foreach(var item in Model.ActivityOutline)
+            {
+                <div class="col-4 activity-img">
+                    <a href="~/ActivityContent/@item.Id">
+                        <img src="~/@item.picture" />
+                    </a>
+                </div>
+            }
         </div>
     </div>
 

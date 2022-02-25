@@ -993,6 +993,7 @@
     <Compile Include="ViewModels\AccountInfoPageViewModel.cs" />
     <Compile Include="ViewModels\ArticleContentViewModel.cs" />
     <Compile Include="ViewModels\CookieClass.cs" />
+    <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

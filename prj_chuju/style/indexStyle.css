@@ -144,6 +144,12 @@ main h1, main h2 {
     background-image: url(../images/P/pexels-burst-373912.png);
 }
 
+.act img {
+    width: 90%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
 .about-us {
     background-image: url(../images/P/pexels-umar-mukhtar-1538177.png);
     padding-top: 30px;

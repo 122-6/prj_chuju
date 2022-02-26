@@ -11,6 +11,8 @@ namespace prj_chuju.Controllers
         // GET: OnlineService
         public ActionResult Service()
         {
+            if (Session["permission"] == null || Session["permission"].ToString() != "admin")
+                return RedirectToAction("Index", "Home");
             return PartialView();
         }
     }

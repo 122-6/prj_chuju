@@ -23,8 +23,6 @@ namespace prj_chuju.Controllers
                 ActivityContent = db.ActivityContent.Take(6).ToList(),
             };
 
-            
-
             return View(vm);
         }
 

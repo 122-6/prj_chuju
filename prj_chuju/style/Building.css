@@ -126,4 +126,25 @@ footer .title {
     font-weight: bold;
 }
 
+.page {
+    border-radius: 30px;
+    border: 2px solid #706139;
+    color: #706139;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 35px;
+    margin-right: 11px;
+    margin-bottom: 53px;
+    background-color: #FFFFFF;
+}
 
+    .page:hover {
+        color: #706139;
+    }
+
+.page-select {
+    border: 2px solid black;
+    color: black;
+}

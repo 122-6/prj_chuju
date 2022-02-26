@@ -20,6 +20,13 @@ namespace prj_chuju
                 );
 
             routes.MapRoute(
+                name: "BuildingList_page",
+                url: "BuildingList/{tag}/{page}",
+                defaults: new { controller = "BuildingList", action = "Index", tag = UrlParameter.Optional, page = UrlParameter.Optional }
+                );
+
+
+            routes.MapRoute(
                 name: "ActivityContent",
                 url: "ActivityContent/{Id}",
                 defaults: new { controller = "Activity", action = "ActivityContent", Id = UrlParameter.Optional }

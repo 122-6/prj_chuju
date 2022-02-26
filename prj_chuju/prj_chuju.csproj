@@ -979,6 +979,7 @@
     <Compile Include="Models\class_ActivityOutline.cs" />
     <Compile Include="Models\class_articleOutline.cs" />
     <Compile Include="Models\class_buildingCase.cs" />
+    <Compile Include="Models\Class_BuildingContent.cs" />
     <Compile Include="Models\class_buildingList.cs" />
     <Compile Include="Models\class_regionList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

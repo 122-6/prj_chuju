@@ -1,38 +1,85 @@
-﻿@model List<prj_chuju.Models.class_buildingList>
+﻿@using prj_chuju.Models
+@model Tuple<List<class_buildingList>,string,int,int>
 @{
     ViewBag.Title = "Index";
 }
 <link rel="stylesheet" href="~/style/Building.css">
+<style>
+    .page {
+        border-radius: 30px;
+        border: 2px solid #706139;
+        color: #706139;
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+        text-align: center;
+        margin-top: 35px;
+        margin-right: 11px;
+        margin-bottom: 53px;
+        background-color: #FFFFFF;
+    }
+
+        .page:hover {
+            color: #706139;
+        }
+
+    .page-select {
+        border: 2px solid black;
+        color: black;
+    }
+</style>
 <main>
     <div class="container-fliud">
-        <h1 style="margin-left:400px;">建案列表</h1>
+        <h1 style="margin-left:400px; margin-top:50px;">建案列表</h1>
         <div class="box ">
             <div class="row">
 
-                @foreach (var  item in Model) {
-    <div class="card">
-        <div class="card-pic">
-            <img src="~/@item.pictrueurl" alt="">
-        </div>
-        <div class="card-name">
-            @item.buildname
-        </div>
-        <div class="card-place">
-            @item.country@item.district
-        </div>
-        <div class="card-space">
-            @item.insidespace
-        </div>
-        <div>
-            <input type="button" value="查看建案" style="width: 150px; align-content: center;">
-        </div>
-    </div>
+                @foreach (var item in Model.Item1)
+                {
+                    <div class="card">
+                        <div class="card-pic">
+                            <img src="~/@item.pictrueurl" alt="">
+                        </div>
+                        <div class="card-name">
+                            @item.buildname
+                        </div>
+                        <div class="card-place">
+                            @item.country@item.district
+                        </div>
+                        <div class="card-space">
+                            @item.insidespace
+                        </div>
+                        <div>
+                            <input type="button" value="查看建案" style="width: 150px; align-content: center;">
+                        </div>
+                    </div>
                 }
-               
+
 
 
 
             </div>
+        </div>
+        <div class="page-list d-flex justify-content-center">
+            @{
+                int previous = Model.Item4 - 1;
+                int next = Model.Item4 + 1;
+                if (previous < 1)
+                {
+                    previous = 1;
+                }
+
+                if (next > Model.Item3)
+                {
+                    next = Model.Item3;
+                }
+
+                <a href="~/BuildingList/@Model.Item2/1" class="page one text-decoration-none">1</a>
+                <a href="~/BuildingList/@Model.Item2/@previous" class="page previous text-decoration-none"><</a>
+                <a href="~/BuildingList/@Model.Item2/@Model.Item4" class="page page-select text-decoration-none">@Model.Item4</a>
+                <a href="~/BuildingList/@Model.Item2/@next" class="page next text-decoration-none">></a>
+                <a href="~/BuildingList/@Model.Item2/@Model.Item3" class="page last text-decoration-none">@Model.Item3</a>
+            }
         </div>
     </div>
 

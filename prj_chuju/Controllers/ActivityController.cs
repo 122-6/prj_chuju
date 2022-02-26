@@ -29,19 +29,19 @@ namespace prj_chuju.Controllers
             switch (tag)
             {
                 case "即將開始":
-                    list = ListSql(soonSql, page);
+                    list = OutlinetSql(soonSql, page);
                     max_page = MaxPage_Sql(soon_countSql);
                     break;
                 case "執行中":
-                    list = ListSql(nowSql, page);
+                    list = OutlinetSql(nowSql, page);
                     max_page = MaxPage_Sql(now_countSql);
                     break;
                 case "已結束":
-                    list = ListSql(endSql, page);
+                    list = OutlinetSql(endSql, page);
                     max_page = MaxPage_Sql(end_countSql);
                     break;
                 default:
-                    list = ListSql(allSql, page);
+                    list = OutlinetSql(allSql, page);
                     max_page = MaxPage_Sql(all_countSql);
                     break;
             }
@@ -50,11 +50,21 @@ namespace prj_chuju.Controllers
             return View(data);
         }
 
-        private List<class_ActivityOutline> ListSql(string strSql, int page)
+        private List<class_ActivityOutline> OutlinetSql(string strSql, int page)
         {
             SqlCommand cmd = methodSQL(strSql);
             cmd.Parameters.AddWithValue("@Page_row", (page - 1) * 4);
             SqlDataReader reader = cmd.ExecuteReader();
+            List<class_ActivityOutline> list = ListSql(reader);
+
+            reader.Close();
+            con.Close();
+
+            return list;
+        }
+
+        private List<class_ActivityOutline> ListSql(SqlDataReader reader)
+        {
             List<class_ActivityOutline> list = new List<class_ActivityOutline>();
             while (reader.Read())
             {
@@ -67,8 +77,6 @@ namespace prj_chuju.Controllers
                 };
                 list.Add(x);
             }
-            reader.Close();
-            con.Close();
 
             return list;
         }
@@ -158,10 +166,9 @@ namespace prj_chuju.Controllers
 
         private int Rows_numberSql(int Id)
         {
-            string row_numberSql = $"with ActivityOutline as (Select ROW_NUMBER() OVER (ORDER BY endDate desc) as ROW_ID, * from dbo.ActivityOutline) select * from ActivityOutline where Id = {Id}";
-
+            string row_numberSql = $"with ActivityOutline as (select ROW_NUMBER() over (order by endDate desc) as ROW_ID, * from dbo.ActivityOutline) select * from ActivityOutline where Id = @Id";
             SqlCommand cmd = methodSQL(row_numberSql);
-
+            cmd.Parameters.AddWithValue("@Id", Id);
             return Convert.ToInt32(cmd.ExecuteScalar());
         }
 
@@ -171,18 +178,9 @@ namespace prj_chuju.Controllers
             cmd.Parameters.AddWithValue("@compute_row_number", row_number);
             cmd.Parameters.AddWithValue("@previous_rows_fetch", previous_rows_fetch);
             SqlDataReader reader = cmd.ExecuteReader();
-            List<class_ActivityOutline> list = new List<class_ActivityOutline>();
-            while (reader.Read())
-            {
-                class_ActivityOutline x = new class_ActivityOutline()
-                {
-                    Id = (int)reader["Id"],
-                    startDate = (DateTime)reader["startDate"],
-                    endDate = (DateTime)reader["endDate"],
-                    picture = (string)reader["picture"]
-                };
-                list.Add(x);
-            }
+
+            List<class_ActivityOutline> list = ListSql(reader);
+           
             reader.Close();
             con.Close();
 

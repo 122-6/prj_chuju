@@ -1,0 +1,834 @@
+﻿@using prj_chuju.Models
+@model Tuple<Class_BuildingContent, List<Class_BuildingContent>>
+@{
+    ViewBag.Title = "BuildingContent";
+    if (Model.Item1.id == 0)
+    {
+        <script>window.location.href = "../Building/Index"</script>
+    }
+}
+<style>
+    .justify-content-space-between {
+        justify-content: space-between
+    }
+
+    .picture {
+        width: 100%;
+    }
+
+    .sticky {
+        background: #706139;
+        margin-bottom: 142px;
+    }
+
+    .swiper:not(:last-child):after {
+        content: "";
+        width: 1px;
+        height: 46px;
+        background: #FFFFFF;
+        position: absolute;
+        margin-left: 22px;
+        margin-top: 12px;
+    }
+
+    .tag-group {
+        width: 579px;
+    }
+
+    .swiper .tag {
+        font-size: 20px;
+        color: #FFFFFF;
+        line-height: 70px;
+    }
+
+    .wrapper {
+        margin: 0px auto;
+        width: 1350px;
+    }
+
+    .wrapper_content {
+        margin-bottom: 130px;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+        .wrapper_content .imgbox {
+            width: 656px;
+        }
+
+    .build_title, .table_title, .map_title, .build_news_title {
+        color: #706139;
+    }
+
+    .build_title, .table_title, .map_title {
+        font-size: 35px;
+    }
+
+    .build_news_title {
+        font-size: 28px;
+    }
+
+    .table_title, .map_title, .build_news_title {
+        text-align: center;
+    }
+
+    .wrapper_content .content {
+        width: 637px;
+        font-size: 19px;
+        line-height: 40px;
+        color: #000000;
+        margin-bottom: 30px;
+    }
+
+    .iconbox {
+        border: 0.5px solid #C7C7C7;
+        width: 388px;
+        margin: 0px auto;
+    }
+
+        .iconbox .box {
+            width: 96px;
+            text-align: center;
+            padding: 17px 13px;
+            border-right: 0.5px solid #C7C7C7;
+            background-color: #F1F1F1;
+        }
+
+            .iconbox .box .tag {
+                color: #706139;
+                font-size: 17px;
+                line-height: 25px;
+                text-decoration: none;
+            }
+
+        .iconbox img {
+            width: 28.5px;
+            margin-bottom: 5px;
+        }
+
+    .reverse {
+        flex-direction: row-reverse;
+    }
+
+    .wrapper_table {
+        padding: 0px 119px;
+    }
+
+        .wrapper_table .table {
+            margin-top: 43px;
+            margin-bottom: 93px;
+            flex-wrap: wrap;
+            color: #706139;
+        }
+
+        .wrapper_table .box {
+            width: 50%;
+            height: 67px;
+            display: flex;
+            align-items: center;
+            font-size: 19px;
+        }
+
+            .wrapper_table .box:nth-child(4n-3), .wrapper_table .box:nth-child(4n-2) {
+                background-color: #E7E5E5;
+            }
+
+            .wrapper_table .box:nth-child(4n-1), .wrapper_table .box:nth-child(4n) {
+                background-color: #F8F8F8;
+            }
+
+        .wrapper_table item {
+            margin-left: 82px;
+            margin-right: 58px;
+        }
+
+        .wrapper_table span {
+            color: #414141;
+        }
+
+    .wrapper_map .imgbox {
+        margin-top: 43px;
+        margin-bottom: 217px;
+    }
+
+    .wrapper_news .line {
+        width: 188px;
+        text-align: end;
+        font-size: 25px;
+        color: #706139;
+        border-top: 1px solid #706139;
+        margin-right: 49px;
+        padding-top: 14px;
+    }
+
+    .wrapper .news {
+        width: 1013px;
+        margin-bottom: 69px;
+    }
+
+    .wrapper_news .box {
+        width: 233px;
+    }
+
+    .wrapper_news .textbox {
+        border-right: 0.5px solid #706139;
+        border-bottom: 0.5px solid #706139;
+    }
+
+    .wrapper_news .type {
+        font-weight: bold;
+        color: #706139;
+    }
+
+    .wrapper_news .title {
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 29px;
+    }
+
+    .wrapper_news .time {
+        color: #797070;
+        font-size: 11px;
+        line-height: 16px;
+        margin-top: 17px;
+        margin-bottom: 27px;
+    }
+
+    .wrapper_function {
+        width: 311px;
+        align-items: center;
+        margin-bottom: 70px;
+    }
+
+        .wrapper_function .func {
+            width: 32px;
+        }
+
+        .wrapper_function .social {
+            width: 45px;
+            height: 45px;
+            background-color: #DADADA;
+            border-radius: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .wrapper_function .social .facebook {
+                width: 22px;
+            }
+
+            .wrapper_function .social .twitter, .wrapper_function .social .line {
+                width: 25px;
+            }
+
+    .wrapper_news a {
+        text-decoration: none;
+        color: #383838;
+    }
+
+    .wrapper_build_news .box {
+        width: 431px;
+        margin-top: 79px;
+        margin-bottom: 88px;
+    }
+
+    .wrapper_build_news .textbox .title {
+        color: #1E3240;
+        font-weight: bold;
+    }
+
+    .wrapper_build_news .imgbox {
+        margin-bottom: 14px;
+    }
+
+    .wrapper_build_news .address .room {
+        width: 12px;
+        margin-right: 7px;
+    }
+
+    .wrapper_build_news .address {
+        margin-top: 4px;
+        font-size: 13px;
+        align-items: center;
+    }
+
+    .wrapper_build_news .heart {
+        width: 15px;
+        margin-right: 5px;
+    }
+
+    .wrapper_build_news .cart_1 {
+        text-decoration: none;
+        color: #1E3240;
+    }
+
+    .wrapper_build_news .cart_2 {
+        text-decoration: none;
+        color: #706139;
+        text-align: end;
+    }
+
+    .signup {
+        background-image: url('../../images/建案內容/pexels-vecislavas-popa-1643383.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 50%;
+        padding: 100px 0px 150px;
+        text-align: center;
+    }
+
+        .signup .title {
+            color: #FFFFFF;
+            font-size: 40px;
+            font-weight: 500;
+            margin-bottom: 35px;
+        }
+
+    .wrapper_signup {
+        margin: 0px auto;
+        width: 865px;
+        text-align: start;
+    }
+
+    .signup .info {
+        color: #FF0000;
+        font-weight: 300;
+        width: 100%;
+    }
+
+    .signup .box {
+        width: 411px;
+    }
+
+    #name, #tel, #email, #signup_county, #signup_city {
+        color: #FFFFFF;
+        font-size: 20px;
+        background: transparent;
+        border: 2px solid #FFFFFF;
+        width: 100%;
+        padding: 6px 10px;
+        margin-bottom: 29px;
+    }
+
+    #code {
+        color: #FFFFFF;
+        font-size: 20px;
+        background: transparent;
+        border: 2px solid #FFFFFF;
+        width: 239px;
+        padding: 6px 10px;
+    }
+
+    #getCode {
+        width: 144px;
+        height: 46px;
+        color: #FFFFFF;
+        background: #706139;
+        font-size: 20px;
+    }
+
+    #signup_county option, #signup_city option {
+        color: #383838;
+    }
+
+    .check_signup_box {
+        margin-top: -9px;
+        margin-bottom: 71px;
+    }
+
+    #check {
+        width: 18px;
+    }
+
+    .checkbox_label {
+        color: #FFFFFF;
+    }
+
+    .signup .member {
+        color: #FFFFFF;
+        text-align: end;
+    }
+
+    .signup .click_signup {
+        color: red;
+        text-decoration: underline;
+    }
+
+    .signup .signup_btn_box {
+        text-align: center;
+    }
+
+    .signup .signup_btn {
+        width: 179px;
+        height: 49px;
+        color: #FFFFFF;
+        background: transparent;
+        border: 2px solid #FFFFFF;
+        font-size: 20px;
+    }
+</style>
+<main>
+
+    @foreach (var item in Model.Item2)
+    {
+        <div>
+            <img class="picture" src="~/@item.buildingpic1" />
+        </div>
+    }
+    <div class="d-flex justify-content-center sticky">
+        <div class="d-flex tag-group justify-content-space-between">
+            <div class="swiper"><a href="#" class="tag text-decoration-none">個案特色</a></div>
+            <div class="swiper"><a href="#" class="tag text-decoration-none">個案詳情</a></div>
+            <div class="swiper"><a href="#" class="tag text-decoration-none">生活地圖</a></div>
+            <div class="swiper"><a href="#" class="tag text-decoration-none">相關新聞</a></div>
+            <div class="swiper"><a href="#" class="tag text-decoration-none">線上預約</a></div>
+        </div>
+    </div>
+    <section>
+        @foreach (var item in Model.Item2)
+        {
+            <div class="wrapper_content wrapper d-flex">
+
+                <div class="imgbox">
+                    <img class="picture" src="~/@item.buildingpic2" />
+                </div>
+
+                <div class="textbox">
+                    <div class="build_title">@item.buildname</div>
+                    <div class="content">
+                        @item.buildingtext1
+                    </div>
+
+                    <div class="iconbox d-flex justify-content-space-between">
+                        <div class="box">
+                            <a href="#" class="tag">
+                                <img src="~/images/建案內容/phone-call.png" />
+                                <div>立即來電</div>
+                            </a>
+                        </div>
+                        <div class="box">
+                            <a href="#" class="tag">
+                                <img src="~/images/建案內容/line.png" />
+                                <div>LINE詢問</div>
+                            </a>
+                        </div>
+                        <div class="box">
+                            <a href="#" class="tag">
+                                <img src="~/images/建案內容/place.png" />
+                                <div>地圖導航</div>
+                            </a>
+                        </div>
+                        <div class="box">
+                            <a href="#" class="tag">
+                                <img src="~/images/建案內容/audit.png" />
+                                <div>立即預約</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </section>
+    <section>
+        @foreach (var item in Model.Item2)
+        {
+            <div class="wrapper_content wrapper d-flex reverse">
+                <div class="imgbox">
+                    <img class="picture" src="~/@item.buildingpic3" />
+                </div>
+                <div class="textbox">
+                    <div class="content">
+                        @item.buildingtext2
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper_content wrapper d-flex">
+                <div class="imgbox">
+                    <img class="picture" src="~/@item.buildingpic4" />
+                </div>
+                <div class="textbox">
+                    <div class="content">
+                        @item.buildingtext3
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper_content wrapper d-flex reverse">
+                <div class="imgbox">
+                    <img class="picture" src="~/@item.buildingpic5" />
+                </div>
+                <div class="textbox">
+                    <div class="content">
+                        @item.buildingtext4
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper_content wrapper d-flex">
+                <div class="imgbox">
+                    <img class="picture" src="~/@item.buildingpic6" />
+                </div>
+                <div class="textbox">
+                    <div class="content">
+                        @item.buildingtext5
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper_content wrapper d-flex reverse">
+                <div class="imgbox">
+                    <img class="picture" src="~/@item.buildingpic7" />
+                </div>
+                <div class="textbox">
+                    <div class="content">
+                        @item.buildingtext6
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper_content wrapper d-flex">
+                <div class="imgbox">
+                    <img class="picture" src="~/@item.buildingpic8" />
+                </div>
+                <div class="textbox">
+                    <div class="content">
+                        @item.buildingtext7
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper_content wrapper d-flex reverse">
+                <div class="imgbox">
+                    <img class="picture" src="~/@item.buildingpic9" />
+                </div>
+                <div class="textbox">
+                    <div class="content">
+                        @item.buildingtext8
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper_content wrapper d-flex">
+                <div class="imgbox">
+                    <img class="picture" src="~/@item.buildingpic10" />
+                </div>
+                <div class="textbox">
+                    <div class="content">
+                        @item.buildingtext9
+                    </div>
+                </div>
+            </div>
+
+        }
+    </section>
+    <section>
+        <div class="wrapper_table wrapper">
+            <div class="table_title">個案詳情</div>
+            <div class="table d-flex">
+                <div class="box">
+                    <item>建案地區</item>
+                    <span>臺北市 士林區</span>
+                </div>
+                <div class="box">
+                    <item>建案名稱</item>
+                    <span>紘石仰格</span>
+                </div>
+                <div class="box">
+                    <item>建案類型</item>
+                    <span>預售屋</span>
+                </div>
+                <div class="box">
+                    <item>投資建設</item>
+                    <span>紘石建設股份有限公司</span>
+                </div>
+                <div class="box">
+                    <item>營造公司 </item>
+                    <span>上承營造股份有限公司</span>
+                </div>
+                <div class="box">
+                    <item>建築設計</item>
+                    <span>金以容建築師事務所</span>
+                </div>
+                <div class="box">
+                    <item>交屋狀況</item>
+                    <span>標準配備</span>
+                </div>
+                <div class="box">
+                    <item>坪數規劃</item>
+                    <span>60 - 78 坪</span>
+                </div>
+                <div class="box">
+                    <item>樓層規劃</item>
+                    <span>地上17層、地下4層</span>
+                </div>
+                <div class="box">
+                    <item>棟戶規劃</item>
+                    <span>1棟、62戶</span>
+                </div>
+                <div class="box">
+                    <item>車位規劃</item>
+                    <span>共86個</span>
+                </div>
+                <div class="box">
+                    <item>車位配比</item>
+                    <span>1:1.38</span>
+                </div>
+                <div class="box">
+                    <item>基地面積</item>
+                    <span>460坪</span>
+                </div>
+                <div class="box">
+                    <item>基地位置</item>
+                    <span>臺北市士林區中山北路五段.中山北路五段751巷口</span>
+                </div>
+                <div class="box">
+                    <item>接待中心</item>
+                    <span>臺北市士林區中山北路五段716號</span>
+                </div>
+                <div class="box">
+                    <item>諮詢專線</item>
+                    <span>02-28328588</span>
+                </div>
+                <div class="box">
+                    <item>建築代銷</item>
+                    <span>海悅廣告股份有限公司</span>
+                </div>
+                <div class="box">
+                    <item></item>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    }
+    <section>
+        <div class="wrapper_map wrapper">
+            <div class="map_title">生活地圖</div>
+            <div class="imgbox">
+                <img class="picture" src="~/images/建案內容/地圖.png" />
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="wrapper_news wrapper d-flex">
+            <div class="line">
+                <span>相關新聞</span>
+            </div>
+            <div class="news d-flex justify-content-space-between">
+                <div class="box">
+                    <a href="#">
+                        <div class="imgbox">
+                            <img class="picture" src="~/images/建案內容/news.png" />
+                        </div>
+                        <div class="textbox">
+                            <div class="type">設計裝修</div>
+                            <div class="title">設計新手｜讀懂立面圖的超能力GET，從此擺脫圖盲</div>
+                            <div class="time">2021/08/21</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="box">
+                    <a href="#">
+                        <div class="imgbox">
+                            <img class="picture" src="~/images/建案內容/news.png" />
+                        </div>
+                        <div class="textbox">
+                            <div class="type">設計裝修</div>
+                            <div class="title">設計新手｜讀懂立面圖的超能力GET，從此擺脫圖盲</div>
+                            <div class="time">2021/08/21</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="box">
+                    <a href="#">
+                        <div class="imgbox">
+                            <img class="picture" src="~/images/建案內容/news.png" />
+                        </div>
+                        <div class="textbox">
+                            <div class="type">設計裝修</div>
+                            <div class="title">設計新手｜讀懂立面圖的超能力GET，從此擺脫圖盲</div>
+                            <div class="time">2021/08/21</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="box">
+                    <a href="#">
+                        <div class="imgbox">
+                            <img class="picture" src="~/images/建案內容/news.png" />
+                        </div>
+                        <div class="textbox">
+                            <div class="type">設計裝修</div>
+                            <div class="title">設計新手｜讀懂立面圖的超能力GET，從此擺脫圖盲</div>
+                            <div class="time">2021/08/21</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="wrapper_function wrapper d-flex justify-content-space-between">
+        <a href="#">
+            <div class="func">
+                <img class="picture" src="~/images/建案內容/text.png" />
+            </div>
+        </a>
+        <a href="#">
+            <div class="func">
+                <img class="picture" src="~/images/建案內容/printer.png" />
+            </div>
+        </a>
+        <a href="#">
+            <div class="social">
+                <div class="facebook">
+                    <img class="picture" src="~/images/建案內容/facebook.png" />
+                </div>
+            </div>
+        </a>
+        <a href="#">
+            <div class="social">
+                <div class="twitter">
+                    <img class="picture" src="~/images/建案內容/twitter.png" />
+                </div>
+            </div>
+        </a>
+        <a href="#">
+            <div class="social">
+                <div class="line">
+                    <img class="picture" src="~/images/建案內容/line.png" />
+                </div>
+            </div>
+        </a>
+    </section>
+    <section>
+        <div class="wrapper_build_news wrapper">
+            <div class="build_news_title">推薦你可能喜歡的新家</div>
+            <div class="build d-flex justify-content-space-between">
+                <div class="box">
+                    <div class="imgbox">
+                        <img class="picture" src="~/images/建案內容/新屋-1.png" />
+                    </div>
+                    <div class="textbox d-flex justify-content-space-between">
+                        <div>
+                            <div class="title">
+                                力麒天沐
+                            </div>
+                            <div class="address d-flex">
+                                <div class="room">
+                                    <img class="picture" src="~/images/建案內容/room.png" />
+                                </div>
+                                <span>臺中市北屯區崇德十九路</span>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="#" class="cart_1 d-flex">
+                                <div class="heart">
+                                    <img class="picture" src="~/images/建案內容/like.png" />
+                                </div>
+                                <span>加入收藏</span>
+                            </a>
+                            <a href="#">
+                                <div class="cart_2">預約鑑賞</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="imgbox">
+                        <img class="picture" src="~/images/建案內容/新屋-2.png" />
+                    </div>
+                    <div class="textbox d-flex justify-content-space-between">
+                        <div>
+                            <div class="title">
+                                聯上天母
+                            </div>
+                            <div class="address d-flex">
+                                <div class="room">
+                                    <img class="picture" src="~/images/建案內容/room.png" />
+                                </div>
+                                <span>臺中市士林區天母北路56號</span>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="#" class="cart_1 d-flex">
+                                <div class="heart">
+                                    <img class="picture" src="~/images/建案內容/like.png" />
+                                </div>
+                                <span>加入收藏</span>
+                            </a>
+                            <a href="#">
+                                <div class="cart_2">預約鑑賞</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="imgbox">
+                        <img class="picture" src="~/images/建案內容/新屋-3.png" />
+                    </div>
+                    <div class="textbox d-flex justify-content-space-between">
+                        <div>
+                            <div class="title">
+                                南京御邸
+                            </div>
+                            <div class="address d-flex">
+                                <div class="room">
+                                    <img class="picture" src="~/images/建案內容/room.png" />
+                                </div>
+                                <span>臺北市中山區南京東路三段106號</span>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="#" class="cart_1 d-flex">
+                                <div class="heart">
+                                    <img class="picture" src="~/images/建案內容/like.png" />
+                                </div>
+                                <span>加入收藏</span>
+                            </a>
+                            <a href="#" class="cart_2">
+                                <div>預約鑑賞</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="signup">
+        <div class="wrapper title">線上預約</div>
+        <div class="wrapper_signup">
+            <form>
+                <label class="info">每個欄位都是必填欄位</label>
+                <div class="content d-flex justify-content-space-between">
+                    <div class="box">
+                        <input id="name" type="text" placeholder="姓名" />
+                        <input id="tel" type="tel" placeholder="行動電話" />
+                        <div class="codebox d-flex justify-content-space-between">
+                            <input id="code" type="text" placeholder="輸入驗證碼" />
+                            <a class="d-flex justify-content-center align-items-center" id="getCode">獲取驗證碼</a>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <input id="email" type="email" placeholder="E-mail" />
+                        <select id="signup_county">
+                            <option>居住縣市</option>
+                            <option value="臺北市" data-index="0">臺北市</option>
+                        </select>
+                        <select id="signup_city">
+                            <option>鄉鎮縣市</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="check_signup_box d-flex justify-content-space-between">
+                    <div>
+                        <input id="check" type="checkbox" />
+                        <label class="checkbox_label">我已閱讀並同意服務條款與隱私權聲明</label>
+                    </div>
+                    <div>
+                        <span class="member">我已經是會員：</span>
+                        <a href="#" class="click_signup">點我登入</a>
+                    </div>
+                </div>
+                <div class="signup_btn_box">
+                    <button class="signup_btn" type="submit">立即預約</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+

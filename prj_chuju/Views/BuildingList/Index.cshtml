@@ -1,7 +1,7 @@
 ﻿@using prj_chuju.Models
 @model Tuple<List<class_buildingList>,string,int,int>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "list";
 }
 <link rel="stylesheet" href="~/style/Building.css">
 <style>
@@ -50,7 +50,9 @@
                             @item.insidespace
                         </div>
                         <div>
-                            <input type="button" value="查看建案" style="width: 150px; align-content: center;">
+                            <a href="~/BuildingContent/@item.id">
+                                <input type="button" value="查看建案" style="width: 150px; align-content: center;">
+                            </a>
                         </div>
                     </div>
                 }

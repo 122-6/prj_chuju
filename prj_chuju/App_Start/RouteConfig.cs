@@ -33,6 +33,12 @@ namespace prj_chuju
                 );
 
             routes.MapRoute(
+                name: "BuildingContent",
+                url: "BuildingContent/{id}",
+                defaults: new { controller = "BuildingList", action = "BuildingContent", Id = UrlParameter.Optional }
+                );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

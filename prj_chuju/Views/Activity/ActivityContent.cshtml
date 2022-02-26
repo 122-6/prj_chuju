@@ -1,8 +1,17 @@
-﻿@model prj_chuju.Models.class_ActivityContent
+﻿@using prj_chuju.Models
+@model Tuple<class_ActivityContent, List<class_ActivityOutline>, List<class_ActivityOutline>>
 @{
     ViewBag.Title = "ActivityContent";
 }
 <style>
+    .picture {
+        width: 100%;
+    }
+
+        .picture:hover {
+            opacity: 0.8;
+        }
+
     .ActivityContent_title {
         text-align: center;
         margin-top: 85px;
@@ -27,18 +36,110 @@
             font-size: 21px;
         }
 
-    .box {
+    .wrapper {
+        margin: 0px auto;
+        width: 1220px;
+    }
 
+    .wrapper_news .line {
+        width: 188px;
+        text-align: end;
+        font-size: 25px;
+        color: #706139;
+        border-top: 1px solid #706139;
+        margin-right: 51px;
+        padding-top: 14px;
+    }
+
+    .wrapper .news {
+        width: 880px;
+        margin-bottom: 69px;
+        flex-wrap:wrap;
+    }
+
+    .wrapper_news .box {
+        width: 260px;
+        margin-left:27px;
+        margin-bottom:41px;
+    }
+
+    .wrapper_news .textbox {
+        border-right: 0.5px solid #706139;
+        border-bottom: 0.5px solid #706139;
+    }
+
+    .wrapper_news .type {
+        font-weight: bold;
+        color: #706139;
+        padding-top:10px
+    }
+
+    .wrapper_news .title {
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 29px;
+    }
+
+    .wrapper_news .time {
+        color: #797070;
+        font-size: 11px;
+        line-height: 16px;
+        margin-top: 17px;
+        margin-bottom: 27px;
+    }
+
+    .wrapper_news a {
+        text-decoration: none;
+        color: #383838;
     }
 </style>
 <div class="ActivityContent_title">
-    @Model.title
+    @Model.Item1.title
 </div>
 <main>
     <div class="content">
-        @Html.Raw(@Model.content)
+        @Html.Raw(@Model.Item1.content)
     </div>
 </main>
 <extra>
-    <div class="box"></div>
+    <div class="wrapper_news wrapper d-flex">
+        <div class="line">
+            <span>其他活動</span>
+        </div>
+        <div>
+            <div class="news d-flex justify-content-space-between">
+                @{
+                    foreach (var item in Model.Item2)
+                    {
+                        <div class="box">
+                            <a href="~/ActivityContent/@item.Id">
+                                <div class="imgbox">
+                                    <img class="picture" src="~/@item.picture" />
+                                </div>
+                                <div class="textbox">
+                                    <div class="type">活動快報</div>
+                                    <div class="time">@item.startDate.ToString("yyyy-MM-dd") ~ @item.endDate.ToString("yyyy-MM-dd")</div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+
+                    foreach (var item in Model.Item3)
+                    {
+                        <div class="box">
+                            <a href="~/ActivityContent/@item.Id">
+                                <div class="imgbox">
+                                    <img class="picture" src="~/@item.picture" />
+                                </div>
+                                <div class="textbox">
+                                    <div class="type">活動快報</div>
+                                    <div class="time">@item.startDate.ToString("yyyy-MM-dd") ~ @item.endDate.ToString("yyyy-MM-dd")</div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
 </extra>

@@ -27,5 +27,10 @@ namespace prj_chuju.Controllers
 
             return View(vm);
         }
+
+        public string getPermission()
+        {
+            return Session["permission"] != null ? Session["permission"].ToString() : "guest";
+        }
     }
 }

@@ -10,6 +10,7 @@ namespace prj_chuju.ViewModels
         public string remember;
         public int theid;
         public string password;
+        //public string permission;
         public AccountInfoMemory()
         {
             remember = "no";
@@ -26,12 +27,12 @@ namespace prj_chuju.ViewModels
             }
             else
             {
-                int FirstBar = cookieValue.IndexOf('|', 0);
-                int SecondBar = cookieValue.IndexOf('|', FirstBar + 1);
+                int Bar1 = cookieValue.IndexOf('|', 0);
+                int Bar2 = cookieValue.IndexOf('|', Bar1 + 1);
 
-                remember = cookieValue.Substring(0, FirstBar);
-                theid = Convert.ToInt32(cookieValue.Substring(FirstBar + 1, SecondBar - FirstBar - 1));
-                password = cookieValue.Substring(SecondBar + 1);
+                remember = cookieValue.Substring(0, Bar1);
+                theid = Convert.ToInt32(cookieValue.Substring(Bar1 + 1, Bar2 - Bar1 - 1));
+                password = cookieValue.Substring(Bar2 + 1);
             }
         }
 

@@ -56,11 +56,7 @@ namespace prj_chuju.Controllers
 
             // 確認登入與記憶狀況後蒐集資料庫資料以呈現頁面
             class_accountInfo x = new factory_accountInfo().selectAccountByID(theid);
-
-            // todo: 待刪 測試用程式碼
-            ViewBag.remember = loginInfo.remember;
-            ViewBag.theid = loginInfo.theid;
-            ViewBag.password = loginInfo.password;
+            Session["permission"] = x.permission; // 記住登入者的權限
 
             AccountInfoPageViewModel aipvm = new AccountInfoPageViewModel(theid);
 
@@ -348,8 +344,6 @@ namespace prj_chuju.Controllers
             List<class_bookedCaseInfo> x = f.getBookedCase(theid);
             return Json(x);
         }
-
-
 
 
     }

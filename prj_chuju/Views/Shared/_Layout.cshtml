@@ -39,7 +39,7 @@
                     <img class="logo _LayoutElement" src="/images/logo/logo_col.png" alt="雛區廣告Logo">
                 </a>
             </div>
-            <div class="top-nav-center row justify-content-between col-8 _LayoutElement">
+            <div id="layoutTopNav" class="top-nav-center row justify-content-between col-8 _LayoutElement">
                 @Html.ActionLink("買房第一站", "Index", "BuyHouseFirst")
                 @Html.ActionLink("關於雛居", "Index", "AboutUs")
                 @Html.ActionLink("房市新訊", "Index", "MarketNews")
@@ -47,7 +47,6 @@
                 <a href="~/Activity/全部活動">活動快報</a>
                 @Html.ActionLink("建案搜尋", "Index", "BuildingCase")
                 @Html.ActionLink("會員專區", "Index", "Account")
-                @Html.ActionLink("客服後台", "Service", "OnlineService")
             </div>
             <div class="top-nav-right row align-items-center justify-content-center col-2 _LayoutElement">
                 <a href="https://www.facebook.com/%E9%9B%9B%E5%B1%85%E5%BB%A3%E5%91%8A-107555398504019"><img class="iconImg _LayoutElement" src="/images/ICON/facebook.png" alt=""></a>|
@@ -166,6 +165,7 @@
         <span>TOP</span>
     </div>
 
+    <!--置頂按鈕-->
     <script>
         $(window).scroll(function () {
             if ($(document).scrollTop() < 300) {
@@ -180,8 +180,25 @@
 
     </script>
 
-    @*線上客服*@
+    <!--客服畫面權限-->
+    <script>
+        $(function () {
+            $.ajax({
+                method: 'post',
+                url: '@Url.Action("getPermission","Home")',
+                success: function (permission) {
+                    if(permission=="admin")
+                        $('#layoutTopNav').append(`@Html.ActionLink("客服後台", "Service", "OnlineService")`)
+                    console.log(permission);
+                },
+                error: function () {
+                    console.log('oops, error')
+                }
+            });
+        });
+    </script>
 
+    @*線上客服*@
     <link href="~/style/Client.css" rel="stylesheet" />
     <div class="mainClient">
         <button class="btnTalk">

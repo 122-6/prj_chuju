@@ -245,7 +245,7 @@ function getCaseHTML(buildingCase) {
                     <div class="card-info font-120 font-bold">${buildingCase.buildname}</div>
                     <div class="card-region">${buildingCase.country} ${buildingCase.district}</div>
                     <div class="card-detail my-3">${buildingCase.insidespace}</div>
-                    <div class="card-tag font-80 mb-2"><img src="~/images/P/price-tag.png" alt=""> ${buildingCase.features}</div>
+                    <div class="card-tag font-80 mb-2"><img src="/images/P/price-tag.png" alt=""> ${buildingCase.features}</div>
                     <div class="card-price">總價 <span>洽詢案場</span> </div>
                 </div>
             </div>

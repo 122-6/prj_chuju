@@ -946,6 +946,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\BrandArticleController.cs" />
+    <Compile Include="Controllers\BuildingIntroController.cs" />
     <Compile Include="Controllers\BuildingListController.cs" />
     <Compile Include="Controllers\BuildingCaseController.cs" />
     <Compile Include="Controllers\BuyHouseFirstController.cs" />
@@ -981,6 +982,7 @@
     <Compile Include="Models\class_buildingCase.cs" />
     <Compile Include="Models\Class_BuildingContent.cs" />
     <Compile Include="Models\class_buildingList.cs" />
+    <Compile Include="Models\class_CollectAndViewed.cs" />
     <Compile Include="Models\class_regionList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="regionList.cs">
@@ -993,6 +995,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AccountInfoPageViewModel.cs" />
     <Compile Include="ViewModels\ArticleContentViewModel.cs" />
+    <Compile Include="ViewModels\buildingContentViewModel.cs" />
     <Compile Include="ViewModels\CookieClass.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="WebForm1.aspx.cs">
@@ -1040,6 +1043,8 @@
     <Content Include="Views\Account\forgetPassword.cshtml" />
     <Content Include="Views\Account\resetPassword.cshtml" />
     <Content Include="Views\BuildingList\BuildingContent.cshtml" />
+    <Content Include="Views\BuildingIntro\easyTestPage.cshtml" />
+    <Content Include="Views\BuildingIntro\Page.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -25,6 +25,13 @@
 }
 
 /*main*/
+.btn-like {
+    color: #706139;
+    cursor: pointer;
+    background-color: transparent;
+    border: 2px solid #706139;
+}
+
 .news .row {
     margin: 30px auto;
 }

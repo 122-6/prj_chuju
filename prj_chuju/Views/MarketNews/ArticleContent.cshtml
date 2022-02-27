@@ -22,6 +22,7 @@
                 <p class="text font-weight-bolder">@item.articleClass1.className</p>
                 <p class="text">刊出日期 @Html.DisplayFor(modelitem => item.publishDate)</p>
                 <p class="text">文字 / 林建評</p>
+                <button class="btn-like">收藏</button>
                 <div class="tag d-flex justify-content-start flex-wrap">
                     @foreach (var tag in item.articleTagList)
                     {
@@ -90,4 +91,11 @@
         </div>
     </div>
 </main>
+<script>
+    $(function () {
+        $(".btn-like").click(function () {
+            $(".btn-like").text("已收藏").attr("disabled", true);
+        });
+    });
+</script>
 

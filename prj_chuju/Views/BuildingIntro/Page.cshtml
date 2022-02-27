@@ -885,6 +885,10 @@
     const buildingID = @ViewBag.buildingID;
     $('#bookCaseBtn').on('click', function (event) {
         event.preventDefault();
+        if (userID < 0) {
+            alert("請先登入！");
+            return;
+        }
         if ($('#name').val() == "") return;
         if ($('#tel').val() == "") return;
         if ($('#email').val() == "") return;

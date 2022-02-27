@@ -1039,6 +1039,7 @@
     <Content Include="Views\OnlineService\Service.cshtml" />
     <Content Include="Views\Account\forgetPassword.cshtml" />
     <Content Include="Views\Account\resetPassword.cshtml" />
+    <Content Include="Views\BuildingList\BuildingContent.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

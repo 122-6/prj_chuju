@@ -66,16 +66,19 @@ namespace prj_chuju.Controllers
         private List<class_ActivityOutline> ListSql(SqlDataReader reader)
         {
             List<class_ActivityOutline> list = new List<class_ActivityOutline>();
-            while (reader.Read())
+            if (reader.HasRows)
             {
-                class_ActivityOutline x = new class_ActivityOutline()
+                while (reader.Read())
                 {
-                    Id = (int)reader["Id"],
-                    startDate = (DateTime)reader["startDate"],
-                    endDate = (DateTime)reader["endDate"],
-                    picture = (string)reader["picture"]
-                };
-                list.Add(x);
+                    class_ActivityOutline x = new class_ActivityOutline()
+                    {
+                        Id = (int)reader["Id"],
+                        startDate = (DateTime)reader["startDate"],
+                        endDate = (DateTime)reader["endDate"],
+                        picture = (string)reader["picture"]
+                    };
+                    list.Add(x);
+                }
             }
 
             return list;
@@ -144,20 +147,23 @@ namespace prj_chuju.Controllers
         }
         private class_ActivityContent QueryContentById(int Id)
         {
-            class_ActivityContent x = default;
-            string IdSql = $"select title, content from ActivityContent where ActivityId = @Id";
+            class_ActivityContent x = new class_ActivityContent();
+            string IdSql = $"select ActivityId, title, content from ActivityContent where ActivityId = @Id";
 
             SqlCommand cmd = methodSQL(IdSql);
             cmd.Parameters.AddWithValue("@Id", Id);
             SqlDataReader reader = cmd.ExecuteReader();
-            if (reader.Read())
+
+            if (reader.HasRows)
             {
-                x = new class_ActivityContent()
+                if (reader.Read())
                 {
-                    title = (string)reader["title"],
-                    content = (string)reader["content"]
+                    x.Id = (int)reader["ActivityId"];
+                    x.title = (string)reader["title"];
+                    x.content = (string)reader["content"];
                 };
             }
+
             reader.Close();
             con.Close();
 
@@ -180,7 +186,7 @@ namespace prj_chuju.Controllers
             SqlDataReader reader = cmd.ExecuteReader();
 
             List<class_ActivityOutline> list = ListSql(reader);
-           
+
             reader.Close();
             con.Close();
 

@@ -1,4 +1,5 @@
-﻿using prj_chuju.ViewModels;
+﻿using prj_chuju.Models;
+using prj_chuju.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,9 @@ namespace prj_chuju.Controllers
             vm.articleOutline = db.articleOutline.Where(t => t.articleClass == articleClass).ToList();
             vm.articleDetail = db.articleOutline.Where(t => t.id == id).ToList();
 
+            // 瀏覽歷史功能
+            AccountInfoMemory userInfo = new AccountInfoHelper(Session, Request).Information;
+            new factory_CollectAndViewed().visitArticle(userInfo.theid, (int)id);
 
             return View(vm);
         }

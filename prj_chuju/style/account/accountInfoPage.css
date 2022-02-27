@@ -350,7 +350,14 @@
     border: 1px solid rgb(212,212,212);
     box-shadow: 1px 3px 3px rgba(0,0,0,.3);
     cursor: pointer;
+    color: black;
 }
+    #bookingPage .bookedCase:hover {
+        text-decoration: none;
+    }
+    #bookingPage .bookedCase:visited {
+        color:black;
+    }
 
 .bookedCase .bookedImg {
     width: 160px;
@@ -398,6 +405,9 @@
     color: rgb(131,131,131);
     cursor: pointer;
 }
+    .caseItem .btnToBuildingCase:hover {
+        text-decoration: none;
+    }
 
 /* 文章元素 */
 #historyPage .articleItem, #collectionPage .articleItem {

@@ -1,4 +1,5 @@
 ﻿using prj_chuju.Models;
+using prj_chuju.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -12,53 +13,22 @@ namespace prj_chuju.Controllers
     {
          SqlConnection con;
 
-        //static SqlConnectionStringBuilder myBuilder = new SqlConnectionStringBuilder()
-        //{
-        //    DataSource = "chujudbserver.database.windows.net",
-        //    InitialCatalog = "dbchuju",
-        //    UserID = "chujuas",
-        //    Password = "P@ssw0rd-chuju",
-        //    AsynchronousProcessing = true,
-        //};
-        //static string conStr = myBuilder.ToString();
 
-
-        // GET: BuildingList
-
-
-        public ActionResult Index(string tag,int page = 1)
+        public ActionResult Index(int page = 1)
         {
             List<class_buildingList> list = default;
-            int max_page = default;
-
+            int max_page = default;            
             string allSql = $"select * from buildingdb order by 建案序號 offset {(page - 1) *12} rows fetch next 12 rows only;";
             string all_countSql = "select count(*) from buildingdb;";
             list = ListSql(allSql,page);
             max_page = CountSql(all_countSql); 
 
-            Tuple<List<class_buildingList>,string, int, int> data = new Tuple<List<class_buildingList>,string, int, int>(list,tag, max_page, page);
+            Tuple<List<class_buildingList>, int, int> data = new Tuple<List<class_buildingList>, int, int>(list, max_page, page);
 
             return View(data);
 
         }
-        //List<class_buildingList> list = new List<class_buildingList>();
-
-        //SqlConnection con = new SqlConnection(conStr);
-        //SqlCommand cmd;
-        //SqlDataReader reader;
-
-        //con.Open();
-        //cmd = new SqlCommand("select * from buildingdb", con);
-        //reader = cmd.ExecuteReader();
-        //while (reader.Read())
-        //{
-        //    class_buildingList bl  = new class_buildingList(reader);
-        //    list.Add(bl);
-        //}
-        //con.Close();
-
-        //return View(list);
-
+       
         private List<class_buildingList> ListSql(string strSql,int page)
         {
             SqlCommand cmd = methodSQL(strSql);
@@ -118,54 +88,59 @@ namespace prj_chuju.Controllers
             return new SqlCommand(strSQL, con);
         }
 
-        public ActionResult BuildingContent(int Id)
+        public ActionResult BuildingContent(int id)
         {
-            var content = QueryContentById(Id);
-            return View(content);
+            List<Class_BuildingContent> list = default;
+            var content = QueryContentById(id);
+
+
+            Tuple<Class_BuildingContent, List<Class_BuildingContent>> data = new Tuple<Class_BuildingContent, List<Class_BuildingContent>>(content,list);
+            return View(data);
         }
 
-        private Class_BuildingContent QueryContentById(int Id)
+        
+        private Class_BuildingContent QueryContentById(int id)
         {
-            Class_BuildingContent x = default;
-            string IdSql = $"select 縣市,地區,建案名稱,文宣1,文宣2,文宣3,文宣4,文宣5,文宣6,文宣7,文宣8,文宣9,pic1,pic2,pic3,pic4,pic5,pic6,pic7,pic8,pic9 from buildingdetail where  建案序號 = @Id";
-
+            Class_BuildingContent x = new Class_BuildingContent();
+            string IdSql = $"select 建案序號,縣市,地區,建案名稱,文宣1,文宣2,文宣3,文宣4,文宣5,文宣6,文宣7,文宣8,文宣9,pic1,pic2,pic3,pic4,pic5,pic6,pic7,pic8,pic9,pic10 from buildingdetail where 建案序號 = @id";
             SqlCommand cmd = methodSQL(IdSql);
-            cmd.Parameters.AddWithValue("@Id", Id);
+            cmd.Parameters.AddWithValue("@id", id);
             SqlDataReader reader = cmd.ExecuteReader();
+            
             if (reader.Read())
             {
-                x = new Class_BuildingContent()
-                {
-                    id = (int)reader["建案序號"],
-                    country = (string)reader["縣市"],
-                    district = (string)reader["區域"],
-                    buildingname = (string)reader["建案名稱"],
-                    buildingtext1 = (string)reader["文宣1"],
-                    buildingtext2 = (string)reader["文宣2"],
-                    buildingtext3 = (string)reader["文宣3"],
-                    buildingtext4 = (string)reader["文宣4"],
-                    buildingtext5 = (string)reader["文宣5"],
-                    buildingtext6 = (string)reader["文宣6"],
-                    buildingtext7 = (string)reader["文宣7"],
-                    buildingtext8 = (string)reader["文宣8"],
-                    buildingtext9 = (string)reader["文宣9"],
-                    buildingpic1 = (string)reader["pic1"],
-                    buildingpic2 = (string)reader["pic2"],
-                    buildingpic3 = (string)reader["pic3"],
-                    buildingpic4 = (string)reader["pic4"],
-                    buildingpic5 = (string)reader["pic5"],
-                    buildingpic6 = (string)reader["pic6"],
-                    buildingpic7 = (string)reader["pic7"],
-                    buildingpic8 = (string)reader["pic8"],
-                    buildingpic9 = (string)reader["pic9"],
-
+                x.id = (int)reader["建案序號"];
+                x.country = (string)reader["縣市"];
+                x.district = (string)reader["地區"];
+                x.buildname = (string)reader["建案名稱"];                
+                x.buildingtext1 = (string)reader["文宣1"];
+                x.buildingtext2 = (string)reader["文宣2"];
+                x.buildingtext3 = (string)reader["文宣3"];
+                x.buildingtext4 = (string)reader["文宣4"];
+                x.buildingtext5 = (string)reader["文宣5"];
+                x.buildingtext6 = (string)reader["文宣6"];
+                x.buildingtext7 = (string)reader["文宣7"];
+                x.buildingtext8 = (string)reader["文宣8"];
+                x.buildingtext9 = (string)reader["文宣9"];
+                x.buildingpic1 = (string)reader["pic1"];
+                x.buildingpic2 = (string)reader["pic2"];
+                x.buildingpic3 = (string)reader["pic3"];
+                x.buildingpic4 = (string)reader["pic4"];
+                x.buildingpic5 = (string)reader["pic5"];
+                x.buildingpic6 = (string)reader["pic6"];
+                x.buildingpic7 = (string)reader["pic7"];
+                x.buildingpic8 = (string)reader["pic8"];
+                x.buildingpic9 = (string)reader["pic9"];
+                x.buildingpic10 = (string)reader["pic10"];
                 };
-            }
+            
             reader.Close();
             con.Close();
 
             return x;
         }
+
+        
 
     }
 }

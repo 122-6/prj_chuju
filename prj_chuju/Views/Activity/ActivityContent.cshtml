@@ -2,6 +2,10 @@
 @model Tuple<class_ActivityContent, List<class_ActivityOutline>, List<class_ActivityOutline>>
 @{
     ViewBag.Title = "ActivityContent";
+    if (Model.Item1.Id == 0)
+    {
+        <script>window.location.href = "../Activity/Index"</script>
+    }
 }
 <style>
     .picture {
@@ -54,13 +58,13 @@
     .wrapper .news {
         width: 880px;
         margin-bottom: 69px;
-        flex-wrap:wrap;
+        flex-wrap: wrap;
     }
 
     .wrapper_news .box {
         width: 260px;
-        margin-left:27px;
-        margin-bottom:41px;
+        margin-left: 27px;
+        margin-bottom: 41px;
     }
 
     .wrapper_news .textbox {
@@ -71,7 +75,7 @@
     .wrapper_news .type {
         font-weight: bold;
         color: #706139;
-        padding-top:10px
+        padding-top: 10px
     }
 
     .wrapper_news .title {

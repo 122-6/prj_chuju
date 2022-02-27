@@ -1,4 +1,5 @@
 ﻿using prj_chuju.Models;
+using prj_chuju.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -27,36 +28,30 @@ namespace prj_chuju.Controllers
 
         public ActionResult Index()
         {
-            List<class_buildingCase> list = new List<class_buildingCase>();
+            AccountInfoMemory userInfo = new AccountInfoHelper(Session, Request).Information;
 
-            SqlConnection con = new SqlConnection(conStr);
-            SqlCommand cmd;
-            SqlDataReader reader;
-
-            con.Open();
-            cmd = new SqlCommand("select * from buildingdb", con);
-            reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                class_buildingCase bc = new class_buildingCase(reader);
-                list.Add(bc);
-            }
-            con.Close();
-
+            ViewBag.userID = userInfo.theid;
             ViewBag.region = Request["region"];
             ViewBag.area = Request["area"];
             ViewBag.rooms = Request["rooms"];
             ViewBag.status = Request["status"];
             ViewBag.tags = Request["tags"];
 
-
-            return View(list);
+            return View();
         }
 
         public JsonResult getBuildingBySelector()
         {
             List<class_buildingCase> List = new factory_buildingCase().getBuildingBySelector(Request);
             return Json(List);
+        }
+
+        public void collect()
+        {
+            int userID = Request["userID"] != null ? Convert.ToInt32(Request["userID"]) : -1;
+            int buildingID = Request["buildingID"] != null ? Convert.ToInt32(Request["buildingID"]) : -1;
+
+            new factory_CollectAndViewed().collectBuilding(userID, buildingID);
         }
     }
 }

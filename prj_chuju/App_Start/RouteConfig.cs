@@ -21,8 +21,8 @@ namespace prj_chuju
 
             routes.MapRoute(
                 name: "BuildingList_page",
-                url: "BuildingList/{tag}/{page}",
-                defaults: new { controller = "BuildingList", action = "Index", tag = UrlParameter.Optional, page = UrlParameter.Optional }
+                url: "BuildingList/{page}",
+                defaults: new { controller = "BuildingList", action = "Index", page = UrlParameter.Optional }
                 );
 
 
@@ -30,6 +30,12 @@ namespace prj_chuju
                 name: "ActivityContent",
                 url: "ActivityContent/{Id}",
                 defaults: new { controller = "Activity", action = "ActivityContent", Id = UrlParameter.Optional }
+                );
+
+            routes.MapRoute(
+                name: "BuildingContent",
+                url: "BuildingContent/{id}",
+                defaults: new { controller = "BuildingList", action = "BuildingContent", Id = UrlParameter.Optional }
                 );
 
             routes.MapRoute(

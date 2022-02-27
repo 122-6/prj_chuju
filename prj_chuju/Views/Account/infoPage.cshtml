@@ -2,7 +2,7 @@
 @using prj_chuju.Models;
 @model AccountInfoPageViewModel
 @{
-    ViewBag.Title = "infoPage";
+    ViewBag.Title = "會員專區";
 }
 
 <link rel="stylesheet" href="~/style/account/accountInfoPage.css">
@@ -816,7 +816,7 @@
     function toBookedCaseStr(ind, elm, IDName) {
         return `
                 <div style="position: relative;">
-                    <div class="bookedCase switchItem d-flex rightHide w-100" id="${IDName}-${ind}">
+                    <a href="/BuildingIntro/Page/${elm.建案序號}" class="bookedCase switchItem d-flex rightHide w-100" id="${IDName}-${ind}">
                         <div class=" " style="width:160px">
                             <img class="bookedImg" src="/${elm.picURL}" alt="">
                         </div>
@@ -830,7 +830,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 `;
     }

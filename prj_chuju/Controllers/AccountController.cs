@@ -198,6 +198,7 @@ namespace prj_chuju.Controllers
 
             // 清除Session
             Session["userInfo"] = "";
+            Session["permission"] = "guest";
 
             return RedirectToAction("Index","Home");
         }

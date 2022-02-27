@@ -1,6 +1,6 @@
-﻿@model List<prj_chuju.Models.class_buildingCase>
+﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "建案搜尋";
 }
 <link rel="stylesheet" href="~/style/buildingsearch.css" />
 <script src="~/Scripts/buildingSearch.js"></script>
@@ -57,6 +57,7 @@
 </main>
 
 <script>
+    const userID = @ViewBag.userID;
     let ViewBagExists = '@ViewBag.region'.length > 0;
     let bagInfo = {
         region: parseInt('@ViewBag.region'),
@@ -130,6 +131,6 @@
                 tags: tagsStr,
             };
         };
-
     }
+    
 </script>

@@ -251,7 +251,7 @@ function getCaseHTML(buildingCase) {
             </div>
 
             <div class="d-flex justify-content-between">
-                <a class="BClink" href="#">加入收藏</a>
+                <a class="BClink" style="cursor:pointer;" onclick="addToCollection(${buildingCase.id})">加入收藏</a>
                 <a class="BClink" href="/BuildingIntro/Page/${buildingCase.id}">查看詳情</a>
                 <a class="BClink" href="/BuildingIntro/Page/${buildingCase.id}#bookSection">預約鑑賞</a>
             </div>
@@ -269,4 +269,17 @@ function generateCaseCards(theCases) {
         theHTML += getCaseHTML(elm);
     });
     $('#casesContainer').html(theHTML);
+}
+function addToCollection(buildingID) {
+    $.ajax({
+        method: 'post',
+        url: 'BuildingCase/collect',
+        data: {
+            userID: userID,
+            buildingID: buildingID,
+        },
+        success: function () {
+            alert('成功加入收藏！');
+        }
+    });
 }

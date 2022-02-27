@@ -1,4 +1,5 @@
-﻿using prj_chuju.ViewModels;
+﻿using prj_chuju.Models;
+using prj_chuju.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,9 @@ namespace prj_chuju.Controllers
             buildingContentHelper bch = new buildingContentHelper();
             if (id == null || !bch.hasData((int)id))
                 return RedirectToAction("Index", "BuildingList");
+
+            AccountInfoMemory userInfo = new AccountInfoHelper(Session, Request).Information;
+            new factory_CollectAndViewed().visitBuilding(userInfo.theid, (int)id);
 
             buildingContentInfo x = bch.getBuildingContentInfoByID((int)id);
             return View(x);

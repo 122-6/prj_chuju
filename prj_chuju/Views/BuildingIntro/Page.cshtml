@@ -372,16 +372,17 @@
     <!--導覽列-->
     <div class="d-flex justify-content-center sticky">
         <div class="d-flex tag-group justify-content-space-between">
-            <div class="swiper"><a href="#" class="tag text-decoration-none">個案特色</a></div>
-            <div class="swiper"><a href="#" class="tag text-decoration-none">個案詳情</a></div>
-            <div class="swiper"><a href="#" class="tag text-decoration-none">生活地圖</a></div>
-            <div class="swiper"><a href="#" class="tag text-decoration-none">相關新聞</a></div>
-            <div class="swiper"><a href="#" class="tag text-decoration-none">線上預約</a></div>
+            <div class="swiper"><a href="#contentSection" class="tag text-decoration-none">個案特色</a></div>
+            <div class="swiper"><a href="#detailSection" class="tag text-decoration-none">個案詳情</a></div>
+            @*<div class="swiper"><a href="#mapSection" class="tag text-decoration-none">生活地圖</a></div>*@
+            <div class="swiper"><a href="#newsSection" class="tag text-decoration-none">相關新聞</a></div>
+            <div class="swiper"><a href="#buildingSection" class="tag text-decoration-none">推薦建案</a></div>
+            <div class="swiper"><a href="#bookSection" class="tag text-decoration-none">線上預約</a></div>
         </div>
     </div>
 
     <!--文章內容-->
-    <section>
+    <section id="contentSection">
         <div class="wrapper_content wrapper d-flex">
             <div class="imgbox">
                 <img class="picture" src="/@Model.innerPicURL[0]" />
@@ -442,7 +443,7 @@
     </section>
 
     <!--個案詳情-->
-    <section>
+    <section id="detailSection">
         <div class="wrapper_table wrapper">
             <div class="table_title">個案詳情</div>
             <div class="table d-flex">
@@ -530,7 +531,7 @@
 
     <!--*生活地圖-->
     <!--
-    <section>
+    <section id="mapSection">
         <div class="wrapper_map wrapper">
             <div class="map_title">生活地圖</div>
             <div class="imgbox">
@@ -541,7 +542,7 @@
     -->
     
     <!--相關新聞-->
-    <section>
+    <section id="newsSection">
         <div class="wrapper_news wrapper d-flex">
             <div class="line">
                 <span>相關新聞</span>
@@ -637,7 +638,7 @@
         -->
     
     <!--推薦建案-->
-    <section>
+    <section id="buildingSection">
         <div class="wrapper_build_news wrapper">
             <div class="build_news_title">推薦你可能喜歡的新家</div>
             <div class="build d-flex justify-content-space-between">

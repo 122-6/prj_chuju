@@ -51,33 +51,8 @@
     </div>
 
     <div id="casesContainer" class="cards py-25 btn-select d-flex justify-content-center flex-wrap">
-        @*@foreach (var item in Model)
-        {
-            <div class="my-card">
-                <div class="d-flex p-3">
-                    <div class="card-pic mr-2">
-                        <img src="~/@item.pictrueurl" alt="">
-                    </div>
-                    <div class="flex-auto">
-                        <div class="card-info font-120 font-bold">@item.buildname</div>
-                        <div class="card-region">@item.country@item.district</div>
-                        <div class="card-detail my-3">@item.insidespace</div>
-                        <div class="card-tag font-80 mb-2"><img src="~/images/P/price-tag.png" alt=""> @item.features</div>
-                        <div class="card-price">總價 <span>洽詢案場</span> </div>
-                    </div>
-                </div>
-
-                <div class="d-flex justify-content-between">
-                    <a class="BClink" href="#">加入收藏</a>
-                    <a class="BClink" href="#">查看詳情</a>
-                    <a class="BClink" href="#">預約鑑賞</a>
-                </div>
-            </div>
-
-        }*@
 
     </div>
-
 
 </main>
 
@@ -107,7 +82,7 @@
         this.ajaxData = {};
         this.update = function () {
             self.generateAjaxData();
-            console.log(self.ajaxData);
+            $('#casesContainer').html('<h3>搜尋中...</h3>')
             $.ajax({
                 method: 'post',
                 url: '@Url.Action("getBuildingBySelector","BuildingCase")',

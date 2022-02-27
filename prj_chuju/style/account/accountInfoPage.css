@@ -398,6 +398,9 @@
     color: rgb(131,131,131);
     cursor: pointer;
 }
+    .caseItem .btnToBuildingCase:hover {
+        text-decoration: none;
+    }
 
 /* 文章元素 */
 #historyPage .articleItem, #collectionPage .articleItem {

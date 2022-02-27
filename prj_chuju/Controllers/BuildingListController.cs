@@ -1,4 +1,5 @@
 ﻿using prj_chuju.Models;
+using prj_chuju.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -97,6 +98,7 @@ namespace prj_chuju.Controllers
             Tuple<Class_BuildingContent, List<Class_BuildingContent>> data = new Tuple<Class_BuildingContent, List<Class_BuildingContent>>(content,list);
             return View(data);
         }
+
         
         private Class_BuildingContent QueryContentById(int id)
         {
@@ -138,6 +140,8 @@ namespace prj_chuju.Controllers
 
             return x;
         }
+
+        
 
     }
 }

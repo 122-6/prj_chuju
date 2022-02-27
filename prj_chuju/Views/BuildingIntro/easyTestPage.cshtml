@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "easyTestPage";
+}
+
+<h2>easyTestPage</h2>
+
+<script src="~/javascript/jquery-3.6.0.min.js"></script>
+<script>
+    let buildingInfo;
+    $.ajax({
+        method: 'post',
+        url: '@Url.Action("getBuildingInfo", "BuildingIntro")',
+        data: {
+            theid: 7,
+        },
+        success: function (result) {
+            console.log(result);
+            buildingInfo = result;
+        },
+        error: function () {
+            console.log('oops, error');
+        }
+    });
+
+</script>

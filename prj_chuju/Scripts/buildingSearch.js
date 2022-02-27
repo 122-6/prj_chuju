@@ -252,13 +252,18 @@ function getCaseHTML(buildingCase) {
 
             <div class="d-flex justify-content-between">
                 <a class="BClink" href="#">加入收藏</a>
-                <a class="BClink" href="#">查看詳情</a>
-                <a class="BClink" href="#">預約鑑賞</a>
+                <a class="BClink" href="/BuildingIntro/Page/${buildingCase.id}">查看詳情</a>
+                <a class="BClink" href="/BuildingIntro/Page/${buildingCase.id}#bookSection">預約鑑賞</a>
             </div>
         </div>
         `;
 }
 function generateCaseCards(theCases) {
+    if (theCases.length <= 0) {
+        $('#casesContainer').html(`<h3>沒有符合條件的建案！</h3>`);
+        return;
+    }
+
     let theHTML = ""
     $.each(theCases, function (ind,elm) {
         theHTML += getCaseHTML(elm);

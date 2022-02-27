@@ -261,7 +261,20 @@ namespace prj_chuju.Models
         // 修改會員系統
         public void editAccountInfo(HttpRequestBase request)
         {
-            string sqlstr = "update accountInfo set " +
+            string sqlstr = "";
+            if (request["region"] == "")
+            {
+                sqlstr = "update accountInfo set " +
+                "userName=@userNamePara," +
+                "gender=@genderPara," +
+                "birthday=@birthdayPara," +
+                "email=@emailPara," +
+                "cellphone=@cellphonePara " +
+                "where id = @idPara;";
+            }
+            else
+            {
+                sqlstr = "update accountInfo set " +
                 "userName=@userNamePara," +
                 "gender=@genderPara," +
                 "birthday=@birthdayPara," +
@@ -269,6 +282,8 @@ namespace prj_chuju.Models
                 "region=@regionPara," +
                 "cellphone=@cellphonePara " +
                 "where id = @idPara;";
+            }
+            
             SqlConnection con = new SqlConnection(dbConnectioniStr);
             SqlCommand cmd;
             cmd = new SqlCommand(sqlstr, con);
@@ -276,7 +291,8 @@ namespace prj_chuju.Models
             cmd.Parameters.AddWithValue("@genderPara", request["gender"]);
             cmd.Parameters.AddWithValue("@birthdayPara", request["birthday"]);
             cmd.Parameters.AddWithValue("@emailPara", request["email"]);
-            cmd.Parameters.AddWithValue("@regionPara", request["region"]);
+            if (request["region"] != "")
+                cmd.Parameters.AddWithValue("@regionPara", request["region"]);
             cmd.Parameters.AddWithValue("@cellphonePara", request["cellphone"]);
             cmd.Parameters.AddWithValue("@idPara", request["id"]);
 

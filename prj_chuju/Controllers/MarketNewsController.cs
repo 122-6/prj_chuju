@@ -32,6 +32,9 @@ namespace prj_chuju.Controllers
             AccountInfoMemory userInfo = new AccountInfoHelper(Session, Request).Information;
             new factory_CollectAndViewed().visitArticle(userInfo.theid, (int)id);
 
+            ViewBag.userID = userInfo.theid;
+            ViewBag.articleID = id;
+
             return View(vm);
         }
 
@@ -51,6 +54,14 @@ namespace prj_chuju.Controllers
         {
             var design = from p in db.articleOutline where p.articleClass1.mainClass == "房市新訊" && p.articleClass1.className == "金融投資" select p;
             return View(design);
+        }
+
+        public void collect()
+        {
+            int userID = Request["userID"] != null ? Convert.ToInt32(Request["userID"]) : -1;
+            int articleID = Request["articleID"] != null ? Convert.ToInt32(Request["articleID"]) : -1;
+
+            new factory_CollectAndViewed().collectArticle(userID, articleID);
         }
     }
 }

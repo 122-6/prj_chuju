@@ -92,9 +92,25 @@
     </div>
 </main>
 <script>
+    const userID = @ViewBag.userID;
+    const articleID = @ViewBag.articleID;
     $(function () {
         $(".btn-like").click(function () {
-            $(".btn-like").text("已收藏").attr("disabled", true);
+            if (userID < 0) {
+                alert("請先登入！");
+            } else {
+                $.ajax({
+                    method: 'post',
+                    url: '@Url.Action("collect","MarketNews")',
+                    data: {
+                        userID,
+                        articleID,
+                    },
+                    success: function () {
+                        $(".btn-like").text("已收藏").attr("disabled", true);
+                    }
+                });
+            }
         });
     });
 </script>

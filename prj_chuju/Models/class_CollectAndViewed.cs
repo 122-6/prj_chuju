@@ -65,7 +65,6 @@ namespace prj_chuju.Models
                 con.Close();
             }
         }
-
         public void visitArticle(int userID, int articleID)
         {
             if (userID > 0 && articleID > 0)
@@ -89,5 +88,58 @@ namespace prj_chuju.Models
                 con.Close();
             }
         }
+        public void collectArticle(int userID, int articleID)
+        {
+            if (userID > 0 && articleID > 0)
+            {
+                string sqlstrDEL = "delete from collectArticle where accountID=@userIDPara and articleID=@articleIDPara";
+                string sqlstrINS = "insert into collectArticle (accountID,articleID) values (@userIDPara,@articleIDPara)";
+                SqlConnection con = new SqlConnection(dbConnectioniStr);
+                SqlCommand cmd;
+                con.Open();
+
+                cmd = new SqlCommand(sqlstrDEL, con);
+                cmd.Parameters.AddWithValue("@userIDPara", userID);
+                cmd.Parameters.AddWithValue("@articleIDPara", articleID);
+                cmd.ExecuteNonQuery();
+
+                cmd = new SqlCommand(sqlstrINS, con);
+                cmd.Parameters.AddWithValue("@userIDPara", userID);
+                cmd.Parameters.AddWithValue("@articleIDPara", articleID);
+                cmd.ExecuteNonQuery();
+
+                con.Close();
+            }
+        }
+
+        public void bookCase(HttpRequestBase Request)
+        {
+            if (Request["userID"] == null || Request["buildingID"] == null)
+                return;
+            int userID = Convert.ToInt32(Request["userID"]);
+            int buildingID = Convert.ToInt32(Request["buildingID"]);
+            string sqlstr = "insert into bookedCase (accountID,buildingID,bookedDate) values (@userIDPara,@buildingIDPara,@bookedDataPara)";
+            SqlConnection con = new SqlConnection(dbConnectioniStr);
+            SqlCommand cmd = new SqlCommand(sqlstr, con);
+            cmd.Parameters.AddWithValue("@userIDPara", userID);
+            cmd.Parameters.AddWithValue("@buildingIDPara", buildingID);
+            cmd.Parameters.AddWithValue("@bookedDataPara", Request["bookedDate"]);
+            con.Open();
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                sqlstr = "insert into bookedCase (accountID,buildingID) values (@userIDPara,@buildingIDPara)";
+                cmd = new SqlCommand(sqlstr, con);
+                cmd.Parameters.AddWithValue("@userIDPara", userID);
+                cmd.Parameters.AddWithValue("@buildingIDPara", buildingID);
+
+                cmd.ExecuteNonQuery();
+            }
+            con.Close();
+        }
+
     }
 }

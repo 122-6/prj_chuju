@@ -88,7 +88,7 @@
                     <div class="row _LayoutElement">
                         <div class="link _LayoutElement">@Html.ActionLink("首頁", "Index", "Home")</div>
                         <div class="link _LayoutElement">@Html.ActionLink("買房新訊", "Index", "MarketNews")</div>
-                        <div class="link _LayoutElement">@Html.ActionLink("使用者條款", "Index", "Home")</div>
+                        <div class="link _LayoutElement"><a href="~/Activity/全部活動">活動快報</a></div>
                     </div>
                     <div class="row _LayoutElement">
                         <div class="link _LayoutElement">@Html.ActionLink("關於我們", "Index", "AboutUs")</div>
@@ -98,27 +98,30 @@
                         <div class="link _LayoutElement">@Html.ActionLink("建案列表", "Index", "BuildingList")</div>
                         <div class="link _LayoutElement">@Html.ActionLink("加入雛居", "Index", "Account")</div>
                     </div>
-                    <div class="row _LayoutElement">
-                        <div class="link _LayoutElement"><a href="~/Activity/全部活動">活動快報</a></div>
-                        <div class="link _LayoutElement">@Html.ActionLink("隱私權政策", "Index", "Home")</div>
-                    </div>
                 </div>
                 <div class="col-2 border-right _LayoutElement">
                     <div class="row _LayoutElement">
                         <h4 class="title _LayoutElement">建案搜尋</h4>
                     </div>
                     <div class="row _LayoutElement">
-                        <div class="link _LayoutElement"><a href="#">台北市</a></div>
-                        <div class="link _LayoutElement"><a href="#">中部地區</a></div>
+                        <div class="link _LayoutElement"><a id="select-0" href="#">臺北市</a></div>
+                        <div class="link _LayoutElement"><a id="select-5" href="#">臺中市</a></div>
                     </div>
                     <div class="row _LayoutElement">
-                        <div class="link _LayoutElement"><a href="#">新北市</a></div>
-                        <div class="link _LayoutElement"><a href="#">南部地區</a></div>
+                        <div class="link _LayoutElement"><a id="select-1" href="#">新北市</a></div>
+                        <div class="link _LayoutElement"><a id="select-6" href="#">臺南市</a></div>
                     </div>
                     <div class="row _LayoutElement">
-                        <div class="link _LayoutElement"><a href="#">桃竹地區</a></div>
-                        <div class="link _LayoutElement"><a href="#">其他地區</a></div>
+                        <div class="link _LayoutElement"><a id="select-2" href="#">桃園市</a></div>
+                        <div class="link _LayoutElement"><a id="select-7" href="#">高雄市</a></div>
                     </div>
+                    <form style="display:none" id="buildingSearchForm" action="@Url.Action("Index","BuildingCase")" method="post">
+                        <input type="hidden" id="toSearchRegion" name="region" />
+                        <input type="hidden" id="toSearchArea" name="area" />
+                        <input type="hidden" id="toSearchRooms" name="rooms" value="0" />
+                        <input type="hidden" id="toSearchStatus" name="status" value="0" />
+                        <input type="hidden" id="toSearchTags" name="tags" value="0" />
+                    </form>
                 </div>
                 <div class="col-2 followUs _LayoutElement">
                     <div class="row _LayoutElement">
@@ -179,6 +182,19 @@
             $("html, body").animate({ scrollTop: 0 }, 500);
         });
 
+    </script>
+
+    <!--footer搜尋功能-->
+    <script>
+        const footerRegions = [0, 1, 2, 5, 6, 7];
+        $('#toSearchArea').val(-1);
+        for (let i = 0; i < footerRegions.length; i++) {
+            $(`#select-${footerRegions[i]}`).on('click', function (event) {
+                event.preventDefault();
+                $('#toSearchRegion').val(footerRegions[i]);
+                $('#buildingSearchForm').submit();
+            })
+        }
     </script>
 
     <!--客服畫面權限-->

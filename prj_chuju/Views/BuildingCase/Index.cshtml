@@ -83,6 +83,7 @@
         this.ajaxData = {};
         this.update = function () {
             self.generateAjaxData();
+            console.log(self.ajaxData);
             $('#casesContainer').html('<h3>搜尋中...</h3>')
             $.ajax({
                 method: 'post',

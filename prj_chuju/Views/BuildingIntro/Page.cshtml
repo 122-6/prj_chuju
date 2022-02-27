@@ -362,6 +362,20 @@
         border: 2px solid #FFFFFF;
         font-size: 20px;
     }
+
+    .dateRow {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+        .dateRow > input, .dateRow > select {
+            width: 30%;
+            text-align: center;
+            background: #FFFFFF;
+            border: 2px solid #FFFFFF;
+            color: #000;
+        }
 </style>
 <main>
     <!--標題圖片-->
@@ -741,15 +755,18 @@
                 <label class="info">每個欄位都是必填欄位</label>
                 <div class="content d-flex justify-content-space-between">
                     <div class="box">
-                        <input id="name" type="text" placeholder="姓名" />
-                        <input id="tel" type="tel" placeholder="行動電話" />
+                        <input id="name" type="text" placeholder="姓名" value="@ViewBag.userName" />
+                        <input id="tel" type="tel" placeholder="行動電話" value="@ViewBag.phone" />
+                        <input id="email" type="email" placeholder="E-mail" value="@ViewBag.email" />
+                        <!--
                         <div class="codebox d-flex justify-content-space-between">
                             <input id="code" type="text" placeholder="輸入驗證碼" />
                             <a class="d-flex justify-content-center align-items-center" id="getCode">獲取驗證碼</a>
                         </div>
+                        -->
                     </div>
                     <div class="box">
-                        <input id="email" type="email" placeholder="E-mail" />
+
                         <select id="signup_county">
                             <option>居住縣市</option>
                             <option value="臺北市" data-index="0">臺北市</option>
@@ -757,24 +774,141 @@
                         <select id="signup_city">
                             <option>鄉鎮縣市</option>
                         </select>
+
+                        <div style="background: transparent; border: 2px solid #FFFFFF; padding: 6px 10px; margin-bottom: 29px; " >
+                            <div style="font-size:18px; color:white; margin-bottom:3px;">預約日期</div>
+                            <div class="dateRow">
+                                <input type="hidden" name="bookDate" id="bookDate" />
+                                <input type="number" step="1" min="1900" name="Year" id="BDy" placeholder="年">
+                                <select name="Month" id="BDm" placeholder="月">
+                                    <option value="" disabled selected hidden>月</option>
+                                </select>
+                                <input type="number" step="1" min="1" max="31" name="Date" id="BDd" placeholder="日" />
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="check_signup_box d-flex justify-content-space-between">
                     <div>
                         <input id="check" type="checkbox" />
-                        <label class="checkbox_label">我已閱讀並同意服務條款與隱私權聲明</label>
+                        <label for="check" class="checkbox_label">我已閱讀並同意服務條款與隱私權聲明</label>
                     </div>
+
+                    @if (ViewBag.userID < 0)
+                    {
                     <div>
                         <span class="member">我已經是會員：</span>
-                        <a href="#" class="click_signup">點我登入</a>
+                        <a href="/Account/LoginPage" class="click_signup">點我登入</a>
                     </div>
+                    }
                 </div>
                 <div class="signup_btn_box">
-                    <button class="signup_btn" type="submit">立即預約</button>
+                    <button id="bookCaseBtn" class="signup_btn" type="submit">立即預約</button>
                 </div>
             </form>
         </div>
     </section>
 
 </main>
+
+<script>
+    // 選擇地區
+    @if (ViewBag.userID>0) {
+    @:const userCity = @ViewBag.cityID;
+    @:const userRegion = @ViewBag.regionID;
+    }
+    else
+    {
+    @:const userCity = -1;
+    @:const userRegion = -1;
+    }
+    let cityList = [];
+    let regionList = [];
+    $.ajax({
+        method: 'post',
+        url: '@Url.Action("regionObject", "Account")',
+        dataType: 'json',
+        success: function (result) {
+            cityList = result["cityList"];
+            regionList = result["regionList"];
+            updateCityOptions();
+            if (userCity > 0 && userRegion > 0) {
+                $('#signup_county').val(userCity);
+                updateRegionOptions(userCity)
+                $('#signup_city').val(userRegion);
+            }
+        },
+    });
+    $('#signup_county').change(function () {
+        let cityID = $(this).val();
+        if (cityID > 0) {
+            updateRegionOptions(cityID);
+        } else {
+            $('#signup_city').html(`<option value="" disabled selected hidden>請選擇地區</option>`);
+        }
+    });
+    function updateCityOptions() {
+        $('#signup_county').html(`<option value="" disabled selected hidden>請選擇縣市</option>`);
+        for (let i = 0; i < cityList.length; i++) {
+            $('#signup_county').append(`<option value=${cityList[i]["id"]}>${cityList[i]["cityName"]}</option>`)
+        }
+    }
+    function updateRegionOptions(cityID) {
+        $('#signup_city').html(`<option value="" disabled selected hidden>請選擇地區</option>`);
+        for (let i = 0; i < regionList.length; i++) {
+            let cid = regionList[i]["cityID"];
+            if (regionList[i]["cityID"] == cityID) {
+                $('#signup_city').append(`<option value=${regionList[i]["id"]}>${regionList[i]["regionName"]}</option>`)
+            }
+            if (cid > cityID) break;
+        }
+    }
+
+    // 選擇日期
+    const month = ["none", "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
+    const maxday = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    for (let i = 1; i <= 12; i++) {
+        $('#BDm').append(`<option value="${i}">${month[i]}</option>`);
+    }
+    $('#BDm').change(function () {
+        $('#BDd').attr('max', maxday[$('#BDm').val()]);
+    });
+
+
+    // 預約功能
+    const userID = @ViewBag.userID;
+    const buildingID = @ViewBag.buildingID;
+    $('#bookCaseBtn').on('click', function (event) {
+        event.preventDefault();
+        if ($('#name').val() == "") return;
+        if ($('#tel').val() == "") return;
+        if ($('#email').val() == "") return;
+        if ($('#signup_county').val() == 0) return;
+        if ($('#signup_city').val() == 0) return;
+        if (!$('#check').prop('checked')) return;
+        if ($('#BDy').val() == "") return;
+        if ($('#BDm').val() == "") return;
+        if ($('#BDd').val() == "") return;
+
+        let bookedDate = `${$('#BDy').val()}-${$('#BDm').val()}-${$('#BDd').val()}`;
+        $.ajax({
+            method: 'post',
+            url: '@Url.Action("bookCase","BuildingIntro")',
+            data: {
+                userID,
+                buildingID,
+                bookedDate,
+            },
+            success: function () {
+
+                alert("預約成功！");
+                $("html, body").animate({ scrollTop: 0 }, 300);
+                //location.reload(true);
+            }
+        })
+
+    })
+</script>
+
 

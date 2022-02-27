@@ -271,15 +271,20 @@ function generateCaseCards(theCases) {
     $('#casesContainer').html(theHTML);
 }
 function addToCollection(buildingID) {
-    $.ajax({
-        method: 'post',
-        url: 'BuildingCase/collect',
-        data: {
-            userID: userID,
-            buildingID: buildingID,
-        },
-        success: function () {
-            alert('成功加入收藏！');
-        }
-    });
+    if (userID < 0) {
+        alert("請先登入！");
+    } else {
+        $.ajax({
+            method: 'post',
+            url: 'BuildingCase/collect',
+            data: {
+                userID: userID,
+                buildingID: buildingID,
+            },
+            success: function () {
+                alert('成功加入收藏！');
+            }
+        });
+    }
+    
 }

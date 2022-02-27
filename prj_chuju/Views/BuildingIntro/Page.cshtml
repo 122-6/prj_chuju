@@ -22,7 +22,7 @@
         height: 46px;
         background: #FFFFFF;
         position: absolute;
-        margin-left: 22px;
+        margin-left: 80px;
         margin-top: 12px;
     }
 
@@ -389,8 +389,8 @@
             <div class="swiper"><a href="#contentSection" class="tag text-decoration-none">個案特色</a></div>
             <div class="swiper"><a href="#detailSection" class="tag text-decoration-none">個案詳情</a></div>
             @*<div class="swiper"><a href="#mapSection" class="tag text-decoration-none">生活地圖</a></div>*@
-            <div class="swiper"><a href="#newsSection" class="tag text-decoration-none">相關新聞</a></div>
-            <div class="swiper"><a href="#buildingSection" class="tag text-decoration-none">推薦建案</a></div>
+            @*<div class="swiper"><a href="#newsSection" class="tag text-decoration-none">相關新聞</a></div>*@
+            @*<div class="swiper"><a href="#buildingSection" class="tag text-decoration-none">推薦建案</a></div>*@
             <div class="swiper"><a href="#bookSection" class="tag text-decoration-none">線上預約</a></div>
         </div>
     </div>
@@ -556,6 +556,7 @@
     -->
     
     <!--相關新聞-->
+    <!--
     <section id="newsSection">
         <div class="wrapper_news wrapper d-flex">
             <div class="line">
@@ -613,6 +614,7 @@
             </div>
         </div>
     </section>
+    -->
     
     <!--*文章功能列-->
     <!--
@@ -652,6 +654,7 @@
         -->
     
     <!--推薦建案-->
+    <!--
     <section id="buildingSection">
         <div class="wrapper_build_news wrapper">
             <div class="build_news_title">推薦你可能喜歡的新家</div>
@@ -746,6 +749,7 @@
             </div>
         </div>
     </section>
+    -->
     
     <!--線上預約-->
     <section id="bookSection" class="signup">
@@ -886,7 +890,10 @@
         if ($('#email').val() == "") return;
         if ($('#signup_county').val() == 0) return;
         if ($('#signup_city').val() == 0) return;
-        if (!$('#check').prop('checked')) return;
+        if (!$('#check').prop('checked')) {
+            alert("請先閱讀服務條款與隱私權聲明");
+            return;
+        } 
         if ($('#BDy').val() == "") return;
         if ($('#BDm').val() == "") return;
         if ($('#BDd').val() == "") return;

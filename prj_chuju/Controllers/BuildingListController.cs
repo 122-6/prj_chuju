@@ -14,17 +14,16 @@ namespace prj_chuju.Controllers
          SqlConnection con;
 
 
-        public ActionResult Index(string tag,int page = 1)
+        public ActionResult Index(int page = 1)
         {
             List<class_buildingList> list = default;
-            int max_page = default;
-
+            int max_page = default;            
             string allSql = $"select * from buildingdb order by 建案序號 offset {(page - 1) *12} rows fetch next 12 rows only;";
             string all_countSql = "select count(*) from buildingdb;";
             list = ListSql(allSql,page);
             max_page = CountSql(all_countSql); 
 
-            Tuple<List<class_buildingList>,string, int, int> data = new Tuple<List<class_buildingList>,string, int, int>(list,tag, max_page, page);
+            Tuple<List<class_buildingList>, int, int> data = new Tuple<List<class_buildingList>, int, int>(list, max_page, page);
 
             return View(data);
 

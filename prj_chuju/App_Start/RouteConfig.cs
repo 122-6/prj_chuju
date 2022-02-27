@@ -21,8 +21,8 @@ namespace prj_chuju
 
             routes.MapRoute(
                 name: "BuildingList_page",
-                url: "BuildingList/{tag}/{page}",
-                defaults: new { controller = "BuildingList", action = "Index", tag = UrlParameter.Optional, page = UrlParameter.Optional }
+                url: "BuildingList/{page}",
+                defaults: new { controller = "BuildingList", action = "Index", page = UrlParameter.Optional }
                 );
 
 

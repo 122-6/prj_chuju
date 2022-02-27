@@ -1,7 +1,7 @@
 ﻿@using prj_chuju.Models
-@model Tuple<List<class_buildingList>,string,int,int>
+@model Tuple<List<class_buildingList>,int,int>
 @{
-    ViewBag.Title = "list";
+    ViewBag.Title = "Index";
 }
 <link rel="stylesheet" href="~/style/Building.css">
 <style>
@@ -64,23 +64,23 @@
         </div>
         <div class="page-list d-flex justify-content-center">
             @{
-                int previous = Model.Item4 - 1;
-                int next = Model.Item4 + 1;
+                int previous = Model.Item3 - 1;
+                int next = Model.Item3 + 1;
                 if (previous < 1)
                 {
                     previous = 1;
                 }
 
-                if (next > Model.Item3)
+                if (next > Model.Item2)
                 {
-                    next = Model.Item3;
+                    next = Model.Item2;
                 }
 
-                <a href="~/BuildingList/@Model.Item2/1" class="page one text-decoration-none">1</a>
-                <a href="~/BuildingList/@Model.Item2/@previous" class="page previous text-decoration-none"><</a>
-                <a href="~/BuildingList/@Model.Item2/@Model.Item4" class="page page-select text-decoration-none">@Model.Item4</a>
-                <a href="~/BuildingList/@Model.Item2/@next" class="page next text-decoration-none">></a>
-                <a href="~/BuildingList/@Model.Item2/@Model.Item3" class="page last text-decoration-none">@Model.Item3</a>
+                <a href="~/BuildingList/1" class="page one text-decoration-none">1</a>
+                <a href="~/BuildingList/@previous" class="page previous text-decoration-none"><</a>
+                <a href="~/BuildingList/@Model.Item3" class="page page-select text-decoration-none">@Model.Item3</a>
+                <a href="~/BuildingList/@next" class="page next text-decoration-none">></a>
+                <a href="~/BuildingList/@Model.Item2" class="page last text-decoration-none">@Model.Item2</a>
             }
         </div>
     </div>

@@ -40,8 +40,12 @@ main h1, main h2 {
     text-shadow: 1px 1px 5px #272727;
 }
 
+.ad{
+    background-color: black;
+}
+
 .ad img{
-    width: 100%;
+    width: auto;
     height: 700px;
 }
 

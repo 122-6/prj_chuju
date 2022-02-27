@@ -845,6 +845,7 @@
     <Content Include="style\designStyle.css" />
     <Content Include="style\indexStyle.css" />
     <Content Include="style\layoutStyle.css" />
+    <Content Include="style\members.css" />
     <Content Include="style\newsStyle.css" />
     <Content Include="Global.asax" />
     <Content Include="images\ICON\facebook.png" />
@@ -1045,6 +1046,7 @@
     <Content Include="Views\BuildingList\BuildingContent.cshtml" />
     <Content Include="Views\BuildingIntro\easyTestPage.cshtml" />
     <Content Include="Views\BuildingIntro\Page.cshtml" />
+    <Content Include="Views\BuildingList\BuildingList.cshtml~RFdfda667.TMP" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

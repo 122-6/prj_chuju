@@ -11,7 +11,8 @@ namespace prj_chuju
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class articleOutline
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,6 +24,7 @@ namespace prj_chuju
     
         public int id { get; set; }
         public int articleClass { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public System.DateTime publishDate { get; set; }
         public string title { get; set; }
         public string intro { get; set; }

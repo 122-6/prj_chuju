@@ -37,15 +37,12 @@
                             @item.intro
                         </div>
                     </div>
-                    <div class="tag-box h-50 d-flex align-items-end justify-content-between">
+                    <div class="tag-box h-50 d-flex align-items-end">
                         <div>
                             @foreach (var tag in item.articleTagList)
                             {
                                 <span class="tag">@tag.tagName</span>
                             }
-                        </div>
-                        <div>
-                            <button class="btn-like">收藏</button>
                         </div>
                     </div>
 
@@ -56,11 +53,4 @@
 
     </div>
 </main>
-<script>
-    $(function () {
-        $(".btn-like").click(function () {
-            $(".btn-like").text("已收藏").attr("disabled", true);
-        });
-    });
-</script>
 

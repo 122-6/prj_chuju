@@ -18,7 +18,7 @@ namespace prj_chuju.Controllers
             dbchujuEntities1 db = new dbchujuEntities1();
             HomePageViewModel vm = new HomePageViewModel()
             {
-                building = db.buildingdb.OrderByDescending(t => t.建案序號).Take(4).ToList(),
+                building = db.buildingdb.OrderBy(t => t.建案序號).Take(4).ToList(),
                 ActivityOutline = db.ActivityOutline.Take(6).ToList(),
                 ActivityContent = db.ActivityContent.Take(6).ToList(),
             };

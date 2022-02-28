@@ -257,7 +257,7 @@
 
                 $('#message').keydown(function (event) {
                     if (event.keyCode == 13) {
-                        chat.server.clientSend($('#message').val(), $("#clientID").val());
+                        chat.server.clientSend($('#message').val(), $("#clientID").val(), $("#serviceID").val());
                         $(".client").append('<div class="content" >' + htmlEncode($('#message').val()) + '</div>');
                         $('#message').val('').focus();
                     }

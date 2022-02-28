@@ -19,11 +19,11 @@ namespace prj_chuju.Controllers
 
             string allSql = "select * from ActivityOutline order by endDate desc offset @Page_row rows fetch next 4 rows only;";
             string all_countSql = "select count(*) from ActivityOutline";
-            string soonSql = "select * from ActivityOutline where getdate() between dateadd(day, -7, startDate) and dateadd(day, -1, startDate) order by endDate desc offset @Page_row rows fetch next 4 rows only;";
+            string soonSql = "select * from ActivityOutline where convert(varchar(10), getdate(), 23) between dateadd(day, -7, startDate) and dateadd(day, -1, startDate) order by endDate desc offset @Page_row rows fetch next 4 rows only;";
             string soon_countSql = "select count(*) from ActivityOutline where getdate() between dateadd(day, -7, startDate) and dateadd(day, -1, startDate)";
-            string nowSql = "select * from ActivityOutline where getdate() between startDate and endDate order by endDate desc offset @Page_row rows fetch next 4 rows only;";
+            string nowSql = "select * from ActivityOutline where convert(varchar(10), getdate(), 23) between startDate and endDate order by endDate desc offset @Page_row rows fetch next 4 rows only;";
             string now_countSql = "select count(*) from ActivityOutline where getdate() between startDate and endDate";
-            string endSql = "select * from ActivityOutline where getdate() > endDate order by endDate desc offset @Page_row rows fetch next 4 rows only;";
+            string endSql = "select * from ActivityOutline where convert(varchar(10), getdate(), 23) > endDate order by endDate desc offset @Page_row rows fetch next 4 rows only;";
             string end_countSql = "select count(*) from ActivityOutline where getdate() > endDate";
 
             switch (tag)

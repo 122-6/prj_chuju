@@ -150,13 +150,23 @@
                         </script>
                     }
 
+                    else if (DateTime.Now.Date >= item.startDate.Date.AddDays(-7))
+                    {
+                        tag = "即將開始";
+                        <script>
+                                  $(function () {
+                                      $(".status_@item.Id").addClass("status-tag-now");
+                                  });
+                        </script>
+                    }
+
                     else
                     {
                         tag = "活動已結束";
                         <script>
                                 $(function () {
                                     $(".status_@item.Id").addClass("status-tag-end");
-                                });
+                        });
                         </script>
                     }
                     <div class="box">

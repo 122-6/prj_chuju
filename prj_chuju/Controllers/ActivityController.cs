@@ -126,8 +126,8 @@ namespace prj_chuju.Controllers
                     break;
             }
 
-            string previous_3data = $"select * from ActivityOutline order by endDate desc, Id offset @compute_row_number rows fetch next @previous_rows_fetch rows only;";
-            string next_3data = $"select * from ActivityOutline order by endDate desc, Id offset @compute_row_number rows fetch next 3 rows only;";
+            string previous_3data = "select * from ActivityOutline order by endDate desc, Id offset @compute_row_number rows fetch next @previous_rows_fetch rows only;";
+            string next_3data = "select * from ActivityOutline order by endDate desc, Id offset @compute_row_number rows fetch next 3 rows only;";
 
             if (row_number == 1)
             {
@@ -148,7 +148,7 @@ namespace prj_chuju.Controllers
         private class_ActivityContent QueryContentById(int Id)
         {
             class_ActivityContent x = new class_ActivityContent();
-            string IdSql = $"select ActivityId, title, content from ActivityContent where ActivityId = @Id";
+            string IdSql = "select ActivityId, title, content from ActivityContent where ActivityId = @Id";
 
             SqlCommand cmd = methodSQL(IdSql);
             cmd.Parameters.AddWithValue("@Id", Id);
@@ -172,7 +172,7 @@ namespace prj_chuju.Controllers
 
         private int Rows_numberSql(int Id)
         {
-            string row_numberSql = $"with ActivityOutline as (select ROW_NUMBER() over (order by endDate desc) as ROW_ID, * from dbo.ActivityOutline) select * from ActivityOutline where Id = @Id";
+            string row_numberSql = "with ActivityOutline as (select ROW_NUMBER() over (order by endDate desc) as ROW_ID, * from dbo.ActivityOutline) select * from ActivityOutline where Id = @Id";
             SqlCommand cmd = methodSQL(row_numberSql);
             cmd.Parameters.AddWithValue("@Id", Id);
             return Convert.ToInt32(cmd.ExecuteScalar());

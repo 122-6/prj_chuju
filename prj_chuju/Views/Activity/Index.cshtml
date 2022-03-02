@@ -150,17 +150,17 @@
                         </script>
                     }
 
-                    else if (DateTime.Now.Date >= item.startDate.Date.AddDays(-7))
+                    else if (DateTime.Now.Date <= item.startDate.Date.AddDays(-7) && DateTime.Now.Date >= item.startDate.Date.AddDays(-1))
                     {
                         tag = "即將開始";
                         <script>
                                   $(function () {
-                                      $(".status_@item.Id").addClass("status-tag-now");
+                                      $(".status_@item.Id").addClass("status-tag-end");
                                   });
                         </script>
                     }
 
-                    else
+                    else if (DateTime.Now.Date >= item.endDate.Date)
                     {
                         tag = "活動已結束";
                         <script>

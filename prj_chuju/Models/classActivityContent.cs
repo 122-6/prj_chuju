@@ -5,7 +5,7 @@ using System.Web;
 
 namespace prj_chuju.Models
 {
-    public class class_ActivityContent
+    public class classActivityContent
     {
         public int Id { get; set; }
 

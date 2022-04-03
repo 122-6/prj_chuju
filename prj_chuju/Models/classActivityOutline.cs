@@ -5,7 +5,7 @@ using System.Web;
 
 namespace prj_chuju.Models
 {
-    public class class_ActivityOutline
+    public class classActivityOutline
     {
         public int Id { get; set; }
         public DateTime startDate { get; set; }

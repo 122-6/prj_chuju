@@ -968,8 +968,8 @@
       <DependentUpon>dbchuju.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\class_accountInfo.cs" />
-    <Compile Include="Models\class_ActivityContent.cs" />
-    <Compile Include="Models\class_ActivityOutline.cs" />
+    <Compile Include="Models\classActivityContent.cs" />
+    <Compile Include="Models\classActivityOutline.cs" />
     <Compile Include="Models\class_articleOutline.cs" />
     <Compile Include="Models\class_buildingCase.cs" />
     <Compile Include="Models\Class_BuildingContent.cs" />

@@ -81,26 +81,26 @@ namespace prj_chuju.SignalR
             }
         }
 
-        //public override Task OnDisconnected(bool stopCalled)
-        //{
+        public override Task OnDisconnected(bool stopCalled)
+        {
             
-        //    return deleteId();
-        //}
+            return deleteId();
+        }
 
-        //public Task deleteId()
-        //{
-        //    ClientConnection tclient = db.ClientConnection.FirstOrDefault(p => p.connectionId == Context.ConnectionId);
-        //    ServiceConnection tservice = db.ServiceConnection.FirstOrDefault(p => p.connectionId == Context.ConnectionId);
-        //    if (tclient != null)
-        //    {
-        //        db.ClientConnection.Remove(tclient);
-        //    }
-        //    else if (tservice != null)
-        //    {
-        //        db.ServiceConnection.Remove(tservice);
-        //    }
-        //    db.SaveChanges();
-        //    return null;
-        //}
+        public Task deleteId()
+        {
+            ClientConnection tclient = db.ClientConnection.FirstOrDefault(p => p.connectionId == Context.ConnectionId);
+            ServiceConnection tservice = db.ServiceConnection.FirstOrDefault(p => p.connectionId == Context.ConnectionId);
+            if (tclient != null)
+            {
+                db.ClientConnection.Remove(tclient);
+            }
+            else if (tservice != null)
+            {
+                db.ServiceConnection.Remove(tservice);
+            }
+            db.SaveChanges();
+            return null;
+        }
     }
 }

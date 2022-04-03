@@ -1,7 +1,6 @@
 ﻿using prj_chuju.Models;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -11,90 +10,52 @@ namespace prj_chuju.Controllers
 {
     public class ActivityController : Controller
     {
-        // GET: Activity
         SqlConnection con;
-        List<classActivityOutline> list;
-        int maxPage;
-        private class QueryAllSql
-        {
-            public string offsetSql = "select * from ActivityOutline order by endDate desc offset @Page_row rows fetch next 4 rows only;";
-            public string countSql = "select count(*) from ActivityOutline";
-        }
-
-        private class QuerySoonSql
-        {
-           public string offsetSql = "select * from ActivityOutline where convert(varchar(10), getdate(), 23) between dateadd(day, -7, startDate) and dateadd(day, -1, startDate) order by endDate desc offset @Page_row rows fetch next 4 rows only;";
-           public string countSql = "select count(*) from ActivityOutline where getdate() between dateadd(day, -7, startDate) and dateadd(day, -1, startDate)";
-        }
-
-        private class QueryNowSql
-        {
-            public string offsetSql = "select * from ActivityOutline where convert(varchar(10), getdate(), 23) between startDate and endDate order by endDate desc offset @Page_row rows fetch next 4 rows only;";
-            public string countSql = "select count(*) from ActivityOutline where getdate() between startDate and endDate";
-        }
-
-        private class QueryEndSql
-        {
-            public string offsetSql = "select * from ActivityOutline where convert(varchar(10), getdate(), 23) > endDate order by endDate desc offset @Page_row rows fetch next 4 rows only;";
-            public string countSql = "select count(*) from ActivityOutline where getdate() > endDate";
-
-        }
+        // GET: Activity
         public ActionResult Index(string tag, int page = 1)
         {
+            List<class_ActivityOutline> list;
+            int max_page;
+
+            string allSql = "select * from ActivityOutline order by endDate desc offset @Page_row rows fetch next 4 rows only;";
+            string all_countSql = "select count(*) from ActivityOutline";
+            string soonSql = "select * from ActivityOutline where convert(varchar(10), getdate(), 23) between dateadd(day, -7, startDate) and dateadd(day, -1, startDate) order by endDate desc offset @Page_row rows fetch next 4 rows only;";
+            string soon_countSql = "select count(*) from ActivityOutline where getdate() between dateadd(day, -7, startDate) and dateadd(day, -1, startDate)";
+            string nowSql = "select * from ActivityOutline where convert(varchar(10), getdate(), 23) between startDate and endDate order by endDate desc offset @Page_row rows fetch next 4 rows only;";
+            string now_countSql = "select count(*) from ActivityOutline where getdate() between startDate and endDate";
+            string endSql = "select * from ActivityOutline where convert(varchar(10), getdate(), 23) > endDate order by endDate desc offset @Page_row rows fetch next 4 rows only;";
+            string end_countSql = "select count(*) from ActivityOutline where getdate() > endDate";
+
             switch (tag)
             {
                 case "即將開始":
-                    SoonSql(page);
+                    list = OutlinetSql(soonSql, page);
+                    max_page = MaxPage_Sql(soon_countSql);
                     break;
                 case "執行中":
-                    NowSql(page);
+                    list = OutlinetSql(nowSql, page);
+                    max_page = MaxPage_Sql(now_countSql);
                     break;
                 case "已結束":
-                    EndSql(page);
+                    list = OutlinetSql(endSql, page);
+                    max_page = MaxPage_Sql(end_countSql);
                     break;
                 default:
-                    AllSql(page);
+                    list = OutlinetSql(allSql, page);
+                    max_page = MaxPage_Sql(all_countSql);
                     break;
             }
-
-            Tuple<List<classActivityOutline>, string, int, int> data = new Tuple<List<classActivityOutline>, string, int, int>(list, tag, maxPage, page);
+            Tuple<List<class_ActivityOutline>, string, int, int> data = new Tuple<List<class_ActivityOutline>, string, int, int>(list, tag, max_page, page);
 
             return View(data);
         }
-        private void AllSql(int page)
-        {
-            QueryAllSql x = new QueryAllSql();
-            list = OutlinetSql(x.offsetSql, page);
-            maxPage = MaxPageSql(x.countSql);
-        }
 
-        private void SoonSql(int page)
+        private List<class_ActivityOutline> OutlinetSql(string strSql, int page)
         {
-            QuerySoonSql x = new QuerySoonSql();
-            list = OutlinetSql(x.offsetSql, page);
-            maxPage = MaxPageSql(x.countSql);
-        }
-
-        private void NowSql(int page)
-        {
-            QueryNowSql x = new QueryNowSql();
-            list = OutlinetSql(x.offsetSql, page);
-            maxPage = MaxPageSql(x.countSql);
-        }
-
-        private void EndSql(int page)
-        {
-            QueryEndSql x = new QueryEndSql();
-            list = OutlinetSql(x.offsetSql, page);
-            maxPage = MaxPageSql(x.countSql);
-        }
-
-        private List<classActivityOutline> OutlinetSql(string strSql, int page)
-        {
-            SqlCommand cmd = OpenDatabase(strSql);
+            SqlCommand cmd = methodSQL(strSql);
             cmd.Parameters.AddWithValue("@Page_row", (page - 1) * 4);
             SqlDataReader reader = cmd.ExecuteReader();
-            List<classActivityOutline> list = ListSql(reader);
+            List<class_ActivityOutline> list = ListSql(reader);
 
             reader.Close();
             con.Close();
@@ -102,14 +63,14 @@ namespace prj_chuju.Controllers
             return list;
         }
 
-        private List<classActivityOutline> ListSql(SqlDataReader reader)
+        private List<class_ActivityOutline> ListSql(SqlDataReader reader)
         {
-            List<classActivityOutline> list = new List<classActivityOutline>();
+            List<class_ActivityOutline> list = new List<class_ActivityOutline>();
             if (reader.HasRows)
             {
                 while (reader.Read())
                 {
-                    classActivityOutline x = new classActivityOutline()
+                    class_ActivityOutline x = new class_ActivityOutline()
                     {
                         Id = (int)reader["Id"],
                         startDate = (DateTime)reader["startDate"],
@@ -123,10 +84,10 @@ namespace prj_chuju.Controllers
             return list;
         }
 
-        private int MaxPageSql(string strSql)
+        private int MaxPage_Sql(string strSql)
         {
             int count = 1;
-            SqlCommand cmd = OpenDatabase(strSql);
+            SqlCommand cmd = methodSQL(strSql);
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.Read() && (int)reader[0] != 0)
             {
@@ -142,48 +103,57 @@ namespace prj_chuju.Controllers
             return (count);
         }
 
-        int rowNumber;
-        int computeRowNumber;
-        int previousRowsFetch = 3;
-        int nextRowsFetch = 3;
-
         public ActionResult ActivityContent(int Id)
         {
-            rowNumber = RowsNumberSql(Id);
+            var content = QueryContentById(Id);
+            int row_number = Rows_numberSql(Id);
+            int compute_row_number;
+            int previous_rows_fetch = 3;
+            List<class_ActivityOutline> previouslist;
 
-            switch (rowNumber)
+            switch (row_number)
             {
                 case 3:
-                    computeRowNumber = 0;
-                    previousRowsFetch = 2;
+                    compute_row_number = 0;
+                    previous_rows_fetch = 2;
                     break;
                 case 2:
-                    computeRowNumber = 0;
-                    previousRowsFetch = 1;
+                    compute_row_number = 0;
+                    previous_rows_fetch = 1;
                     break;
                 default:
-                    computeRowNumber = rowNumber - 4;
+                    compute_row_number = row_number - 4;
                     break;
             }
-            Tuple<classActivityContent, List<classActivityOutline>, List<classActivityOutline>> data = new Tuple<classActivityContent, List<classActivityOutline>, List<classActivityOutline>>(QueryContentById(Id), previousData(), nextData());
+
+            string previous_3data = "select * from ActivityOutline order by endDate desc, Id offset @compute_row_number rows fetch next @previous_rows_fetch rows only;";
+            string next_3data = "select * from ActivityOutline order by endDate desc, Id offset @compute_row_number rows fetch next 3 rows only;";
+
+            if (row_number == 1)
+            {
+                previouslist = new List<class_ActivityOutline>();
+            }
+
+            else
+            {
+                previouslist = OtherActivitySql(previous_3data, compute_row_number, previous_rows_fetch);
+            }
+
+            List<class_ActivityOutline> nextlist = OtherActivitySql(next_3data, row_number, previous_rows_fetch);
+
+            Tuple<class_ActivityContent, List<class_ActivityOutline>, List<class_ActivityOutline>> data = new Tuple<class_ActivityContent, List<class_ActivityOutline>, List<class_ActivityOutline>>(content, previouslist, nextlist);
 
             return View(data);
         }
-
-        private classActivityContent QueryContentById(int Id)
+        private class_ActivityContent QueryContentById(int Id)
         {
+            class_ActivityContent x = new class_ActivityContent();
             string IdSql = "select ActivityId, title, content from ActivityContent where ActivityId = @Id";
 
-            SqlCommand cmd = OpenDatabase(IdSql);
+            SqlCommand cmd = methodSQL(IdSql);
             cmd.Parameters.AddWithValue("@Id", Id);
-            classActivityContent x = ContentSql(cmd.ExecuteReader());
+            SqlDataReader reader = cmd.ExecuteReader();
 
-            return x;
-        }
-
-        private classActivityContent ContentSql(SqlDataReader reader)
-        {
-            classActivityContent x = new classActivityContent();
             if (reader.HasRows)
             {
                 if (reader.Read())
@@ -193,56 +163,40 @@ namespace prj_chuju.Controllers
                     x.content = (string)reader["content"];
                 };
             }
+
             reader.Close();
             con.Close();
 
             return x;
         }
 
-        private List<classActivityOutline> previousData()
+        private int Rows_numberSql(int Id)
         {
-            List<classActivityOutline> previouslist = new List<classActivityOutline>();
-
-            if (rowNumber != 1)
-            {
-                previouslist = OtherActivitySql(computeRowNumber, previousRowsFetch);
-            }
-
-            return previouslist;
-        }
-        private List<classActivityOutline> nextData()
-        {
-            return OtherActivitySql(rowNumber, nextRowsFetch);
-        }
-        private int RowsNumberSql(int Id)
-        {
-            string rowNumberSql = "with ActivityOutline as (select ROW_NUMBER() over (order by endDate desc) as ROW_ID, * from dbo.ActivityOutline) select * from ActivityOutline where Id = @Id";
-            SqlCommand cmd = OpenDatabase(rowNumberSql);
+            string row_numberSql = "with ActivityOutline as (select ROW_NUMBER() over (order by endDate desc) as ROW_ID, * from dbo.ActivityOutline) select * from ActivityOutline where Id = @Id";
+            SqlCommand cmd = methodSQL(row_numberSql);
             cmd.Parameters.AddWithValue("@Id", Id);
             return Convert.ToInt32(cmd.ExecuteScalar());
         }
 
-        private List<classActivityOutline> OtherActivitySql(int computeRowNumber, int rowsFetch)
+        private List<class_ActivityOutline> OtherActivitySql(string strSql, int row_number, int previous_rows_fetch)
         {
-            string offsetSql = "select * from ActivityOutline order by endDate desc, Id offset @computeRowNumber rows fetch next @rowsFetch rows only;";
-
-            SqlCommand cmd = OpenDatabase(offsetSql);
-            cmd.Parameters.AddWithValue("@computeRowNumber", computeRowNumber);
-            cmd.Parameters.AddWithValue("@rowsFetch", rowsFetch);
+            SqlCommand cmd = methodSQL(strSql);
+            cmd.Parameters.AddWithValue("@compute_row_number", row_number);
+            cmd.Parameters.AddWithValue("@previous_rows_fetch", previous_rows_fetch);
             SqlDataReader reader = cmd.ExecuteReader();
 
-            List<classActivityOutline> list = ListSql(reader);
+            List<class_ActivityOutline> list = ListSql(reader);
 
             reader.Close();
             con.Close();
 
             return list;
         }
-        SqlConnection a = new SqlConnection();
 
-        private SqlCommand OpenDatabase(string strSQL)
+        private SqlCommand methodSQL(string strSQL)
         {
-            con = new SqlConnection(ConfigurationManager.ConnectionStrings["mssqlConnect"].ConnectionString);
+            con = new SqlConnection();
+            con.ConnectionString = @"Data Source=chujudbserver.database.windows.net;Initial Catalog=dbchuju;Persist Security Info=True;User ID=chujuas;Password=P@ssw0rd-chuju;MultipleActiveResultSets=True;Application Name=EntityFramework";
             con.Open();
             return new SqlCommand(strSQL, con);
         }
